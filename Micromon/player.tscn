@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://b2ws32nnl8qie"]
 
-[ext_resource type="Script" uid="uid://drnf2p3ub21f1" path="res://Player.gd" id="1_ohh05"]
+[ext_resource type="Script" uid="uid://drnf2p3ub21f1" path="res://Micromon/Player.gd" id="1_ohh05"]
 [ext_resource type="Texture2D" uid="uid://pk1ishefpy52" path="res://Micromon/dungeonSprites_ v1.5/warlock_.png" id="2_cmvke"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hw307"]
