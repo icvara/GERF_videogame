@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2ws32nnl8qie"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_ohh05"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_36vgm"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f6xkb"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+slide_on_ceiling = false
+script = ExtResource("1_ohh05")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_36vgm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_f6xkb")
+animation = &"new_animation"

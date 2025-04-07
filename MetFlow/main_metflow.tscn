@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://rcp0n6kg1610"]
+
+[ext_resource type="Script" path="res://MetFlow/main_metflow.gd" id="1_fqjca"]
+[ext_resource type="PackedScene" uid="uid://rxm1sdbnigii" path="res://MetFlow/flow_tile_T.tscn" id="2_4xt6e"]
+[ext_resource type="PackedScene" uid="uid://x4xdfye0hc4s" path="res://MetFlow/fluid.tscn" id="3_cyd7a"]
+[ext_resource type="PackedScene" uid="uid://ccwr8m4wr2mn" path="res://pause_menu.tscn" id="4_7sfbf"]
+
+[node name="MainMetflow" type="Node2D"]
+script = ExtResource("1_fqjca")
+newtile = ExtResource("2_4xt6e")
+newfluid = ExtResource("3_cyd7a")
+
+[node name="Yeast" type="ColorRect" parent="."]
+offset_left = 158.0
+offset_top = 99.0
+offset_right = 1020.0
+offset_bottom = 544.0
+color = Color(0.541176, 0.541176, 0, 1)
+
+[node name="flowarea" type="ColorRect" parent="Yeast"]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 62.0
+offset_right = 752.0
+offset_bottom = 382.0
+color = Color(1, 1, 1, 0.54902)
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Pause_menu" parent="." instance=ExtResource("4_7sfbf")]
+visible = false
+offset_left = 594.0
+offset_top = 317.0
+offset_right = 594.0
+offset_bottom = 317.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

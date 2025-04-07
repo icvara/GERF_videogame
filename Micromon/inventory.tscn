@@ -1,0 +1,181 @@
+[gd_scene load_steps=3 format=3 uid="uid://besb44alptch8"]
+
+[ext_resource type="Script" path="res://Micromon/inventory.gd" id="1_amc63"]
+[ext_resource type="Texture2D" uid="uid://brbtbuawr3wyq" path="res://icon.svg" id="1_ex1tg"]
+
+[node name="Inventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_amc63")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -276.0
+offset_bottom = 263.0
+grow_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="1" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="ID" type="Label" parent="Panel/VBoxContainer/1"]
+layout_mode = 2
+text = "1: "
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel/VBoxContainer/1"]
+position = Vector2(14, 1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_ex1tg")
+centered = false
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/1"]
+layout_mode = 2
+text = "Species NAMES"
+
+[node name="Button1" type="Button" parent="Panel/VBoxContainer/1"]
+layout_mode = 2
+text = "Drop"
+
+[node name="2" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="ID" type="Label" parent="Panel/VBoxContainer/2"]
+layout_mode = 2
+text = "1: "
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel/VBoxContainer/2"]
+position = Vector2(14, 1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_ex1tg")
+centered = false
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/2"]
+layout_mode = 2
+text = "Species NAMES"
+
+[node name="Button2" type="Button" parent="Panel/VBoxContainer/2"]
+layout_mode = 2
+text = "Drop"
+
+[node name="3" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="ID" type="Label" parent="Panel/VBoxContainer/3"]
+layout_mode = 2
+text = "1: "
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel/VBoxContainer/3"]
+position = Vector2(14, 1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_ex1tg")
+centered = false
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/3"]
+layout_mode = 2
+text = "Species NAMES"
+
+[node name="Button3" type="Button" parent="Panel/VBoxContainer/3"]
+layout_mode = 2
+text = "Drop"
+
+[node name="4" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="ID" type="Label" parent="Panel/VBoxContainer/4"]
+layout_mode = 2
+text = "1: "
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel/VBoxContainer/4"]
+position = Vector2(14, 1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_ex1tg")
+centered = false
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/4"]
+layout_mode = 2
+text = "Species NAMES"
+
+[node name="Button4" type="Button" parent="Panel/VBoxContainer/4"]
+layout_mode = 2
+text = "Drop"
+
+[node name="5" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="ID" type="Label" parent="Panel/VBoxContainer/5"]
+layout_mode = 2
+text = "1: "
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel/VBoxContainer/5"]
+position = Vector2(14, 1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_ex1tg")
+centered = false
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/5"]
+layout_mode = 2
+text = "Species NAMES"
+
+[node name="Button5" type="Button" parent="Panel/VBoxContainer/5"]
+layout_mode = 2
+text = "Drop"
+
+[node name="6" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="ID" type="Label" parent="Panel/VBoxContainer/6"]
+layout_mode = 2
+text = "1: "
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel/VBoxContainer/6"]
+position = Vector2(14, 1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_ex1tg")
+centered = false
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/6"]
+layout_mode = 2
+text = "Species NAMES"
+
+[node name="Button6" type="Button" parent="Panel/VBoxContainer/6"]
+layout_mode = 2
+text = "Drop"
+
+[node name="Button" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 227.0
+offset_right = 158.0
+offset_bottom = 258.0
+text = "CLOSE"
+
+[connection signal="pressed" from="Panel/VBoxContainer/1/Button1" to="." method="_on_button_1_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/2/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/3/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/4/Button4" to="." method="_on_button_4_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/5/Button5" to="." method="_on_button_5_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/6/Button6" to="." method="_on_button_6_pressed"]
+[connection signal="pressed" from="Panel/Button" to="." method="_on_button_pressed"]
