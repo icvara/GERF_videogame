@@ -3,9 +3,9 @@ class_name Micromon
 
 
 
-var micromon_name = "e.coli"
+var micromon_name = "none"
 var HP = 100
-var type = "human"
+var type = "none"
 
 var skills = {
 	"1":null,
@@ -22,7 +22,7 @@ func PickUp(player):
 			print("acquired " + player.micromon_inv[m].micromon_name + "!")
 			hide()
 			$CollisionShape2D.disabled = true
-			get_parent().get_node("Inventory").updateTeam(player)
+			get_parent().get_node("CanvasLayer").get_node("Inventory").updateTeam(player)
 			#queue_free()
 			return
 	print("inventory full")

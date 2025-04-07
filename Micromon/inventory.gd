@@ -44,7 +44,7 @@ func updateTeam(player):
 	for m in player.micromon_inv:
 		print(player.micromon_inv[m])
 		$Panel/VBoxContainer.get_node(str(m)).get_node("ID").text = m
-		$Panel/VBoxContainer.get_node(str(m)).get_node("Sprite2D")
+		$Panel/VBoxContainer.get_node(str(m)).get_node("TextureRect")
 		if player.micromon_inv[m] != null:
 			$Panel/VBoxContainer.get_node(str(m)).get_node("Label").text = player.micromon_inv[m].micromon_name
 		else:

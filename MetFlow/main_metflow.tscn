@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://rcp0n6kg1610"]
 
-[ext_resource type="Script" path="res://MetFlow/main_metflow.gd" id="1_fqjca"]
+[ext_resource type="Script" uid="uid://0tamjolx6kqq" path="res://MetFlow/main_metflow.gd" id="1_fqjca"]
 [ext_resource type="PackedScene" uid="uid://rxm1sdbnigii" path="res://MetFlow/flow_tile_T.tscn" id="2_4xt6e"]
 [ext_resource type="PackedScene" uid="uid://x4xdfye0hc4s" path="res://MetFlow/fluid.tscn" id="3_cyd7a"]
 [ext_resource type="PackedScene" uid="uid://ccwr8m4wr2mn" path="res://pause_menu.tscn" id="4_7sfbf"]

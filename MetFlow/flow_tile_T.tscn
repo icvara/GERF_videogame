@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://rxm1sdbnigii"]
 
-[ext_resource type="Script" path="res://MetFlow/flowtile.gd" id="1_al756"]
+[ext_resource type="Script" uid="uid://b52ftfcxbi504" path="res://MetFlow/flowtile.gd" id="1_al756"]
 
 [node name="FlowTile" type="Node2D"]
 scale = Vector2(2, 2)

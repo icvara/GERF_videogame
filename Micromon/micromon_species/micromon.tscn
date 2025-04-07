@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bqmvyixs00n0"]
 
-[ext_resource type="Script" path="res://Micromon/micromon_Test.gd" id="1_pqdo0"]
+[ext_resource type="Script" uid="uid://dxd17lgv5qpyd" path="res://Micromon/micromon_species/micromon_Test.gd" id="1_pqdo0"]
 [ext_resource type="Texture2D" uid="uid://brbtbuawr3wyq" path="res://icon.svg" id="2_qwgwy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hgvry"]

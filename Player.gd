@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
+const SPEED = 50.0
 
 var inv_isopen = false
 var micromon_inv = { "1": null,
@@ -27,6 +27,13 @@ func _physics_process(delta):
 		velocity = direction * SPEED
 	else:
 		velocity = Vector2(0,0)
+	
+	if direction.x < 0:
+		$AnimatedSprite2D.play("left")
+	elif direction.x > 0:
+		$AnimatedSprite2D.play("right")
+	else:
+		$AnimatedSprite2D.stop()
 
 
 	move_and_slide()
@@ -38,5 +45,4 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("fight"):
 		is_inFight = true
-		get_parent().get_node("Fight_scene").Start()
-
+		get_parent().get_node("CanvasLayer").get_node("Fight_scene").Start()
