@@ -8,11 +8,19 @@ func _ready():
 	pass
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
-
+func Enemy_turn():
+	await get_tree().create_timer(.5).timeout
+	if $Enemy/ProgressBar.value <= 0.:
+		hide()
+		$Player/ProgressBar.value = 100
+		$Enemy/ProgressBar.value = 100
+	else:
+		$Player/ProgressBar.value -= 20
+		await get_tree().create_timer(.5).timeout
+		if $Player/ProgressBar.value <= 0.:
+			hide()
+			$Enemy/ProgressBar.value = 100
 
 func Start():
 	show()
@@ -45,11 +53,12 @@ func _on_button_attack_pressed() -> void:
 
 func a1_on__pressed() -> void:
 	$Player/ProgressBar.value += 20
-
+	Enemy_turn()
 
 func a2_on__pressed() -> void:
 	$Enemy/ProgressBar.value -= 40
-
+	Enemy_turn()
 
 func a3_on__pressed() -> void:
 	$Player/ProgressBar.value -= 20
+	Enemy_turn()
