@@ -169,7 +169,7 @@ text = "BOSS"
 position = Vector2(230, 29)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_i8x2q")
-frame_progress = 0.459914
+frame_progress = 0.885499
 
 [node name="ProgressBar" type="ProgressBar" parent="Enemy"]
 modulate = Color(0.131793, 0.753388, 0.370285, 1)
