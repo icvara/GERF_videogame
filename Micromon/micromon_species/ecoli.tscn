@@ -79,7 +79,7 @@ shape = SubResource("RectangleShape2D_hgvry")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 modulate = Color(0.196078, 0.729412, 0.239216, 1)
 sprite_frames = SubResource("SpriteFrames_ef1ur")
-frame_progress = 0.689741
+frame_progress = 0.244162
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

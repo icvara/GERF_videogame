@@ -107,22 +107,18 @@ columns = 2
 
 [node name="Button_Attack" type="Button" parent="PanelContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
 text = "Attack"
 
 [node name="Button_inv" type="Button" parent="PanelContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
 text = "Inventory"
 
 [node name="Button_mon" type="Button" parent="PanelContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
 text = "Micromon"
 
 [node name="Button_leave" type="Button" parent="PanelContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
 text = "Leave"
 
 [node name="PanelAttack" type="GridContainer" parent="."]
@@ -139,22 +135,18 @@ columns = 2
 
 [node name="1" type="Button" parent="PanelAttack"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
 text = "Photosyn."
 
 [node name="2" type="Button" parent="PanelAttack"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
 text = "Oxydation"
 
 [node name="3" type="Button" parent="PanelAttack"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
 text = "Division"
 
 [node name="Return" type="Button" parent="PanelAttack"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
 text = "Return"
 
 [node name="Enemy" type="Control" parent="."]
@@ -171,14 +163,13 @@ offset_top = 5.0
 offset_right = 80.0
 offset_bottom = 7.52
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 8
 text = "BOSS"
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Enemy"]
 position = Vector2(230, 29)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_i8x2q")
-frame_progress = 0.0597648
+frame_progress = 0.459914
 
 [node name="ProgressBar" type="ProgressBar" parent="Enemy"]
 modulate = Color(0.131793, 0.753388, 0.370285, 1)
@@ -205,7 +196,6 @@ offset_top = 64.0
 offset_right = 229.0
 offset_bottom = 69.52
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 12
 text = "NAME"
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Player"]
