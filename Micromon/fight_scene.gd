@@ -60,11 +60,11 @@ func _on_button_attack_pressed() -> void:
 
 
 func a1_on__pressed() -> void:
-	$Player/ProgressBar.value += 20
+	$Player/ProgressBar.value += 30
 	Enemy_turn()
 
 func a2_on__pressed() -> void:
-	$Enemy/ProgressBar.value -= 40
+	$Enemy/ProgressBar.value -= 10
 	Enemy_turn()
 
 func a3_on__pressed() -> void:
