@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://cqdd4btabtbex" path="res://overlab/item.gd" id="1_axg4c"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f7h51"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_axg4c"]
 size = Vector2(8, 8)
 
-[node name="Item" type="RigidBody2D"]
-gravity_scale = 0.0
+[node name="Item" type="CharacterBody2D" groups=["Item"]]
+motion_mode = 1
 script = ExtResource("1_axg4c")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -18,4 +18,4 @@ offset_right = 4.0
 offset_bottom = 4.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_f7h51")
+shape = SubResource("RectangleShape2D_axg4c")
