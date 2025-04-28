@@ -1,30 +1,46 @@
 import pygame,sys,random
 from pygame.math import Vector2
 
+#from pathlib import Path
+
+from pathlib import Path
+
+# Path to the current file
+current_file = Path(__file__)
+
+# Directory containing the file
+current_dir = current_file.parent
+
+print("Current file:", current_file)
+print("Current directory:", current_dir)
+
+
 class SNAKE:
 	def __init__(self):
 		self.body = [Vector2(5,10),Vector2(4,10)]
 		self.direction = Vector2(0,0)
 		self.new_block = False
 
-		self.head_up = pygame.image.load('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Graphics/head_up.png').convert_alpha()
-		self.head_down = pygame.image.load('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Graphics/head_down.png').convert_alpha()
-		self.head_right = pygame.image.load('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Graphics/head_right.png').convert_alpha()
-		self.head_left = pygame.image.load('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Graphics/head_left.png').convert_alpha()
+		self.head_up = pygame.image.load(current_dir / "Graphics/head_up.png").convert_alpha()
+		self.head_down = pygame.image.load(current_dir / 'Graphics/head_down.png').convert_alpha()
+		self.head_right = pygame.image.load(current_dir / 'Graphics/head_right.png').convert_alpha()
+		self.head_left = pygame.image.load(current_dir / 'Graphics/head_left.png').convert_alpha()
 		
-		self.tail_up = pygame.image.load('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Graphics/tail_up.png').convert_alpha()
-		self.tail_down = pygame.image.load('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Graphics/tail_down.png').convert_alpha()
-		self.tail_right = pygame.image.load('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Graphics/tail_right.png').convert_alpha()
-		self.tail_left = pygame.image.load('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Graphics/tail_left.png').convert_alpha()
+		self.tail_up = pygame.image.load(current_dir / 'Graphics/tail_up.png').convert_alpha()
+		self.tail_down = pygame.image.load(current_dir / 'Graphics/tail_down.png').convert_alpha()
+		self.tail_right = pygame.image.load(current_dir / 'Graphics/tail_right.png').convert_alpha()
+		self.tail_left = pygame.image.load(current_dir / 'Graphics/tail_left.png').convert_alpha()
 
-		self.body_vertical = pygame.image.load('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Graphics/body_vertical.png').convert_alpha()
-		self.body_horizontal = pygame.image.load('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Graphics/body_horizontal.png').convert_alpha()
+		self.body_vertical = pygame.image.load(current_dir / 'Graphics/body_vertical.png').convert_alpha()
+		self.body_horizontal = pygame.image.load(current_dir / 'Graphics/body_horizontal.png').convert_alpha()
 
-		self.body_tr = pygame.image.load('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Graphics/body_tr.png').convert_alpha()
-		self.body_tl = pygame.image.load('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Graphics/body_tl.png').convert_alpha()
-		self.body_br = pygame.image.load('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Graphics/body_br.png').convert_alpha()
-		self.body_bl = pygame.image.load('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Graphics/body_bl.png').convert_alpha()
-		self.crunch_sound = pygame.mixer.Sound('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Sound/crunch.wav')
+		self.body_tr = pygame.image.load(current_dir / 'Graphics/body_tr.png').convert_alpha()
+		self.body_tl = pygame.image.load(current_dir / 'Graphics/body_tl.png').convert_alpha()
+		self.body_br = pygame.image.load(current_dir / 'Graphics/body_br.png').convert_alpha()
+		self.body_bl = pygame.image.load(current_dir / 'Graphics/body_bl.png').convert_alpha()
+		self.crunch_sound = pygame.mixer.Sound(current_dir / 'Sound/crunch.wav')
+          
+       
 
 	def draw_snake(self):
 		self.update_head_graphics()
@@ -278,8 +294,8 @@ screen_width = cell_number * cell_size
 screen_height = (cell_number * cell_size) + header_height
 screen = pygame.display.set_mode((screen_width, screen_height))
 clock = pygame.time.Clock()
-apple = pygame.image.load('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Graphics/apple.png').convert_alpha()
-game_font = pygame.font.Font('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Font/PoetsenOne-Regular.ttf', 25)
+apple = pygame.image.load( current_dir / 'Graphics/apple.png').convert_alpha()
+game_font = pygame.font.Font(current_dir / 'Font/PoetsenOne-Regular.ttf', 25)
 
 SCREEN_UPDATE = pygame.USEREVENT
 pygame.time.set_timer(SCREEN_UPDATE,150)
