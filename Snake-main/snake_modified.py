@@ -278,18 +278,18 @@ class MAIN:
             if expected != actual:
                 errors += 1
                 if i in active_sites:
-                    self.show_popup("❌ Misfolded Protein", "Error in active site!")
+                    self.show_popup("Misfolded protein", "Wrong codon in active site! The protein cannot work :(", emoji_img=emoji_cross)
                     self.game_over()
                     return
 
         error_rate = errors / len(current_recipe)
         if error_rate > 0.3:
-            self.show_popup("❌ Misfolded Protein", f"{errors} errors ({error_rate:.0%})")
+            self.show_popup("Misfolded protein", f"{errors} wrong codons in the sequence ({error_rate:.0%})! The protein cannot work :(", emoji_img=emoji_cross)
             self.game_over()
             return
 
         description = current_protein_data.get("description", "No description available.")
-        self.show_popup("✅ Protein Synthesized!", description)
+        self.show_popup("Protein synthesised!", description, emoji_img=emoji_check)
         self.reset_game()
 
     def draw_grass(self):
@@ -335,21 +335,39 @@ class MAIN:
         pygame.draw.rect(screen, (255, 255, 255), header_rect)  # Changed to white
 
         # Protein name
-        title_text = f"Building: {current_protein_name}"
+        title_text = f"Let's build {current_protein_name}"
         title_surf = game_font.render(title_text, True, (0, 0, 0))
-        screen.blit(title_surf, (20, 15))
+        title_rect = title_surf.get_rect(centerx=screen_width // 2, y=15)
+        screen.blit(title_surf, title_rect)
 
         # Recipe progress
-        recipe_text = "Recipe: " + " ".join(
+        recipe_text = "Follow this recipe: " + " ".join(
             [
                 f"[{codon}]" if i == recipe_index else codon
                 for i, codon in enumerate(current_recipe)
             ]
         )
         recipe_surf = game_font.render(recipe_text, True, (0, 0, 0))
-        screen.blit(recipe_surf, (20, 45))
+        recipe_rect = recipe_surf.get_rect(centerx=screen_width // 2, y=45)
+        screen.blit(recipe_surf, recipe_rect)
         
-    def show_popup(self, message, submessage):
+    def wrap_text(self, text, font, max_width):
+        words = text.split(' ')
+        lines = []
+        current_line = ""
+
+        for word in words:
+            test_line = current_line + word + " "
+            if font.size(test_line)[0] <= max_width:
+                current_line = test_line
+            else:
+                lines.append(current_line.strip())
+                current_line = word + " "
+        if current_line:
+            lines.append(current_line.strip())
+        return lines
+        
+    def show_popup(self, message, submessage, emoji_img=None):
         popup_width = 500
         popup_height = 250
         popup_x = (screen_width - popup_width) // 2
@@ -366,16 +384,25 @@ class MAIN:
             pygame.draw.rect(screen, (255, 255, 255), (popup_x, popup_y, popup_width, popup_height))
             pygame.draw.rect(screen, (0, 0, 0), (popup_x, popup_y, popup_width, popup_height), 4)
 
-            # Draw text
+            # Draw emoji at the top-left corner of the popup
+            if emoji_img:
+                emoji_rect = emoji_img.get_rect(topleft=(popup_x + 20, popup_y + 20))  # Position emoji at the top-left corner
+                screen.blit(emoji_img, emoji_rect)
+
+            # Draw message (title) text to the right of the emoji
             title_surf = game_font.render(message, True, (0, 0, 0))
-            sub_surf = game_font.render(submessage, True, (50, 50, 50))
-            screen.blit(title_surf, (popup_x + 20, popup_y + 20))
-            screen.blit(sub_surf, (popup_x + 20, popup_y + 80))
+            screen.blit(title_surf, (popup_x + 60, popup_y + 20))  # Offset to make room for the emoji
+
+            # Wrap and draw submessage (body text)
+            wrapped_lines = self.wrap_text(submessage, game_font, popup_width - 40)
+            for i, line in enumerate(wrapped_lines):
+                sub_surf = game_font.render(line, True, (50, 50, 50))
+                screen.blit(sub_surf, (popup_x + 20, popup_y + 60 + i * 30))  # Added extra spacing
 
             # Draw button
             pygame.draw.rect(screen, (100, 200, 100), button_rect)
             pygame.draw.rect(screen, (0, 0, 0), button_rect, 2)
-            button_text = game_font.render("Play Again", True, (0, 0, 0))
+            button_text = game_font.render("Play again", True, (0, 0, 0))
             text_rect = button_text.get_rect(center=button_rect.center)
             screen.blit(button_text, text_rect)
 
@@ -410,8 +437,12 @@ screen_width = cell_number * cell_size
 screen_height = (cell_number * cell_size) + header_height
 screen = pygame.display.set_mode((screen_width, screen_height))
 clock = pygame.time.Clock()
-apple = pygame.image.load(current_dir / "Graphics/apple.png").convert_alpha()
-game_font = pygame.font.Font(current_dir / "Font/PoetsenOne-Regular.ttf", 25)
+game_font = pygame.font.Font(f"{current_dir}/Font/PoetsenOne-Regular.ttf", 25)
+emoji_check = pygame.image.load(f"{current_dir}/Graphics/check_emoji.png").convert_alpha()
+emoji_cross = pygame.image.load(f"{current_dir}/Graphics/cross_emoji.png").convert_alpha()
+
+emoji_check = pygame.transform.scale(emoji_check, (30, 30))
+emoji_cross = pygame.transform.scale(emoji_cross, (30, 30))
 
 SCREEN_UPDATE = pygame.USEREVENT
 pygame.time.set_timer(SCREEN_UPDATE, 150)
