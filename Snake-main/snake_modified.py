@@ -274,23 +274,22 @@ class MAIN:
 
     def protein_complete(self):
         errors = 0
-        for i, (expected, actual) in enumerate(
-            zip(current_recipe, self.snake.codon_history)
-        ):
+        for i, (expected, actual) in enumerate(zip(current_recipe, self.snake.codon_history)):
             if expected != actual:
                 errors += 1
                 if i in active_sites:
-                    print("❌ Misfolded: Error in active site")
+                    self.show_popup("❌ Misfolded Protein", "Error in active site!")
                     self.game_over()
                     return
 
         error_rate = errors / len(current_recipe)
         if error_rate > 0.3:
-            print(f"❌ Misfolded: {errors} errors ({error_rate:.0%})")
+            self.show_popup("❌ Misfolded Protein", f"{errors} errors ({error_rate:.0%})")
             self.game_over()
             return
 
-        print("✅ Protein correctly synthesized")
+        description = current_protein_data.get("description", "No description available.")
+        self.show_popup("✅ Protein Synthesized!", description)
         self.reset_game()
 
     def draw_grass(self):
@@ -349,7 +348,47 @@ class MAIN:
         )
         recipe_surf = game_font.render(recipe_text, True, (0, 0, 0))
         screen.blit(recipe_surf, (20, 45))
+        
+    def show_popup(self, message, submessage):
+        popup_width = 500
+        popup_height = 250
+        popup_x = (screen_width - popup_width) // 2
+        popup_y = (screen_height - popup_height) // 2
 
+        button_width = 200
+        button_height = 50
+        button_x = popup_x + (popup_width - button_width) // 2
+        button_y = popup_y + 170
+        button_rect = pygame.Rect(button_x, button_y, button_width, button_height)
+
+        while True:
+            # Draw popup box
+            pygame.draw.rect(screen, (255, 255, 255), (popup_x, popup_y, popup_width, popup_height))
+            pygame.draw.rect(screen, (0, 0, 0), (popup_x, popup_y, popup_width, popup_height), 4)
+
+            # Draw text
+            title_surf = game_font.render(message, True, (0, 0, 0))
+            sub_surf = game_font.render(submessage, True, (50, 50, 50))
+            screen.blit(title_surf, (popup_x + 20, popup_y + 20))
+            screen.blit(sub_surf, (popup_x + 20, popup_y + 80))
+
+            # Draw button
+            pygame.draw.rect(screen, (100, 200, 100), button_rect)
+            pygame.draw.rect(screen, (0, 0, 0), button_rect, 2)
+            button_text = game_font.render("Play Again", True, (0, 0, 0))
+            text_rect = button_text.get_rect(center=button_rect.center)
+            screen.blit(button_text, text_rect)
+
+            pygame.display.update()
+
+            # Wait for button click or quit
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if button_rect.collidepoint(event.pos):
+                        return
 
 pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init()
