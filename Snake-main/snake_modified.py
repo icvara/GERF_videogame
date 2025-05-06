@@ -278,7 +278,7 @@ class MAIN:
             if expected != actual:
                 errors += 1
                 if i in active_sites:
-                    self.show_popup("Misfolded protein", "Wrong codon in active site! The protein cannot work :(", emoji_img=emoji_cross)
+                    self.show_popup("Misfolded protein", "Wrong codon in active site! The protein is inactive :(", emoji_img=emoji_cross)
                     self.game_over()
                     return
 
