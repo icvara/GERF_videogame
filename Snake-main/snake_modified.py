@@ -1,4 +1,5 @@
 import pygame, sys, random
+import json
 from pygame.math import Vector2
 from pathlib import Path
 
@@ -8,59 +9,44 @@ current_file = Path(__file__)
 # Directory containing the file
 current_dir = current_file.parent
 
-
 class SNAKE:
     def __init__(self):
         self.body = [Vector2(5, 10), Vector2(4, 10)]
         self.direction = Vector2(0, 0)
         self.new_block = False
 
-        self.head_up = pygame.image.load(
-            current_dir / "Graphics/head_up.png"
+        self.head_up = pygame.image.load(f"{current_dir}/Graphics/head_up.png"
         ).convert_alpha()
-        self.head_down = pygame.image.load(
-            current_dir / "Graphics/head_down.png"
+        self.head_down = pygame.image.load(f"{current_dir}/Graphics/head_down.png"
         ).convert_alpha()
-        self.head_right = pygame.image.load(
-            current_dir / "Graphics/head_right.png"
+        self.head_right = pygame.image.load(f"{current_dir}/Graphics/head_right.png"
         ).convert_alpha()
-        self.head_left = pygame.image.load(
-            current_dir / "Graphics/head_left.png"
+        self.head_left = pygame.image.load(f"{current_dir}/Graphics/head_left.png"
         ).convert_alpha()
 
-        self.tail_up = pygame.image.load(
-            current_dir / "Graphics/tail_up.png"
+        self.tail_up = pygame.image.load(f"{current_dir}/Graphics/tail_up.png"
         ).convert_alpha()
-        self.tail_down = pygame.image.load(
-            current_dir / "Graphics/tail_down.png"
+        self.tail_down = pygame.image.load(f"{current_dir}/Graphics/tail_down.png"
         ).convert_alpha()
-        self.tail_right = pygame.image.load(
-            current_dir / "Graphics/tail_right.png"
+        self.tail_right = pygame.image.load(f"{current_dir}/Graphics/tail_right.png"
         ).convert_alpha()
-        self.tail_left = pygame.image.load(
-            current_dir / "Graphics/tail_left.png"
+        self.tail_left = pygame.image.load(f"{current_dir}/Graphics/tail_left.png"
         ).convert_alpha()
 
-        self.body_vertical = pygame.image.load(
-            current_dir / "Graphics/body_vertical.png"
+        self.body_vertical = pygame.image.load(f"{current_dir}/Graphics/body_vertical.png"
         ).convert_alpha()
-        self.body_horizontal = pygame.image.load(
-            current_dir / "Graphics/body_horizontal.png"
+        self.body_horizontal = pygame.image.load(f"{current_dir}/Graphics/body_horizontal.png"
         ).convert_alpha()
 
-        self.body_tr = pygame.image.load(
-            current_dir / "Graphics/body_tr.png"
+        self.body_tr = pygame.image.load(f"{current_dir}/Graphics/body_tr.png"
         ).convert_alpha()
-        self.body_tl = pygame.image.load(
-            current_dir / "Graphics/body_tl.png"
+        self.body_tl = pygame.image.load(f"{current_dir}/Graphics/body_tl.png"
         ).convert_alpha()
-        self.body_br = pygame.image.load(
-            current_dir / "Graphics/body_br.png"
+        self.body_br = pygame.image.load(f"{current_dir}/Graphics/body_br.png"
         ).convert_alpha()
-        self.body_bl = pygame.image.load(
-            current_dir / "Graphics/body_bl.png"
+        self.body_bl = pygame.image.load(f"{current_dir}/Graphics/body_bl.png"
         ).convert_alpha()
-        self.crunch_sound = pygame.mixer.Sound(current_dir / "Sound/crunch.wav")
+        self.crunch_sound = pygame.mixer.Sound(f"{current_dir}/Sound/crunch.wav")
 
     def draw_snake(self):
         self.update_head_graphics()
@@ -331,16 +317,15 @@ pygame.init()
 cell_size = 30
 cell_number = 20
 
-PROTEIN_RECIPES = {
-    "Hemoglobin": ["r", "r", "g", "b", "y"],
-    "Insulin": ["g", "g", "y", "b"],
-    "Collagen": ["b", "y", "r"],
-}
+with open("/Users/giorgiadelmissier/Desktop/GERF/GERF_videogame/Snake-main/proteins_db.json") as f:
+    PROTEINS = json.load(f)
 
-current_protein = random.choice(list(PROTEIN_RECIPES.keys()))
-current_recipe = PROTEIN_RECIPES[current_protein]
+# Choose a random protein from the database
+current_protein_data = random.choice(PROTEINS)
+current_protein_name = current_protein_data["name"]
+current_recipe = current_protein_data["sequence"]
+active_sites = current_protein_data["active_sites"]
 recipe_index = 0
-
 header_height = 80  # Space for protein info
 screen_width = cell_number * cell_size
 screen_height = (cell_number * cell_size) + header_height
