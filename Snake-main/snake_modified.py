@@ -1,8 +1,5 @@
 import pygame, sys, random
 from pygame.math import Vector2
-
-# from pathlib import Path
-
 from pathlib import Path
 
 # Path to the current file
@@ -10,6 +7,7 @@ current_file = Path(__file__)
 
 # Directory containing the file
 current_dir = current_file.parent
+
 
 class SNAKE:
     def __init__(self):
@@ -297,15 +295,6 @@ class MAIN:
                         )
                         pygame.draw.rect(screen, grass_color, grass_rect)
 
-    # def protein_complete(self):
-    #     self.reset_recipe_progress()
-    #     self.select_new_protein()
-    #     self.snake.reset()
-    #     self.codons = [CODON() for _ in range(2)]
-    #     self.last_codon_time = pygame.time.get_ticks()
-    #     self.draw_header()  # Force immediate redraw
-    #     pygame.display.update()  # Update display before next frame
-
     def reset_recipe_progress(self):
         global recipe_index
         recipe_index = 0
@@ -399,7 +388,7 @@ while True:
     pygame.display.update()
     clock.tick(60)
 
-# next things to do: make random codons not random but depend on composition of next codon that needs to appear
 # show final message about the protein
 # allow incorporation of wrong codons, if too high percent show message about misfolding
 # make graphics look better
+# add different visual / sound for wrong codon incorporation
