@@ -1,127 +1,195 @@
-import pygame,sys,random
+import json
+import pygame, sys, random
 from pygame.math import Vector2
 
+
 class SNAKE:
-	def __init__(self):
-		self.body = [Vector2(5,10),Vector2(4,10)]
-		self.direction = Vector2(0,0)
-		self.new_block = False
+    def __init__(self):
+        self.body = [Vector2(5, 10), Vector2(4, 10)]
+        self.direction = Vector2(0, 0)
+        self.codon_history = []
+        self.new_block = False
 
-		self.head_up = pygame.image.load('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Graphics/head_up.png').convert_alpha()
-		self.head_down = pygame.image.load('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Graphics/head_down.png').convert_alpha()
-		self.head_right = pygame.image.load('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Graphics/head_right.png').convert_alpha()
-		self.head_left = pygame.image.load('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Graphics/head_left.png').convert_alpha()
-		
-		self.tail_up = pygame.image.load('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Graphics/tail_up.png').convert_alpha()
-		self.tail_down = pygame.image.load('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Graphics/tail_down.png').convert_alpha()
-		self.tail_right = pygame.image.load('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Graphics/tail_right.png').convert_alpha()
-		self.tail_left = pygame.image.load('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Graphics/tail_left.png').convert_alpha()
+        self.head_up = pygame.image.load(
+            "/Users/giorgiadelmissier/Desktop/GERF/GERF_videogame/Snake-main/Graphics/head_up.png"
+        ).convert_alpha()
+        self.head_down = pygame.image.load(
+            "/Users/giorgiadelmissier/Desktop/GERF/GERF_videogame/Snake-main/Graphics/head_down.png"
+        ).convert_alpha()
+        self.head_right = pygame.image.load(
+            "/Users/giorgiadelmissier/Desktop/GERF/GERF_videogame/Snake-main/Graphics/head_right.png"
+        ).convert_alpha()
+        self.head_left = pygame.image.load(
+            "/Users/giorgiadelmissier/Desktop/GERF/GERF_videogame/Snake-main/Graphics/head_left.png"
+        ).convert_alpha()
 
-		self.body_vertical = pygame.image.load('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Graphics/body_vertical.png').convert_alpha()
-		self.body_horizontal = pygame.image.load('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Graphics/body_horizontal.png').convert_alpha()
+        self.tail_up = pygame.image.load(
+            "/Users/giorgiadelmissier/Desktop/GERF/GERF_videogame/Snake-main/Graphics/tail_up.png"
+        ).convert_alpha()
+        self.tail_down = pygame.image.load(
+            "/Users/giorgiadelmissier/Desktop/GERF/GERF_videogame/Snake-main/Graphics/tail_down.png"
+        ).convert_alpha()
+        self.tail_right = pygame.image.load(
+            "/Users/giorgiadelmissier/Desktop/GERF/GERF_videogame/Snake-main/Graphics/tail_right.png"
+        ).convert_alpha()
+        self.tail_left = pygame.image.load(
+            "/Users/giorgiadelmissier/Desktop/GERF/GERF_videogame/Snake-main/Graphics/tail_left.png"
+        ).convert_alpha()
 
-		self.body_tr = pygame.image.load('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Graphics/body_tr.png').convert_alpha()
-		self.body_tl = pygame.image.load('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Graphics/body_tl.png').convert_alpha()
-		self.body_br = pygame.image.load('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Graphics/body_br.png').convert_alpha()
-		self.body_bl = pygame.image.load('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Graphics/body_bl.png').convert_alpha()
-		self.crunch_sound = pygame.mixer.Sound('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Sound/crunch.wav')
+        self.body_vertical = pygame.image.load(
+            "/Users/giorgiadelmissier/Desktop/GERF/GERF_videogame/Snake-main/Graphics/body_vertical.png"
+        ).convert_alpha()
+        self.body_horizontal = pygame.image.load(
+            "/Users/giorgiadelmissier/Desktop/GERF/GERF_videogame/Snake-main/Graphics/body_horizontal.png"
+        ).convert_alpha()
 
-	def draw_snake(self):
-		self.update_head_graphics()
-		self.update_tail_graphics()
+        self.body_tr = pygame.image.load(
+            "/Users/giorgiadelmissier/Desktop/GERF/GERF_videogame/Snake-main/Graphics/body_tr.png"
+        ).convert_alpha()
+        self.body_tl = pygame.image.load(
+            "/Users/giorgiadelmissier/Desktop/GERF/GERF_videogame/Snake-main/Graphics/body_tl.png"
+        ).convert_alpha()
+        self.body_br = pygame.image.load(
+            "/Users/giorgiadelmissier/Desktop/GERF/GERF_videogame/Snake-main/Graphics/body_br.png"
+        ).convert_alpha()
+        self.body_bl = pygame.image.load(
+            "/Users/giorgiadelmissier/Desktop/GERF/GERF_videogame/Snake-main/Graphics/body_bl.png"
+        ).convert_alpha()
+        self.crunch_sound = pygame.mixer.Sound(
+            "/Users/giorgiadelmissier/Desktop/GERF/GERF_videogame/Snake-main/Sound/crunch.wav"
+        )
 
-		for index,block in enumerate(self.body):
-			x_pos = int(block.x * cell_size)
-			y_pos = int(block.y * cell_size) + header_height
-			block_rect = pygame.Rect(x_pos,y_pos,cell_size,cell_size)
+    def draw_snake(self):
+        self.update_head_graphics()
+        self.update_tail_graphics()
 
-			if index == 0:
-				screen.blit(self.head,block_rect)
-			elif index == len(self.body) - 1:
-				screen.blit(self.tail,block_rect)
-			else:
-				previous_block = self.body[index + 1] - block
-				next_block = self.body[index - 1] - block
-				if previous_block.x == next_block.x:
-					screen.blit(self.body_vertical,block_rect)
-				elif previous_block.y == next_block.y:
-					screen.blit(self.body_horizontal,block_rect)
-				else:
-					if previous_block.x == -1 and next_block.y == -1 or previous_block.y == -1 and next_block.x == -1:
-						screen.blit(self.body_tl,block_rect)
-					elif previous_block.x == -1 and next_block.y == 1 or previous_block.y == 1 and next_block.x == -1:
-						screen.blit(self.body_bl,block_rect)
-					elif previous_block.x == 1 and next_block.y == -1 or previous_block.y == -1 and next_block.x == 1:
-						screen.blit(self.body_tr,block_rect)
-					elif previous_block.x == 1 and next_block.y == 1 or previous_block.y == 1 and next_block.x == 1:
-						screen.blit(self.body_br,block_rect)
+        for index, block in enumerate(self.body):
+            x_pos = int(block.x * cell_size)
+            y_pos = int(block.y * cell_size) + header_height
+            block_rect = pygame.Rect(x_pos, y_pos, cell_size, cell_size)
 
-	def update_head_graphics(self):
-		head_relation = self.body[1] - self.body[0]
-		if head_relation == Vector2(1,0): self.head = self.head_left
-		elif head_relation == Vector2(-1,0): self.head = self.head_right
-		elif head_relation == Vector2(0,1): self.head = self.head_up
-		elif head_relation == Vector2(0,-1): self.head = self.head_down
+            if index == 0:
+                screen.blit(self.head, block_rect)
+            elif index == len(self.body) - 1:
+                screen.blit(self.tail, block_rect)
+            else:
+                previous_block = self.body[index + 1] - block
+                next_block = self.body[index - 1] - block
+                if previous_block.x == next_block.x:
+                    screen.blit(self.body_vertical, block_rect)
+                elif previous_block.y == next_block.y:
+                    screen.blit(self.body_horizontal, block_rect)
+                else:
+                    if (
+                        previous_block.x == -1
+                        and next_block.y == -1
+                        or previous_block.y == -1
+                        and next_block.x == -1
+                    ):
+                        screen.blit(self.body_tl, block_rect)
+                    elif (
+                        previous_block.x == -1
+                        and next_block.y == 1
+                        or previous_block.y == 1
+                        and next_block.x == -1
+                    ):
+                        screen.blit(self.body_bl, block_rect)
+                    elif (
+                        previous_block.x == 1
+                        and next_block.y == -1
+                        or previous_block.y == -1
+                        and next_block.x == 1
+                    ):
+                        screen.blit(self.body_tr, block_rect)
+                    elif (
+                        previous_block.x == 1
+                        and next_block.y == 1
+                        or previous_block.y == 1
+                        and next_block.x == 1
+                    ):
+                        screen.blit(self.body_br, block_rect)
 
-	def update_tail_graphics(self):
-		tail_relation = self.body[-2] - self.body[-1]
-		if tail_relation == Vector2(1,0): self.tail = self.tail_left
-		elif tail_relation == Vector2(-1,0): self.tail = self.tail_right
-		elif tail_relation == Vector2(0,1): self.tail = self.tail_up
-		elif tail_relation == Vector2(0,-1): self.tail = self.tail_down
+    def update_head_graphics(self):
+        head_relation = self.body[1] - self.body[0]
+        if head_relation == Vector2(1, 0):
+            self.head = self.head_left
+        elif head_relation == Vector2(-1, 0):
+            self.head = self.head_right
+        elif head_relation == Vector2(0, 1):
+            self.head = self.head_up
+        elif head_relation == Vector2(0, -1):
+            self.head = self.head_down
 
-	def move_snake(self):
-		if self.new_block == True:
-			body_copy = self.body[:]
-			body_copy.insert(0,body_copy[0] + self.direction)
-			self.body = body_copy[:]
-			self.new_block = False
-		else:
-			body_copy = self.body[:-1]
-			body_copy.insert(0,body_copy[0] + self.direction)
-			self.body = body_copy[:]
+    def update_tail_graphics(self):
+        tail_relation = self.body[-2] - self.body[-1]
+        if tail_relation == Vector2(1, 0):
+            self.tail = self.tail_left
+        elif tail_relation == Vector2(-1, 0):
+            self.tail = self.tail_right
+        elif tail_relation == Vector2(0, 1):
+            self.tail = self.tail_up
+        elif tail_relation == Vector2(0, -1):
+            self.tail = self.tail_down
 
-	def add_block(self):
-		self.new_block = True
+    def move_snake(self):
+        if self.new_block == True:
+            body_copy = self.body[:]
+            body_copy.insert(0, body_copy[0] + self.direction)
+            self.body = body_copy[:]
+            self.new_block = False
+        else:
+            body_copy = self.body[:-1]
+            body_copy.insert(0, body_copy[0] + self.direction)
+            self.body = body_copy[:]
 
-	def play_crunch_sound(self):
-		self.crunch_sound.play()
+    def add_block(self):
+        self.new_block = True
 
-	def reset(self):
-		self.body = [Vector2(5,10),Vector2(4,10)]
-		self.direction = Vector2(0,0)
+    def play_crunch_sound(self):
+        self.crunch_sound.play()
+
+    def reset(self):
+        self.body = [Vector2(5, 10), Vector2(4, 10)]
+        self.direction = Vector2(0, 0)
+        self.codon_history = []
+
 
 class CODON:
     def __init__(self):
-        self.types = ['r', 'b', 'g', 'y']  # Example codon types
-        self.colors = {
-            'r': 'red',
-            'b': 'blue', 
-            'g': 'green',
-            'y': 'yellow'
-        }
+        self.types = ["r", "b", "g", "y"]  # Example codon types
+        self.colors = {"r": "red", "b": "blue", "g": "green", "y": "yellow"}
         self.current_type = None
         self.pos = None
         self.spawn_time = pygame.time.get_ticks()  # Track spawn time
         self.randomize()
-		
+
     @property
     def expired(self):
         return pygame.time.get_ticks() - self.spawn_time > 15000  # 10 seconds
-   
+
     def randomize(self):
         self.x = random.randint(0, cell_number - 1)
         self.y = random.randint(0, cell_number - 1)
         self.pos = Vector2(self.x, self.y)
-        self.current_type = random.choice(self.types)
-        
+
+        # Favor spawning the next needed codon
+        if random.random() < 0.75:  # 75% chance
+            self.current_type = current_recipe[recipe_index]
+        else:
+            # Pick a random codon that is *not* the next needed one
+            other_codons = [c for c in self.types if c != current_recipe[recipe_index]]
+            self.current_type = random.choice(other_codons)
+
     def draw_codon(self):
         shape_rect = pygame.Rect(
             int(self.pos.x * cell_size),
             int(self.pos.y * cell_size) + header_height,  # Offset by header
-            cell_size, cell_size
+            cell_size,
+            cell_size,
         )
-        pygame.draw.circle(screen, self.colors[self.current_type], shape_rect.center, 15)
+        pygame.draw.circle(
+            screen, self.colors[self.current_type], shape_rect.center, 15
+        )
 
 
 class MAIN:
@@ -130,7 +198,7 @@ class MAIN:
         self.codons = [CODON() for _ in range(3)]  # 3 codons on screen
         self.last_codon_time = pygame.time.get_ticks()
         self.active = False  # Game starts paused
-        
+
     def update(self):
         if not self.active:
             return
@@ -139,48 +207,53 @@ class MAIN:
         self.check_fail()
         self.check_codon_spawn()
         self.remove_expired_codons()
-        
+
     def draw_elements(self):
         self.draw_header()  # Draw header FIRST
-        self.draw_grass()   # Then draw grass UNDERNEATH
+        self.draw_grass()  # Then draw grass UNDERNEATH
         for codon in self.codons:
             codon.draw_codon()
         self.snake.draw_snake()
-        
+
     def check_codon_spawn(self):
         # Spawn new codon every 5 seconds
         if pygame.time.get_ticks() - self.last_codon_time > 3000:
             self.codons.append(CODON())
             self.last_codon_time = pygame.time.get_ticks()
-			
+
     def remove_expired_codons(self):
         current_time = pygame.time.get_ticks()
         self.codons = [c for c in self.codons if not c.expired]
-        
+
     def check_collision(self):
         global recipe_index
-        
+
         for codon in self.codons[:]:
             if codon.pos == self.snake.body[0]:
-                if codon.current_type == current_recipe[recipe_index]:
-                    self.snake.add_block()
-                    recipe_index += 1
-                    self.codons.remove(codon)
-                    if recipe_index >= len(current_recipe):
-                        self.protein_complete()
-                # else:
-                #     self.snake.body.pop()  # Penalty for wrong codon, removes 1 body length
+                actual_codon = codon.current_type
+                expected_codon = current_recipe[recipe_index]
+
+                self.snake.codon_history.append(actual_codon)
+                self.snake.add_block()
+                self.codons.remove(codon)
+
+                recipe_index += 1  # Always advance, even on errors
+
+                if recipe_index >= len(current_recipe):
+                    self.protein_complete()
                 break
-			
-    
+
     def check_fail(self):
-        if not 0 <= self.snake.body[0].x < cell_number or not 0 <= self.snake.body[0].y < cell_number:
+        if (
+            not 0 <= self.snake.body[0].x < cell_number
+            or not 0 <= self.snake.body[0].y < cell_number
+        ):
             self.game_over()
 
         for block in self.snake.body[1:]:
             if block == self.snake.body[0]:
                 self.game_over()
-    
+
     def reset_game(self):
         self.reset_recipe_progress()
         self.select_new_protein()
@@ -190,24 +263,43 @@ class MAIN:
         self.draw_header()
         pygame.display.update()
         self.active = False
-		
+
     def game_over(self):
         self.reset_game()
 
     def protein_complete(self):
+        errors = 0
+        for i, (expected, actual) in enumerate(
+            zip(current_recipe, self.snake.codon_history)
+        ):
+            if expected != actual:
+                errors += 1
+                if i in active_sites:
+                    print("❌ Misfolded: Error in active site")
+                    self.game_over()
+                    return
+
+        error_rate = errors / len(current_recipe)
+        if error_rate > 0.3:
+            print(f"❌ Misfolded: {errors} errors ({error_rate:.0%})")
+            self.game_over()
+            return
+
+        print("✅ Protein correctly synthesized")
         self.reset_game()
 
     def draw_grass(self):
-        grass_color = (167,209,61)
+        grass_color = (167, 209, 61)
         for row in range(cell_number):
-            if row % 2 == 0: 
+            if row % 2 == 0:
                 for col in range(cell_number):
                     if col % 2 == 0:
                         # Add header_height offset to y position
                         grass_rect = pygame.Rect(
                             col * cell_size,
                             row * cell_size + header_height,  # THIS LINE CHANGED
-                            cell_size, cell_size
+                            cell_size,
+                            cell_size,
                         )
                         pygame.draw.rect(screen, grass_color, grass_rect)
             else:
@@ -217,60 +309,58 @@ class MAIN:
                         grass_rect = pygame.Rect(
                             col * cell_size,
                             row * cell_size + header_height,  # THIS LINE CHANGED
-                            cell_size, cell_size
+                            cell_size,
+                            cell_size,
                         )
-                        pygame.draw.rect(screen, grass_color, grass_rect)	
+                        pygame.draw.rect(screen, grass_color, grass_rect)
 
-    # def protein_complete(self):
-    #     self.reset_recipe_progress()
-    #     self.select_new_protein()
-    #     self.snake.reset()
-    #     self.codons = [CODON() for _ in range(2)]
-    #     self.last_codon_time = pygame.time.get_ticks()
-    #     self.draw_header()  # Force immediate redraw
-    #     pygame.display.update()  # Update display before next frame
-		
     def reset_recipe_progress(self):
         global recipe_index
         recipe_index = 0
-        print(f"Reset recipe index to: {recipe_index}")  # Debugging
 
     def select_new_protein(self):
-        global current_protein, current_recipe
-        available = list(PROTEIN_RECIPES.keys())
-        current_protein = random.choice(available)
-        current_recipe = PROTEIN_RECIPES[current_protein]
-        
+        global current_protein_data, current_protein_name, current_recipe, active_sites, recipe_index
+        current_protein_data = random.choice(PROTEINS)
+        current_protein_name = current_protein_data["name"]
+        current_recipe = current_protein_data["sequence"]
+        active_sites = current_protein_data["active_sites"]
+        recipe_index = 0
+
     def draw_header(self):
         header_rect = pygame.Rect(0, 0, screen_width, header_height)
         pygame.draw.rect(screen, (255, 255, 255), header_rect)  # Changed to white
-        
+
         # Protein name
-        title_text = f"Building: {current_protein}"
+        title_text = f"Building: {current_protein_name}"
         title_surf = game_font.render(title_text, True, (0, 0, 0))
         screen.blit(title_surf, (20, 15))
-        
+
         # Recipe progress
-        recipe_text = "Recipe: " + " ".join([
-            f"[{codon}]" if i == recipe_index else codon 
-            for i, codon in enumerate(current_recipe)
-        ])
+        recipe_text = "Recipe: " + " ".join(
+            [
+                f"[{codon}]" if i == recipe_index else codon
+                for i, codon in enumerate(current_recipe)
+            ]
+        )
         recipe_surf = game_font.render(recipe_text, True, (0, 0, 0))
         screen.blit(recipe_surf, (20, 45))
 
-pygame.mixer.pre_init(44100,-16,2,512)
+
+pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init()
 cell_size = 30
 cell_number = 20
 
-PROTEIN_RECIPES = {
-    "Hemoglobin": ['r', 'r', 'g', 'b', 'y'],
-    "Insulin": ['g', 'g', 'y', 'b'],
-    "Collagen": ['b', 'y', 'r']
-}
+with open(
+    "/Users/giorgiadelmissier/Desktop/GERF/GERF_videogame/Snake-main/proteins_db.json"
+) as f:
+    PROTEINS = json.load(f)
 
-current_protein = random.choice(list(PROTEIN_RECIPES.keys()))
-current_recipe = PROTEIN_RECIPES[current_protein]
+# Choose a random protein from the database
+current_protein_data = random.choice(PROTEINS)
+current_protein_name = current_protein_data["name"]
+current_recipe = current_protein_data["sequence"]
+active_sites = current_protein_data["active_sites"]
 recipe_index = 0
 
 header_height = 80  # Space for protein info
@@ -278,11 +368,16 @@ screen_width = cell_number * cell_size
 screen_height = (cell_number * cell_size) + header_height
 screen = pygame.display.set_mode((screen_width, screen_height))
 clock = pygame.time.Clock()
-apple = pygame.image.load('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Graphics/apple.png').convert_alpha()
-game_font = pygame.font.Font('/Users/giorgiadelmissier/Desktop/GERF/Snake-main/Font/PoetsenOne-Regular.ttf', 25)
+apple = pygame.image.load(
+    "/Users/giorgiadelmissier/Desktop/GERF/GERF_videogame/Snake-main/Graphics/apple.png"
+).convert_alpha()
+game_font = pygame.font.Font(
+    "/Users/giorgiadelmissier/Desktop/GERF/GERF_videogame/Snake-main/Font/PoetsenOne-Regular.ttf",
+    25,
+)
 
 SCREEN_UPDATE = pygame.USEREVENT
-pygame.time.set_timer(SCREEN_UPDATE,150)
+pygame.time.set_timer(SCREEN_UPDATE, 150)
 
 main_game = MAIN()
 
@@ -296,29 +391,31 @@ while True:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
                 if main_game.snake.direction.y != 1:
-                    main_game.snake.direction = Vector2(0,-1)
+                    main_game.snake.direction = Vector2(0, -1)
                     main_game.active = True
             if event.key == pygame.K_RIGHT:
                 if main_game.snake.direction.x != -1:
-                    main_game.snake.direction = Vector2(1,0)
+                    main_game.snake.direction = Vector2(1, 0)
                     main_game.active = True
             if event.key == pygame.K_DOWN:
                 if main_game.snake.direction.y != -1:
-                    main_game.snake.direction = Vector2(0,1)
+                    main_game.snake.direction = Vector2(0, 1)
                     main_game.active = True
             if event.key == pygame.K_LEFT:
                 if main_game.snake.direction.x != 1:
-                    main_game.snake.direction = Vector2(-1,0)
+                    main_game.snake.direction = Vector2(-1, 0)
                     main_game.active = True
 
-    screen.fill((175,215,70))
+    screen.fill((175, 215, 70))
     main_game.draw_elements()
-    game_area = pygame.Rect(0, header_height, screen_width, screen_height-header_height)
-    pygame.draw.rect(screen, (0,0,0), game_area, 2)
+    game_area = pygame.Rect(
+        0, header_height, screen_width, screen_height - header_height
+    )
+    pygame.draw.rect(screen, (0, 0, 0), game_area, 2)
     pygame.display.update()
     clock.tick(60)
 
-# next things to do: make random codons not random but depend on composition of next codon that needs to appear
+
 # show final message about the protein
-# allow incorporation of wrong codons, if too high percent show message about misfolding
 # make graphics look better
+# different sound / visual for wrong codons
