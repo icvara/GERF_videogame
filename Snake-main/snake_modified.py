@@ -452,6 +452,5 @@ while True:
     pygame.display.update()
     clock.tick(60)
 
-# show final message about the protein
 # make graphics look better
 # add different visual / sound for wrong codon incorporation
