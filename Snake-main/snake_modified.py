@@ -178,7 +178,7 @@ class CODON:
         self.pos = Vector2(self.x, self.y)
 
         # Favor spawning the next needed codon
-        if random.random() < 0.8:  # 80% chance
+        if random.random() < 0.75:  # 75% chance
             self.current_type = current_recipe[recipe_index]
         else:
             # Pick a random codon that is *not* the next needed one
@@ -322,7 +322,6 @@ class MAIN:
     def reset_recipe_progress(self):
         global recipe_index
         recipe_index = 0
-        print(f"Reset recipe index to: {recipe_index}")  # Debugging
 
     def select_new_protein(self):
         global current_protein_data, current_protein_name, current_recipe, active_sites, recipe_index
