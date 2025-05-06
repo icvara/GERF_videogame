@@ -414,6 +414,5 @@ while True:
     clock.tick(60)
 
 # show final message about the protein
-# allow incorporation of wrong codons, if too high percent show message about misfolding
 # make graphics look better
 # add different visual / sound for wrong codon incorporation
