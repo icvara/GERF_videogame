@@ -9,6 +9,7 @@ current_file = Path(__file__)
 # Directory containing the file
 current_dir = current_file.parent
 
+
 class SNAKE:
     def __init__(self):
         self.body = [Vector2(5, 10), Vector2(4, 10)]
@@ -16,36 +17,50 @@ class SNAKE:
         self.codon_history = []
         self.new_block = False
 
-        self.head_up = pygame.image.load(f"{current_dir}/Graphics/head_up.png"
+        self.head_up = pygame.image.load(
+            f"{current_dir}/Graphics/head_up.png"
         ).convert_alpha()
-        self.head_down = pygame.image.load(f"{current_dir}/Graphics/head_down.png"
+        self.head_down = pygame.image.load(
+            f"{current_dir}/Graphics/head_down.png"
         ).convert_alpha()
-        self.head_right = pygame.image.load(f"{current_dir}/Graphics/head_right.png"
+        self.head_right = pygame.image.load(
+            f"{current_dir}/Graphics/head_right.png"
         ).convert_alpha()
-        self.head_left = pygame.image.load(f"{current_dir}/Graphics/head_left.png"
-        ).convert_alpha()
-
-        self.tail_up = pygame.image.load(f"{current_dir}/Graphics/tail_up.png"
-        ).convert_alpha()
-        self.tail_down = pygame.image.load(f"{current_dir}/Graphics/tail_down.png"
-        ).convert_alpha()
-        self.tail_right = pygame.image.load(f"{current_dir}/Graphics/tail_right.png"
-        ).convert_alpha()
-        self.tail_left = pygame.image.load(f"{current_dir}/Graphics/tail_left.png"
+        self.head_left = pygame.image.load(
+            f"{current_dir}/Graphics/head_left.png"
         ).convert_alpha()
 
-        self.body_vertical = pygame.image.load(f"{current_dir}/Graphics/body_vertical.png"
+        self.tail_up = pygame.image.load(
+            f"{current_dir}/Graphics/tail_up.png"
         ).convert_alpha()
-        self.body_horizontal = pygame.image.load(f"{current_dir}/Graphics/body_horizontal.png"
+        self.tail_down = pygame.image.load(
+            f"{current_dir}/Graphics/tail_down.png"
+        ).convert_alpha()
+        self.tail_right = pygame.image.load(
+            f"{current_dir}/Graphics/tail_right.png"
+        ).convert_alpha()
+        self.tail_left = pygame.image.load(
+            f"{current_dir}/Graphics/tail_left.png"
         ).convert_alpha()
 
-        self.body_tr = pygame.image.load(f"{current_dir}/Graphics/body_tr.png"
+        self.body_vertical = pygame.image.load(
+            f"{current_dir}/Graphics/body_vertical.png"
         ).convert_alpha()
-        self.body_tl = pygame.image.load(f"{current_dir}/Graphics/body_tl.png"
+        self.body_horizontal = pygame.image.load(
+            f"{current_dir}/Graphics/body_horizontal.png"
         ).convert_alpha()
-        self.body_br = pygame.image.load(f"{current_dir}/Graphics/body_br.png"
+
+        self.body_tr = pygame.image.load(
+            f"{current_dir}/Graphics/body_tr.png"
         ).convert_alpha()
-        self.body_bl = pygame.image.load(f"{current_dir}/Graphics/body_bl.png"
+        self.body_tl = pygame.image.load(
+            f"{current_dir}/Graphics/body_tl.png"
+        ).convert_alpha()
+        self.body_br = pygame.image.load(
+            f"{current_dir}/Graphics/body_br.png"
+        ).convert_alpha()
+        self.body_bl = pygame.image.load(
+            f"{current_dir}/Graphics/body_bl.png"
         ).convert_alpha()
         self.crunch_sound = pygame.mixer.Sound(f"{current_dir}/Sound/crunch.wav")
 
@@ -259,7 +274,9 @@ class MAIN:
 
     def protein_complete(self):
         errors = 0
-        for i, (expected, actual) in enumerate(zip(current_recipe, self.snake.codon_history)):
+        for i, (expected, actual) in enumerate(
+            zip(current_recipe, self.snake.codon_history)
+        ):
             if expected != actual:
                 errors += 1
                 if i in active_sites:
