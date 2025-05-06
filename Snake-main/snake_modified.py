@@ -179,7 +179,14 @@ class CODON:
         self.x = random.randint(0, cell_number - 1)
         self.y = random.randint(0, cell_number - 1)
         self.pos = Vector2(self.x, self.y)
-        self.current_type = random.choice(self.types)
+
+        # Favor spawning the next needed codon
+        if random.random() < 0.8:  # 80% chance
+            self.current_type = current_recipe[recipe_index]
+        else:
+            # Pick a random codon that is *not* the next needed one
+            other_codons = [c for c in self.types if c != current_recipe[recipe_index]]
+            self.current_type = random.choice(other_codons)
 
     def draw_codon(self):
         shape_rect = pygame.Rect(
