@@ -13,6 +13,7 @@ class SNAKE:
     def __init__(self):
         self.body = [Vector2(5, 10), Vector2(4, 10)]
         self.direction = Vector2(0, 0)
+        self.codon_history = []
         self.new_block = False
 
         self.head_up = pygame.image.load(f"{current_dir}/Graphics/head_up.png"
@@ -140,6 +141,7 @@ class SNAKE:
     def reset(self):
         self.body = [Vector2(5, 10), Vector2(4, 10)]
         self.direction = Vector2(0, 0)
+        self.codon_history = []
 
 
 class CODON:
@@ -218,14 +220,17 @@ class MAIN:
 
         for codon in self.codons[:]:
             if codon.pos == self.snake.body[0]:
-                if codon.current_type == current_recipe[recipe_index]:
-                    self.snake.add_block()
-                    recipe_index += 1
-                    self.codons.remove(codon)
-                    if recipe_index >= len(current_recipe):
-                        self.protein_complete()
-                # else:
-                #     self.snake.body.pop()  # Penalty for wrong codon, removes 1 body length
+                actual_codon = codon.current_type
+                expected_codon = current_recipe[recipe_index]
+
+                self.snake.codon_history.append(actual_codon)
+                self.snake.add_block()
+                self.codons.remove(codon)
+
+                recipe_index += 1  # Always advance, even on errors
+
+                if recipe_index >= len(current_recipe):
+                    self.protein_complete()
                 break
 
     def check_fail(self):
@@ -253,6 +258,22 @@ class MAIN:
         self.reset_game()
 
     def protein_complete(self):
+        errors = 0
+        for i, (expected, actual) in enumerate(zip(current_recipe, self.snake.codon_history)):
+            if expected != actual:
+                errors += 1
+                if i in active_sites:
+                    print("❌ Misfolded: Error in active site")
+                    self.game_over()
+                    return
+
+        error_rate = errors / len(current_recipe)
+        if error_rate > 0.3:
+            print(f"❌ Misfolded: {errors} errors ({error_rate:.0%})")
+            self.game_over()
+            return
+
+        print("✅ Protein correctly synthesized")
         self.reset_game()
 
     def draw_grass(self):
@@ -287,17 +308,19 @@ class MAIN:
         print(f"Reset recipe index to: {recipe_index}")  # Debugging
 
     def select_new_protein(self):
-        global current_protein, current_recipe
-        available = list(PROTEIN_RECIPES.keys())
-        current_protein = random.choice(available)
-        current_recipe = PROTEIN_RECIPES[current_protein]
+        global current_protein_data, current_protein_name, current_recipe, active_sites, recipe_index
+        current_protein_data = random.choice(PROTEINS)
+        current_protein_name = current_protein_data["name"]
+        current_recipe = current_protein_data["sequence"]
+        active_sites = current_protein_data["active_sites"]
+        recipe_index = 0
 
     def draw_header(self):
         header_rect = pygame.Rect(0, 0, screen_width, header_height)
         pygame.draw.rect(screen, (255, 255, 255), header_rect)  # Changed to white
 
         # Protein name
-        title_text = f"Building: {current_protein}"
+        title_text = f"Building: {current_protein_name}"
         title_surf = game_font.render(title_text, True, (0, 0, 0))
         screen.blit(title_surf, (20, 15))
 
@@ -317,7 +340,7 @@ pygame.init()
 cell_size = 30
 cell_number = 20
 
-with open("/Users/giorgiadelmissier/Desktop/GERF/GERF_videogame/Snake-main/proteins_db.json") as f:
+with open(f"{current_dir}/proteins_db.json") as f:
     PROTEINS = json.load(f)
 
 # Choose a random protein from the database
@@ -326,6 +349,7 @@ current_protein_name = current_protein_data["name"]
 current_recipe = current_protein_data["sequence"]
 active_sites = current_protein_data["active_sites"]
 recipe_index = 0
+
 header_height = 80  # Space for protein info
 screen_width = cell_number * cell_size
 screen_height = (cell_number * cell_size) + header_height
