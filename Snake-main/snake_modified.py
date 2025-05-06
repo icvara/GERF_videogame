@@ -11,10 +11,6 @@ current_file = Path(__file__)
 # Directory containing the file
 current_dir = current_file.parent
 
-print("Current file:", current_file)
-print("Current directory:", current_dir)
-
-
 class SNAKE:
     def __init__(self):
         self.body = [Vector2(5, 10), Vector2(4, 10)]
