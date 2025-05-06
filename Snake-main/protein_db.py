@@ -10,22 +10,22 @@ current_dir = current_file.parent
 
 proteins = [
     {
-        "name": "Hemoglobin",
-        "description": "Carries oxygen in the blood.",
-        "active_sites": [0, 3],
-        "sequence": ["r", "r", "g", "b", "y"]
-    },
-    {
-        "name": "Insulin",
-        "description": "Regulates blood sugar levels.",
+        "name": "Casein",
+        "description": "Main protein in milk — gives cheese its texture!",
         "active_sites": [0],
-        "sequence": ["g", "g", "y", "b"]
+        "sequence": ["y", "r", "b", "g"]
     },
     {
-        "name": "Collagen",
-        "description": "Structural protein in connective tissue.",
-        "active_sites": [],
-        "sequence": ["b", "y", "r", "g"]
+        "name": "Leghemoglobin",
+        "description": "Makes plant-based burgers look and taste like meat!",
+        "active_sites": [1, 4],
+        "sequence": ["r", "y", "g", "g", "b"]
+    },
+    {
+        "name": "Mycoprotein",
+        "description": "Fungi-based protein used in meat alternatives like burgers and nuggets.",
+        "active_sites": [4],
+        "sequence": ["g", "y", "r", "b"]
     }
 ]
 
