@@ -6,10 +6,7 @@ const SPEED = 50.0
 var inv_isopen = false
 var micromon_inv = { "1": null,
 					"2": null,
-					"3":null,
-					"4":null,
-					"5":null,
-					"6":null
+					"3":null		
 						}
 
 var is_inFight = false
@@ -42,7 +39,10 @@ func _physics_process(delta):
 		if interacting_with != null:
 			interacting_with.PickUp(self)
 	
-	
-	if Input.is_action_just_pressed("fight"):
-		is_inFight = true
-		get_parent().get_node("CanvasLayer").get_node("Fight_scene").Start()
+
+
+func displaytext(textstr):
+	$Label.text = textstr
+	$Label.show()
+	await get_tree().create_timer(.5).timeout
+	$Label.hide()

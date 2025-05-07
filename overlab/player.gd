@@ -7,11 +7,16 @@ var inventory
 var push_force =  80
 @export var playerID = 1
 
+var animatedstuff
 
+func setskin(skinid):
+	print(skinid)
+	animatedstuff = get_node("AnimatedSprite2D_"+str(skinid))
+	animatedstuff.show()
 
 func _physics_process(delta):
-	if 	get_node("AnimatedSprite2D_"+str(playerID)).is_visible() == false:
-		get_node("AnimatedSprite2D_"+str(playerID)).show()
+	if 	animatedstuff.is_visible() == false:
+		animatedstuff.show()
 
 	var direction = null
 	if playerID == 1:
@@ -25,15 +30,15 @@ func _physics_process(delta):
 		velocity = Vector2(0,0)
 	
 	if direction.x < 0:		
-		get_node("AnimatedSprite2D_"+str(playerID)).play("left")
+		animatedstuff.play("left")
 	elif direction.x > 0:
-		get_node("AnimatedSprite2D_"+str(playerID)).play("right")
+		animatedstuff.play("right")
 	elif direction.y > 0:
-		get_node("AnimatedSprite2D_"+str(playerID)).play("front")
+		animatedstuff.play("front")
 	elif direction.y < 0:
-		get_node("AnimatedSprite2D_"+str(playerID)).play("back")
+		animatedstuff.play("back")
 	else:
-		get_node("AnimatedSprite2D_"+str(playerID)).stop()
+		animatedstuff.stop()
 		
 	move_and_slide()
 	
@@ -81,7 +86,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		interacting_with = body
 	if body.is_in_group("workstation"):
 		interacting_with_workstation = body 
-
+	
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Item"):
@@ -90,3 +95,9 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.is_in_group("workstation"):
 		if interacting_with_workstation == body:
 			interacting_with_workstation = null 
+			
+func displaymsg(textstr):
+	$Label.text = textstr
+	$Label.show()
+	await get_tree().create_timer(.5).timeout
+	$Label.hide()

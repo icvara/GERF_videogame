@@ -16,8 +16,15 @@ func _on_button_pressed():
 
 
 func _on_button_2_pressed():
-	get_tree().change_scene_to_file("res://Micromon/main_micromon.tscn")
+	#get_tree().change_scene_to_file("res://Micromon/main_micromon.tscn")
+	get_tree().change_scene_to_file("res://Micromon/micromon_start.tscn")
 
 
 func _on_button_3_pressed() -> void:
-	get_tree().change_scene_to_file("res://overlab/main_overlab.tscn")
+	#get_tree().change_scene_to_file("res://overlab/main_overlab.tscn")
+	GlobalVariableOverlab.init_var()
+	get_tree().change_scene_to_file("res://overlab/player_select.tscn")
+
+
+func _on_button_4_pressed() -> void:
+	get_tree().quit()
