@@ -69,11 +69,11 @@ func spawn_tile(pos,type):
 
 func _on_timer_timeout():
 	
-	var nf = newfluid.instantiate()
+	'var nf = newfluid.instantiate()
 	nf.position = Vector2(5*16-10,-50)
-	$Yeast/flowarea.add_child(nf)
+	$Yeast/flowarea.add_child(nf)'
 
-	nf = newfluid.instantiate()
+	var nf = newfluid.instantiate()
 	nf.position = Vector2(160-10-16,-50)
 	nf.get_node("ColorRect").color = Color(1,0,0)
 	$Yeast/flowarea.add_child(nf)

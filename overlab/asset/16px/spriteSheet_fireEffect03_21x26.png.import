@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c64uy0uho3aeg"
-path="res://.godot/imported/spriteSheet_fireEffect03_21x26.png-b615eca4613b5274c79e8965cfa980f9.ctex"
+path="res://.godot/imported/spriteSheet_fireEffect03_21x26.png-6ae7ddbec4b251cf75327309e812f14c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://overlab/asset/16px/spriteSheet_fireEffect03_21x26.png"
-dest_files=["res://.godot/imported/spriteSheet_fireEffect03_21x26.png-b615eca4613b5274c79e8965cfa980f9.ctex"]
+source_file="res://OverLab/asset/16px/spriteSheet_fireEffect03_21x26.png"
+dest_files=["res://.godot/imported/spriteSheet_fireEffect03_21x26.png-6ae7ddbec4b251cf75327309e812f14c.ctex"]
 
 [params]
 

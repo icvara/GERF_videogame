@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cf6mcq38lapcb"]
 
-[ext_resource type="Script" uid="uid://cqdd4btabtbex" path="res://overlab/item.gd" id="1_axg4c"]
+[ext_resource type="Script" uid="uid://cqdd4btabtbex" path="res://OverLab/item.gd" id="1_axg4c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_axg4c"]
 size = Vector2(8, 8)

@@ -19,7 +19,7 @@ func _physics_process(delta):
 		animatedstuff.show()
 
 	var direction = null
-	if playerID == 1:
+	if playerID == 0:
 		direction = Vector2(Input.get_axis("left", "right"),Input.get_axis("up", "down"))
 	else: 
 		direction = Vector2(Input.get_axis("left2", "right2"),Input.get_axis("up2", "down2"))
@@ -51,7 +51,7 @@ func _physics_process(delta):
 		#inventory.apply_central_force(velocity)
 		inventory.global_position = global_position
 	
-	if playerID == 1:
+	if playerID == 0:
 		if Input.is_action_just_pressed("space"):
 			if interacting_with_workstation:
 				interacting_with_workstation.Use(self)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxyjteves365y"
-path="res://.godot/imported/LabNPCs.png-01b5345da7df9371fc00b5399abd4cb7.ctex"
+uid="uid://ch5j7ovx7xbrc"
+path="res://.godot/imported/test.png-403db8f4f679db8d142bb7d3c398143d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://OverLab/asset/LabNPCs.png"
-dest_files=["res://.godot/imported/LabNPCs.png-01b5345da7df9371fc00b5399abd4cb7.ctex"]
+source_file="res://OverLab/asset/test.png"
+dest_files=["res://.godot/imported/test.png-403db8f4f679db8d142bb7d3c398143d.ctex"]
 
 [params]
 

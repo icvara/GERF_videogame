@@ -12,7 +12,7 @@ func _ready() -> void:
 		var newplay = player.instantiate()
 		newplay.setskin(GlobalVariableOverlab.playerskin[i])
 		newplay.playerID = i
-		newplay.position = Vector2(80,40) + Vector2((320-40)/2,(180-40)/2) * init_posvector[i]
+		newplay.position = Vector2(260,50) + Vector2(-(320-40)/2,(180-40)/2) * init_posvector[i]
 		add_child(newplay)
 		
 func _process(delta: float) -> void:
