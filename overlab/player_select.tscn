@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://dq3rmh0rq1uot"]
 
 [ext_resource type="PackedScene" uid="uid://ccwr8m4wr2mn" path="res://pause_menu.tscn" id="1_h1tva"]
-[ext_resource type="Script" uid="uid://crxl4vdyq24cl" path="res://overlab/player_select.gd" id="1_qm632"]
-[ext_resource type="PackedScene" uid="uid://c4oi8rjtj0a6t" path="res://overlab/charselect.tscn" id="2_0ysgb"]
+[ext_resource type="Script" uid="uid://crxl4vdyq24cl" path="res://OverLab/player_select.gd" id="1_qm632"]
+[ext_resource type="PackedScene" uid="uid://c4oi8rjtj0a6t" path="res://OverLab/charselect.tscn" id="2_0ysgb"]
 
 [node name="PlayerSelect" type="Control"]
 layout_mode = 3
