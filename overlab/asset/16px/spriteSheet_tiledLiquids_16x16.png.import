@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://fouphcr1y2r5"
-path="res://.godot/imported/spriteSheet_tiledLiquids_16x16.png-3de4621b1a937468ecbb77492dd239a6.ctex"
+path="res://.godot/imported/spriteSheet_tiledLiquids_16x16.png-62543c798e767eec53145970c5f1d43c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://OverLab/asset/16px/spriteSheet_tiledLiquids_16x16.png"
-dest_files=["res://.godot/imported/spriteSheet_tiledLiquids_16x16.png-3de4621b1a937468ecbb77492dd239a6.ctex"]
+source_file="res://overlab/asset/16px/spriteSheet_tiledLiquids_16x16.png"
+dest_files=["res://.godot/imported/spriteSheet_tiledLiquids_16x16.png-62543c798e767eec53145970c5f1d43c.ctex"]
 
 [params]
 
