@@ -1,0 +1,126 @@
+[gd_scene load_steps=13 format=3 uid="uid://c4oi8rjtj0a6t"]
+
+[ext_resource type="Texture2D" uid="uid://dxyjteves365y" path="res://Prototype_presentation_8.05.2025/overlab/asset/LabNPCs.png" id="1_7vbvn"]
+[ext_resource type="Script" uid="uid://bn1sm4tmhencm" path="res://Prototype_presentation_8.05.2025/overlab/charselect.gd" id="1_xy27h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xy27h"]
+atlas = ExtResource("1_7vbvn")
+region = Rect2(8, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7w1c"]
+atlas = ExtResource("1_7vbvn")
+region = Rect2(40, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qy7nl"]
+atlas = ExtResource("1_7vbvn")
+region = Rect2(72, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_opmbj"]
+atlas = ExtResource("1_7vbvn")
+region = Rect2(104, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ljrih"]
+atlas = ExtResource("1_7vbvn")
+region = Rect2(136, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xr0jo"]
+atlas = ExtResource("1_7vbvn")
+region = Rect2(168, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_chaub"]
+atlas = ExtResource("1_7vbvn")
+region = Rect2(200, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlt8v"]
+atlas = ExtResource("1_7vbvn")
+region = Rect2(232, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nspwb"]
+atlas = ExtResource("1_7vbvn")
+region = Rect2(264, 0, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u1hik"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xy27h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p7w1c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qy7nl")
+}],
+"loop": true,
+"name": &"0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_opmbj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ljrih")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xr0jo")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_chaub")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlt8v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nspwb")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}]
+
+[node name="charselect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -270.0
+offset_bottom = -135.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xy27h")
+
+[node name="L" type="Button" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "<"
+
+[node name="R" type="Button" parent="."]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 1.0
+offset_right = 43.0
+offset_bottom = 22.0
+text = ">"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(22, 2)
+sprite_frames = SubResource("SpriteFrames_u1hik")
+animation = &"2"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 27.0
+offset_right = 44.0
+offset_bottom = 40.0
+text = "Player X"
+
+[connection signal="pressed" from="L" to="." method="_on_l_pressed"]
+[connection signal="pressed" from="R" to="." method="_on_r_pressed"]

@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://ppbifnwbvxrn"]
+
+[ext_resource type="Script" uid="uid://cwp6j61f2tfa2" path="res://Prototype_presentation_8.05.2025/Micromon/micromon_species/micromon_enemy.gd" id="1_yxphh"]
+[ext_resource type="Texture2D" uid="uid://db1spuyrjx7d6" path="res://Prototype_presentation_8.05.2025/Micromon/dungeonSprites_ v1.5/skeleton_.png" id="2_yxphh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hgvry"]
+size = Vector2(24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tgq0f"]
+atlas = ExtResource("2_yxphh")
+region = Rect2(96, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4o5tu"]
+atlas = ExtResource("2_yxphh")
+region = Rect2(120, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ea7nm"]
+atlas = ExtResource("2_yxphh")
+region = Rect2(144, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4xc6"]
+atlas = ExtResource("2_yxphh")
+region = Rect2(168, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ef1ur"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tgq0f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4o5tu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ea7nm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x4xc6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="enemy" type="Area2D"]
+script = ExtResource("1_yxphh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hgvry")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0.196078, 0.729412, 0.239216, 1)
+sprite_frames = SubResource("SpriteFrames_ef1ur")
+frame_progress = 0.244162
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

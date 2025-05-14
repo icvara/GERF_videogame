@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqmvyixs00n0"]
+
+[ext_resource type="Script" uid="uid://dxd17lgv5qpyd" path="res://Prototype_presentation_8.05.2025/Micromon/micromon_species/micromon_Test.gd" id="1_pqdo0"]
+[ext_resource type="Texture2D" uid="uid://brbtbuawr3wyq" path="res://icon.svg" id="2_qwgwy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hgvry"]
+size = Vector2(158, 148)
+
+[node name="Micromon" type="Area2D"]
+scale = Vector2(0.25, 0.25)
+script = ExtResource("1_pqdo0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_qwgwy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, -3)
+shape = SubResource("RectangleShape2D_hgvry")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -36.0
+offset_top = -120.0
+offset_right = 25.0
+offset_bottom = -59.0
+text = " You picked XXX"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

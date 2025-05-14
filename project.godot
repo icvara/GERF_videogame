@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="GERF_Prototype_test"
-run/main_scene="res://start_menu.tscn"
+run/main_scene="uid://dim2iyppu8yd8"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-GlobalVariableOverlab="*res://overlab/global_variable_overlab.gd"
+GlobalVariableOverlab="*res://Prototype_presentation_8.05.2025/overlab/global_variable_overlab.gd"
 
 [display]
 
