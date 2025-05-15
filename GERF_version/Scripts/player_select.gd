@@ -17,7 +17,3 @@ func _on_l_pressed() -> void:
 
 func _on_buttonstart_pressed() -> void:
 	get_tree().change_scene_to_file("res://Prototype_presentation_8.05.2025/overlab/main_overlab.tscn")
-
-
-func _on_buttontuto_pressed():
-	get_tree().change_scene_to_file("res://GERF_version/Scenes/tuto_control.tscn")

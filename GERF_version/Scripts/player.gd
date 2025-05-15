@@ -6,16 +6,11 @@ var interacting_with_workstation
 var inventory
 var push_force =  80
 @export var playerID = 1
-@export var skinid = 0
 
 var animatedstuff
 
-func setskin(id):
-	skinid = id
-	animatedstuff = get_node("AnimatedSprite2D_"+str(skinid))
-	animatedstuff.show()
-	
-func _ready():
+func setskin(skinid):
+	print(skinid)
 	animatedstuff = get_node("AnimatedSprite2D_"+str(skinid))
 	animatedstuff.show()
 

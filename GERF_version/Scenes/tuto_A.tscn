@@ -1,0 +1,103 @@
+[gd_scene load_steps=8 format=3 uid="uid://b15cg372t2tac"]
+
+[ext_resource type="Script" uid="uid://cirow2kaxmkcq" path="res://GERF_version/Scripts/tuto_a.gd" id="1_oyt1q"]
+[ext_resource type="PackedScene" uid="uid://b8edkh57hgfcf" path="res://GERF_version/Scenes/player.tscn" id="2_xgck5"]
+[ext_resource type="PackedScene" uid="uid://625fix8gh62c" path="res://GERF_version/workstation/DNA_delivery.tscn" id="3_k372j"]
+[ext_resource type="PackedScene" uid="uid://ccwr8m4wr2mn" path="res://Prototype_presentation_8.05.2025/pause_menu.tscn" id="3_yv6qu"]
+[ext_resource type="PackedScene" uid="uid://bog2su78p01o5" path="res://GERF_version/workstation/final_delivery.tscn" id="5_bjf18"]
+[ext_resource type="PackedScene" uid="uid://bo2gjmkf31bd7" path="res://GERF_version/workstation/Incubator.tscn" id="6_qac76"]
+[ext_resource type="PackedScene" uid="uid://mxoes4ppbaoc" path="res://GERF_version/workstation/Transformation_station.tscn" id="7_e2o6h"]
+
+[node name="Tuto_A" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_oyt1q")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.155513, 0.243889, 0.320241, 1)
+
+[node name="Button" type="Button" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -38.0
+offset_top = -31.0
+offset_right = 38.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Ready!"
+
+[node name="player" parent="ColorRect" instance=ExtResource("2_xgck5")]
+position = Vector2(100, 73)
+playerID = 0
+
+[node name="player2" parent="ColorRect" instance=ExtResource("2_xgck5")]
+position = Vector2(206, 73)
+skinid = 1
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 172.0
+offset_bottom = 81.0
+text = "1. Collect DNA"
+
+[node name="Label2" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 182.0
+offset_top = 1.0
+offset_right = 413.0
+offset_bottom = 24.0
+text = "2. Tranform it. Succes rate 3/4"
+
+[node name="Label3" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 81.0
+offset_right = 340.0
+offset_bottom = 156.0
+text = "3. Incubate the cells. Carefull of overgrown"
+
+[node name="Label4" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 219.0
+offset_top = 82.0
+offset_right = 385.0
+offset_bottom = 157.0
+text = "4. Delivery"
+
+[node name="dna_delivery" parent="ColorRect" instance=ExtResource("3_k372j")]
+position = Vector2(6, 18)
+
+[node name="Pause_menu" parent="ColorRect" instance=ExtResource("3_yv6qu")]
+visible = false
+layout_mode = 1
+
+[node name="Delivery" parent="ColorRect" instance=ExtResource("5_bjf18")]
+position = Vector2(245, 128)
+
+[node name="Incubator" parent="ColorRect" instance=ExtResource("6_qac76")]
+position = Vector2(23, 139)
+
+[node name="Transfo_station" parent="ColorRect" instance=ExtResource("7_e2o6h")]
+position = Vector2(206, 26)
+
+[node name="Pause_menu" parent="." instance=ExtResource("3_yv6qu")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="ColorRect/Button" to="." method="_on_button_pressed"]

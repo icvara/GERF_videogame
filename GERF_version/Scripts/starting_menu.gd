@@ -6,9 +6,10 @@ extends Control
 func _on_1_pressed() -> void:
 	#when start is pressed launch the game
 	#Currently still calling the old version used for the last presentation. it will be change soon.
+	get_tree().change_scene_to_file("res://GERF_version/Scenes/player_select.tscn")
 
-	GlobalVariableOverlab.init_var()
-	get_tree().change_scene_to_file("res://Prototype_presentation_8.05.2025/overlab/player_select.tscn")
+
+	#get_tree().change_scene_to_file("res://Prototype_presentation_8.05.2025/overlab/player_select.tscn")
 
 func _on_2_pressed() -> void:
 	#extra button if needed. no function yet
