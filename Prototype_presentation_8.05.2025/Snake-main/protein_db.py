@@ -13,19 +13,19 @@ proteins = [
         "name": "Casein",
         "description": "Main protein in milk — gives cheese its texture!",
         "active_sites": [0],
-        "sequence": ["c", "s", "q", "d", "f", "x"]
+        "sequence": ["c", "s", "q", "d", "f", "x", "c", "s", "q", "f", "f", "x", "f", "x", "c", "s"]
     },
     {
         "name": "Leghemoglobin",
         "description": "Makes plant-based burgers look and taste like meat!",
         "active_sites": [1, 4],
-        "sequence": ["c", "d", "d", "s", "f"]
+        "sequence": ["c", "d", "d", "s", "f", "s", "q", "f", "f", "x", "f", "x", "c"]
     },
     {
         "name": "Mycoprotein",
         "description": "Fungi-based protein used in meat alternatives like burgers and nuggets.",
         "active_sites": [4],
-        "sequence": ["c", "q", "d", "x"]
+        "sequence": ["c", "q", "d", "x", "d", "d", "s", "f", "s", "q", "f", "f", "x", "f", "x", "c"]
     }
 ]
 
