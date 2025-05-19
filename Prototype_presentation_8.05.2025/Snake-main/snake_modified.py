@@ -206,7 +206,7 @@ class CODON:
 class MAIN:
     def __init__(self):
         self.snake = SNAKE()
-        self.codons = [CODON() for _ in range(8)]  # 8 codons on screen
+        self.codons = [CODON() for _ in range(4)]  # 8 codons on screen
         self.last_codon_time = pygame.time.get_ticks()
         self.active = False  # Game starts paused
 
@@ -228,7 +228,7 @@ class MAIN:
 
     def check_codon_spawn(self):
         # Spawn new codon every 1 seconds
-        if pygame.time.get_ticks() - self.last_codon_time >= 1000:
+        if pygame.time.get_ticks() - self.last_codon_time >= random.randint(500, 1000):
             self.codons.append(CODON())
             self.last_codon_time = pygame.time.get_ticks()
 
@@ -334,7 +334,7 @@ class MAIN:
                         # Add header_height offset to y position
                         grass_rect = pygame.Rect(
                             col * cell_size,
-                            row * cell_size + header_height,  # THIS LINE CHANGED
+                            row * cell_size + header_height,
                             cell_size,
                             cell_size,
                         )
@@ -345,7 +345,7 @@ class MAIN:
                         # Add header_height offset to y position
                         grass_rect = pygame.Rect(
                             col * cell_size,
-                            row * cell_size + header_height,  # THIS LINE CHANGED
+                            row * cell_size + header_height,
                             cell_size,
                             cell_size,
                         )
@@ -362,68 +362,88 @@ class MAIN:
         current_recipe = current_protein_data["sequence"]
         active_sites = current_protein_data["active_sites"]
         recipe_index = 0
-    
+        
     def draw_header(self):
+        global active_sites
         header_rect = pygame.Rect(0, 0, screen_width, header_height)
         pygame.draw.rect(screen, (255, 255, 255), header_rect)
 
-        # 1. Title at the top
-        title_text = f"Let's build {current_protein_name}"
+        # 1. Title
+        title_text = f"Let's build {current_protein_name.upper()}"
         title_surf = game_font.render(title_text, True, (0, 0, 0))
         title_rect = title_surf.get_rect(centerx=screen_width // 2, y=10)
         screen.blit(title_surf, title_rect)
 
-        # 2. Recipe line: prefix + icons
+        # 2. Prefix + icons
         prefix = "Follow this recipe:"
         prefix_surf = game_font.render(prefix, True, (0, 0, 0))
         prefix_width = prefix_surf.get_width()
-
         spacing = 4
         num = len(current_recipe)
         icons_width = num * header_icon_size + (num - 1) * spacing
-
-        total_width = prefix_width + 10 + icons_width  # gap between prefix and icons
+        total_width = prefix_width + 10 + icons_width
         start_x = (screen_width - total_width) // 2
-        icon_y = 50  # Y-position for codon icons
+        icon_y = 50
 
-        # Draw prefix
-        prefix_rect = prefix_surf.get_rect(x=start_x, y=icon_y)
-        screen.blit(prefix_surf, prefix_rect)
+        screen.blit(prefix_surf, (start_x, icon_y))
+        prefix_end = start_x + prefix_width
 
-        # 3. Draw codon icons + progress squares below them
+        # 3. Precompute x‐positions for each codon icon
+        icon_positions = []                             
+        for i in range(num):
+            x = prefix_end + 10 + i * (header_icon_size + spacing)
+            icon_positions.append(x)                    
+
+        # 4. Group contiguous active_sites into runs
+        runs = []                                       
+        for idx in sorted(active_sites):                
+            if not runs or idx > runs[-1][-1] + 1:      
+                runs.append([idx, idx])                 
+            else:                                      
+                runs[-1][-1] = idx                      
+
+        # 5. Draw highlights for each run
+        pad = 4                                        
+        highlight_color = (167,0,0)
+        highlight_shift = 3               
+        for start_idx, end_idx in runs:                
+            x_start = icon_positions[start_idx]       
+            x_end   = icon_positions[end_idx]          
+            run_width = (end_idx - start_idx) * (header_icon_size + spacing) + header_icon_size
+            rect = pygame.Rect(
+                x_start - pad + highlight_shift,                         
+                icon_y - pad + 2,                          
+                run_width + pad * 2,                   
+                header_icon_size + pad * 2             
+            )
+            pygame.draw.rect(
+                screen,
+                highlight_color,
+                rect,
+                width=3,
+                border_radius=7
+            )
+
+        # 6. Draw icons + progress
         for i, codon in enumerate(current_recipe):
-            icon = CODON_ICONS[codon]
-            x = prefix_rect.right + 10 + i * (header_icon_size + spacing)
+            x = icon_positions[i]                      
+            screen.blit(CODON_ICONS[codon], (x, icon_y))
 
-            # # Highlight current codon
-            # if i == recipe_index:
-            #     pad = 4
-            #     rect = pygame.Rect(
-            #         x - pad,
-            #         icon_y - pad,
-            #         header_icon_size + pad * 2,
-            #         header_icon_size + pad * 2,
-            #     )
-            #     pygame.draw.rect(screen, (200, 200, 0), rect, width=3, border_radius=5)
-
-            # Draw the icon
-            screen.blit(icon, (x, icon_y))
-
-            # Draw progress square below the icon
+            # progress square
             square_size = 25
-            square_y = icon_y + header_icon_size + 6  # Small gap below icon
-            square_rect = pygame.Rect(x + (header_icon_size - square_size) // 2, square_y, square_size, square_size)
-
+            square_y = icon_y + header_icon_size + 10
+            square_rect = pygame.Rect(
+                x + (header_icon_size - square_size)//2,
+                square_y,
+                square_size,
+                square_size
+            )
             if i < len(self.snake.codon_history):
-                if self.snake.codon_history[i] == current_recipe[i]:
-                    emoji_img = emoji_check
-                else:
-                    emoji_img = emoji_cross
-
+                emoji_img = emoji_check if self.snake.codon_history[i] == current_recipe[i] else emoji_cross
                 emoji_rect = emoji_img.get_rect(center=square_rect.center)
                 screen.blit(emoji_img, emoji_rect)
             else:
-                pygame.draw.rect(screen, (180, 180, 180), square_rect, width=1)  # Gray outline
+                pygame.draw.rect(screen, (180,180,180), square_rect, width=1)
 
     def wrap_text(self, text, font, max_width):
         words = text.split(" ")
@@ -515,9 +535,9 @@ recipe_index = 0
 pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init()
 infoObject = pygame.display.Info()
-screen_width = infoObject.current_w
+screen_width = infoObject.current_w - 5
 header_height = 130  # Space for protein info
-screen_height = infoObject.current_h - 100  # Leave space for taskbars etc.
+screen_height = infoObject.current_h - 115  # Leave space for taskbars etc.
 
 cell_size = 30
 cell_number_x = screen_width // cell_size
@@ -537,7 +557,7 @@ emoji_cross = pygame.image.load(
     f"{current_dir}/Graphics/cross_emoji.png"
 ).convert_alpha()
 
-header_icon_size = 40
+header_icon_size = 35
 shapes = {"c": "circle", "s": "star", "q": "square", "x": "cross", "f": "flower", "d": "diamond"}
 CODON_ICONS = {
     codon: pygame.image.load(f"{current_dir}/Graphics/{shapes[codon]}.png").convert_alpha()
@@ -589,7 +609,11 @@ while True:
     pygame.display.update()
     clock.tick(60)
 
-# add shapes added into snake body???
+
+# add short tutorial
 # add active site visualisation
-# improve final message window: add protein drawing
-# create db of proteins + facts
+# improve final message window + add protein drawing
+# add proteins to db
+# codons overlapping fix
+# add message when ending for collision 
+# add shapes added into snake body???
