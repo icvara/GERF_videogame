@@ -395,16 +395,16 @@ class MAIN:
             icon = CODON_ICONS[codon]
             x = prefix_rect.right + 10 + i * (header_icon_size + spacing)
 
-            # Highlight current codon
-            if i == recipe_index:
-                pad = 4
-                rect = pygame.Rect(
-                    x - pad,
-                    icon_y - pad,
-                    header_icon_size + pad * 2,
-                    header_icon_size + pad * 2,
-                )
-                pygame.draw.rect(screen, (200, 200, 0), rect, width=3, border_radius=5)
+            # # Highlight current codon
+            # if i == recipe_index:
+            #     pad = 4
+            #     rect = pygame.Rect(
+            #         x - pad,
+            #         icon_y - pad,
+            #         header_icon_size + pad * 2,
+            #         header_icon_size + pad * 2,
+            #     )
+            #     pygame.draw.rect(screen, (200, 200, 0), rect, width=3, border_radius=5)
 
             # Draw the icon
             screen.blit(icon, (x, icon_y))
@@ -416,12 +416,14 @@ class MAIN:
 
             if i < len(self.snake.codon_history):
                 if self.snake.codon_history[i] == current_recipe[i]:
-                    pygame.draw.rect(screen, (50, 200, 50), square_rect)  # Green = correct
+                    emoji_img = emoji_check
                 else:
-                    pygame.draw.rect(screen, (220, 50, 50), square_rect)  # Red = wrong
+                    emoji_img = emoji_cross
+
+                emoji_rect = emoji_img.get_rect(center=square_rect.center)
+                screen.blit(emoji_img, emoji_rect)
             else:
                 pygame.draw.rect(screen, (180, 180, 180), square_rect, width=1)  # Gray outline
-
 
     def wrap_text(self, text, font, max_width):
         words = text.split(" ")
@@ -514,7 +516,7 @@ pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init()
 infoObject = pygame.display.Info()
 screen_width = infoObject.current_w
-header_height = 150  # Space for protein info
+header_height = 130  # Space for protein info
 screen_height = infoObject.current_h - 100  # Leave space for taskbars etc.
 
 cell_size = 30
@@ -590,5 +592,4 @@ while True:
 # add shapes added into snake body???
 # add active site visualisation
 # improve final message window: add protein drawing
-# add bar of how many correct or tick / x for each codon incorporated
 # create db of proteins + facts
