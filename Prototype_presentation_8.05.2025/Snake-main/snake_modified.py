@@ -214,6 +214,7 @@ class MAIN:
         self.level_up_every = 5  # Increase speed every 5 codons
         self.speed_floor = 50    # Fastest allowed speed
         self.codons_eaten = 0
+        self.tutorial_shown = False
 
     def update(self):
         if not self.active:
@@ -315,12 +316,17 @@ class MAIN:
     def game_over(self):
         if self.game_over_reason:
             failure.play()
-            self.show_popup(
-                "GAME OVER :(",
-                f"{self.game_over_reason}",
+            choice = self.show_popup(
+                "Game Over :(",
+                self.game_over_reason,
                 emoji_img=emoji_cross
             )
-            self.game_over_reason = None  # Clear the reason after showing popup
+            self.game_over_reason = None  # Clear for next round
+
+            if choice == "tutorial":
+                self.reset_game()
+                self.show_tutorial()
+                return  # Exit early so reset_game is NOT called
 
         self.reset_game()
     
@@ -403,6 +409,72 @@ class MAIN:
         active_sites = current_protein_data["active_sites"]
         recipe_index = 0
         
+    def show_tutorial(self):
+        tutorial_text = (
+            "Welcome to Codon Snake!"
+            "🧬 Collect codons by moving the snake onto them."
+            "✅ Follow the recipe shown at the top of the screen."
+            "⚠️ Wrong codons may cause the protein to misfold."
+            "🧠 Active site codons are especially important!"
+            "🎮 Controls:"
+            "Use arrow keys to move the snake."
+            "🍎 The snake grows with each codon."
+            "🚫 Avoid crashing into the wall or yourself."
+            "Good luck making a functional protein!"
+        )
+
+        # Popup dimensions
+        popup_width = 600
+        popup_height = 500
+        popup_x = (screen_width - popup_width) // 2
+        popup_y = (screen_height - popup_height) // 2
+
+        # Button
+        button_width = 200
+        button_height = 50
+        button_x = popup_x + (popup_width - button_width) // 2
+        button_y = popup_y + popup_height - button_height - 20
+        button_rect = pygame.Rect(button_x, button_y, button_width, button_height)
+
+        # Wrap text
+        wrapped_lines = self.wrap_text(tutorial_text, game_font, popup_width - 40)
+
+        while True:
+            # Background
+            screen.fill((223, 218, 196))
+
+            # Popup box
+            pygame.draw.rect(screen, (255, 255, 255), (popup_x, popup_y, popup_width, popup_height))
+            pygame.draw.rect(screen, (0, 0, 0), (popup_x, popup_y, popup_width, popup_height), 4)
+
+            # Title
+            title_surf = game_font.render("Tutorial", True, (0, 0, 0))
+            screen.blit(title_surf, (popup_x + 20, popup_y + 20))
+
+            # Body text
+            for i, line in enumerate(wrapped_lines):
+                text_surface = game_font.render(line, True, (50, 50, 50))
+                screen.blit(text_surface, (popup_x + 20, popup_y + 60 + i * 30))
+
+            # Button
+            pygame.draw.rect(screen, (100, 200, 100), button_rect)
+            pygame.draw.rect(screen, (0, 0, 0), button_rect, 2)
+            button_text = game_font.render("Start Game", True, (0, 0, 0))
+            text_rect = button_text.get_rect(center=button_rect.center)
+            screen.blit(button_text, text_rect)
+
+            pygame.display.update()
+
+            # Event handling
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if button_rect.collidepoint(event.pos):
+                        return
+
+
     def draw_header(self):
         global active_sites
         header_rect = pygame.Rect(0, 0, screen_width, header_height)
@@ -500,66 +572,138 @@ class MAIN:
         if current_line:
             lines.append(current_line.strip())
         return lines
-
+    
     def show_popup(self, message, submessage, emoji_img=None):
         popup_width = 500
-        popup_height = 250
+        popup_height = 300
         popup_x = (screen_width - popup_width) // 2
         popup_y = (screen_height - popup_height) // 2
 
-        button_width = 200
+        # Button dimensions
+        button_width = 180
         button_height = 50
-        button_x = popup_x + (popup_width - button_width) // 2
-        button_y = popup_y + 170
-        button_rect = pygame.Rect(button_x, button_y, button_width, button_height)
+
+        # "Play Again" button
+        play_button_rect = pygame.Rect(
+            popup_x + 40,
+            popup_y + 220,
+            button_width,
+            button_height
+        )
+
+        # "Tutorial" button
+        tutorial_button_rect = pygame.Rect(
+            popup_x + popup_width - 40 - button_width,
+            popup_y + 220,
+            button_width,
+            button_height
+        )
 
         while True:
-            # Draw popup box
-            pygame.draw.rect(
-                screen, (255, 255, 255), (popup_x, popup_y, popup_width, popup_height)
-            )
-            pygame.draw.rect(
-                screen, (0, 0, 0), (popup_x, popup_y, popup_width, popup_height), 4
-            )
+            # Draw popup background
+            pygame.draw.rect(screen, (255, 255, 255), (popup_x, popup_y, popup_width, popup_height))
+            pygame.draw.rect(screen, (0, 0, 0), (popup_x, popup_y, popup_width, popup_height), 4)
 
-            # Draw emoji at the top-left corner of the popup
+            # Emoji
             if emoji_img:
-                emoji_rect = emoji_img.get_rect(
-                    topleft=(popup_x + 20, popup_y + 20)
-                )  # Position emoji at the top-left corner
+                emoji_rect = emoji_img.get_rect(topleft=(popup_x + 20, popup_y + 20))
                 screen.blit(emoji_img, emoji_rect)
 
-            # Draw message (title) text to the right of the emoji
+            # Title
             title_surf = game_font.render(message, True, (0, 0, 0))
-            screen.blit(
-                title_surf, (popup_x + 60, popup_y + 20)
-            )  # Offset to make room for the emoji
+            screen.blit(title_surf, (popup_x + 60, popup_y + 20))
 
-            # Wrap and draw submessage (body text)
+            # Body text (wrapped)
             wrapped_lines = self.wrap_text(submessage, game_font, popup_width - 40)
             for i, line in enumerate(wrapped_lines):
                 sub_surf = game_font.render(line, True, (50, 50, 50))
-                screen.blit(
-                    sub_surf, (popup_x + 20, popup_y + 60 + i * 30)
-                )  # Added extra spacing
+                screen.blit(sub_surf, (popup_x + 20, popup_y + 60 + i * 30))
 
-            # Draw button
-            pygame.draw.rect(screen, (100, 200, 100), button_rect)
-            pygame.draw.rect(screen, (0, 0, 0), button_rect, 2)
-            button_text = game_font.render("play again", True, (0, 0, 0))
-            text_rect = button_text.get_rect(center=button_rect.center)
-            screen.blit(button_text, text_rect)
+            # Play Again button
+            pygame.draw.rect(screen, (100, 200, 100), play_button_rect)
+            pygame.draw.rect(screen, (0, 0, 0), play_button_rect, 2)
+            play_text = game_font.render("Play Again", True, (0, 0, 0))
+            screen.blit(play_text, play_text.get_rect(center=play_button_rect.center))
+
+            # Tutorial button
+            pygame.draw.rect(screen, (180, 180, 255), tutorial_button_rect)
+            pygame.draw.rect(screen, (0, 0, 0), tutorial_button_rect, 2)
+            tutorial_text = game_font.render("View Tutorial", True, (0, 0, 0))
+            screen.blit(tutorial_text, tutorial_text.get_rect(center=tutorial_button_rect.center))
 
             pygame.display.update()
 
-            # Wait for button click or quit
+            # Event handling
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    if button_rect.collidepoint(event.pos):
-                        return
+                    if play_button_rect.collidepoint(event.pos):
+                        return "play"
+                    elif tutorial_button_rect.collidepoint(event.pos):
+                        return "tutorial"
+
+
+    # def show_popup(self, message, submessage, emoji_img=None):
+    #     popup_width = 500
+    #     popup_height = 250
+    #     popup_x = (screen_width - popup_width) // 2
+    #     popup_y = (screen_height - popup_height) // 2
+
+    #     button_width = 200
+    #     button_height = 50
+    #     button_x = popup_x + (popup_width - button_width) // 2
+    #     button_y = popup_y + 170
+    #     button_rect = pygame.Rect(button_x, button_y, button_width, button_height)
+
+    #     while True:
+    #         # Draw popup box
+    #         pygame.draw.rect(
+    #             screen, (255, 255, 255), (popup_x, popup_y, popup_width, popup_height)
+    #         )
+    #         pygame.draw.rect(
+    #             screen, (0, 0, 0), (popup_x, popup_y, popup_width, popup_height), 4
+    #         )
+
+    #         # Draw emoji at the top-left corner of the popup
+    #         if emoji_img:
+    #             emoji_rect = emoji_img.get_rect(
+    #                 topleft=(popup_x + 20, popup_y + 20)
+    #             )  # Position emoji at the top-left corner
+    #             screen.blit(emoji_img, emoji_rect)
+
+    #         # Draw message (title) text to the right of the emoji
+    #         title_surf = game_font.render(message, True, (0, 0, 0))
+    #         screen.blit(
+    #             title_surf, (popup_x + 60, popup_y + 20)
+    #         )  # Offset to make room for the emoji
+
+    #         # Wrap and draw submessage (body text)
+    #         wrapped_lines = self.wrap_text(submessage, game_font, popup_width - 40)
+    #         for i, line in enumerate(wrapped_lines):
+    #             sub_surf = game_font.render(line, True, (50, 50, 50))
+    #             screen.blit(
+    #                 sub_surf, (popup_x + 20, popup_y + 60 + i * 30)
+    #             )  # Added extra spacing
+
+    #         # Draw button
+    #         pygame.draw.rect(screen, (100, 200, 100), button_rect)
+    #         pygame.draw.rect(screen, (0, 0, 0), button_rect, 2)
+    #         button_text = game_font.render("play again", True, (0, 0, 0))
+    #         text_rect = button_text.get_rect(center=button_rect.center)
+    #         screen.blit(button_text, text_rect)
+
+    #         pygame.display.update()
+
+    #         # Wait for button click or quit
+    #         for event in pygame.event.get():
+    #             if event.type == pygame.QUIT:
+    #                 pygame.quit()
+    #                 sys.exit()
+    #             if event.type == pygame.MOUSEBUTTONDOWN:
+    #                 if button_rect.collidepoint(event.pos):
+    #                     return
 
 
 with open(f"{current_dir}/proteins_db.json") as f:
@@ -616,6 +760,10 @@ pygame.time.set_timer(SCREEN_UPDATE, 150)
 main_game = MAIN()
 
 while True:
+    if not main_game.tutorial_shown:
+        main_game.show_tutorial()
+        main_game.tutorial_shown = True
+        
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
