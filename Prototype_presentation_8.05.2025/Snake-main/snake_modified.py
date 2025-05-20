@@ -154,7 +154,7 @@ class SNAKE:
 
     def play_right_sound(self):
         self.right_sound.play()
-
+        
     def play_wrong_sound(self):
         self.wrong_sound.play()
 
@@ -167,18 +167,9 @@ class SNAKE:
 class CODON:
     def __init__(self):
         self.types = ["c", "s", "q", "x", "f", "d"]
-        self.shapes = {
-            "c": "circle",
-            "s": "star",
-            "q": "square",
-            "x": "cross",
-            "f": "flower",
-            "d": "diamond",
-        }
+        self.shapes = {"c": "circle", "s": "star", "q": "square", "x": "cross", "f": "flower", "d": "diamond"}
         self.images = {
-            codon: pygame.image.load(
-                f"{current_dir}/Graphics/{self.shapes[codon]}.png"
-            ).convert_alpha()
+            codon: pygame.image.load(f"{current_dir}/Graphics/{self.shapes[codon]}.png").convert_alpha()
             for codon in self.shapes
         }
         self.current_type = None
@@ -206,7 +197,7 @@ class CODON:
     def draw_codon(self):
         x_px = int(self.pos.x * cell_size)
         y_px = int(self.pos.y * cell_size) + header_height
-
+        
         img = self.images[self.current_type]
 
         screen.blit(img, (x_px, y_px))
@@ -239,12 +230,8 @@ class MAIN:
     def check_codon_spawn(self):
         if pygame.time.get_ticks() - self.last_codon_time >= random.randint(500, 1000):
             # Get occupied positions (by snake and existing codons)
-            occupied_positions = set(
-                (int(codon.pos.x), int(codon.pos.y)) for codon in self.codons
-            )
-            occupied_positions.update(
-                (int(block.x), int(block.y)) for block in self.snake.body
-            )
+            occupied_positions = set((int(codon.pos.x), int(codon.pos.y)) for codon in self.codons)
+            occupied_positions.update((int(block.x), int(block.y)) for block in self.snake.body)
 
             # Try spawning at a free position (limit attempts to prevent infinite loop)
             max_attempts = 50
@@ -270,12 +257,12 @@ class MAIN:
 
                 self.snake.codon_history.append(actual_codon)
                 self.snake.add_block()
-
+                
                 if actual_codon == expected_codon:
                     self.snake.play_right_sound()
                 else:
                     self.snake.play_wrong_sound()
-
+                
                 self.codons.remove(codon)
 
                 recipe_index += 1  # Always advance, even on errors
@@ -311,12 +298,14 @@ class MAIN:
         if self.game_over_reason:
             failure.play()
             self.show_popup(
-                "Game Over :(", f"{self.game_over_reason}", emoji_img=emoji_cross
+                "Game Over :(",
+                f"{self.game_over_reason}",
+                emoji_img=emoji_cross
             )
             self.game_over_reason = None  # Clear the reason after showing popup
 
         self.reset_game()
-
+    
     def protein_complete(self):
         errors = 0
         for i, (expected, actual) in enumerate(
@@ -332,9 +321,9 @@ class MAIN:
                         "Wrong codon in active site! The protein is inactive :(",
                         emoji_img=emoji_cross,
                     )
-
+                    
                     self.game_over()
-
+                    
                     return
 
         error_rate = errors / len(current_recipe)
@@ -347,7 +336,7 @@ class MAIN:
                 emoji_img=emoji_cross,
             )
             self.game_over()
-
+            
             return
 
         description = current_protein_data.get(
@@ -359,7 +348,7 @@ class MAIN:
         self.reset_game()
 
     def draw_grass(self):
-        grass_color = (229, 225, 207)
+        grass_color = (229,225,207)
         for row in range(cell_number_x):
             if row % 2 == 0:
                 for col in range(cell_number_x):
@@ -395,7 +384,7 @@ class MAIN:
         current_recipe = current_protein_data["sequence"]
         active_sites = current_protein_data["active_sites"]
         recipe_index = 0
-
+        
     def draw_header(self):
         global active_sites
         header_rect = pygame.Rect(0, 0, screen_width, header_height)
@@ -422,61 +411,61 @@ class MAIN:
         prefix_end = start_x + prefix_width
 
         # 3. Precompute x‐positions for each codon icon
-        icon_positions = []
+        icon_positions = []                             
         for i in range(num):
             x = prefix_end + 10 + i * (header_icon_size + spacing)
-            icon_positions.append(x)
+            icon_positions.append(x)                    
 
         # 4. Group contiguous active_sites into runs
-        runs = []
-        for idx in sorted(active_sites):
-            if not runs or idx > runs[-1][-1] + 1:
-                runs.append([idx, idx])
-            else:
-                runs[-1][-1] = idx
+        runs = []                                       
+        for idx in sorted(active_sites):                
+            if not runs or idx > runs[-1][-1] + 1:      
+                runs.append([idx, idx])                 
+            else:                                      
+                runs[-1][-1] = idx                      
 
         # 5. Draw highlights for each run
-        pad = 4
-        highlight_color = (167, 0, 0)
-        highlight_shift = 3
-        for start_idx, end_idx in runs:
-            x_start = icon_positions[start_idx]
-            x_end = icon_positions[end_idx]
-            run_width = (end_idx - start_idx) * (
-                header_icon_size + spacing
-            ) + header_icon_size
+        pad = 4                                        
+        highlight_color = (167,0,0)
+        highlight_shift = 3               
+        for start_idx, end_idx in runs:                
+            x_start = icon_positions[start_idx]       
+            x_end   = icon_positions[end_idx]          
+            run_width = (end_idx - start_idx) * (header_icon_size + spacing) + header_icon_size
             rect = pygame.Rect(
-                x_start - pad + highlight_shift,
-                icon_y - pad + 2,
-                run_width + pad * 2,
-                header_icon_size + pad * 2,
+                x_start - pad + highlight_shift,                         
+                icon_y - pad + 2,                          
+                run_width + pad * 2,                   
+                header_icon_size + pad * 2             
             )
-            pygame.draw.rect(screen, highlight_color, rect, width=3, border_radius=7)
+            pygame.draw.rect(
+                screen,
+                highlight_color,
+                rect,
+                width=3,
+                border_radius=7
+            )
 
         # 6. Draw icons + progress
         for i, codon in enumerate(current_recipe):
-            x = icon_positions[i]
+            x = icon_positions[i]                      
             screen.blit(CODON_ICONS[codon], (x, icon_y))
 
             # progress square
             square_size = 25
             square_y = icon_y + header_icon_size + 10
             square_rect = pygame.Rect(
-                x + (header_icon_size - square_size) // 2,
+                x + (header_icon_size - square_size)//2,
                 square_y,
                 square_size,
-                square_size,
+                square_size
             )
             if i < len(self.snake.codon_history):
-                emoji_img = (
-                    emoji_check
-                    if self.snake.codon_history[i] == current_recipe[i]
-                    else emoji_cross
-                )
+                emoji_img = emoji_check if self.snake.codon_history[i] == current_recipe[i] else emoji_cross
                 emoji_rect = emoji_img.get_rect(center=square_rect.center)
                 screen.blit(emoji_img, emoji_rect)
             else:
-                pygame.draw.rect(screen, (180, 180, 180), square_rect, width=1)
+                pygame.draw.rect(screen, (180,180,180), square_rect, width=1)
 
     def wrap_text(self, text, font, max_width):
         words = text.split(" ")
@@ -591,19 +580,10 @@ emoji_cross = pygame.image.load(
 ).convert_alpha()
 
 header_icon_size = 35
-shapes = {
-    "c": "circle",
-    "s": "star",
-    "q": "square",
-    "x": "cross",
-    "f": "flower",
-    "d": "diamond",
-}
+shapes = {"c": "circle", "s": "star", "q": "square", "x": "cross", "f": "flower", "d": "diamond"}
 CODON_ICONS = {
-    codon: pygame.image.load(
-        f"{current_dir}/Graphics/{shapes[codon]}.png"
-    ).convert_alpha()
-    for codon in shapes
+    codon: pygame.image.load(f"{current_dir}/Graphics/{shapes[codon]}.png").convert_alpha()
+            for codon in shapes
 }
 
 success = pygame.mixer.Sound(f"{current_dir}/Sound/you_won.wav")
@@ -646,7 +626,7 @@ while True:
                         main_game.snake.direction = Vector2(-1, 0)
                         main_game.active = True
 
-    screen.fill((223, 218, 196))
+    screen.fill((223,218,196))
     main_game.draw_elements()
     game_area = pygame.Rect(
         0, header_height, screen_width, screen_height - header_height
@@ -658,7 +638,6 @@ while True:
 
 # add short tutorial
 # improve final message window + add protein drawing
-# add message when ending for collision
 
 # add proteins to db??
 # add shapes added into snake body???
