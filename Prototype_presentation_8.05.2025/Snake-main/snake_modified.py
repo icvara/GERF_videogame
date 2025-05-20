@@ -10,7 +10,6 @@ current_file = Path(__file__)
 # Directory containing the file
 current_dir = current_file.parent
 
-
 class SNAKE:
     def __init__(self):
         self.body = [Vector2(5, 10), Vector2(4, 10)]
@@ -428,18 +427,9 @@ class MAIN:
             ("", None),
             ("Collect codons by guiding the snake over them.", emoji_snake),
             ("Follow the recipe displayed at the top carefully.", emoji_memo),
-            (
-                "Incorrect codons can cause the protein to misfold and be inactive.",
-                emoji_warning,
-            ),
-            (
-                "Codons in the active site (highlighted by a red rectangle) are the most important!",
-                emoji_exclamation,
-            ),
-            (
-                "Each codon collected makes the snake grow longer and move faster.",
-                emoji_rocket,
-            ),
+            ("Incorrect codons can cause the protein to misfold and be inactive.", emoji_warning),
+            ("Codons in the active site (highlighted by a red rectangle) are the most important!", emoji_exclamation),
+            ("Each codon collected makes the snake grow longer and move faster.", emoji_rocket),
             ("Avoid crashing into walls or running into yourself.", emoji_stop),
             ("", None),
             ("Good luck building a functional food protein!", emoji_dna),
