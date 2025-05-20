@@ -825,8 +825,8 @@ while True:
     clock.tick(60)
 
 
-# add short tutorial
 # improve final message window + add protein drawing
+# better name
 
 # add proteins to db??
 # add shapes added into snake body???
