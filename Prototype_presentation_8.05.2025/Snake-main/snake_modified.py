@@ -179,7 +179,7 @@ class CODON:
 
     @property
     def expired(self):
-        return pygame.time.get_ticks() - self.spawn_time > 10000  # 10 seconds
+        return pygame.time.get_ticks() - self.spawn_time > random.randint(5000, 10000)
 
     def randomize(self):
         self.x = random.randint(0, cell_number_x - 1)
@@ -187,7 +187,7 @@ class CODON:
         self.pos = Vector2(self.x, self.y)
 
         # Favor spawning the next needed codon
-        if random.random() < 0.65:  # 75% chance
+        if random.random() < 0.55:  # 55% chance
             self.current_type = current_recipe[recipe_index]
         else:
             # Pick a random codon that is *not* the next needed one
@@ -227,10 +227,20 @@ class MAIN:
         self.snake.draw_snake()
 
     def check_codon_spawn(self):
-        # Spawn new codon every 1 seconds
         if pygame.time.get_ticks() - self.last_codon_time >= random.randint(500, 1000):
-            self.codons.append(CODON())
-            self.last_codon_time = pygame.time.get_ticks()
+            # Get occupied positions (by snake and existing codons)
+            occupied_positions = set((int(codon.pos.x), int(codon.pos.y)) for codon in self.codons)
+            occupied_positions.update((int(block.x), int(block.y)) for block in self.snake.body)
+
+            # Try spawning at a free position (limit attempts to prevent infinite loop)
+            max_attempts = 50
+            for _ in range(max_attempts):
+                new_codon = CODON()
+                new_pos = (int(new_codon.pos.x), int(new_codon.pos.y))
+                if new_pos not in occupied_positions:
+                    self.codons.append(new_codon)
+                    self.last_codon_time = pygame.time.get_ticks()
+                    break
 
     def remove_expired_codons(self):
         current_time = pygame.time.get_ticks()
@@ -611,9 +621,8 @@ while True:
 
 
 # add short tutorial
-# add active site visualisation
 # improve final message window + add protein drawing
-# add proteins to db
-# codons overlapping fix
 # add message when ending for collision 
+
+# add proteins to db??
 # add shapes added into snake body???
