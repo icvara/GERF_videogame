@@ -154,7 +154,7 @@ class SNAKE:
 
     def play_right_sound(self):
         self.right_sound.play()
-        
+
     def play_wrong_sound(self):
         self.wrong_sound.play()
 
@@ -167,9 +167,18 @@ class SNAKE:
 class CODON:
     def __init__(self):
         self.types = ["c", "s", "q", "x", "f", "d"]
-        self.shapes = {"c": "circle", "s": "star", "q": "square", "x": "cross", "f": "flower", "d": "diamond"}
+        self.shapes = {
+            "c": "circle",
+            "s": "star",
+            "q": "square",
+            "x": "cross",
+            "f": "flower",
+            "d": "diamond",
+        }
         self.images = {
-            codon: pygame.image.load(f"{current_dir}/Graphics/{self.shapes[codon]}.png").convert_alpha()
+            codon: pygame.image.load(
+                f"{current_dir}/Graphics/{self.shapes[codon]}.png"
+            ).convert_alpha()
             for codon in self.shapes
         }
         self.current_type = None
@@ -197,7 +206,7 @@ class CODON:
     def draw_codon(self):
         x_px = int(self.pos.x * cell_size)
         y_px = int(self.pos.y * cell_size) + header_height
-        
+
         img = self.images[self.current_type]
 
         screen.blit(img, (x_px, y_px))
@@ -212,7 +221,7 @@ class MAIN:
         self.game_over_reason = None
         self.snake_speed = 150  # Initial speed in ms
         self.level_up_every = 5  # Increase speed every 5 codons
-        self.speed_floor = 50    # Fastest allowed speed
+        self.speed_floor = 50  # Fastest allowed speed
         self.codons_eaten = 0
         self.tutorial_shown = False
 
@@ -235,8 +244,12 @@ class MAIN:
     def check_codon_spawn(self):
         if pygame.time.get_ticks() - self.last_codon_time >= random.randint(500, 1000):
             # Get occupied positions (by snake and existing codons)
-            occupied_positions = set((int(codon.pos.x), int(codon.pos.y)) for codon in self.codons)
-            occupied_positions.update((int(block.x), int(block.y)) for block in self.snake.body)
+            occupied_positions = set(
+                (int(codon.pos.x), int(codon.pos.y)) for codon in self.codons
+            )
+            occupied_positions.update(
+                (int(block.x), int(block.y)) for block in self.snake.body
+            )
 
             # Try spawning at a free position (limit attempts to prevent infinite loop)
             max_attempts = 50
@@ -247,11 +260,10 @@ class MAIN:
                     self.codons.append(new_codon)
                     self.last_codon_time = pygame.time.get_ticks()
                     break
-                
+
     def update_speed(self):
         new_speed = max(
-            self.speed_floor,
-            150 - (self.codons_eaten // self.level_up_every) * 10
+            self.speed_floor, 150 - (self.codons_eaten // self.level_up_every) * 10
         )
         if new_speed != self.snake_speed:
             self.snake_speed = new_speed
@@ -273,12 +285,12 @@ class MAIN:
                 self.snake.add_block()
                 self.codons_eaten += 1
                 self.update_speed()
-                
+
                 if actual_codon == expected_codon:
                     self.snake.play_right_sound()
                 else:
                     self.snake.play_wrong_sound()
-                
+
                 self.codons.remove(codon)
 
                 recipe_index += 1  # Always advance, even on errors
@@ -306,20 +318,18 @@ class MAIN:
         self.snake.reset()
         self.codons_eaten = 0
         self.snake_speed = 200  # Reset speed to starting value
-        pygame.time.set_timer(SCREEN_UPDATE, self.snake_speed)  
+        pygame.time.set_timer(SCREEN_UPDATE, self.snake_speed)
         self.codons = [CODON() for _ in range(2)]
         self.last_codon_time = pygame.time.get_ticks()
         self.draw_header()
         pygame.display.update()
         self.active = False
-        
+
     def game_over(self):
         if self.game_over_reason:
             failure.play()
             choice = self.show_popup(
-                "Game Over :(",
-                self.game_over_reason,
-                emoji_img=emoji_cross
+                "Game Over :(", self.game_over_reason, emoji_img=emoji_crossmark
             )
             self.game_over_reason = None  # Clear for next round
 
@@ -329,7 +339,7 @@ class MAIN:
                 return  # Exit early so reset_game is NOT called
 
         self.reset_game()
-    
+
     def protein_complete(self):
         errors = 0
         for i, (expected, actual) in enumerate(
@@ -343,11 +353,11 @@ class MAIN:
                     self.show_popup(
                         "Oh no! Wrong codon in the active site!",
                         "The protein is inactive :(",
-                        emoji_img=emoji_cross,
+                        emoji_img=emoji_crossmark,
                     )
-                    
+
                     self.game_over()
-                    
+
                     return
 
         error_rate = errors / len(current_recipe)
@@ -357,10 +367,10 @@ class MAIN:
             self.show_popup(
                 "Oh no! Your protein is misfolded!",
                 f"{errors} wrong codons in the sequence ({error_rate:.0%})! The protein cannot work :(",
-                emoji_img=emoji_cross,
+                emoji_img=emoji_crossmark,
             )
             self.game_over()
-            
+
             return
 
         description = current_protein_data.get(
@@ -368,11 +378,15 @@ class MAIN:
         )
         time.sleep(1)
         success.play()
-        self.show_popup(f"Congratulations! You correctly synthesised {current_protein_name.upper()}!", description, emoji_img=emoji_check)
+        self.show_popup(
+            f"Congratulations! You correctly synthesised {current_protein_name.upper()}!",
+            description,
+            emoji_img=emoji_checkmark,
+        )
         self.reset_game()
 
     def draw_grass(self):
-        grass_color = (229,225,207)
+        grass_color = (229, 225, 207)
         for row in range(cell_number_x):
             if row % 2 == 0:
                 for col in range(cell_number_x):
@@ -408,24 +422,32 @@ class MAIN:
         current_recipe = current_protein_data["sequence"]
         active_sites = current_protein_data["active_sites"]
         recipe_index = 0
-        
+
     def show_tutorial(self):
-        tutorial_text = (
-            "Welcome to Codon Snake!"
-            "🧬 Collect codons by moving the snake onto them."
-            "✅ Follow the recipe shown at the top of the screen."
-            "⚠️ Wrong codons may cause the protein to misfold."
-            "🧠 Active site codons are especially important!"
-            "🎮 Controls:"
-            "Use arrow keys to move the snake."
-            "🍎 The snake grows with each codon."
-            "🚫 Avoid crashing into the wall or yourself."
-            "Good luck making a functional protein!"
-        )
+        tutorial_lines = [
+            ("", None),
+            ("Collect codons by guiding the snake over them.", emoji_snake),
+            ("Follow the recipe displayed at the top carefully.", emoji_memo),
+            (
+                "Incorrect codons can cause the protein to misfold and be inactive.",
+                emoji_warning,
+            ),
+            (
+                "Codons in the active site (highlighted by a red rectangle) are the most important!",
+                emoji_exclamation,
+            ),
+            (
+                "Each codon collected makes the snake grow longer and move faster.",
+                emoji_rocket,
+            ),
+            ("Avoid crashing into walls or running into yourself.", emoji_stop),
+            ("", None),
+            ("Good luck building a functional food protein!", emoji_dna),
+        ]
 
         # Popup dimensions
-        popup_width = 600
-        popup_height = 500
+        popup_width = 1030
+        popup_height = 550
         popup_x = (screen_width - popup_width) // 2
         popup_y = (screen_height - popup_height) // 2
 
@@ -436,25 +458,56 @@ class MAIN:
         button_y = popup_y + popup_height - button_height - 20
         button_rect = pygame.Rect(button_x, button_y, button_width, button_height)
 
-        # Wrap text
-        wrapped_lines = self.wrap_text(tutorial_text, game_font, popup_width - 40)
-
         while True:
             # Background
             screen.fill((223, 218, 196))
 
             # Popup box
-            pygame.draw.rect(screen, (255, 255, 255), (popup_x, popup_y, popup_width, popup_height))
-            pygame.draw.rect(screen, (0, 0, 0), (popup_x, popup_y, popup_width, popup_height), 4)
+            pygame.draw.rect(
+                screen, (255, 255, 255), (popup_x, popup_y, popup_width, popup_height)
+            )
+            pygame.draw.rect(
+                screen, (0, 0, 0), (popup_x, popup_y, popup_width, popup_height), 4
+            )
 
             # Title
-            title_surf = game_font.render("Tutorial", True, (0, 0, 0))
-            screen.blit(title_surf, (popup_x + 20, popup_y + 20))
+            title_surf = title_font.render("Welcome to PROTEIN SNAKE!", True, (0, 0, 0))
+            title_rect = title_surf.get_rect(
+                center=(popup_x + popup_width // 2, popup_y + 40)
+            )
+            screen.blit(title_surf, title_rect)
 
             # Body text
-            for i, line in enumerate(wrapped_lines):
-                text_surface = game_font.render(line, True, (50, 50, 50))
-                screen.blit(text_surface, (popup_x + 20, popup_y + 60 + i * 30))
+            for i, (line, emoji_img) in enumerate(tutorial_lines):
+                y = popup_y + 80 + i * 40  # Slightly lower for spacing under title
+
+                # Check if it's the last line
+                is_final = i == len(tutorial_lines) - 1
+
+                font_to_use = highlight_font if is_final else game_font
+                text_color = (0, 0, 0) if is_final else (50, 50, 50)
+
+                if is_final:
+                    text_surface = font_to_use.render(line, True, text_color)
+                    total_width = text_surface.get_width()
+                    if emoji_img:
+                        total_width += emoji_img.get_width() + 10
+
+                    text_x = popup_x + (popup_width - total_width) // 2
+                    if emoji_img:
+                        screen.blit(emoji_img, (text_x, y))
+                        text_x += emoji_img.get_width() + 10
+
+                    screen.blit(text_surface, (text_x, y))
+                else:
+                    if emoji_img:
+                        screen.blit(emoji_img, (popup_x + 20, y))
+                        text_x = popup_x + 20 + emoji_img.get_width() + 10
+                    else:
+                        text_x = popup_x + 20
+
+                    text_surface = font_to_use.render(line, True, text_color)
+                    screen.blit(text_surface, (text_x, y))
 
             # Button
             pygame.draw.rect(screen, (100, 200, 100), button_rect)
@@ -473,7 +526,6 @@ class MAIN:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if button_rect.collidepoint(event.pos):
                         return
-
 
     def draw_header(self):
         global active_sites
@@ -501,61 +553,61 @@ class MAIN:
         prefix_end = start_x + prefix_width
 
         # 3. Precompute x‐positions for each codon icon
-        icon_positions = []                             
+        icon_positions = []
         for i in range(num):
             x = prefix_end + 10 + i * (header_icon_size + spacing)
-            icon_positions.append(x)                    
+            icon_positions.append(x)
 
         # 4. Group contiguous active_sites into runs
-        runs = []                                       
-        for idx in sorted(active_sites):                
-            if not runs or idx > runs[-1][-1] + 1:      
-                runs.append([idx, idx])                 
-            else:                                      
-                runs[-1][-1] = idx                      
+        runs = []
+        for idx in sorted(active_sites):
+            if not runs or idx > runs[-1][-1] + 1:
+                runs.append([idx, idx])
+            else:
+                runs[-1][-1] = idx
 
         # 5. Draw highlights for each run
-        pad = 4                                        
-        highlight_color = (167,0,0)
-        highlight_shift = 3               
-        for start_idx, end_idx in runs:                
-            x_start = icon_positions[start_idx]       
-            x_end   = icon_positions[end_idx]          
-            run_width = (end_idx - start_idx) * (header_icon_size + spacing) + header_icon_size
+        pad = 4
+        highlight_color = (167, 0, 0)
+        highlight_shift = 3
+        for start_idx, end_idx in runs:
+            x_start = icon_positions[start_idx]
+            x_end = icon_positions[end_idx]
+            run_width = (end_idx - start_idx) * (
+                header_icon_size + spacing
+            ) + header_icon_size
             rect = pygame.Rect(
-                x_start - pad + highlight_shift,                         
-                icon_y - pad + 2,                          
-                run_width + pad * 2,                   
-                header_icon_size + pad * 2             
+                x_start - pad + highlight_shift,
+                icon_y - pad + 2,
+                run_width + pad * 2,
+                header_icon_size + pad * 2,
             )
-            pygame.draw.rect(
-                screen,
-                highlight_color,
-                rect,
-                width=3,
-                border_radius=7
-            )
+            pygame.draw.rect(screen, highlight_color, rect, width=3, border_radius=7)
 
         # 6. Draw icons + progress
         for i, codon in enumerate(current_recipe):
-            x = icon_positions[i]                      
+            x = icon_positions[i]
             screen.blit(CODON_ICONS[codon], (x, icon_y))
 
             # progress square
             square_size = 25
             square_y = icon_y + header_icon_size + 10
             square_rect = pygame.Rect(
-                x + (header_icon_size - square_size)//2,
+                x + (header_icon_size - square_size) // 2,
                 square_y,
                 square_size,
-                square_size
+                square_size,
             )
             if i < len(self.snake.codon_history):
-                emoji_img = emoji_check if self.snake.codon_history[i] == current_recipe[i] else emoji_cross
+                emoji_img = (
+                    emoji_check
+                    if self.snake.codon_history[i] == current_recipe[i]
+                    else emoji_cross
+                )
                 emoji_rect = emoji_img.get_rect(center=square_rect.center)
                 screen.blit(emoji_img, emoji_rect)
             else:
-                pygame.draw.rect(screen, (180,180,180), square_rect, width=1)
+                pygame.draw.rect(screen, (180, 180, 180), square_rect, width=1)
 
     def wrap_text(self, text, font, max_width):
         words = text.split(" ")
@@ -572,7 +624,7 @@ class MAIN:
         if current_line:
             lines.append(current_line.strip())
         return lines
-    
+
     def show_popup(self, message, submessage, emoji_img=None):
         popup_width = 500
         popup_height = 300
@@ -585,10 +637,7 @@ class MAIN:
 
         # "Play Again" button
         play_button_rect = pygame.Rect(
-            popup_x + 40,
-            popup_y + 220,
-            button_width,
-            button_height
+            popup_x + 40, popup_y + 220, button_width, button_height
         )
 
         # "Tutorial" button
@@ -596,13 +645,17 @@ class MAIN:
             popup_x + popup_width - 40 - button_width,
             popup_y + 220,
             button_width,
-            button_height
+            button_height,
         )
 
         while True:
             # Draw popup background
-            pygame.draw.rect(screen, (255, 255, 255), (popup_x, popup_y, popup_width, popup_height))
-            pygame.draw.rect(screen, (0, 0, 0), (popup_x, popup_y, popup_width, popup_height), 4)
+            pygame.draw.rect(
+                screen, (255, 255, 255), (popup_x, popup_y, popup_width, popup_height)
+            )
+            pygame.draw.rect(
+                screen, (0, 0, 0), (popup_x, popup_y, popup_width, popup_height), 4
+            )
 
             # Emoji
             if emoji_img:
@@ -622,14 +675,17 @@ class MAIN:
             # Play Again button
             pygame.draw.rect(screen, (100, 200, 100), play_button_rect)
             pygame.draw.rect(screen, (0, 0, 0), play_button_rect, 2)
-            play_text = game_font.render("Play Again", True, (0, 0, 0))
+            play_text = game_font.render("play again", True, (0, 0, 0))
             screen.blit(play_text, play_text.get_rect(center=play_button_rect.center))
 
             # Tutorial button
             pygame.draw.rect(screen, (180, 180, 255), tutorial_button_rect)
             pygame.draw.rect(screen, (0, 0, 0), tutorial_button_rect, 2)
-            tutorial_text = game_font.render("View Tutorial", True, (0, 0, 0))
-            screen.blit(tutorial_text, tutorial_text.get_rect(center=tutorial_button_rect.center))
+            tutorial_text = game_font.render("view tutorial", True, (0, 0, 0))
+            screen.blit(
+                tutorial_text,
+                tutorial_text.get_rect(center=tutorial_button_rect.center),
+            )
 
             pygame.display.update()
 
@@ -643,67 +699,6 @@ class MAIN:
                         return "play"
                     elif tutorial_button_rect.collidepoint(event.pos):
                         return "tutorial"
-
-
-    # def show_popup(self, message, submessage, emoji_img=None):
-    #     popup_width = 500
-    #     popup_height = 250
-    #     popup_x = (screen_width - popup_width) // 2
-    #     popup_y = (screen_height - popup_height) // 2
-
-    #     button_width = 200
-    #     button_height = 50
-    #     button_x = popup_x + (popup_width - button_width) // 2
-    #     button_y = popup_y + 170
-    #     button_rect = pygame.Rect(button_x, button_y, button_width, button_height)
-
-    #     while True:
-    #         # Draw popup box
-    #         pygame.draw.rect(
-    #             screen, (255, 255, 255), (popup_x, popup_y, popup_width, popup_height)
-    #         )
-    #         pygame.draw.rect(
-    #             screen, (0, 0, 0), (popup_x, popup_y, popup_width, popup_height), 4
-    #         )
-
-    #         # Draw emoji at the top-left corner of the popup
-    #         if emoji_img:
-    #             emoji_rect = emoji_img.get_rect(
-    #                 topleft=(popup_x + 20, popup_y + 20)
-    #             )  # Position emoji at the top-left corner
-    #             screen.blit(emoji_img, emoji_rect)
-
-    #         # Draw message (title) text to the right of the emoji
-    #         title_surf = game_font.render(message, True, (0, 0, 0))
-    #         screen.blit(
-    #             title_surf, (popup_x + 60, popup_y + 20)
-    #         )  # Offset to make room for the emoji
-
-    #         # Wrap and draw submessage (body text)
-    #         wrapped_lines = self.wrap_text(submessage, game_font, popup_width - 40)
-    #         for i, line in enumerate(wrapped_lines):
-    #             sub_surf = game_font.render(line, True, (50, 50, 50))
-    #             screen.blit(
-    #                 sub_surf, (popup_x + 20, popup_y + 60 + i * 30)
-    #             )  # Added extra spacing
-
-    #         # Draw button
-    #         pygame.draw.rect(screen, (100, 200, 100), button_rect)
-    #         pygame.draw.rect(screen, (0, 0, 0), button_rect, 2)
-    #         button_text = game_font.render("play again", True, (0, 0, 0))
-    #         text_rect = button_text.get_rect(center=button_rect.center)
-    #         screen.blit(button_text, text_rect)
-
-    #         pygame.display.update()
-
-    #         # Wait for button click or quit
-    #         for event in pygame.event.get():
-    #             if event.type == pygame.QUIT:
-    #                 pygame.quit()
-    #                 sys.exit()
-    #             if event.type == pygame.MOUSEBUTTONDOWN:
-    #                 if button_rect.collidepoint(event.pos):
-    #                     return
 
 
 with open(f"{current_dir}/proteins_db.json") as f:
@@ -734,6 +729,8 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 
 clock = pygame.time.Clock()
 game_font = pygame.font.Font(f"{current_dir}/Font/PoetsenOne-Regular.ttf", 25)
+title_font = pygame.font.Font(f"{current_dir}/Font/PoetsenOne-Regular.ttf", 30)
+highlight_font = pygame.font.Font(f"{current_dir}/Font/PoetsenOne-Regular.ttf", 28)
 emoji_check = pygame.image.load(
     f"{current_dir}/Graphics/check_emoji.png"
 ).convert_alpha()
@@ -741,18 +738,54 @@ emoji_cross = pygame.image.load(
     f"{current_dir}/Graphics/cross_emoji.png"
 ).convert_alpha()
 
+emoji_checkmark = pygame.image.load(
+    f"{current_dir}/Graphics/checkmark.png"
+).convert_alpha()
+emoji_crossmark = pygame.image.load(
+    f"{current_dir}/Graphics/crossmark.png"
+).convert_alpha()
+
+emoji_snake = pygame.image.load(f"{current_dir}/Graphics/snake.png").convert_alpha()
+emoji_memo = pygame.image.load(f"{current_dir}/Graphics/memo.png").convert_alpha()
+emoji_warning = pygame.image.load(f"{current_dir}/Graphics/warning.png").convert_alpha()
+emoji_exclamation = pygame.image.load(
+    f"{current_dir}/Graphics/exclamation.png"
+).convert_alpha()
+emoji_dna = pygame.image.load(f"{current_dir}/Graphics/dna.png").convert_alpha()
+emoji_stop = pygame.image.load(f"{current_dir}/Graphics/prohibited.png").convert_alpha()
+emoji_rocket = pygame.image.load(f"{current_dir}/Graphics/rocket.png").convert_alpha()
+
+emoji_size = (30, 30)
+emoji_check = pygame.transform.smoothscale(emoji_check, emoji_size)
+emoji_cross = pygame.transform.smoothscale(emoji_cross, emoji_size)
+emoji_checkmark = pygame.transform.smoothscale(emoji_checkmark, emoji_size)
+emoji_crossmark = pygame.transform.smoothscale(emoji_crossmark, emoji_size)
+emoji_snake = pygame.transform.smoothscale(emoji_snake, emoji_size)
+emoji_memo = pygame.transform.smoothscale(emoji_memo, emoji_size)
+emoji_warning = pygame.transform.smoothscale(emoji_warning, emoji_size)
+emoji_exclamation = pygame.transform.smoothscale(emoji_exclamation, emoji_size)
+emoji_dna = pygame.transform.smoothscale(emoji_dna, emoji_size)
+emoji_stop = pygame.transform.smoothscale(emoji_stop, emoji_size)
+emoji_rocket = pygame.transform.smoothscale(emoji_rocket, emoji_size)
+
 header_icon_size = 35
-shapes = {"c": "circle", "s": "star", "q": "square", "x": "cross", "f": "flower", "d": "diamond"}
+shapes = {
+    "c": "circle",
+    "s": "star",
+    "q": "square",
+    "x": "cross",
+    "f": "flower",
+    "d": "diamond",
+}
 CODON_ICONS = {
-    codon: pygame.image.load(f"{current_dir}/Graphics/{shapes[codon]}.png").convert_alpha()
-            for codon in shapes
+    codon: pygame.image.load(
+        f"{current_dir}/Graphics/{shapes[codon]}.png"
+    ).convert_alpha()
+    for codon in shapes
 }
 
 success = pygame.mixer.Sound(f"{current_dir}/Sound/you_won.wav")
 failure = pygame.mixer.Sound(f"{current_dir}/Sound/you_lost.wav")
-
-emoji_check = pygame.transform.scale(emoji_check, (30, 30))
-emoji_cross = pygame.transform.scale(emoji_cross, (30, 30))
 
 SCREEN_UPDATE = pygame.USEREVENT
 pygame.time.set_timer(SCREEN_UPDATE, 150)
@@ -763,7 +796,7 @@ while True:
     if not main_game.tutorial_shown:
         main_game.show_tutorial()
         main_game.tutorial_shown = True
-        
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -792,7 +825,7 @@ while True:
                         main_game.snake.direction = Vector2(-1, 0)
                         main_game.active = True
 
-    screen.fill((223,218,196))
+    screen.fill((223, 218, 196))
     main_game.draw_elements()
     game_area = pygame.Rect(
         0, header_height, screen_width, screen_height - header_height
