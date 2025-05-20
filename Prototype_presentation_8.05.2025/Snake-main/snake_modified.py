@@ -210,6 +210,10 @@ class MAIN:
         self.last_codon_time = pygame.time.get_ticks()
         self.active = False  # Game starts paused
         self.game_over_reason = None
+        self.snake_speed = 180  # Initial speed in ms
+        self.level_up_every = 2  # Increase speed every 2 apples
+        self.speed_floor = 50    # Fastest allowed speed
+        self.codons_eaten = 0
 
     def update(self):
         if not self.active:
@@ -242,6 +246,15 @@ class MAIN:
                     self.codons.append(new_codon)
                     self.last_codon_time = pygame.time.get_ticks()
                     break
+                
+    def update_speed(self):
+        new_speed = max(
+            self.speed_floor,
+            180 - (self.codons_eaten // self.level_up_every) * 10
+        )
+        if new_speed != self.snake_speed:
+            self.snake_speed = new_speed
+            pygame.time.set_timer(SCREEN_UPDATE, self.snake_speed)
 
     def remove_expired_codons(self):
         current_time = pygame.time.get_ticks()
@@ -257,6 +270,8 @@ class MAIN:
 
                 self.snake.codon_history.append(actual_codon)
                 self.snake.add_block()
+                self.codons_eaten += 1
+                self.update_speed()
                 
                 if actual_codon == expected_codon:
                     self.snake.play_right_sound()
@@ -288,12 +303,15 @@ class MAIN:
         self.reset_recipe_progress()
         self.select_new_protein()
         self.snake.reset()
+        self.codons_eaten = 0
+        self.snake_speed = 200  # Reset speed to starting value
+        pygame.time.set_timer(SCREEN_UPDATE, self.snake_speed)  
         self.codons = [CODON() for _ in range(2)]
         self.last_codon_time = pygame.time.get_ticks()
         self.draw_header()
         pygame.display.update()
         self.active = False
-
+        
     def game_over(self):
         if self.game_over_reason:
             failure.play()

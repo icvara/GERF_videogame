@@ -58,7 +58,7 @@ proteins = [
   },
   {
     "name": "Phycocyanin",
-    "description": "Phycocyanin is a protein found in spirulina, which can make smoothies and snacks bright blue-green all by itself—no artificial dye needed!!",
+    "description": "Phycocyanin is a protein found in spirulina, which can make food bright blue-green without any artificial dye!",
     "sequence": random.choices(letters, k=length),
     "active_sites": [-8, -9]
   },
@@ -70,7 +70,7 @@ proteins = [
   },
   {
     "name": "Hemp protein",
-    "description": "This protein is made from hemp seeds and contains all nine essential amino acids to help muscles repair and grow after exercise!",
+    "description": "Made from hemp seeds, it contains all essential amino acids to help muscles repair and grow after exercise!",
     "sequence": random.choices(letters, k=length),
     "active_sites": []
   }
