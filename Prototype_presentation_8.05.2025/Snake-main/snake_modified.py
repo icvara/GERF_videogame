@@ -210,8 +210,8 @@ class MAIN:
         self.last_codon_time = pygame.time.get_ticks()
         self.active = False  # Game starts paused
         self.game_over_reason = None
-        self.snake_speed = 180  # Initial speed in ms
-        self.level_up_every = 2  # Increase speed every 2 apples
+        self.snake_speed = 150  # Initial speed in ms
+        self.level_up_every = 5  # Increase speed every 5 codons
         self.speed_floor = 50    # Fastest allowed speed
         self.codons_eaten = 0
 
@@ -250,7 +250,7 @@ class MAIN:
     def update_speed(self):
         new_speed = max(
             self.speed_floor,
-            180 - (self.codons_eaten // self.level_up_every) * 10
+            150 - (self.codons_eaten // self.level_up_every) * 10
         )
         if new_speed != self.snake_speed:
             self.snake_speed = new_speed
@@ -291,12 +291,12 @@ class MAIN:
             not 0 <= self.snake.body[0].x < cell_number_x
             or not 0 <= self.snake.body[0].y < cell_number_y
         ):
-            self.game_over_reason = "Ooops... You hit the edge!"
+            self.game_over_reason = "ooops... you hit the edge!"
             self.game_over()
 
         for block in self.snake.body[1:]:
             if block == self.snake.body[0]:
-                self.game_over_reason = "Ooops... You tangled up!"
+                self.game_over_reason = "ooops... you tangled up!"
                 self.game_over()
 
     def reset_game(self):
@@ -316,7 +316,7 @@ class MAIN:
         if self.game_over_reason:
             failure.play()
             self.show_popup(
-                "Game Over :(",
+                "GAME OVER :(",
                 f"{self.game_over_reason}",
                 emoji_img=emoji_cross
             )
@@ -335,8 +335,8 @@ class MAIN:
                     time.sleep(1)
                     failure.play()
                     self.show_popup(
-                        "Misfolded protein",
-                        "Wrong codon in active site! The protein is inactive :(",
+                        "Oh no! Wrong codon in the active site!",
+                        "The protein is inactive :(",
                         emoji_img=emoji_cross,
                     )
                     
@@ -349,7 +349,7 @@ class MAIN:
             time.sleep(1)
             failure.play()
             self.show_popup(
-                "Misfolded protein",
+                "Oh no! Your protein is misfolded!",
                 f"{errors} wrong codons in the sequence ({error_rate:.0%})! The protein cannot work :(",
                 emoji_img=emoji_cross,
             )
@@ -362,7 +362,7 @@ class MAIN:
         )
         time.sleep(1)
         success.play()
-        self.show_popup("Protein synthesised!", description, emoji_img=emoji_check)
+        self.show_popup(f"Congratulations! You correctly synthesised {current_protein_name.upper()}!", description, emoji_img=emoji_check)
         self.reset_game()
 
     def draw_grass(self):
@@ -409,13 +409,13 @@ class MAIN:
         pygame.draw.rect(screen, (255, 255, 255), header_rect)
 
         # 1. Title
-        title_text = f"Let's build {current_protein_name.upper()}"
+        title_text = f"let's build {current_protein_name.upper()}"
         title_surf = game_font.render(title_text, True, (0, 0, 0))
         title_rect = title_surf.get_rect(centerx=screen_width // 2, y=10)
         screen.blit(title_surf, title_rect)
 
         # 2. Prefix + icons
-        prefix = "Follow this recipe:"
+        prefix = "follow this recipe:"
         prefix_surf = game_font.render(prefix, True, (0, 0, 0))
         prefix_width = prefix_surf.get_width()
         spacing = 4
@@ -546,7 +546,7 @@ class MAIN:
             # Draw button
             pygame.draw.rect(screen, (100, 200, 100), button_rect)
             pygame.draw.rect(screen, (0, 0, 0), button_rect, 2)
-            button_text = game_font.render("Play again", True, (0, 0, 0))
+            button_text = game_font.render("play again", True, (0, 0, 0))
             text_rect = button_text.get_rect(center=button_rect.center)
             screen.blit(button_text, text_rect)
 
