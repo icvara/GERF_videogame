@@ -214,7 +214,7 @@ class CODON:
 class MAIN:
     def __init__(self):
         self.snake = SNAKE()
-        self.codons = [CODON() for _ in range(4)]  # 8 codons on screen
+        self.codons = [CODON() for _ in range(5)]  # 5 codons on screen
         self.last_codon_time = pygame.time.get_ticks()
         self.active = False  # Game starts paused
         self.game_over_reason = None
@@ -223,6 +223,7 @@ class MAIN:
         self.speed_floor = 50  # Fastest allowed speed
         self.codons_eaten = 0
         self.tutorial_shown = False
+        self.protein_fig = pygame.image.load(f"{current_dir}/Graphics/protein.png")
 
     def update(self):
         if not self.active:
@@ -312,23 +313,24 @@ class MAIN:
                 self.game_over()
 
     def reset_game(self):
+        self.snake = SNAKE()
         self.reset_recipe_progress()
         self.select_new_protein()
         self.snake.reset()
         self.codons_eaten = 0
-        self.snake_speed = 200  # Reset speed to starting value
+        self.snake_speed = 150  # Reset speed to starting value
         pygame.time.set_timer(SCREEN_UPDATE, self.snake_speed)
-        self.codons = [CODON() for _ in range(2)]
+        self.codons = [CODON() for _ in range(5)]
         self.last_codon_time = pygame.time.get_ticks()
         self.draw_header()
         pygame.display.update()
         self.active = False
-
+        
     def game_over(self):
         if self.game_over_reason:
             failure.play()
-            choice = self.show_popup(
-                "Game Over :(", self.game_over_reason, emoji_img=emoji_crossmark
+            choice = self.show_gameover_popup(
+                "GAME OVER", self.game_over_reason, emoji_img=emoji_gameover
             )
             self.game_over_reason = None  # Clear for next round
 
@@ -336,52 +338,71 @@ class MAIN:
                 self.reset_game()
                 self.show_tutorial()
                 return  # Exit early so reset_game is NOT called
-
+            
         self.reset_game()
-
+        
     def protein_complete(self):
         errors = 0
-        for i, (expected, actual) in enumerate(
-            zip(current_recipe, self.snake.codon_history)
-        ):
+        for i, (expected, actual) in enumerate(zip(current_recipe, self.snake.codon_history)):
             if expected != actual:
                 errors += 1
                 if i in active_sites:
                     time.sleep(1)
                     failure.play()
-                    self.show_popup(
-                        "Oh no! Wrong codon in the active site!",
-                        "The protein is inactive :(",
-                        emoji_img=emoji_crossmark,
+                    self.last_description = "One or more wrong codons found in the active site."
+                    choice = self.show_final_popup(
+                        message="Oh no!",
+                        submessage="Your protein is inactive!",
+                        emoji_img=emoji_sadface,
+                        figure_img=self.protein_fig
                     )
-
-                    self.game_over()
-
+                    
+                    if choice == "tutorial":
+                        self.reset_game()
+                        self.show_tutorial()
+                        return
+                    
+                    self.reset_game()
                     return
 
         error_rate = errors / len(current_recipe)
         if error_rate > 0.3:
             time.sleep(1)
             failure.play()
-            self.show_popup(
-                "Oh no! Your protein is misfolded!",
-                f"{errors} wrong codons in the sequence ({error_rate:.0%})! The protein cannot work :(",
-                emoji_img=emoji_crossmark,
+            self.last_description = (
+                f"{errors} wrong codons in the sequence ({error_rate:.0%} error rate)."
             )
-            self.game_over()
+            choice = self.show_final_popup(
+                message="Oh no!",
+                submessage="Your protein cannot hold its shape and is misfolded!",
+                emoji_img=emoji_sadface,
+                figure_img=self.protein_fig
+            )
 
+            if choice == "tutorial":
+                self.reset_game()
+                self.show_tutorial()
+                return
+
+            self.reset_game()
             return
 
-        description = current_protein_data.get(
-            "description", "No description available."
-        )
+        description = current_protein_data.get("description", "No description available.")
         time.sleep(1)
         success.play()
-        self.show_popup(
-            f"Congratulations! You correctly synthesised {current_protein_name.upper()}!",
-            description,
-            emoji_img=emoji_checkmark,
+        self.last_description = description
+        choice = self.show_final_popup(
+            message="Congratulations!",
+            submessage=f"You correctly synthesised {current_protein_name.upper()}!",
+            emoji_img=emoji_trophy,
+            figure_img=self.protein_fig
         )
+
+        if choice == "tutorial":
+            self.reset_game()
+            self.show_tutorial()
+            return
+
         self.reset_game()
 
     def draw_grass(self):
@@ -502,7 +523,7 @@ class MAIN:
             # Button
             pygame.draw.rect(screen, (100, 200, 100), button_rect)
             pygame.draw.rect(screen, (0, 0, 0), button_rect, 2)
-            button_text = game_font.render("Start Game", True, (0, 0, 0))
+            button_text = game_font.render("start game", True, (0, 0, 0))
             text_rect = button_text.get_rect(center=button_rect.center)
             screen.blit(button_text, text_rect)
 
@@ -614,53 +635,87 @@ class MAIN:
         if current_line:
             lines.append(current_line.strip())
         return lines
-
-    def show_popup(self, message, submessage, emoji_img=None):
-        popup_width = 500
-        popup_height = 300
+    
+    def show_final_popup(self, message, submessage, emoji_img=None, figure_img=None):
+        popup_width = 800
+        popup_height = 480
         popup_x = (screen_width - popup_width) // 2
         popup_y = (screen_height - popup_height) // 2
 
         # Button dimensions
-        button_width = 180
+        button_width = 200
         button_height = 50
+        button_spacing = 40
+        button_y = popup_y + popup_height - 70
 
-        # "Play Again" button
+        # Button positions
         play_button_rect = pygame.Rect(
-            popup_x + 40, popup_y + 220, button_width, button_height
+            popup_x + popup_width // 2 - button_width - button_spacing // 2,
+            button_y,
+            button_width,
+            button_height,
         )
 
-        # "Tutorial" button
         tutorial_button_rect = pygame.Rect(
-            popup_x + popup_width - 40 - button_width,
-            popup_y + 220,
+            popup_x + popup_width // 2 + button_spacing // 2,
+            button_y,
             button_width,
             button_height,
         )
 
         while True:
             # Draw popup background
-            pygame.draw.rect(
-                screen, (255, 255, 255), (popup_x, popup_y, popup_width, popup_height)
-            )
-            pygame.draw.rect(
-                screen, (0, 0, 0), (popup_x, popup_y, popup_width, popup_height), 4
-            )
+            pygame.draw.rect(screen, (255, 255, 255), (popup_x, popup_y, popup_width, popup_height))
+            pygame.draw.rect(screen, (0, 0, 0), (popup_x, popup_y, popup_width, popup_height), 4)
 
-            # Emoji
+            # Title row: emoji + message (centered as a line)
+            title_surf = title_font.render(message, True, (0, 0, 0))
+
             if emoji_img:
-                emoji_rect = emoji_img.get_rect(topleft=(popup_x + 20, popup_y + 20))
+                emoji_rect = emoji_img.get_rect()
+                total_width = emoji_rect.width + 10 + title_surf.get_width()
+                start_x = popup_x + (popup_width - total_width) // 2
+
+                emoji_rect.topleft = (start_x, popup_y + 30)
+                title_rect = title_surf.get_rect(midleft=(emoji_rect.right + 10, emoji_rect.centery))
                 screen.blit(emoji_img, emoji_rect)
+                screen.blit(title_surf, title_rect)
+            else:
+                title_rect = title_surf.get_rect(center=(popup_x + popup_width // 2, popup_y + 40))
+                screen.blit(title_surf, title_rect)
 
-            # Title
-            title_surf = game_font.render(message, True, (0, 0, 0))
-            screen.blit(title_surf, (popup_x + 60, popup_y + 20))
+            # Second line: subheadline (centered)
+            sub_surf = highlight_font.render(submessage, True, (80, 80, 80))
+            sub_rect = sub_surf.get_rect(center=(popup_x + popup_width // 2, title_rect.bottom + 30))
+            screen.blit(sub_surf, sub_rect)
 
-            # Body text (wrapped)
-            wrapped_lines = self.wrap_text(submessage, game_font, popup_width - 40)
+            # Image and description area
+            text_top = sub_rect.bottom + 30
+            padding = 10
+
+            if figure_img:
+                original_width, original_height = figure_img.get_size()
+                scale_factor = 0.25 # 20% of original size
+                new_size = (int(original_width * scale_factor), int(original_height * scale_factor))
+                fig_scaled = pygame.transform.smoothscale(figure_img, new_size)
+                fig_rect = fig_scaled.get_rect(topleft=(popup_x + padding, text_top))
+                screen.blit(fig_scaled, fig_rect)
+                text_x = fig_rect.right + padding
+            else:
+                text_x = popup_x + padding
+
+            # Wrapped description (to the right of figure, vertically centered)
+            wrap_width = popup_width - 320 if figure_img else popup_width - 60
+            wrapped_lines = self.wrap_text(self.last_description, game_font, wrap_width)
+
+            text_block_height = len(wrapped_lines) * 30
+            start_y = popup_y + (popup_height // 2) - (text_block_height // 2)
+
             for i, line in enumerate(wrapped_lines):
-                sub_surf = game_font.render(line, True, (50, 50, 50))
-                screen.blit(sub_surf, (popup_x + 20, popup_y + 60 + i * 30))
+                text_surf = game_font.render(line, True, (50, 50, 50))
+                text_x = popup_x + 300 if figure_img else popup_x + 30
+                text_y = start_y + i * 30
+                screen.blit(text_surf, (text_x, text_y))
 
             # Play Again button
             pygame.draw.rect(screen, (100, 200, 100), play_button_rect)
@@ -672,10 +727,7 @@ class MAIN:
             pygame.draw.rect(screen, (180, 180, 255), tutorial_button_rect)
             pygame.draw.rect(screen, (0, 0, 0), tutorial_button_rect, 2)
             tutorial_text = game_font.render("view tutorial", True, (0, 0, 0))
-            screen.blit(
-                tutorial_text,
-                tutorial_text.get_rect(center=tutorial_button_rect.center),
-            )
+            screen.blit(tutorial_text, tutorial_text.get_rect(center=tutorial_button_rect.center))
 
             pygame.display.update()
 
@@ -691,7 +743,86 @@ class MAIN:
                         return "tutorial"
 
 
-with open(f"{current_dir}/proteins_db.json") as f:
+    def show_gameover_popup(self, message, submessage, emoji_img=None):
+        popup_width = 500
+        popup_height = 250
+        popup_x = (screen_width - popup_width) // 2
+        popup_y = (screen_height - popup_height) // 2
+
+        # Button dimensions
+        button_width = 180
+        button_height = 50
+        button_y = popup_y + popup_height - 70
+
+        # "Play Again" button
+        play_button_rect = pygame.Rect(
+            popup_x + 40, button_y, button_width, button_height
+        )
+
+        # "Tutorial" button
+        tutorial_button_rect = pygame.Rect(
+            popup_x + popup_width - 40 - button_width, button_y, button_width, button_height
+        )
+
+        while True:
+            # Draw popup background
+            pygame.draw.rect(screen, (255, 255, 255), (popup_x, popup_y, popup_width, popup_height))
+            pygame.draw.rect(screen, (0, 0, 0), (popup_x, popup_y, popup_width, popup_height), 4)
+
+            # ----- Title line with emoji -----
+            title_surf = title_font.render(message, True, (0, 0, 0))
+            y_header = popup_y + 30
+
+            if emoji_img:
+                gap = 10
+                pair_width = emoji_img.get_width() + gap + title_surf.get_width()
+                x_start = popup_x + (popup_width - pair_width) // 2
+
+                # Draw emoji and title text side-by-side
+                emoji_rect = emoji_img.get_rect(topleft=(x_start, y_header))
+                screen.blit(emoji_img, emoji_rect)
+                screen.blit(title_surf, (x_start + emoji_img.get_width() + gap, y_header))
+            else:
+                title_rect = title_surf.get_rect(center=(popup_x + popup_width // 2, y_header))
+                screen.blit(title_surf, title_rect)
+
+            # ----- Submessage (reason), centered -----
+            y_offset = y_header + title_surf.get_height() + 50  # Extra spacing below title
+            wrapped_lines = self.wrap_text(submessage, game_font, popup_width - 80)
+
+            for i, line in enumerate(wrapped_lines):
+                line_surf = game_font.render(line, True, (50, 50, 50))
+                line_rect = line_surf.get_rect(center=(popup_x + popup_width // 2, y_offset + i * 30))
+                screen.blit(line_surf, line_rect)
+
+            # ----- Buttons -----
+            pygame.draw.rect(screen, (100, 200, 100), play_button_rect)
+            pygame.draw.rect(screen, (0, 0, 0), play_button_rect, 2)
+            play_text = game_font.render("play again", True, (0, 0, 0))
+            screen.blit(play_text, play_text.get_rect(center=play_button_rect.center))
+
+            pygame.draw.rect(screen, (180, 180, 255), tutorial_button_rect)
+            pygame.draw.rect(screen, (0, 0, 0), tutorial_button_rect, 2)
+            tutorial_text = game_font.render("view tutorial", True, (0, 0, 0))
+            screen.blit(tutorial_text, tutorial_text.get_rect(center=tutorial_button_rect.center))
+
+            pygame.display.update()
+
+            # ----- Event handling -----
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if play_button_rect.collidepoint(event.pos):
+                        return "play"
+                    elif tutorial_button_rect.collidepoint(event.pos):
+                        return "tutorial"
+
+
+
+
+with open(f"{current_dir}/proteins_db_copy.json") as f:
     PROTEINS = json.load(f)
 
 # Choose a random protein from the database
@@ -721,35 +852,25 @@ clock = pygame.time.Clock()
 game_font = pygame.font.Font(f"{current_dir}/Font/PoetsenOne-Regular.ttf", 25)
 title_font = pygame.font.Font(f"{current_dir}/Font/PoetsenOne-Regular.ttf", 30)
 highlight_font = pygame.font.Font(f"{current_dir}/Font/PoetsenOne-Regular.ttf", 28)
-emoji_check = pygame.image.load(
-    f"{current_dir}/Graphics/check_emoji.png"
-).convert_alpha()
-emoji_cross = pygame.image.load(
-    f"{current_dir}/Graphics/cross_emoji.png"
-).convert_alpha()
 
-emoji_checkmark = pygame.image.load(
-    f"{current_dir}/Graphics/checkmark.png"
-).convert_alpha()
-emoji_crossmark = pygame.image.load(
-    f"{current_dir}/Graphics/crossmark.png"
-).convert_alpha()
-
+emoji_check = pygame.image.load(f"{current_dir}/Graphics/check_emoji.png").convert_alpha()
+emoji_cross = pygame.image.load(f"{current_dir}/Graphics/cross_emoji.png").convert_alpha()
+emoji_trophy = pygame.image.load(f"{current_dir}/Graphics/trophy.png").convert_alpha()
+emoji_sadface = pygame.image.load(f"{current_dir}/Graphics/sadface.png").convert_alpha()
 emoji_snake = pygame.image.load(f"{current_dir}/Graphics/snake.png").convert_alpha()
 emoji_memo = pygame.image.load(f"{current_dir}/Graphics/memo.png").convert_alpha()
 emoji_warning = pygame.image.load(f"{current_dir}/Graphics/warning.png").convert_alpha()
-emoji_exclamation = pygame.image.load(
-    f"{current_dir}/Graphics/exclamation.png"
-).convert_alpha()
+emoji_exclamation = pygame.image.load(f"{current_dir}/Graphics/exclamation.png").convert_alpha()
 emoji_dna = pygame.image.load(f"{current_dir}/Graphics/dna.png").convert_alpha()
 emoji_stop = pygame.image.load(f"{current_dir}/Graphics/prohibited.png").convert_alpha()
 emoji_rocket = pygame.image.load(f"{current_dir}/Graphics/rocket.png").convert_alpha()
+emoji_gameover = pygame.image.load(f"{current_dir}/Graphics/game_over.png").convert_alpha()
 
 emoji_size = (30, 30)
 emoji_check = pygame.transform.smoothscale(emoji_check, emoji_size)
 emoji_cross = pygame.transform.smoothscale(emoji_cross, emoji_size)
-emoji_checkmark = pygame.transform.smoothscale(emoji_checkmark, emoji_size)
-emoji_crossmark = pygame.transform.smoothscale(emoji_crossmark, emoji_size)
+emoji_trophy = pygame.transform.smoothscale(emoji_trophy, emoji_size)
+emoji_sadface = pygame.transform.smoothscale(emoji_sadface, emoji_size)
 emoji_snake = pygame.transform.smoothscale(emoji_snake, emoji_size)
 emoji_memo = pygame.transform.smoothscale(emoji_memo, emoji_size)
 emoji_warning = pygame.transform.smoothscale(emoji_warning, emoji_size)
@@ -757,6 +878,7 @@ emoji_exclamation = pygame.transform.smoothscale(emoji_exclamation, emoji_size)
 emoji_dna = pygame.transform.smoothscale(emoji_dna, emoji_size)
 emoji_stop = pygame.transform.smoothscale(emoji_stop, emoji_size)
 emoji_rocket = pygame.transform.smoothscale(emoji_rocket, emoji_size)
+emoji_gameover = pygame.transform.smoothscale(emoji_gameover, emoji_size)
 
 header_icon_size = 35
 shapes = {
