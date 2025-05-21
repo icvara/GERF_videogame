@@ -947,7 +947,7 @@ while True:
     clock.tick(60)
 
 
-# improve final message window + add protein drawing
+# modify protein drawing
 # better name
 
 # add proteins to db??
