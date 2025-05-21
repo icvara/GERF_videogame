@@ -171,16 +171,19 @@ class MAIN:
         self.speed_floor = 50  # Fastest allowed speed
         self.codons_eaten = 0
         self.tutorial_shown = False
-        self.protein_fig = pygame.image.load(f"{current_dir}/Graphics/protein.jpg")
+        self.protein_correct = protein_correct
+        self.protein_misfolded = protein_misfolded
+        self.protein_inactive = protein_inactive
 
     def update(self):
         if not self.active:
             return
+        current_time = pygame.time.get_ticks()
         self.snake.move_snake()
         self.check_collision()
         self.check_fail()
-        self.check_codon_spawn()
-        self.remove_expired_codons()
+        self.check_codon_spawn(current_time)
+        self.remove_expired_codons(current_time)
 
     def draw_elements(self):
         self.draw_header()  # Draw header FIRST
@@ -189,8 +192,8 @@ class MAIN:
             codon.draw_codon()
         self.snake.draw_snake()
 
-    def check_codon_spawn(self):
-        if pygame.time.get_ticks() - self.last_codon_time >= random.randint(500, 1000):
+    def check_codon_spawn(self, current_time):
+        if current_time - self.last_codon_time >= random.randint(500, 1000):
             # Get occupied positions (by snake and existing codons)
             occupied_positions = set(
                 (int(codon.pos.x), int(codon.pos.y)) for codon in self.codons
@@ -206,7 +209,7 @@ class MAIN:
                 new_pos = (int(new_codon.pos.x), int(new_codon.pos.y))
                 if new_pos not in occupied_positions:
                     self.codons.append(new_codon)
-                    self.last_codon_time = pygame.time.get_ticks()
+                    self.last_codon_time = current_time
                     break
 
     def update_speed(self):
@@ -217,8 +220,7 @@ class MAIN:
             self.snake_speed = new_speed
             pygame.time.set_timer(SCREEN_UPDATE, self.snake_speed)
 
-    def remove_expired_codons(self):
-        current_time = pygame.time.get_ticks()
+    def remove_expired_codons(self, current_time):
         self.codons = [c for c in self.codons if not c.expired]
 
     def check_collision(self):
@@ -302,7 +304,7 @@ class MAIN:
                         message="Oh no!",
                         submessage="Your protein is inactive!",
                         emoji_img=emoji_sadface,
-                        figure_img=self.protein_fig
+                        figure_img=self.protein_inactive
                     )
                     
                     if choice == "tutorial":
@@ -324,7 +326,7 @@ class MAIN:
                 message="Oh no!",
                 submessage="Your protein cannot hold its shape and is misfolded!",
                 emoji_img=emoji_sadface,
-                figure_img=self.protein_fig
+                figure_img=self.protein_misfolded
             )
 
             if choice == "tutorial":
@@ -343,7 +345,7 @@ class MAIN:
             message="Congratulations!",
             submessage=f"You correctly synthesised {current_protein_name.upper()}!",
             emoji_img=emoji_trophy,
-            figure_img=self.protein_fig
+            figure_img=self.protein_correct
         )
 
         if choice == "tutorial":
@@ -815,6 +817,10 @@ emoji_dna = load_scaled(f"{current_dir}/Graphics/dna.png")
 emoji_stop = load_scaled(f"{current_dir}/Graphics/prohibited.png")
 emoji_rocket = load_scaled(f"{current_dir}/Graphics/rocket.png")
 emoji_gameover = load_scaled(f"{current_dir}/Graphics/game_over.png")
+
+protein_correct = pygame.image.load(f"{current_dir}/Graphics/protein.jpg")
+protein_misfolded = pygame.image.load(f"{current_dir}/Graphics/protein.jpg")
+protein_inactive = pygame.image.load(f"{current_dir}/Graphics/protein.jpg")
 
 header_icon_size = 35
 
