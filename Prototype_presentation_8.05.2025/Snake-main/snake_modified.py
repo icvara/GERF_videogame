@@ -10,6 +10,7 @@ current_file = Path(__file__)
 # Directory containing the file
 current_dir = current_file.parent
 
+
 class SNAKE:
     def __init__(self):
         self.body = [Vector2(5, 10), Vector2(4, 10)]
@@ -17,53 +18,26 @@ class SNAKE:
         self.codon_history = []
         self.new_block = False
 
-        self.head_up = pygame.image.load(
-            f"{current_dir}/Graphics/head_up.png"
-        ).convert_alpha()
-        self.head_down = pygame.image.load(
-            f"{current_dir}/Graphics/head_down.png"
-        ).convert_alpha()
-        self.head_right = pygame.image.load(
-            f"{current_dir}/Graphics/head_right.png"
-        ).convert_alpha()
-        self.head_left = pygame.image.load(
-            f"{current_dir}/Graphics/head_left.png"
-        ).convert_alpha()
+        self.head_up = SNAKE_PARTS["head"]["up"]
+        self.head_down = SNAKE_PARTS["head"]["down"]
+        self.head_right = SNAKE_PARTS["head"]["right"]
+        self.head_left = SNAKE_PARTS["head"]["left"]
 
-        self.tail_up = pygame.image.load(
-            f"{current_dir}/Graphics/tail_up.png"
-        ).convert_alpha()
-        self.tail_down = pygame.image.load(
-            f"{current_dir}/Graphics/tail_down.png"
-        ).convert_alpha()
-        self.tail_right = pygame.image.load(
-            f"{current_dir}/Graphics/tail_right.png"
-        ).convert_alpha()
-        self.tail_left = pygame.image.load(
-            f"{current_dir}/Graphics/tail_left.png"
-        ).convert_alpha()
+        self.tail_up = SNAKE_PARTS["tail"]["up"]
+        self.tail_down = SNAKE_PARTS["tail"]["down"]
+        self.tail_right = SNAKE_PARTS["tail"]["right"]
+        self.tail_left = SNAKE_PARTS["tail"]["left"]
 
-        self.body_vertical = pygame.image.load(
-            f"{current_dir}/Graphics/body_vertical.png"
-        ).convert_alpha()
-        self.body_horizontal = pygame.image.load(
-            f"{current_dir}/Graphics/body_horizontal.png"
-        ).convert_alpha()
+        self.body_vertical = SNAKE_PARTS["body"]["vertical"]
+        self.body_horizontal = SNAKE_PARTS["body"]["horizontal"]
 
-        self.body_tr = pygame.image.load(
-            f"{current_dir}/Graphics/body_tr.png"
-        ).convert_alpha()
-        self.body_tl = pygame.image.load(
-            f"{current_dir}/Graphics/body_tl.png"
-        ).convert_alpha()
-        self.body_br = pygame.image.load(
-            f"{current_dir}/Graphics/body_br.png"
-        ).convert_alpha()
-        self.body_bl = pygame.image.load(
-            f"{current_dir}/Graphics/body_bl.png"
-        ).convert_alpha()
-        self.right_sound = pygame.mixer.Sound(f"{current_dir}/Sound/right_codon.mp3")
-        self.wrong_sound = pygame.mixer.Sound(f"{current_dir}/Sound/wrong_codon.mp3")
+        self.body_tr = SNAKE_PARTS["body"]["tr"]
+        self.body_tl = SNAKE_PARTS["body"]["tl"]
+        self.body_br = SNAKE_PARTS["body"]["br"]
+        self.body_bl = SNAKE_PARTS["body"]["bl"]
+        
+        self.right_sound = right_sound
+        self.wrong_sound = wrong_sound
 
     def draw_snake(self):
         self.update_head_graphics()
@@ -86,34 +60,20 @@ class SNAKE:
                 elif previous_block.y == next_block.y:
                     screen.blit(self.body_horizontal, block_rect)
                 else:
-                    if (
-                        previous_block.x == -1
-                        and next_block.y == -1
-                        or previous_block.y == -1
-                        and next_block.x == -1
-                    ):
-                        screen.blit(self.body_tl, block_rect)
-                    elif (
-                        previous_block.x == -1
-                        and next_block.y == 1
-                        or previous_block.y == 1
-                        and next_block.x == -1
-                    ):
-                        screen.blit(self.body_bl, block_rect)
-                    elif (
-                        previous_block.x == 1
-                        and next_block.y == -1
-                        or previous_block.y == -1
-                        and next_block.x == 1
-                    ):
-                        screen.blit(self.body_tr, block_rect)
-                    elif (
-                        previous_block.x == 1
-                        and next_block.y == 1
-                        or previous_block.y == 1
-                        and next_block.x == 1
-                    ):
-                        screen.blit(self.body_br, block_rect)
+                    turn_lookup = {
+                        ((-1, 0), (0, -1)): self.body_tl,
+                        ((0, -1), (-1, 0)): self.body_tl,
+                        ((-1, 0), (0, 1)): self.body_bl,
+                        ((0, 1), (-1, 0)): self.body_bl,
+                        ((1, 0), (0, -1)): self.body_tr,
+                        ((0, -1), (1, 0)): self.body_tr,
+                        ((1, 0), (0, 1)): self.body_br,
+                        ((0, 1), (1, 0)): self.body_br,
+                    }
+                    key = (previous_block.x, previous_block.y), (next_block.x, next_block.y)
+                    sprite = turn_lookup.get(key)
+                    if sprite:
+                        screen.blit(sprite, block_rect)
 
     def update_head_graphics(self):
         head_relation = self.body[1] - self.body[0]
@@ -138,10 +98,11 @@ class SNAKE:
             self.tail = self.tail_down
 
     def move_snake(self):
-        if self.new_block == True:
-            body_copy = self.body[:]
-            body_copy.insert(0, body_copy[0] + self.direction)
-            self.body = body_copy[:]
+        if self.new_block:
+            new_head = self.body[0] + self.direction
+            self.body.insert(0, new_head)
+            if not self.new_block:
+                self.body.pop()
             self.new_block = False
         else:
             body_copy = self.body[:-1]
@@ -166,21 +127,8 @@ class SNAKE:
 class CODON:
     def __init__(self):
         self.types = ["c", "s", "q", "x", "f", "d"]
-        self.shapes = {
-            "c": "circle",
-            "s": "star",
-            "q": "square",
-            "x": "cross",
-            "f": "flower",
-            "d": "diamond",
-        }
-        self.images = {
-            codon: pygame.image.load(
-                f"{current_dir}/Graphics/{self.shapes[codon]}.png"
-            ).convert_alpha()
-            for codon in self.shapes
-        }
         self.current_type = None
+        self.images =  CODON_ICONS
         self.pos = None
         self.spawn_time = pygame.time.get_ticks()  # Track spawn time
         self.randomize()
@@ -193,6 +141,9 @@ class CODON:
         self.x = random.randint(0, cell_number_x - 1)
         self.y = random.randint(0, cell_number_y - 1)
         self.pos = Vector2(self.x, self.y)
+        
+        self.x_px = int(self.pos.x * cell_size)
+        self.y_px = int(self.pos.y * cell_size) + header_height
 
         # Favor spawning the next needed codon
         if random.random() < 0.55:  # 55% chance
@@ -201,14 +152,11 @@ class CODON:
             # Pick a random codon that is *not* the next needed one
             other_codons = [c for c in self.types if c != current_recipe[recipe_index]]
             self.current_type = random.choice(other_codons)
+        
+        self.img = self.images[self.current_type]
 
     def draw_codon(self):
-        x_px = int(self.pos.x * cell_size)
-        y_px = int(self.pos.y * cell_size) + header_height
-
-        img = self.images[self.current_type]
-
-        screen.blit(img, (x_px, y_px))
+        screen.blit(self.img, (self.x_px, self.y_px))
 
 
 class MAIN:
@@ -742,7 +690,6 @@ class MAIN:
                     elif tutorial_button_rect.collidepoint(event.pos):
                         return "tutorial"
 
-
     def show_gameover_popup(self, message, submessage, emoji_img=None):
         popup_width = 500
         popup_height = 250
@@ -853,49 +800,61 @@ game_font = pygame.font.Font(f"{current_dir}/Font/PoetsenOne-Regular.ttf", 25)
 title_font = pygame.font.Font(f"{current_dir}/Font/PoetsenOne-Regular.ttf", 30)
 highlight_font = pygame.font.Font(f"{current_dir}/Font/PoetsenOne-Regular.ttf", 28)
 
-emoji_check = pygame.image.load(f"{current_dir}/Graphics/check_emoji.png").convert_alpha()
-emoji_cross = pygame.image.load(f"{current_dir}/Graphics/cross_emoji.png").convert_alpha()
-emoji_trophy = pygame.image.load(f"{current_dir}/Graphics/trophy.png").convert_alpha()
-emoji_sadface = pygame.image.load(f"{current_dir}/Graphics/sadface.png").convert_alpha()
-emoji_snake = pygame.image.load(f"{current_dir}/Graphics/snake.png").convert_alpha()
-emoji_memo = pygame.image.load(f"{current_dir}/Graphics/memo.png").convert_alpha()
-emoji_warning = pygame.image.load(f"{current_dir}/Graphics/warning.png").convert_alpha()
-emoji_exclamation = pygame.image.load(f"{current_dir}/Graphics/exclamation.png").convert_alpha()
-emoji_dna = pygame.image.load(f"{current_dir}/Graphics/dna.png").convert_alpha()
-emoji_stop = pygame.image.load(f"{current_dir}/Graphics/prohibited.png").convert_alpha()
-emoji_rocket = pygame.image.load(f"{current_dir}/Graphics/rocket.png").convert_alpha()
-emoji_gameover = pygame.image.load(f"{current_dir}/Graphics/game_over.png").convert_alpha()
+def load_scaled(path, size = (30, 30)):
+    return pygame.transform.smoothscale(pygame.image.load(path).convert_alpha(), size)
 
-emoji_size = (30, 30)
-emoji_check = pygame.transform.smoothscale(emoji_check, emoji_size)
-emoji_cross = pygame.transform.smoothscale(emoji_cross, emoji_size)
-emoji_trophy = pygame.transform.smoothscale(emoji_trophy, emoji_size)
-emoji_sadface = pygame.transform.smoothscale(emoji_sadface, emoji_size)
-emoji_snake = pygame.transform.smoothscale(emoji_snake, emoji_size)
-emoji_memo = pygame.transform.smoothscale(emoji_memo, emoji_size)
-emoji_warning = pygame.transform.smoothscale(emoji_warning, emoji_size)
-emoji_exclamation = pygame.transform.smoothscale(emoji_exclamation, emoji_size)
-emoji_dna = pygame.transform.smoothscale(emoji_dna, emoji_size)
-emoji_stop = pygame.transform.smoothscale(emoji_stop, emoji_size)
-emoji_rocket = pygame.transform.smoothscale(emoji_rocket, emoji_size)
-emoji_gameover = pygame.transform.smoothscale(emoji_gameover, emoji_size)
+emoji_check = load_scaled(f"{current_dir}/Graphics/check_emoji.png")
+emoji_cross = load_scaled(f"{current_dir}/Graphics/cross_emoji.png")
+emoji_trophy = load_scaled(f"{current_dir}/Graphics/trophy.png")
+emoji_sadface = load_scaled(f"{current_dir}/Graphics/sadface.png")
+emoji_snake = load_scaled(f"{current_dir}/Graphics/snake.png")
+emoji_memo = load_scaled(f"{current_dir}/Graphics/memo.png")
+emoji_warning = load_scaled(f"{current_dir}/Graphics/warning.png")
+emoji_exclamation = load_scaled(f"{current_dir}/Graphics/exclamation.png")
+emoji_dna = load_scaled(f"{current_dir}/Graphics/dna.png")
+emoji_stop = load_scaled(f"{current_dir}/Graphics/prohibited.png")
+emoji_rocket = load_scaled(f"{current_dir}/Graphics/rocket.png")
+emoji_gameover = load_scaled(f"{current_dir}/Graphics/game_over.png")
 
 header_icon_size = 35
-shapes = {
-    "c": "circle",
-    "s": "star",
-    "q": "square",
-    "x": "cross",
-    "f": "flower",
-    "d": "diamond",
-}
+
 CODON_ICONS = {
-    codon: pygame.image.load(
-        f"{current_dir}/Graphics/{shapes[codon]}.png"
-    ).convert_alpha()
-    for codon in shapes
+    codon: pygame.image.load(f"{current_dir}/Graphics/{shape}.png").convert_alpha()
+    for codon, shape in {
+        "c": "circle",
+        "s": "star",
+        "q": "square",
+        "x": "cross",
+        "f": "flower",
+        "d": "diamond",
+    }.items()
 }
 
+SNAKE_PARTS = {
+    "head": {
+        "up": pygame.image.load(f"{current_dir}/Graphics/head_up.png").convert_alpha(),
+        "down": pygame.image.load(f"{current_dir}/Graphics/head_down.png").convert_alpha(),
+        "right": pygame.image.load(f"{current_dir}/Graphics/head_right.png").convert_alpha(),
+        "left": pygame.image.load(f"{current_dir}/Graphics/head_left.png").convert_alpha(),
+    },
+    "tail": {
+        "up": pygame.image.load(f"{current_dir}/Graphics/tail_up.png").convert_alpha(),
+        "down": pygame.image.load(f"{current_dir}/Graphics/tail_down.png").convert_alpha(),
+        "right": pygame.image.load(f"{current_dir}/Graphics/tail_right.png").convert_alpha(),
+        "left": pygame.image.load(f"{current_dir}/Graphics/tail_left.png").convert_alpha(),
+    },
+    "body": {
+        "vertical": pygame.image.load(f"{current_dir}/Graphics/body_vertical.png").convert_alpha(),
+        "horizontal": pygame.image.load(f"{current_dir}/Graphics/body_horizontal.png").convert_alpha(),
+        "tr": pygame.image.load(f"{current_dir}/Graphics/body_tr.png").convert_alpha(),
+        "tl": pygame.image.load(f"{current_dir}/Graphics/body_tl.png").convert_alpha(),
+        "br": pygame.image.load(f"{current_dir}/Graphics/body_br.png").convert_alpha(),
+        "bl": pygame.image.load(f"{current_dir}/Graphics/body_bl.png").convert_alpha(),
+    }
+}
+     
+right_sound = pygame.mixer.Sound(f"{current_dir}/Sound/right_codon.mp3")
+wrong_sound = pygame.mixer.Sound(f"{current_dir}/Sound/wrong_codon.mp3")
 success = pygame.mixer.Sound(f"{current_dir}/Sound/you_won.wav")
 failure = pygame.mixer.Sound(f"{current_dir}/Sound/you_lost.wav")
 
@@ -903,6 +862,13 @@ SCREEN_UPDATE = pygame.USEREVENT
 pygame.time.set_timer(SCREEN_UPDATE, 150)
 
 main_game = MAIN()
+
+key_to_direction = {
+    pygame.K_UP: Vector2(0, -1),
+    pygame.K_DOWN: Vector2(0, 1),
+    pygame.K_LEFT: Vector2(-1, 0),
+    pygame.K_RIGHT: Vector2(1, 0),
+}
 
 while True:
     if not main_game.tutorial_shown:
@@ -920,21 +886,10 @@ while True:
                 main_game.reset_game()
                 main_game.active = True
             else:
-                if event.key == pygame.K_UP:
-                    if main_game.snake.direction.y != 1:
-                        main_game.snake.direction = Vector2(0, -1)
-                        main_game.active = True
-                if event.key == pygame.K_RIGHT:
-                    if main_game.snake.direction.x != -1:
-                        main_game.snake.direction = Vector2(1, 0)
-                        main_game.active = True
-                if event.key == pygame.K_DOWN:
-                    if main_game.snake.direction.y != -1:
-                        main_game.snake.direction = Vector2(0, 1)
-                        main_game.active = True
-                if event.key == pygame.K_LEFT:
-                    if main_game.snake.direction.x != 1:
-                        main_game.snake.direction = Vector2(-1, 0)
+                if event.key in key_to_direction:
+                    new_dir = key_to_direction[event.key]
+                    if new_dir + main_game.snake.direction != Vector2(0, 0):  # Prevent reversal
+                        main_game.snake.direction = new_dir
                         main_game.active = True
 
     screen.fill((223, 218, 196))
