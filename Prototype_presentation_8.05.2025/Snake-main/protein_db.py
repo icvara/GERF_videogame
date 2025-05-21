@@ -11,7 +11,7 @@ current_file = Path(__file__)
 current_dir = current_file.parent
 
 letters = ["c", "s", "q", "x", "f", "d"]
-length = random.randint(15, 30)
+length = random.randint(10, 20)
 
 proteins = [
   {
@@ -78,3 +78,6 @@ proteins = [
 
 with open(f"{current_dir}/proteins_db.json", "w") as f:
     json.dump(proteins, f, indent=4)
+
+with open(f"{current_dir}/proteins_db_short.json", "w") as f:
+    json.dump(proteins[:3], f, indent=4)

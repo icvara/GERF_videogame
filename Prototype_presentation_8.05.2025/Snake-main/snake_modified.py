@@ -223,7 +223,7 @@ class MAIN:
         self.speed_floor = 50  # Fastest allowed speed
         self.codons_eaten = 0
         self.tutorial_shown = False
-        self.protein_fig = pygame.image.load(f"{current_dir}/Graphics/protein.png")
+        self.protein_fig = pygame.image.load(f"{current_dir}/Graphics/protein.jpg")
 
     def update(self):
         if not self.active:
@@ -691,11 +691,11 @@ class MAIN:
 
             # Image and description area
             text_top = sub_rect.bottom + 30
-            padding = 10
+            padding = 40
 
             if figure_img:
                 original_width, original_height = figure_img.get_size()
-                scale_factor = 0.25 # 20% of original size
+                scale_factor = 0.30 # 20% of original size
                 new_size = (int(original_width * scale_factor), int(original_height * scale_factor))
                 fig_scaled = pygame.transform.smoothscale(figure_img, new_size)
                 fig_rect = fig_scaled.get_rect(topleft=(popup_x + padding, text_top))
@@ -822,7 +822,7 @@ class MAIN:
 
 
 
-with open(f"{current_dir}/proteins_db_copy.json") as f:
+with open(f"{current_dir}/proteins_db_short.json") as f:
     PROTEINS = json.load(f)
 
 # Choose a random protein from the database
