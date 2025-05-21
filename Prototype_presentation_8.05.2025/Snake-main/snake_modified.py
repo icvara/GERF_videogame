@@ -35,7 +35,7 @@ class SNAKE:
         self.body_tl = SNAKE_PARTS["body"]["tl"]
         self.body_br = SNAKE_PARTS["body"]["br"]
         self.body_bl = SNAKE_PARTS["body"]["bl"]
-        
+
         self.right_sound = right_sound
         self.wrong_sound = wrong_sound
 
@@ -70,7 +70,10 @@ class SNAKE:
                         ((1, 0), (0, 1)): self.body_br,
                         ((0, 1), (1, 0)): self.body_br,
                     }
-                    key = (previous_block.x, previous_block.y), (next_block.x, next_block.y)
+                    key = (previous_block.x, previous_block.y), (
+                        next_block.x,
+                        next_block.y,
+                    )
                     sprite = turn_lookup.get(key)
                     if sprite:
                         screen.blit(sprite, block_rect)
@@ -128,7 +131,7 @@ class CODON:
     def __init__(self):
         self.types = ["c", "s", "q", "x", "f", "d"]
         self.current_type = None
-        self.images =  CODON_ICONS
+        self.images = CODON_ICONS
         self.pos = None
         self.spawn_time = pygame.time.get_ticks()  # Track spawn time
         self.randomize()
@@ -141,7 +144,7 @@ class CODON:
         self.x = random.randint(0, cell_number_x - 1)
         self.y = random.randint(0, cell_number_y - 1)
         self.pos = Vector2(self.x, self.y)
-        
+
         self.x_px = int(self.pos.x * cell_size)
         self.y_px = int(self.pos.y * cell_size) + header_height
 
@@ -152,7 +155,7 @@ class CODON:
             # Pick a random codon that is *not* the next needed one
             other_codons = [c for c in self.types if c != current_recipe[recipe_index]]
             self.current_type = random.choice(other_codons)
-        
+
         self.img = self.images[self.current_type]
 
     def draw_codon(self):
@@ -275,7 +278,7 @@ class MAIN:
         self.draw_header()
         pygame.display.update()
         self.active = False
-        
+
     def game_over(self):
         if self.game_over_reason:
             failure.play()
@@ -288,30 +291,34 @@ class MAIN:
                 self.reset_game()
                 self.show_tutorial()
                 return  # Exit early so reset_game is NOT called
-            
+
         self.reset_game()
-        
+
     def protein_complete(self):
         errors = 0
-        for i, (expected, actual) in enumerate(zip(current_recipe, self.snake.codon_history)):
+        for i, (expected, actual) in enumerate(
+            zip(current_recipe, self.snake.codon_history)
+        ):
             if expected != actual:
                 errors += 1
                 if i in active_sites:
                     time.sleep(1)
                     failure.play()
-                    self.last_description = "One or more wrong codons found in the active site."
+                    self.last_description = (
+                        "One or more wrong codons found in the active site."
+                    )
                     choice = self.show_final_popup(
                         message="Oh no!",
                         submessage="Your protein is inactive!",
                         emoji_img=emoji_sadface,
-                        figure_img=self.protein_inactive
+                        figure_img=self.protein_inactive,
                     )
-                    
+
                     if choice == "tutorial":
                         self.reset_game()
                         self.show_tutorial()
                         return
-                    
+
                     self.reset_game()
                     return
 
@@ -326,7 +333,7 @@ class MAIN:
                 message="Oh no!",
                 submessage="Your protein cannot hold its shape and is misfolded!",
                 emoji_img=emoji_sadface,
-                figure_img=self.protein_misfolded
+                figure_img=self.protein_misfolded,
             )
 
             if choice == "tutorial":
@@ -337,7 +344,9 @@ class MAIN:
             self.reset_game()
             return
 
-        description = current_protein_data.get("description", "No description available.")
+        description = current_protein_data.get(
+            "description", "No description available."
+        )
         time.sleep(1)
         success.play()
         self.last_description = description
@@ -345,7 +354,7 @@ class MAIN:
             message="Congratulations!",
             submessage=f"You correctly synthesised {current_protein_name.upper()}!",
             emoji_img=emoji_trophy,
-            figure_img=self.protein_correct
+            figure_img=self.protein_correct,
         )
 
         if choice == "tutorial":
@@ -398,9 +407,18 @@ class MAIN:
             ("", None),
             ("Collect codons by guiding the snake over them.", emoji_snake),
             ("Follow the recipe displayed at the top carefully.", emoji_memo),
-            ("Incorrect codons can cause the protein to misfold and be inactive.", emoji_warning),
-            ("Codons in the active site (highlighted by a red rectangle) are the most important!", emoji_exclamation),
-            ("Each codon collected makes the snake grow longer and move faster.", emoji_rocket),
+            (
+                "Incorrect codons can cause the protein to misfold and be inactive.",
+                emoji_warning,
+            ),
+            (
+                "Codons in the active site (highlighted by a red rectangle) are the most important!",
+                emoji_exclamation,
+            ),
+            (
+                "Each codon collected makes the snake grow longer and move faster.",
+                emoji_rocket,
+            ),
             ("Avoid crashing into walls or running into yourself.", emoji_stop),
             ("", None),
             ("Good luck building a functional food protein!", emoji_dna),
@@ -585,7 +603,7 @@ class MAIN:
         if current_line:
             lines.append(current_line.strip())
         return lines
-    
+
     def show_final_popup(self, message, submessage, emoji_img=None, figure_img=None):
         popup_width = 800
         popup_height = 480
@@ -615,8 +633,12 @@ class MAIN:
 
         while True:
             # Draw popup background
-            pygame.draw.rect(screen, (255, 255, 255), (popup_x, popup_y, popup_width, popup_height))
-            pygame.draw.rect(screen, (0, 0, 0), (popup_x, popup_y, popup_width, popup_height), 4)
+            pygame.draw.rect(
+                screen, (255, 255, 255), (popup_x, popup_y, popup_width, popup_height)
+            )
+            pygame.draw.rect(
+                screen, (0, 0, 0), (popup_x, popup_y, popup_width, popup_height), 4
+            )
 
             # Title row: emoji + message (centered as a line)
             title_surf = title_font.render(message, True, (0, 0, 0))
@@ -627,16 +649,22 @@ class MAIN:
                 start_x = popup_x + (popup_width - total_width) // 2
 
                 emoji_rect.topleft = (start_x, popup_y + 30)
-                title_rect = title_surf.get_rect(midleft=(emoji_rect.right + 10, emoji_rect.centery))
+                title_rect = title_surf.get_rect(
+                    midleft=(emoji_rect.right + 10, emoji_rect.centery)
+                )
                 screen.blit(emoji_img, emoji_rect)
                 screen.blit(title_surf, title_rect)
             else:
-                title_rect = title_surf.get_rect(center=(popup_x + popup_width // 2, popup_y + 40))
+                title_rect = title_surf.get_rect(
+                    center=(popup_x + popup_width // 2, popup_y + 40)
+                )
                 screen.blit(title_surf, title_rect)
 
             # Second line: subheadline (centered)
             sub_surf = highlight_font.render(submessage, True, (80, 80, 80))
-            sub_rect = sub_surf.get_rect(center=(popup_x + popup_width // 2, title_rect.bottom + 30))
+            sub_rect = sub_surf.get_rect(
+                center=(popup_x + popup_width // 2, title_rect.bottom + 30)
+            )
             screen.blit(sub_surf, sub_rect)
 
             # Image and description area
@@ -645,8 +673,11 @@ class MAIN:
 
             if figure_img:
                 original_width, original_height = figure_img.get_size()
-                scale_factor = 0.20 # 20% of original size
-                new_size = (int(original_width * scale_factor), int(original_height * scale_factor))
+                scale_factor = 0.20  # 20% of original size
+                new_size = (
+                    int(original_width * scale_factor),
+                    int(original_height * scale_factor),
+                )
                 fig_scaled = pygame.transform.smoothscale(figure_img, new_size)
                 fig_rect = fig_scaled.get_rect(topleft=(popup_x + padding, text_top))
                 screen.blit(fig_scaled, fig_rect)
@@ -677,7 +708,10 @@ class MAIN:
             pygame.draw.rect(screen, (180, 180, 255), tutorial_button_rect)
             pygame.draw.rect(screen, (0, 0, 0), tutorial_button_rect, 2)
             tutorial_text = game_font.render("view tutorial", True, (0, 0, 0))
-            screen.blit(tutorial_text, tutorial_text.get_rect(center=tutorial_button_rect.center))
+            screen.blit(
+                tutorial_text,
+                tutorial_text.get_rect(center=tutorial_button_rect.center),
+            )
 
             pygame.display.update()
 
@@ -710,13 +744,20 @@ class MAIN:
 
         # "Tutorial" button
         tutorial_button_rect = pygame.Rect(
-            popup_x + popup_width - 40 - button_width, button_y, button_width, button_height
+            popup_x + popup_width - 40 - button_width,
+            button_y,
+            button_width,
+            button_height,
         )
 
         while True:
             # Draw popup background
-            pygame.draw.rect(screen, (255, 255, 255), (popup_x, popup_y, popup_width, popup_height))
-            pygame.draw.rect(screen, (0, 0, 0), (popup_x, popup_y, popup_width, popup_height), 4)
+            pygame.draw.rect(
+                screen, (255, 255, 255), (popup_x, popup_y, popup_width, popup_height)
+            )
+            pygame.draw.rect(
+                screen, (0, 0, 0), (popup_x, popup_y, popup_width, popup_height), 4
+            )
 
             # ----- Title line with emoji -----
             title_surf = title_font.render(message, True, (0, 0, 0))
@@ -730,18 +771,26 @@ class MAIN:
                 # Draw emoji and title text side-by-side
                 emoji_rect = emoji_img.get_rect(topleft=(x_start, y_header))
                 screen.blit(emoji_img, emoji_rect)
-                screen.blit(title_surf, (x_start + emoji_img.get_width() + gap, y_header))
+                screen.blit(
+                    title_surf, (x_start + emoji_img.get_width() + gap, y_header)
+                )
             else:
-                title_rect = title_surf.get_rect(center=(popup_x + popup_width // 2, y_header))
+                title_rect = title_surf.get_rect(
+                    center=(popup_x + popup_width // 2, y_header)
+                )
                 screen.blit(title_surf, title_rect)
 
             # ----- Submessage (reason), centered -----
-            y_offset = y_header + title_surf.get_height() + 50  # Extra spacing below title
+            y_offset = (
+                y_header + title_surf.get_height() + 50
+            )  # Extra spacing below title
             wrapped_lines = self.wrap_text(submessage, game_font, popup_width - 80)
 
             for i, line in enumerate(wrapped_lines):
                 line_surf = game_font.render(line, True, (50, 50, 50))
-                line_rect = line_surf.get_rect(center=(popup_x + popup_width // 2, y_offset + i * 30))
+                line_rect = line_surf.get_rect(
+                    center=(popup_x + popup_width // 2, y_offset + i * 30)
+                )
                 screen.blit(line_surf, line_rect)
 
             # ----- Buttons -----
@@ -753,7 +802,10 @@ class MAIN:
             pygame.draw.rect(screen, (180, 180, 255), tutorial_button_rect)
             pygame.draw.rect(screen, (0, 0, 0), tutorial_button_rect, 2)
             tutorial_text = game_font.render("view tutorial", True, (0, 0, 0))
-            screen.blit(tutorial_text, tutorial_text.get_rect(center=tutorial_button_rect.center))
+            screen.blit(
+                tutorial_text,
+                tutorial_text.get_rect(center=tutorial_button_rect.center),
+            )
 
             pygame.display.update()
 
@@ -800,8 +852,10 @@ game_font = pygame.font.Font(f"{current_dir}/Font/PoetsenOne-Regular.ttf", 25)
 title_font = pygame.font.Font(f"{current_dir}/Font/PoetsenOne-Regular.ttf", 30)
 highlight_font = pygame.font.Font(f"{current_dir}/Font/PoetsenOne-Regular.ttf", 28)
 
-def load_scaled(path, size = (30, 30)):
+
+def load_scaled(path, size=(30, 30)):
     return pygame.transform.smoothscale(pygame.image.load(path).convert_alpha(), size)
+
 
 emoji_check = load_scaled(f"{current_dir}/Graphics/check_emoji.png")
 emoji_cross = load_scaled(f"{current_dir}/Graphics/cross_emoji.png")
@@ -837,26 +891,42 @@ CODON_ICONS = {
 SNAKE_PARTS = {
     "head": {
         "up": pygame.image.load(f"{current_dir}/Graphics/head_up.png").convert_alpha(),
-        "down": pygame.image.load(f"{current_dir}/Graphics/head_down.png").convert_alpha(),
-        "right": pygame.image.load(f"{current_dir}/Graphics/head_right.png").convert_alpha(),
-        "left": pygame.image.load(f"{current_dir}/Graphics/head_left.png").convert_alpha(),
+        "down": pygame.image.load(
+            f"{current_dir}/Graphics/head_down.png"
+        ).convert_alpha(),
+        "right": pygame.image.load(
+            f"{current_dir}/Graphics/head_right.png"
+        ).convert_alpha(),
+        "left": pygame.image.load(
+            f"{current_dir}/Graphics/head_left.png"
+        ).convert_alpha(),
     },
     "tail": {
         "up": pygame.image.load(f"{current_dir}/Graphics/tail_up.png").convert_alpha(),
-        "down": pygame.image.load(f"{current_dir}/Graphics/tail_down.png").convert_alpha(),
-        "right": pygame.image.load(f"{current_dir}/Graphics/tail_right.png").convert_alpha(),
-        "left": pygame.image.load(f"{current_dir}/Graphics/tail_left.png").convert_alpha(),
+        "down": pygame.image.load(
+            f"{current_dir}/Graphics/tail_down.png"
+        ).convert_alpha(),
+        "right": pygame.image.load(
+            f"{current_dir}/Graphics/tail_right.png"
+        ).convert_alpha(),
+        "left": pygame.image.load(
+            f"{current_dir}/Graphics/tail_left.png"
+        ).convert_alpha(),
     },
     "body": {
-        "vertical": pygame.image.load(f"{current_dir}/Graphics/body_vertical.png").convert_alpha(),
-        "horizontal": pygame.image.load(f"{current_dir}/Graphics/body_horizontal.png").convert_alpha(),
+        "vertical": pygame.image.load(
+            f"{current_dir}/Graphics/body_vertical.png"
+        ).convert_alpha(),
+        "horizontal": pygame.image.load(
+            f"{current_dir}/Graphics/body_horizontal.png"
+        ).convert_alpha(),
         "tr": pygame.image.load(f"{current_dir}/Graphics/body_tr.png").convert_alpha(),
         "tl": pygame.image.load(f"{current_dir}/Graphics/body_tl.png").convert_alpha(),
         "br": pygame.image.load(f"{current_dir}/Graphics/body_br.png").convert_alpha(),
         "bl": pygame.image.load(f"{current_dir}/Graphics/body_bl.png").convert_alpha(),
-    }
+    },
 }
-     
+
 right_sound = pygame.mixer.Sound(f"{current_dir}/Sound/right_codon.mp3")
 wrong_sound = pygame.mixer.Sound(f"{current_dir}/Sound/wrong_codon.mp3")
 success = pygame.mixer.Sound(f"{current_dir}/Sound/you_won.wav")
@@ -892,7 +962,9 @@ while True:
             else:
                 if event.key in key_to_direction:
                     new_dir = key_to_direction[event.key]
-                    if new_dir + main_game.snake.direction != Vector2(0, 0):  # Prevent reversal
+                    if new_dir + main_game.snake.direction != Vector2(
+                        0, 0
+                    ):  # Prevent reversal
                         main_game.snake.direction = new_dir
                         main_game.active = True
 
