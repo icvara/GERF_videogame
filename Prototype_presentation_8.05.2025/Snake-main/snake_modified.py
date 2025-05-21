@@ -162,7 +162,7 @@ class CODON:
 class MAIN:
     def __init__(self):
         self.snake = SNAKE()
-        self.codons = [CODON() for _ in range(5)]  # 5 codons on screen
+        self.codons = [CODON() for _ in range(1)]  # 0 codons on screen
         self.last_codon_time = pygame.time.get_ticks()
         self.active = False  # Game starts paused
         self.game_over_reason = None
@@ -641,11 +641,11 @@ class MAIN:
 
             # Image and description area
             text_top = sub_rect.bottom + 30
-            padding = 40
+            padding = 30
 
             if figure_img:
                 original_width, original_height = figure_img.get_size()
-                scale_factor = 0.30 # 20% of original size
+                scale_factor = 0.20 # 20% of original size
                 new_size = (int(original_width * scale_factor), int(original_height * scale_factor))
                 fig_scaled = pygame.transform.smoothscale(figure_img, new_size)
                 fig_rect = fig_scaled.get_rect(topleft=(popup_x + padding, text_top))
@@ -769,8 +769,6 @@ class MAIN:
                         return "tutorial"
 
 
-
-
 with open(f"{current_dir}/proteins_db_short.json") as f:
     PROTEINS = json.load(f)
 
@@ -818,9 +816,9 @@ emoji_stop = load_scaled(f"{current_dir}/Graphics/prohibited.png")
 emoji_rocket = load_scaled(f"{current_dir}/Graphics/rocket.png")
 emoji_gameover = load_scaled(f"{current_dir}/Graphics/game_over.png")
 
-protein_correct = pygame.image.load(f"{current_dir}/Graphics/protein.jpg")
-protein_misfolded = pygame.image.load(f"{current_dir}/Graphics/protein.jpg")
-protein_inactive = pygame.image.load(f"{current_dir}/Graphics/protein.jpg")
+protein_correct = pygame.image.load(f"{current_dir}/Graphics/protein_correct.png")
+protein_misfolded = pygame.image.load(f"{current_dir}/Graphics/protein_misfolded.png")
+protein_inactive = pygame.image.load(f"{current_dir}/Graphics/protein_inactive.png")
 
 header_icon_size = 35
 
