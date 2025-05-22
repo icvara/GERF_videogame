@@ -821,7 +821,7 @@ class MAIN:
                         return "tutorial"
 
 
-with open(f"{current_dir}/proteins_db_short.json") as f:
+with open(f"{current_dir}/proteins_db.json") as f:
     PROTEINS = json.load(f)
 
 # Choose a random protein from the database
