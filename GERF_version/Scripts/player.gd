@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var SPEED = 50
+var SPEED = 500
 var interacting_with
 var interacting_with_workstation
 var inventory

@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://c8l5nefbp1vib"
-path="res://.godot/imported/PoetsenOne-Regular.ttf-ded70428d3337f020d3f45ed14c42423.fontdata"
+path="res://.godot/imported/PoetsenOne-Regular.ttf-570e5dad7d1af4f1cf378c6de1bccc57.fontdata"
 
 [deps]
 
-source_file="res://Snake-main/Font/PoetsenOne-Regular.ttf"
-dest_files=["res://.godot/imported/PoetsenOne-Regular.ttf-ded70428d3337f020d3f45ed14c42423.fontdata"]
+source_file="res://Prototype_presentation_8.05.2025/Snake-main/Font/PoetsenOne-Regular.ttf"
+dest_files=["res://.godot/imported/PoetsenOne-Regular.ttf-570e5dad7d1af4f1cf378c6de1bccc57.fontdata"]
 
 [params]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=27 format=4 uid="uid://depa7m1etxn40"]
 
-[ext_resource type="Script" uid="uid://udpwraov6f2i" path="res://Prototype_presentation_8.05.2025/overlab/main_overlab.gd" id="1_ie725"]
+[ext_resource type="Script" uid="uid://udpwraov6f2i" path="res://GERF_version/Scripts/main_overlab.gd" id="1_ie725"]
 [ext_resource type="PackedScene" uid="uid://cf6mcq38lapcb" path="res://Prototype_presentation_8.05.2025/overlab/item.tscn" id="2_hpguq"]
 [ext_resource type="PackedScene" uid="uid://bi1v36qu4r7la" path="res://Prototype_presentation_8.05.2025/overlab/player.tscn" id="3_asu0b"]
 [ext_resource type="Texture2D" uid="uid://d5t833l5vfpy" path="res://Prototype_presentation_8.05.2025/overlab/asset/16px/tilesFloor.png" id="4_65pam"]

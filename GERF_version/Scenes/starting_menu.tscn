@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dim2iyppu8yd8"]
+[gd_scene load_steps=3 format=3 uid="uid://dim2iyppu8yd8"]
 
 [ext_resource type="Script" uid="uid://dhnusnluxusf5" path="res://GERF_version/Scripts/starting_menu.gd" id="1_tfirb"]
+[ext_resource type="Script" uid="uid://bgg0at8pecbww" path="res://GERF_version/Scripts/scoreboard.gd" id="2_yuayt"]
 
 [node name="starting_menu" type="Control"]
 layout_mode = 3
@@ -29,7 +30,7 @@ offset_left = -92.0
 offset_right = 92.0
 offset_bottom = 32.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 24
 text = "Name of the Game!"
 horizontal_alignment = 1
 
@@ -69,9 +70,64 @@ offset_left = 1.0
 offset_top = 37.0
 offset_right = 319.0
 offset_bottom = 66.0
-text = "Coperate with your friends/partner/others to build
+text = "Cooperate with your friends/partner/others to build
  world saving bioengineered solutions"
 horizontal_alignment = 1
+
+[node name="Scoreboard" type="VBoxContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.035
+anchor_bottom = 0.031
+offset_left = 818.0
+offset_top = 196.0
+offset_right = 817.68
+offset_bottom = 215.912
+script = ExtResource("2_yuayt")
+
+[node name="label" type="Label" parent="ColorRect/Scoreboard"]
+layout_mode = 2
+text = "Scoreboard"
+
+[node name="1" type="Label" parent="ColorRect/Scoreboard"]
+layout_mode = 2
+text = "1. EMPTY: 0000 "
+
+[node name="2" type="Label" parent="ColorRect/Scoreboard"]
+layout_mode = 2
+text = "2. EMPTY: 0000 "
+
+[node name="3" type="Label" parent="ColorRect/Scoreboard"]
+layout_mode = 2
+text = "3. EMPTY: 0000 "
+
+[node name="4" type="Label" parent="ColorRect/Scoreboard"]
+layout_mode = 2
+text = "4. EMPTY: 0000 "
+
+[node name="5" type="Label" parent="ColorRect/Scoreboard"]
+layout_mode = 2
+text = "5. EMPTY: 0000 "
+
+[node name="6" type="Label" parent="ColorRect/Scoreboard"]
+layout_mode = 2
+text = "6. EMPTY: 0000 "
+
+[node name="7" type="Label" parent="ColorRect/Scoreboard"]
+layout_mode = 2
+text = "7. EMPTY: 0000 "
+
+[node name="8" type="Label" parent="ColorRect/Scoreboard"]
+layout_mode = 2
+text = "8. EMPTY: 0000 "
+
+[node name="9" type="Label" parent="ColorRect/Scoreboard"]
+layout_mode = 2
+text = "9. EMPTY: 0000 "
+
+[node name="10" type="Label" parent="ColorRect/Scoreboard"]
+layout_mode = 2
+text = "10. EMPTY: 0000 "
 
 [connection signal="pressed" from="ColorRect/VBoxContainer/1" to="." method="_on_1_pressed"]
 [connection signal="pressed" from="ColorRect/VBoxContainer/2" to="." method="_on_2_pressed"]
