@@ -1,6 +1,6 @@
 extends Control
 
-var maxplayer = 2
+var maxplayer = 4
 
 func _on_r_pressed() -> void:
 	GlobalVariableOverlab.nplayer = clamp (GlobalVariableOverlab.nplayer+1,1,maxplayer)
@@ -16,8 +16,4 @@ func _on_l_pressed() -> void:
 
 
 func _on_buttonstart_pressed() -> void:
-	get_tree().change_scene_to_file("res://GERF_version/Scenes/main_overlab.tscn")
-
-
-func _on_buttontuto_pressed():
-	get_tree().change_scene_to_file("res://GERF_version/Scenes/tuto_control.tscn")
+	get_tree().change_scene_to_file("res://GERF_version/Scenes/story.tscn")

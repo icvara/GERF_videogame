@@ -24,11 +24,12 @@ func _on_button_2_pressed():
 	get_tree().reload_current_scene()
 	
 
-func _on_button_4_pressed():
+func _on_button_3_pressed():
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://GERF_version/Scenes/starting_menu.tscn") 
+	get_tree().change_scene_to_file("res://Prototype_presentation_8.05.2025/start_menu.tscn") 
 
-	#get_tree().quit()
+func _on_button_4_pressed():
+	get_tree().quit()
 	
 
 	

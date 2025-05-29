@@ -1,8 +1,11 @@
 extends Control
 
+func call_window():
+	show()
+	get_tree().paused = true
+
 
 func _on_button_pressed():
-	get_tree().change_scene_to_file("res://GERF_version/Scenes/tuto_A.tscn")
-
-	#go to next when pressing button
-	pass # Replace with function body.
+	get_tree().paused = false
+	hide()
+	

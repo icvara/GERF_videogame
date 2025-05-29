@@ -97,29 +97,32 @@ script = ExtResource("1_g1rkv")
 
 [node name="L" type="Button" parent="."]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = -61.0
+offset_top = -17.0
+offset_right = -44.0
+offset_bottom = 12.0
 text = "<"
 
 [node name="R" type="Button" parent="."]
 layout_mode = 0
-offset_left = 31.0
-offset_top = 1.0
-offset_right = 43.0
-offset_bottom = 22.0
+offset_left = 56.0
+offset_top = -17.0
+offset_right = 73.0
+offset_bottom = 12.0
 text = ">"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(22, 2)
+position = Vector2(1, -17)
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_u1hik")
 animation = &"2"
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 4.0
-offset_top = 27.0
-offset_right = 44.0
-offset_bottom = 40.0
+offset_left = -37.0
+offset_top = 40.0
+offset_right = 48.0
+offset_bottom = 61.0
 text = "Player X"
 
 [connection signal="pressed" from="L" to="." method="_on_l_pressed"]
