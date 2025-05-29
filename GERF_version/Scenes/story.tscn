@@ -283,7 +283,7 @@ color = Color(0.321905, 0.398754, 0.58863, 1)
 position = Vector2(156, 264)
 sprite_frames = SubResource("SpriteFrames_mokuj")
 autoplay = "default"
-frame_progress = 0.0161172
+frame_progress = 0.421051
 
 [node name="PlayerSprite" type="Control" parent="."]
 layout_mode = 3

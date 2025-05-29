@@ -331,6 +331,7 @@ size = Vector2(16, 22)
 radius = 19.0
 
 [node name="player" type="CharacterBody2D"]
+scale = Vector2(2, 2)
 motion_mode = 1
 script = ExtResource("1_do4mp")
 

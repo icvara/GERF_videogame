@@ -3,17 +3,12 @@ extends VBoxContainer
 var path = "res://GERF_version/savefile/save_score.s"
 var score_list = {}
 func _ready() -> void:
-	reset_score()
-	save_score("test1",10)
-	save_score("test2",200)
-	save_score("test3",50)
-	save_score("test4",10000)
+	#reset_score()
+	
 
 	write_scoreboard()	
 
-func save_to_file(content,path):
-	var file = FileAccess.open(path, FileAccess.WRITE)
-	file.store_string(content)
+
 
 func load_from_file(path):
 	var file = FileAccess.open(path, FileAccess.READ)
@@ -28,7 +23,9 @@ func load_score():
 		var line = score.split(";")[i]
 		score_list[line.split(":")[0]] = int(line.split(":")[1])
 
-
+func save_to_file(content,path):
+	var file = FileAccess.open(path, FileAccess.WRITE)
+	file.store_string(content)
 
 func save_score(name,finalscore):
 	#var name = "Rodrigo"

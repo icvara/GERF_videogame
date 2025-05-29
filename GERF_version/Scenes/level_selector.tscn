@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bmb046wxm4dwv"]
+[gd_scene load_steps=39 format=3 uid="uid://bmb046wxm4dwv"]
 
 [ext_resource type="Script" uid="uid://b1i5r1u1ktdeh" path="res://GERF_version/Scripts/level_selector.gd" id="1_wqmym"]
 [ext_resource type="PackedScene" uid="uid://b8edkh57hgfcf" path="res://GERF_version/Scenes/player.tscn" id="2_67mh6"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ew4cs3o4boh4" path="res://GERF_version/Scenes/pause_menu.tscn" id="3_67mh6"]
 [ext_resource type="Texture2D" uid="uid://bbhvvbeectp53" path="res://GERF_version/Asset/graphic/WKRrf_.png" id="5_67mh6"]
 [ext_resource type="PackedScene" uid="uid://yal365f56m32" path="res://GERF_version/Scenes/level_object.tscn" id="5_bhse7"]
+[ext_resource type="PackedScene" uid="uid://c0w2asl2w8djv" path="res://GERF_version/Scenes/level_easy.tscn" id="5_d247x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b68ub"]
 atlas = ExtResource("5_67mh6")
@@ -252,6 +253,7 @@ frame_progress = 0.0807696
 
 [node name="level_object" parent="." instance=ExtResource("5_bhse7")]
 position = Vector2(705, 301)
+level = ExtResource("5_d247x")
 
 [node name="startposplayer" type="Control" parent="."]
 layout_mode = 1

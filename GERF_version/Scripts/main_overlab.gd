@@ -12,8 +12,8 @@ func _ready() -> void:
 		var newplay = player.instantiate()
 		newplay.setskin(GlobalVariableOverlab.playerskin[i])
 		newplay.playerID = i
-		newplay.position = Vector2(260,50) + Vector2(-(320-40)/2,(180-40)/2) * init_posvector[i]
-		add_child(newplay)
+		#newplay.position = 
+		$player_startpos.get_node(str(i)).add_child(newplay)
 		
 func _process(delta: float) -> void:
 	$CanvasLayer/Panel/timelabel.text = "Time Left: " + str(int($GameTimer.time_left)) + "s"
