@@ -24,16 +24,26 @@ func Use(player):
 				player.inventory.Transfer(player)
 		
 				number_item += 1
+		else:
+			player.displaymsg("Wrong Item!")
+			
 	elif player.inventory == null and number_item == 2:
 		$Timer.start()
 		$ProgressBar.show()
 	
 	
-	elif player.inventory == null and task_finshed:
-		if added_item:
-			added_item.PickUP(player)
-			added_item = null
-			task_finshed = false
+	elif task_finshed:
+		if player.inventory == null:
+			var new_item = item.instantiate()
+			#new_item.item_ID = "Cell"
+			get_parent().get_parent().add_child(new_item)
+			new_item.PickUP(player)
+			$Panel.get_node("mCell").hide()
+			$Panel.hide()
+
+		else:
+			player.displaymsg("hands full")
+	
 
 func add_in_queue(item_ID):
 	$Panel.show()
@@ -49,7 +59,6 @@ func queue_finish():
 func _on_timer_timeout() -> void:
 	$ProgressBar.value += 1
 	if $ProgressBar.value == 10:
-		task_finshed = true
 		$Timer.stop()
 		$ProgressBar.hide()
 		$ProgressBar.value = 0
@@ -58,9 +67,12 @@ func _on_timer_timeout() -> void:
 			#added_item.item_ID = "Cell"
 			queue_finish()
 			displaytext("Success!")
+			task_finshed = true
+			number_item = 0
+
 		else:
 			displaytext("Fail!")
-			added_item.queue_free()
+			#added_item.queue_free()
 		
 		
 	

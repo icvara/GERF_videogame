@@ -56,4 +56,4 @@ shape = SubResource("RectangleShape2D_axg4c")
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_us4ch")
 autoplay = "default"
-frame_progress = 0.0186315
+frame_progress = 0.573737
