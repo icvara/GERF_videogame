@@ -1,6 +1,8 @@
 extends StaticBody2D
 class_name Workstation
 
+@export var item: PackedScene
+
 var added_item
 var task_finshed = false
 

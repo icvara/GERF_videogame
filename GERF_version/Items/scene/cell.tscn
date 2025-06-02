@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://dsyyr4h1fm27"]
+
+[ext_resource type="Script" uid="uid://d4llyri3bwnjc" path="res://GERF_version/Items/script/cell.gd" id="1_q8cne"]
+[ext_resource type="Texture2D" uid="uid://dlvs6u6flgvrk" path="res://GERF_version/Asset/graphic/Slime.png" id="2_ddth8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_axg4c"]
+size = Vector2(15, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uxpda"]
+atlas = ExtResource("2_ddth8")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ntyxp"]
+atlas = ExtResource("2_ddth8")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2c7vn"]
+atlas = ExtResource("2_ddth8")
+region = Rect2(64, 0, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_us4ch"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uxpda")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ntyxp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2c7vn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[node name="cell_item" type="RigidBody2D" groups=["Item"]]
+mass = 0.05
+gravity_scale = 0.0
+lock_rotation = true
+linear_damp = 50.0
+script = ExtResource("1_q8cne")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 3)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_axg4c")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_us4ch")
+autoplay = "default"
+frame_progress = 0.0186315

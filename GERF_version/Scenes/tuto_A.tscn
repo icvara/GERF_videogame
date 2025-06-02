@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://cirow2kaxmkcq" path="res://GERF_version/Scripts/tuto_a.gd" id="1_oyt1q"]
 [ext_resource type="PackedScene" uid="uid://b8edkh57hgfcf" path="res://GERF_version/Scenes/player.tscn" id="2_xgck5"]
-[ext_resource type="PackedScene" uid="uid://625fix8gh62c" path="res://GERF_version/workstation/DNA_delivery.tscn" id="3_k372j"]
+[ext_resource type="PackedScene" uid="uid://625fix8gh62c" path="res://GERF_version/workstation/scene/DNA_delivery.tscn" id="3_k372j"]
 [ext_resource type="PackedScene" uid="uid://ccwr8m4wr2mn" path="res://Prototype_presentation_8.05.2025/pause_menu.tscn" id="3_yv6qu"]
 [ext_resource type="PackedScene" uid="uid://bog2su78p01o5" path="res://GERF_version/workstation/final_delivery.tscn" id="5_bjf18"]
 [ext_resource type="PackedScene" uid="uid://bo2gjmkf31bd7" path="res://GERF_version/workstation/Incubator.tscn" id="6_qac76"]
-[ext_resource type="PackedScene" uid="uid://mxoes4ppbaoc" path="res://GERF_version/workstation/Transformation_station.tscn" id="7_e2o6h"]
+[ext_resource type="PackedScene" uid="uid://mxoes4ppbaoc" path="res://GERF_version/workstation/scene/Transformation_station.tscn" id="7_e2o6h"]
 
 [node name="Tuto_A" type="Control"]
 layout_mode = 3

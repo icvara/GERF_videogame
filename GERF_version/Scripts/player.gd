@@ -56,8 +56,9 @@ func _physics_process(delta):
 	
 	if inventory != null:
 		#inventory.apply_central_force(velocity)
-		inventory.global_position = global_position
-	
+		#inventory.global_position = global_position
+		inventory.position = global_position + Vector2(-8,0)
+
 	if playerID == 0:
 		if Input.is_action_just_pressed("space"):
 			if interacting_with_workstation:
@@ -92,7 +93,12 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Item"):
 		interacting_with = body
 	if body.is_in_group("workstation"):
+		if interacting_with_workstation:
+			if interacting_with_workstation.get_node("ColorRect"):
+				interacting_with_workstation.get_node("ColorRect").hide()
 		interacting_with_workstation = body 
+		if body.get_node("ColorRect"):
+			body.get_node("ColorRect").show()
 	
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
@@ -102,6 +108,8 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.is_in_group("workstation"):
 		if interacting_with_workstation == body:
 			interacting_with_workstation = null 
+			if body.get_node("ColorRect"):
+				body.get_node("ColorRect").hide()
 			
 func displaymsg(textstr):
 	$Label.text = textstr

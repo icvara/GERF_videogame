@@ -13,19 +13,20 @@ script = ExtResource("1_vypku")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
-offset_left = 531.0
-offset_right = 621.0
-offset_bottom = 21.0
+offset_left = 982.0
+offset_top = 574.0
+offset_right = 1117.0
+offset_bottom = 605.0
 theme_override_font_sizes/font_size = 24
 text = "Time Left"
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 modulate = Color(0, 1, 0, 1)
 layout_mode = 2
-offset_left = 520.0
-offset_top = 33.0
-offset_right = 682.0
-offset_bottom = 52.0
+offset_left = 971.0
+offset_top = 607.0
+offset_right = 1133.0
+offset_bottom = 626.0
 max_value = 80.0
 step = 1.0
 value = 80.0
@@ -33,10 +34,10 @@ show_percentage = false
 
 [node name="timevalue" type="Label" parent="."]
 layout_mode = 2
-offset_left = 521.0
-offset_top = 33.0
-offset_right = 683.0
-offset_bottom = 63.0
+offset_left = 972.0
+offset_top = 607.0
+offset_right = 1134.0
+offset_bottom = 637.0
 text = "120 s"
 horizontal_alignment = 1
 

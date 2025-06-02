@@ -1,12 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://dmeyt0eaapuus"]
 
-[ext_resource type="Script" uid="uid://cqdd4btabtbex" path="res://Prototype_presentation_8.05.2025/overlab/item.gd" id="1_2lqu1"]
+[ext_resource type="Script" uid="uid://dulpkxbvcdy8f" path="res://GERF_version/Items/item.gd" id="1_2lqu1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_axg4c"]
 size = Vector2(8, 8)
 
-[node name="Item" type="CharacterBody2D" groups=["Item"]]
-motion_mode = 1
+[node name="Item" type="RigidBody2D" groups=["Item"]]
 script = ExtResource("1_2lqu1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

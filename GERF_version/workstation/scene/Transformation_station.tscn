@@ -1,13 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://mxoes4ppbaoc"]
+[gd_scene load_steps=13 format=3 uid="uid://mxoes4ppbaoc"]
 
-[ext_resource type="Script" uid="uid://dg5hmwx6ftnug" path="res://Prototype_presentation_8.05.2025/overlab/workstation/transfo_station.gd" id="1_hq4q1"]
-[ext_resource type="Texture2D" uid="uid://db1d16uoeyeon" path="res://Prototype_presentation_8.05.2025/overlab/asset/16px/tilesStuff.png" id="2_87be5"]
+[ext_resource type="Script" uid="uid://dwxenuw885btw" path="res://GERF_version/workstation/script/transfo_station.gd" id="1_80rty"]
+[ext_resource type="PackedScene" uid="uid://dyj70urrvani6" path="res://GERF_version/Items/scene/mcell.tscn" id="2_6rbpm"]
+[ext_resource type="Texture2D" uid="uid://db1d16uoeyeon" path="res://Prototype_presentation_8.05.2025/overlab/asset/16px/tilesStuff.png" id="2_j6k5d"]
+[ext_resource type="Texture2D" uid="uid://dlvs6u6flgvrk" path="res://GERF_version/Asset/graphic/Slime.png" id="3_j6k5d"]
+[ext_resource type="Texture2D" uid="uid://bjntagmk4gbcs" path="res://GERF_version/Asset/graphic/DNA.png" id="4_jowpw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_afujj"]
-size = Vector2(38, 16)
+size = Vector2(32, 32)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0rxss"]
-texture = ExtResource("2_87be5")
+texture = ExtResource("2_j6k5d")
 29:0/0 = 0
 31:0/0 = 0
 32:0/0 = 0
@@ -436,18 +439,54 @@ texture = ExtResource("2_87be5")
 [sub_resource type="TileSet" id="TileSet_sucgt"]
 sources/0 = SubResource("TileSetAtlasSource_0rxss")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_6rbpm"]
+atlas = ExtResource("3_j6k5d")
+region = Rect2(256, 128, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_01e6c"]
+atlas = ExtResource("3_j6k5d")
+region = Rect2(288, 128, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8in8d"]
+atlas = ExtResource("3_j6k5d")
+region = Rect2(320, 128, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jowpw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6rbpm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_01e6c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8in8d")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
 [node name="Transfo_station" type="StaticBody2D" groups=["workstation"]]
-script = ExtResource("1_hq4q1")
+script = ExtResource("1_80rty")
+item = ExtResource("2_6rbpm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1)
+position = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_afujj")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
-offset_left = -21.0
-offset_top = 10.0
-offset_right = 20.0
-offset_bottom = 19.0
+visible = false
+offset_left = -4.0
+offset_top = 34.0
+offset_right = 37.0
+offset_bottom = 43.0
 max_value = 10.0
 show_percentage = false
 
@@ -455,8 +494,7 @@ show_percentage = false
 wait_time = 0.1
 
 [node name="TileMap" type="TileMapLayer" parent="."]
-position = Vector2(-25, -8)
-tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 30, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 31, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 32, 0, 2, 0, 0, 0)
+tile_map_data = PackedByteArray(0, 0, 1, 0, 0, 0, 0, 0, 30, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 0, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 32, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 32, 0, 6, 0, 0, 0)
 tile_set = SubResource("TileSet_sucgt")
 
 [node name="Label" type="Label" parent="."]
@@ -464,5 +502,35 @@ offset_left = -20.0
 offset_top = -27.0
 offset_right = 20.0
 offset_bottom = -14.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_right = 32.0
+offset_bottom = 32.0
+color = Color(1, 1, 1, 0.42)
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+offset_left = 33.0
+offset_right = 48.0
+offset_bottom = 33.0
+
+[node name="Cell" type="AnimatedSprite2D" parent="Panel"]
+visible = false
+position = Vector2(7, 6)
+sprite_frames = SubResource("SpriteFrames_jowpw")
+autoplay = "default"
+
+[node name="mCell" type="AnimatedSprite2D" parent="Panel"]
+visible = false
+position = Vector2(7, 14)
+sprite_frames = SubResource("SpriteFrames_jowpw")
+autoplay = "default"
+
+[node name="DNA" type="Sprite2D" parent="Panel"]
+visible = false
+position = Vector2(7, 24)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_jowpw")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

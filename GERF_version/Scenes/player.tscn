@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://6l1o6agfj1nb" path="res://GERF_version/Scripts/player.gd" id="1_do4mp"]
 [ext_resource type="Texture2D" uid="uid://dxyjteves365y" path="res://Prototype_presentation_8.05.2025/overlab/asset/LabNPCs.png" id="2_th17n"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_j74bp"]
+radius = 19.0
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_j74bp"]
 atlas = ExtResource("2_th17n")
 region = Rect2(99, 144, 33, 48)
@@ -324,16 +327,19 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_606se"]
-size = Vector2(16, 22)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_j74bp"]
-radius = 19.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_do4mp"]
 
 [node name="player" type="CharacterBody2D"]
-scale = Vector2(2, 2)
+scale = Vector2(3, 3)
 motion_mode = 1
 script = ExtResource("1_do4mp")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(1, -12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1, 12)
+shape = SubResource("CircleShape2D_j74bp")
 
 [node name="AnimatedSprite2D_1" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -354,15 +360,8 @@ sprite_frames = SubResource("SpriteFrames_r7bmt")
 animation = &"back"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 1)
-shape = SubResource("RectangleShape2D_606se")
-
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(1, -12)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-1, 12)
-shape = SubResource("CircleShape2D_j74bp")
+position = Vector2(0.333333, 4)
+shape = SubResource("CircleShape2D_do4mp")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -16.0

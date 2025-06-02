@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://625fix8gh62c"]
 
-[ext_resource type="Script" uid="uid://c5peaynr0c4q" path="res://Prototype_presentation_8.05.2025/overlab/workstation/DNA_delivery.gd" id="1_5b3ep"]
-[ext_resource type="PackedScene" uid="uid://cf6mcq38lapcb" path="res://Prototype_presentation_8.05.2025/overlab/item.tscn" id="2_v0e3o"]
+[ext_resource type="Script" uid="uid://oeclgd2ulhgw" path="res://GERF_version/workstation/script/DNA_delivery.gd" id="1_ycjmj"]
+[ext_resource type="PackedScene" uid="uid://cjty0r048lr8i" path="res://GERF_version/Items/scene/DNA.tscn" id="2_ycjmj"]
 [ext_resource type="Texture2D" uid="uid://db1d16uoeyeon" path="res://Prototype_presentation_8.05.2025/overlab/asset/16px/tilesStuff.png" id="3_dvjfr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_afujj"]
@@ -438,8 +438,8 @@ texture = ExtResource("3_dvjfr")
 sources/0 = SubResource("TileSetAtlasSource_0rxss")
 
 [node name="dna_delivery" type="StaticBody2D" groups=["workstation"]]
-script = ExtResource("1_5b3ep")
-item = ExtResource("2_v0e3o")
+script = ExtResource("1_ycjmj")
+item = ExtResource("2_ycjmj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(16.5, 14.5)
@@ -457,3 +457,9 @@ show_percentage = false
 [node name="TileMap" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 29, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 30, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 29, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 29, 0, 0, 0, 0, 0)
 tile_set = SubResource("TileSet_sucgt")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_right = 32.0
+offset_bottom = 32.0
+color = Color(1, 1, 1, 0.42)

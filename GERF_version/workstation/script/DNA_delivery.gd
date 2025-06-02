@@ -1,6 +1,5 @@
 extends Workstation
 
-@export var item : PackedScene
 
 
 # input_output = ["DNA","transformed_cell","bioproduct","finished"]
@@ -9,8 +8,8 @@ extends Workstation
 func Use(player):
 	if player.inventory == null:
 		var new_item = item.instantiate()
-		new_item.item_ID = "DNA"
-		get_parent().add_child(new_item)
+		#new_item.item_ID = "Cell"
+		get_parent().get_parent().add_child(new_item)
 		new_item.PickUP(player)
 
 	else:
