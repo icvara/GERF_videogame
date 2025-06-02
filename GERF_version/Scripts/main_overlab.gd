@@ -16,11 +16,12 @@ func _ready() -> void:
 		$player_startpos.get_node(str(i)).add_child(newplay)
 		
 func _process(delta: float) -> void:
-	$CanvasLayer/Panel/timelabel.text = "Time Left: " + str(int($GameTimer.time_left)) + "s"
+	#$CanvasLayer/Panel/timelabel.text = "Time Left: " + str(int($GameTimer.time_left)) + "s"
+	if GlobalVariableOverlab.time <= 0 :
+		$CanvasLayer/TimeHUD.hide()
+		$CanvasLayer/End.start()
 
 
 
 
-
-func _on_game_timer_timeout() -> void:
-	$CanvasLayer/End.start()
+	

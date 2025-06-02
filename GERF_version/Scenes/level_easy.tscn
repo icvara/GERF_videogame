@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://c0w2asl2w8djv"]
+[gd_scene load_steps=28 format=4 uid="uid://c0w2asl2w8djv"]
 
 [ext_resource type="Script" uid="uid://udpwraov6f2i" path="res://GERF_version/Scripts/main_overlab.gd" id="1_lm60a"]
 [ext_resource type="PackedScene" uid="uid://cf6mcq38lapcb" path="res://Prototype_presentation_8.05.2025/overlab/item.tscn" id="2_olwvr"]
@@ -11,9 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://dgsuawmim43c1" path="res://Prototype_presentation_8.05.2025/overlab/workstation/Transformation_station.tscn" id="9_7dd3x"]
 [ext_resource type="PackedScene" uid="uid://dwi3g471w21yi" path="res://Prototype_presentation_8.05.2025/overlab/workstation/empty_table.tscn" id="10_dawpc"]
 [ext_resource type="PackedScene" uid="uid://33qa0skp3obp" path="res://Prototype_presentation_8.05.2025/overlab/workstation/final_delivery.tscn" id="11_6iaao"]
-[ext_resource type="PackedScene" uid="uid://ggpb3syylhem" path="res://Prototype_presentation_8.05.2025/overlab/score.tscn" id="12_xyhme"]
 [ext_resource type="PackedScene" uid="uid://ew4cs3o4boh4" path="res://GERF_version/Scenes/pause_menu.tscn" id="13_lm60a"]
+[ext_resource type="PackedScene" uid="uid://c1wjuu37hvn4e" path="res://GERF_version/Scenes/score.tscn" id="13_olwvr"]
 [ext_resource type="PackedScene" uid="uid://fxevips2yu1n" path="res://GERF_version/Scenes/end.tscn" id="14_olwvr"]
+[ext_resource type="PackedScene" uid="uid://bjxyv0aonstdc" path="res://GERF_version/Scenes/time_hud.tscn" id="15_olwvr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o0fyi"]
 texture = ExtResource("4_fp3b2")
@@ -2561,35 +2562,18 @@ position = Vector2(265.5, 62)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Panel" type="Panel" parent="CanvasLayer"]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -18.0
-offset_right = 65.0
-grow_vertical = 0
+[node name="Score" parent="CanvasLayer" instance=ExtResource("13_olwvr")]
 
-[node name="timelabel" type="Label" parent="CanvasLayer/Panel"]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 62.0
-offset_bottom = 15.0
-text = "Time Left: 120s"
-
-[node name="Score" parent="CanvasLayer" instance=ExtResource("12_xyhme")]
-
-[node name="Pause_menu" parent="CanvasLayer" instance=ExtResource("13_lm60a")]
+[node name="TimeHUD" parent="CanvasLayer" instance=ExtResource("15_olwvr")]
 
 [node name="End" parent="CanvasLayer" instance=ExtResource("14_olwvr")]
+visible = false
+
+[node name="Pause_menu" parent="CanvasLayer" instance=ExtResource("13_lm60a")]
+visible = false
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
 
-[node name="GameTimer" type="Timer" parent="."]
-wait_time = 120.0
-autostart = true
-
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]

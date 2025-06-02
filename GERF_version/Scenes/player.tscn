@@ -1,6 +1,6 @@
 [gd_scene load_steps=44 format=3 uid="uid://b8edkh57hgfcf"]
 
-[ext_resource type="Script" uid="uid://cjl5qyyniji7v" path="res://Prototype_presentation_8.05.2025/overlab/player.gd" id="1_do4mp"]
+[ext_resource type="Script" uid="uid://6l1o6agfj1nb" path="res://GERF_version/Scripts/player.gd" id="1_do4mp"]
 [ext_resource type="Texture2D" uid="uid://dxyjteves365y" path="res://Prototype_presentation_8.05.2025/overlab/asset/LabNPCs.png" id="2_th17n"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j74bp"]

@@ -15,6 +15,13 @@ func setskin(skinid):
 	animatedstuff.show()
 
 func _physics_process(delta):
+	if GlobalVariableOverlab.nplayer == 1:
+		if Input.is_action_just_pressed("change_player"):
+			if playerID == 1:
+				playerID = 0
+			else:
+				playerID = 1
+		
 	if 	animatedstuff.is_visible() == false:
 		animatedstuff.show()
 
