@@ -40,6 +40,7 @@ func Use(player):
 			new_item.PickUP(player)
 			$Panel.get_node("mCell").hide()
 			$Panel.hide()
+			task_finshed =false
 
 		else:
 			player.displaymsg("hands full")
@@ -62,7 +63,7 @@ func _on_timer_timeout() -> void:
 		$Timer.stop()
 		$ProgressBar.hide()
 		$ProgressBar.value = 0
-		if randi_range(0,2) == 1:
+		if randi_range(0,4) > 0:
 			#added_item.get_node("ColorRect").color = Color(1,0,0)
 			#added_item.item_ID = "Cell"
 			queue_finish()

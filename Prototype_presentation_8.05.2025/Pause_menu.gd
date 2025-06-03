@@ -9,6 +9,7 @@ func _process(delta):
 	if Input.is_action_pressed("pause"):
 		show()
 		get_tree().paused = true
+		$Panel/VBoxContainer/Button.grab_focus()
 
 
 func _on_button_pressed():

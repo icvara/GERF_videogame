@@ -95,7 +95,16 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_g1rkv")
 
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = -72.0
+offset_top = -12.0
+offset_right = 84.0
+offset_bottom = 9.0
+text = "Press A to join!"
+
 [node name="L" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = -61.0
 offset_top = -17.0
@@ -104,6 +113,7 @@ offset_bottom = 12.0
 text = "<"
 
 [node name="R" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 56.0
 offset_top = -17.0
@@ -112,12 +122,14 @@ offset_bottom = 12.0
 text = ">"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(1, -17)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_u1hik")
 animation = &"2"
 
 [node name="Label" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = -37.0
 offset_top = 40.0

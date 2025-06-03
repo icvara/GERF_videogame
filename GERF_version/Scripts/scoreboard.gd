@@ -10,6 +10,7 @@ func _ready() -> void:
 
 
 
+
 func load_from_file(path):
 	var file = FileAccess.open(path, FileAccess.READ)
 	var content = file.get_as_text()

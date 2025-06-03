@@ -1,5 +1,5 @@
 extends StaticBody2D
-class_name Workstation
+#class_name Workstation
 
 var added_item
 var task_finshed = false

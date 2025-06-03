@@ -22,5 +22,5 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 
 func _process(delta: float) -> void:
 	if player_on_it.size()> 0: #NEED TO ADJUST ACCORDING TO WHO IS ON
-		if Input.is_action_just_pressed("space"): 
+		if Input.is_action_just_pressed("space") or Input.is_action_just_pressed("space2") or Input.is_action_just_pressed("space3") :
 			get_tree().change_scene_to_packed(level)

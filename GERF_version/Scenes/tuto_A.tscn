@@ -1,12 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://b15cg372t2tac"]
+[gd_scene load_steps=12 format=3 uid="uid://b15cg372t2tac"]
 
 [ext_resource type="Script" uid="uid://cirow2kaxmkcq" path="res://GERF_version/Scripts/tuto_a.gd" id="1_oyt1q"]
-[ext_resource type="PackedScene" uid="uid://b8edkh57hgfcf" path="res://GERF_version/Scenes/player.tscn" id="2_xgck5"]
 [ext_resource type="PackedScene" uid="uid://625fix8gh62c" path="res://GERF_version/workstation/scene/DNA_delivery.tscn" id="3_k372j"]
 [ext_resource type="PackedScene" uid="uid://ccwr8m4wr2mn" path="res://Prototype_presentation_8.05.2025/pause_menu.tscn" id="3_yv6qu"]
-[ext_resource type="PackedScene" uid="uid://bog2su78p01o5" path="res://GERF_version/workstation/final_delivery.tscn" id="5_bjf18"]
-[ext_resource type="PackedScene" uid="uid://bo2gjmkf31bd7" path="res://GERF_version/workstation/Incubator.tscn" id="6_qac76"]
+[ext_resource type="PackedScene" uid="uid://bog2su78p01o5" path="res://GERF_version/workstation/scene/final_delivery.tscn" id="5_bjf18"]
+[ext_resource type="PackedScene" uid="uid://bo2gjmkf31bd7" path="res://GERF_version/workstation/scene/Incubator.tscn" id="6_qac76"]
+[ext_resource type="PackedScene" uid="uid://yn40icnwyppt" path="res://GERF_version/Items/scene/bioproduct.tscn" id="7_12shw"]
 [ext_resource type="PackedScene" uid="uid://mxoes4ppbaoc" path="res://GERF_version/workstation/scene/Transformation_station.tscn" id="7_e2o6h"]
+[ext_resource type="PackedScene" uid="uid://dsyyr4h1fm27" path="res://GERF_version/Items/scene/cell.tscn" id="8_wofsu"]
+[ext_resource type="PackedScene" uid="uid://cjty0r048lr8i" path="res://GERF_version/Items/scene/DNA.tscn" id="9_18o0k"]
+[ext_resource type="PackedScene" uid="uid://dyj70urrvani6" path="res://GERF_version/Items/scene/mcell.tscn" id="10_05eaj"]
+[ext_resource type="PackedScene" uid="uid://bptn6adjpekm0" path="res://GERF_version/workstation/scene/glycerol_stock.tscn" id="11_wma2i"]
 
 [node name="Tuto_A" type="Control"]
 layout_mode = 3
@@ -28,73 +32,162 @@ color = Color(0.155513, 0.243889, 0.320241, 1)
 
 [node name="Button" type="Button" parent="ColorRect"]
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.952
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -38.0
-offset_top = -31.0
-offset_right = 38.0
+offset_left = -66.5
+offset_top = -28.896
+offset_right = 66.5
+offset_bottom = -13.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_font_sizes/font_size = 30
 text = "Ready!"
-
-[node name="player" parent="ColorRect" instance=ExtResource("2_xgck5")]
-position = Vector2(100, 73)
-playerID = 0
-
-[node name="player2" parent="ColorRect" instance=ExtResource("2_xgck5")]
-position = Vector2(206, 73)
-skinid = 1
 
 [node name="Label" type="Label" parent="ColorRect"]
 layout_mode = 0
-offset_left = 6.0
-offset_top = 6.0
-offset_right = 172.0
-offset_bottom = 81.0
-text = "1. Collect DNA"
+offset_left = 56.0
+offset_top = 55.0
+offset_right = 386.0
+offset_bottom = 130.0
+theme_override_font_sizes/font_size = 24
+text = "1. Collect DNA and Cell"
+
+[node name="arrow" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 110.0
+offset_right = 225.0
+offset_bottom = 149.0
+theme_override_font_sizes/font_size = 30
+text = "->"
+
+[node name="arrow2" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 190.0
+offset_top = 168.0
+offset_right = 223.0
+offset_bottom = 207.0
+theme_override_font_sizes/font_size = 30
+text = "->"
+
+[node name="arrow3" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 749.0
+offset_top = 218.0
+offset_right = 782.0
+offset_bottom = 257.0
+theme_override_font_sizes/font_size = 30
+text = "->"
+
+[node name="arrow5" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 129.0
+offset_top = 410.0
+offset_right = 162.0
+offset_bottom = 449.0
+theme_override_font_sizes/font_size = 30
+text = "->"
+
+[node name="arrow4" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 832.0
+offset_top = 220.0
+offset_right = 865.0
+offset_bottom = 259.0
+theme_override_font_sizes/font_size = 30
+text = "->"
+
+[node name="arrow6" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 212.0
+offset_top = 413.0
+offset_right = 245.0
+offset_bottom = 452.0
+theme_override_font_sizes/font_size = 30
+text = "->"
+
+[node name="arrow7" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 716.0
+offset_top = 475.0
+offset_right = 749.0
+offset_bottom = 514.0
+theme_override_font_sizes/font_size = 30
+text = "->"
 
 [node name="Label2" type="Label" parent="ColorRect"]
 layout_mode = 0
-offset_left = 182.0
-offset_top = 1.0
-offset_right = 413.0
-offset_bottom = 24.0
-text = "2. Tranform it. Succes rate 3/4"
+offset_left = 481.0
+offset_top = 149.0
+offset_right = 1074.0
+offset_bottom = 180.0
+theme_override_font_sizes/font_size = 24
+text = "2. Add 1 DNA and 1 Cell. Succes rate 3/4"
 
 [node name="Label3" type="Label" parent="ColorRect"]
 layout_mode = 0
-offset_left = 10.0
-offset_top = 81.0
-offset_right = 340.0
-offset_bottom = 156.0
-text = "3. Incubate the cells. Carefull of overgrown"
+offset_left = 43.0
+offset_top = 323.0
+offset_right = 717.0
+offset_bottom = 398.0
+theme_override_font_sizes/font_size = 24
+text = "3. Incubate the cells.
+Carefull of overgrown"
 
 [node name="Label4" type="Label" parent="ColorRect"]
 layout_mode = 0
-offset_left = 219.0
-offset_top = 82.0
-offset_right = 385.0
-offset_bottom = 157.0
+offset_left = 671.0
+offset_top = 407.0
+offset_right = 837.0
+offset_bottom = 482.0
+theme_override_font_sizes/font_size = 24
 text = "4. Delivery"
 
 [node name="dna_delivery" parent="ColorRect" instance=ExtResource("3_k372j")]
-position = Vector2(6, 18)
+position = Vector2(148, 113)
 
 [node name="Pause_menu" parent="ColorRect" instance=ExtResource("3_yv6qu")]
 visible = false
 layout_mode = 1
 
 [node name="Delivery" parent="ColorRect" instance=ExtResource("5_bjf18")]
-position = Vector2(245, 128)
+position = Vector2(755, 461)
 
 [node name="Incubator" parent="ColorRect" instance=ExtResource("6_qac76")]
-position = Vector2(23, 139)
+position = Vector2(167, 401)
 
 [node name="Transfo_station" parent="ColorRect" instance=ExtResource("7_e2o6h")]
-position = Vector2(206, 26)
+position = Vector2(792, 221)
+
+[node name="bioproduct_item" parent="ColorRect" instance=ExtResource("7_12shw")]
+position = Vector2(265, 427)
+
+[node name="bioproduct_item2" parent="ColorRect" instance=ExtResource("7_12shw")]
+position = Vector2(685, 489)
+
+[node name="cell_item" parent="ColorRect" instance=ExtResource("8_wofsu")]
+position = Vector2(247, 183)
+
+[node name="cell_item3" parent="ColorRect" instance=ExtResource("8_wofsu")]
+position = Vector2(697, 233)
+
+[node name="dna_item" parent="ColorRect" instance=ExtResource("9_18o0k")]
+position = Vector2(244, 128)
+
+[node name="dna_item2" parent="ColorRect" instance=ExtResource("9_18o0k")]
+position = Vector2(728, 236)
+
+[node name="cell_item2" parent="ColorRect" instance=ExtResource("10_05eaj")]
+position = Vector2(887, 234)
+
+[node name="cell_item4" parent="ColorRect" instance=ExtResource("10_05eaj")]
+position = Vector2(105, 425)
+
+[node name="freezer" parent="ColorRect" instance=ExtResource("11_wma2i")]
+position = Vector2(146, 169)
 
 [node name="Pause_menu" parent="." instance=ExtResource("3_yv6qu")]
 visible = false

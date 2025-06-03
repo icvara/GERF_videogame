@@ -53,7 +53,7 @@ func Transfer(player):
 		#set_physics_process(true)
 	#get_parent().get_parent().add_child(self)
 
-
+	
 func _process(delta: float) -> void:
 	pass
 	#print(global_position)

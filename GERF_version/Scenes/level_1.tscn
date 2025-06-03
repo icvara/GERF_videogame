@@ -12,9 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://cjrd1bwffn17u" path="res://GERF_version/Asset/graphic/table.png" id="10_57yap"]
 [ext_resource type="PackedScene" uid="uid://625fix8gh62c" path="res://GERF_version/workstation/scene/DNA_delivery.tscn" id="11_w0wfq"]
 [ext_resource type="PackedScene" uid="uid://c1wjuu37hvn4e" path="res://GERF_version/Scenes/score.tscn" id="12_7m1vr"]
-[ext_resource type="PackedScene" uid="uid://bog2su78p01o5" path="res://GERF_version/workstation/final_delivery.tscn" id="12_tjhfs"]
+[ext_resource type="PackedScene" uid="uid://bog2su78p01o5" path="res://GERF_version/workstation/scene/final_delivery.tscn" id="12_tjhfs"]
 [ext_resource type="PackedScene" uid="uid://bjxyv0aonstdc" path="res://GERF_version/Scenes/time_hud.tscn" id="13_oajpy"]
-[ext_resource type="PackedScene" uid="uid://bo2gjmkf31bd7" path="res://GERF_version/workstation/Incubator.tscn" id="13_wdi0a"]
+[ext_resource type="PackedScene" uid="uid://bo2gjmkf31bd7" path="res://GERF_version/workstation/scene/Incubator.tscn" id="13_wdi0a"]
 [ext_resource type="PackedScene" uid="uid://fxevips2yu1n" path="res://GERF_version/Scenes/end.tscn" id="14_8nwj5"]
 [ext_resource type="PackedScene" uid="uid://mxoes4ppbaoc" path="res://GERF_version/workstation/scene/Transformation_station.tscn" id="14_dhn57"]
 [ext_resource type="PackedScene" uid="uid://bptn6adjpekm0" path="res://GERF_version/workstation/scene/glycerol_stock.tscn" id="14_tjhfs"]
@@ -3305,14 +3305,13 @@ position = Vector2(159, 240)
 position = Vector2(191.5, 240)
 
 [node name="Delivery" parent="Workstation" instance=ExtResource("12_tjhfs")]
-position = Vector2(288, 259)
-scale = Vector2(1.5, 0.8)
+position = Vector2(287.5, 238)
 
 [node name="Incubator" parent="Workstation" instance=ExtResource("13_wdi0a")]
-position = Vector2(144, 87.5)
+position = Vector2(89, 64)
 
 [node name="Incubator2" parent="Workstation" instance=ExtResource("13_wdi0a")]
-position = Vector2(143, 26)
+position = Vector2(87.5, 0)
 
 [node name="freezer" parent="Workstation" instance=ExtResource("14_tjhfs")]
 position = Vector2(384, 238)
@@ -3326,26 +3325,25 @@ position = Vector2(447.5, 15.5)
 [node name="player_startpos" type="Node2D" parent="."]
 
 [node name="0" type="Node2D" parent="player_startpos"]
-position = Vector2(401.5, 86)
+position = Vector2(434, 405)
 
 [node name="1" type="Node2D" parent="player_startpos"]
-position = Vector2(217, 397)
+position = Vector2(397, 153)
 
 [node name="2" type="Node2D" parent="player_startpos"]
-position = Vector2(219, 242)
+position = Vector2(706, 120)
 
 [node name="3" type="Node2D" parent="player_startpos"]
-position = Vector2(874, 396)
+position = Vector2(831, 383)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Score" parent="CanvasLayer" instance=ExtResource("12_7m1vr")]
 
 [node name="TimeHUD" parent="CanvasLayer" instance=ExtResource("13_oajpy")]
-offset_left = -14.0
-offset_top = 17.0
-offset_right = -14.0
-offset_bottom = 17.0
+offset_top = -2.0
+offset_right = -1152.0
+offset_bottom = -650.0
 
 [node name="End" parent="CanvasLayer" instance=ExtResource("14_8nwj5")]
 visible = false

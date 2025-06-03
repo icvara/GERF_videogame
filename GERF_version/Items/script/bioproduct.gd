@@ -2,7 +2,7 @@ extends Item
 
 
 func _ready():
-	pass
+	item_ID = "Bioproduct"
 
 
 

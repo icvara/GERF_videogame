@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://yn40icnwyppt"]
+
+[ext_resource type="Script" uid="uid://dh70fjboa8tuy" path="res://GERF_version/Items/script/bioproduct.gd" id="1_ekmxe"]
+[ext_resource type="Texture2D" uid="uid://dlvs6u6flgvrk" path="res://GERF_version/Asset/graphic/Slime.png" id="2_inw7v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_axg4c"]
+size = Vector2(15, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ekmxe"]
+atlas = ExtResource("2_inw7v")
+region = Rect2(352, 160, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_inw7v"]
+atlas = ExtResource("2_inw7v")
+region = Rect2(384, 160, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_us4ch"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ekmxe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_inw7v")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[node name="bioproduct_item" type="RigidBody2D" groups=["Item"]]
+mass = 0.05
+gravity_scale = 0.0
+lock_rotation = true
+linear_damp = 50.0
+script = ExtResource("1_ekmxe")
+item_ID = "Bioproduct"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 3)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_axg4c")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_us4ch")
+autoplay = "default"
+frame_progress = 0.0186315

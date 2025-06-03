@@ -1,1 +1,1 @@
-test1:10;test2:200;test3:50;test4:10000;ddddd:0;444:0;Me:300;Vara:300;Alex:400;pas eshtel:0;
+Izva:500;

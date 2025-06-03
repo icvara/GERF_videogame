@@ -1,13 +1,13 @@
-[gd_scene load_steps=9 format=4 uid="uid://bo2gjmkf31bd7"]
+[gd_scene load_steps=6 format=4 uid="uid://bog2su78p01o5"]
 
-[ext_resource type="Script" uid="uid://drfus73ah8cdm" path="res://Prototype_presentation_8.05.2025/overlab/workstation/Incubator.gd" id="1_sovbb"]
-[ext_resource type="Texture2D" uid="uid://db1d16uoeyeon" path="res://Prototype_presentation_8.05.2025/overlab/asset/16px/tilesStuff.png" id="2_wrxm3"]
+[ext_resource type="Script" uid="uid://dviqxonm8v1go" path="res://GERF_version/workstation/script/final_delivery.gd" id="1_woobc"]
+[ext_resource type="Texture2D" uid="uid://db1d16uoeyeon" path="res://Prototype_presentation_8.05.2025/overlab/asset/16px/tilesStuff.png" id="2_ro54x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_afujj"]
-size = Vector2(15, 28)
+size = Vector2(62.5, 46.5)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0rxss"]
-texture = ExtResource("2_wrxm3")
+texture = ExtResource("2_ro54x")
 29:0/0 = 0
 31:0/0 = 0
 32:0/0 = 0
@@ -436,63 +436,34 @@ texture = ExtResource("2_wrxm3")
 [sub_resource type="TileSet" id="TileSet_sucgt"]
 sources/0 = SubResource("TileSetAtlasSource_0rxss")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_v6pfk"]
-atlas = ExtResource("2_wrxm3")
-region = Rect2(495, 5, 17, 27)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_78stf"]
-atlas = ExtResource("2_wrxm3")
-region = Rect2(529, 5, 17, 27)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_71gx2"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_v6pfk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_78stf")
-}],
-"loop": true,
-"name": &"default",
-"speed": 1.0
-}]
-
-[node name="Incubator" type="StaticBody2D" groups=["workstation"]]
-script = ExtResource("1_sovbb")
+[node name="Delivery" type="StaticBody2D" groups=["workstation"]]
+script = ExtResource("1_woobc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -5)
+position = Vector2(31.75, 24.75)
 shape = SubResource("RectangleShape2D_afujj")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 visible = false
-offset_left = -14.0
-offset_top = -24.0
-offset_right = 27.0
-offset_bottom = -15.0
-rotation = 1.5708
-max_value = 20.0
+offset_left = -6.0
+offset_top = 21.0
+offset_right = 57.0
+offset_bottom = 30.0
+max_value = 10.0
 show_percentage = false
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.1
-
 [node name="TileMap" type="TileMapLayer" parent="."]
-position = Vector2(-24, -21)
-tile_map_data = PackedByteArray("AAAAAP//AAAeAAcAAAAAAAAAAAAeAAgAAAAAAAEAAAAeAAkAAAAAAAIAAAAeAAoAAAABAP//AAAfAAcAAAABAAAAAAAfAAgAAAABAAEAAAAfAAkAAAABAAIAAAAfAAoAAAACAP//AAAgAAcAAAACAAAAAAAgAAgAAAACAAEAAAAgAAkAAAACAAIAAAAgAAoAAAA=")
+tile_map_data = PackedByteArray("AAAAAAAAAAAeAAMAAAABAAAAAAAfAAMAAAACAAAAAAAfAAMAAAAAAAEAAAAeAAQAAAABAAEAAAAfAAQAAAACAAEAAAAfAAQAAAADAAAAAAAgAAMAAAADAAEAAAAgAAQAAAAAAAIAAAAbAAEAAAABAAIAAAAcAAEAAAACAAIAAAAbAAEAAAADAAIAAAAcAAEAAAA=")
 tile_set = SubResource("TileSet_sucgt")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-visible = false
-position = Vector2(0, -2)
-sprite_frames = SubResource("SpriteFrames_71gx2")
-frame_progress = 0.034414
-
 [node name="Label" type="Label" parent="."]
-offset_left = 15.0
-offset_top = -7.0
-offset_right = 55.0
-offset_bottom = 6.0
+offset_left = 22.0
+offset_top = 8.0
+offset_right = 62.0
+offset_bottom = 21.0
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_right = 64.0
+offset_bottom = 48.0
+color = Color(1, 1, 1, 0.42)

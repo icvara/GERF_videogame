@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ew4cs3o4boh4" path="res://GERF_version/Scenes/pause_menu.tscn" id="3_67mh6"]
 [ext_resource type="Texture2D" uid="uid://bbhvvbeectp53" path="res://GERF_version/Asset/graphic/WKRrf_.png" id="5_67mh6"]
 [ext_resource type="PackedScene" uid="uid://yal365f56m32" path="res://GERF_version/Scenes/level_object.tscn" id="5_bhse7"]
-[ext_resource type="PackedScene" uid="uid://c30pbx2xgd84h" path="res://GERF_version/Scenes/level_1.tscn" id="5_d247x"]
+[ext_resource type="PackedScene" uid="uid://b15cg372t2tac" path="res://GERF_version/Scenes/tuto_A.tscn" id="5_d247x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b68ub"]
 atlas = ExtResource("5_67mh6")
@@ -263,7 +263,6 @@ offset_left = 786.0
 offset_top = 477.0
 offset_right = 716.6
 offset_bottom = 417.424
-scale = Vector2(3, 3)
 
 [node name="Tuto_control" parent="." instance=ExtResource("2_dggm2")]
 visible = false
