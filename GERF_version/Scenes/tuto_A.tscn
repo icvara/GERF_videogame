@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b15cg372t2tac"]
+[gd_scene load_steps=13 format=3 uid="uid://b15cg372t2tac"]
 
 [ext_resource type="Script" uid="uid://cirow2kaxmkcq" path="res://GERF_version/Scripts/tuto_a.gd" id="1_oyt1q"]
 [ext_resource type="PackedScene" uid="uid://625fix8gh62c" path="res://GERF_version/workstation/scene/DNA_delivery.tscn" id="3_k372j"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cjty0r048lr8i" path="res://GERF_version/Items/scene/DNA.tscn" id="9_18o0k"]
 [ext_resource type="PackedScene" uid="uid://dyj70urrvani6" path="res://GERF_version/Items/scene/mcell.tscn" id="10_05eaj"]
 [ext_resource type="PackedScene" uid="uid://bptn6adjpekm0" path="res://GERF_version/workstation/scene/glycerol_stock.tscn" id="11_wma2i"]
+[ext_resource type="AudioStream" uid="uid://bth641rduq30i" path="res://GERF_version/Asset/sound/cave theme.mp3" id="12_wofsu"]
 
 [node name="Tuto_A" type="Control"]
 layout_mode = 3
@@ -192,5 +193,9 @@ position = Vector2(146, 169)
 [node name="Pause_menu" parent="." instance=ExtResource("3_yv6qu")]
 visible = false
 layout_mode = 1
+
+[node name="CaveTheme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_wofsu")
+autoplay = true
 
 [connection signal="pressed" from="ColorRect/Button" to="." method="_on_button_pressed"]

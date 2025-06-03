@@ -1,8 +1,9 @@
-[gd_scene load_steps=35 format=3 uid="uid://dim2iyppu8yd8"]
+[gd_scene load_steps=36 format=3 uid="uid://dim2iyppu8yd8"]
 
 [ext_resource type="Script" uid="uid://dhnusnluxusf5" path="res://GERF_version/Scripts/starting_menu.gd" id="1_tfirb"]
 [ext_resource type="Texture2D" uid="uid://bbhvvbeectp53" path="res://GERF_version/Asset/graphic/WKRrf_.png" id="2_q4xvx"]
 [ext_resource type="Script" uid="uid://bgg0at8pecbww" path="res://GERF_version/Scripts/scoreboard.gd" id="2_yuayt"]
+[ext_resource type="AudioStream" uid="uid://cfluq1b2y86vu" path="res://GERF_version/Asset/sound/mountain top.mp3" id="4_sbfbn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b68ub"]
 atlas = ExtResource("2_q4xvx")
@@ -356,6 +357,10 @@ text = "9. EMPTY: 0000 "
 [node name="10" type="Label" parent="ColorRect/Scoreboard"]
 layout_mode = 2
 text = "10. EMPTY: 0000 "
+
+[node name="MountainTop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_sbfbn")
+autoplay = true
 
 [connection signal="pressed" from="ColorRect/VBoxContainer/1" to="." method="_on_1_pressed"]
 [connection signal="pressed" from="ColorRect/VBoxContainer/2" to="." method="_on_2_pressed"]

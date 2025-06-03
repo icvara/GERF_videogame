@@ -1,1 +1,1 @@
-Izva:500;
+Izva:500;Izva:400;Izva:700;testa2:500;

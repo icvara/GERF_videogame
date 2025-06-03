@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bjxyv0aonstdc"]
+[gd_scene load_steps=4 format=3 uid="uid://bjxyv0aonstdc"]
 
 [ext_resource type="Script" uid="uid://bwemfh8waemsp" path="res://GERF_version/Scripts/time_hud.gd" id="1_vypku"]
+[ext_resource type="AudioStream" uid="uid://bth641rduq30i" path="res://GERF_version/Asset/sound/cave theme.mp3" id="2_ile8r"]
+[ext_resource type="AudioStream" uid="uid://b7m0nkuiaamn1" path="res://GERF_version/Asset/sound/dark.soundwave.wav" id="3_g0q32"]
 
 [node name="TimeHUD" type="Control"]
 layout_mode = 3
@@ -42,5 +44,13 @@ text = "120 s"
 horizontal_alignment = 1
 
 [node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="CaveTheme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_ile8r")
+autoplay = true
+
+[node name="Dark_soundwave" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_g0q32")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

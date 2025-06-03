@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bmb046wxm4dwv"]
+[gd_scene load_steps=40 format=3 uid="uid://bmb046wxm4dwv"]
 
 [ext_resource type="Script" uid="uid://b1i5r1u1ktdeh" path="res://GERF_version/Scripts/level_selector.gd" id="1_wqmym"]
 [ext_resource type="PackedScene" uid="uid://b8edkh57hgfcf" path="res://GERF_version/Scenes/player.tscn" id="2_67mh6"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bbhvvbeectp53" path="res://GERF_version/Asset/graphic/WKRrf_.png" id="5_67mh6"]
 [ext_resource type="PackedScene" uid="uid://yal365f56m32" path="res://GERF_version/Scenes/level_object.tscn" id="5_bhse7"]
 [ext_resource type="PackedScene" uid="uid://b15cg372t2tac" path="res://GERF_version/Scenes/tuto_A.tscn" id="5_d247x"]
+[ext_resource type="AudioStream" uid="uid://bkhyg558xebmw" path="res://GERF_version/Asset/sound/FOREST.mp3" id="8_6nkq7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b68ub"]
 atlas = ExtResource("5_67mh6")
@@ -271,3 +272,7 @@ layout_mode = 1
 [node name="Pause_menu" parent="." instance=ExtResource("3_67mh6")]
 visible = false
 layout_mode = 1
+
+[node name="Forest" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_6nkq7")
+autoplay = true

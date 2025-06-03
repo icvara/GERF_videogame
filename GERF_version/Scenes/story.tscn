@@ -1,9 +1,10 @@
-[gd_scene load_steps=40 format=3 uid="uid://bbisetm4o3e3q"]
+[gd_scene load_steps=41 format=3 uid="uid://bbisetm4o3e3q"]
 
 [ext_resource type="Script" uid="uid://bc3v5a7rqrg51" path="res://GERF_version/Scripts/story.gd" id="1_u0jl3"]
 [ext_resource type="Texture2D" uid="uid://bbhvvbeectp53" path="res://GERF_version/Asset/graphic/WKRrf_.png" id="1_wugj3"]
 [ext_resource type="AudioStream" uid="uid://dncwo1yv8ohj8" path="res://GERF_version/Asset/sound/hey_listen.mp3" id="2_4mcic"]
 [ext_resource type="Texture2D" uid="uid://cfuxtf3iujdc3" path="res://GERF_version/Asset/graphic/LabNPCs.png" id="2_b68ub"]
+[ext_resource type="AudioStream" uid="uid://bkhyg558xebmw" path="res://GERF_version/Asset/sound/FOREST.mp3" id="5_cxwkt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b68ub"]
 atlas = ExtResource("1_wugj3")
@@ -382,6 +383,10 @@ offset_top = 123.0
 offset_right = 454.0
 offset_bottom = 152.0
 text = "Continue - Press A"
+
+[node name="Forest" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_cxwkt")
+autoplay = true
 
 [connection signal="pressed" from="Panel/next1" to="." method="_on_next_1_pressed"]
 [connection signal="pressed" from="Panel2/Button" to="." method="_on_button_pressed"]
