@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://boqe85m3sf8co"]
+[gd_scene load_steps=3 format=3 uid="uid://boqe85m3sf8co"]
 
 [ext_resource type="Script" uid="uid://3lsdmycjtlg6" path="res://GERF_version/Scripts/tuto_control.gd" id="1_2yf0u"]
 [ext_resource type="Texture2D" uid="uid://dgxr1d03nefu5" path="res://GERF_version/Asset/graphic/controller template.png" id="2_6u3ut"]
-[ext_resource type="AudioStream" uid="uid://bkhyg558xebmw" path="res://GERF_version/Asset/sound/FOREST.mp3" id="3_2yf0u"]
 
 [node name="Tuto_control" type="Control"]
 process_mode = 3
@@ -59,9 +58,5 @@ text = "Okay"
 position = Vector2(555, 349)
 scale = Vector2(0.348307, 0.348307)
 texture = ExtResource("2_6u3ut")
-
-[node name="Forest" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_2yf0u")
-autoplay = true
 
 [connection signal="pressed" from="Panel/Button" to="." method="_on_button_pressed"]
