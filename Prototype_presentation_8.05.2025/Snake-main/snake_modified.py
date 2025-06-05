@@ -622,7 +622,7 @@ class MAIN:
         popup_y = (screen_height - popup_height) // 2
 
         # Button dimensions
-        button_width = 200
+        button_width = 220
         button_height = 50
         button_spacing = 40
         button_y = popup_y + popup_height - 70
@@ -757,13 +757,13 @@ class MAIN:
                         return "tutorial"
 
     def show_gameover_popup(self, message, submessage, emoji_img=None):
-        popup_width = 500
+        popup_width = 600
         popup_height = 250
         popup_x = (screen_width - popup_width) // 2
         popup_y = (screen_height - popup_height) // 2
 
         # Button dimensions
-        button_width = 180
+        button_width = 220
         button_height = 50
         button_y = popup_y + popup_height - 70
 
