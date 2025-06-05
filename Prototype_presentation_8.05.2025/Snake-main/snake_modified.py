@@ -1,8 +1,9 @@
-import pygame, sys, random
+import pygame, sys, random, os
 import json
 import time
 from pygame.math import Vector2
 from pathlib import Path
+from screeninfo import get_monitors
 
 # Path to the current file
 current_file = Path(__file__)
@@ -849,10 +850,31 @@ if pygame.joystick.get_count() > 0:
 else:
     joystick = None
     
-infoObject = pygame.display.Info()
-screen_width = infoObject.current_w - 5
+# infoObject = pygame.display.Info()
+# screen_width = infoObject.current_w - 5
+# header_height = 130  # Space for protein info
+# screen_height = infoObject.current_h - 115  # Leave space for taskbars etc.
+
+monitors = get_monitors()
+for i, m in enumerate(monitors):
+    print(f"Monitor {i}: {m.width}x{m.height} at ({m.x}, {m.y})")
+
+# Use the second monitor if available
+if len(monitors) > 1:
+    screen_width = monitors[1].width - 5
+    screen_height = monitors[1].height - 115
+    screen_x = monitors[1].x
+    screen_y = monitors[1].y
+else:
+    screen_width = monitors[0].width - 5
+    screen_height = monitors[0].height - 115
+    screen_x = monitors[0].x
+    screen_y = monitors[0].y
+    
+os.environ['SDL_VIDEO_WINDOW_POS'] = f"{screen_x},{screen_y}"
+screen = pygame.display.set_mode((screen_width, screen_height))
+
 header_height = 130  # Space for protein info
-screen_height = infoObject.current_h - 115  # Leave space for taskbars etc.
 
 cell_size = 30
 cell_number_x = screen_width // cell_size
