@@ -1023,3 +1023,5 @@ while True:
 # buttons color? and text
 # add pause (and add tutorial line about it)
 # add start and play again/tutorial with buttons from joystick
+# colorblind palette
+# bigger recipe or more spaced (or both)
