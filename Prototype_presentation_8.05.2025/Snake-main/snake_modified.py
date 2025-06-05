@@ -169,6 +169,7 @@ class MAIN:
         self.codons = [CODON() for _ in range(1)]  # 0 codons on screen
         self.last_codon_time = pygame.time.get_ticks()
         self.active = False  # Game starts paused
+        self.paused = False
         self.game_over_reason = None
         self.snake_speed = 150  # Initial speed in ms
         self.level_up_every = 5  # Increase speed every 5 codons
@@ -885,8 +886,6 @@ else:
     
     
 monitors = get_monitors()
-for i, m in enumerate(monitors):
-    print(f"Monitor {i}: {m.width}x{m.height} at ({m.x}, {m.y})")
 
 # Use the second monitor if available
 if len(monitors) > 1:
@@ -1020,21 +1019,23 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-        if event.type == SCREEN_UPDATE:
+        if event.type == SCREEN_UPDATE and not main_game.paused:
             main_game.update()
         if event.type == pygame.KEYDOWN:
-            if not main_game.active and main_game.game_over_reason:
+            # Toggle pause with 'X' key
+            if event.key == pygame.K_x:
+                main_game.paused = not main_game.paused
+
+            elif not main_game.active and main_game.game_over_reason:
                 main_game.reset_game()
                 main_game.active = True
-            else:
-                if event.key in key_to_direction:
-                    new_dir = key_to_direction[event.key]
-                    if new_dir + main_game.snake.direction != Vector2(
-                        0, 0
-                    ):  # Prevent reversal
-                        main_game.snake.direction = new_dir
-                        main_game.active = True
-                        
+
+            elif event.key in key_to_direction:
+                new_dir = key_to_direction[event.key]
+                if new_dir + main_game.snake.direction != Vector2(0, 0):
+                    main_game.snake.direction = new_dir
+                    main_game.active = True
+                           
         # Joystick hat/dpad
         if event.type == pygame.JOYHATMOTION:
             hat_x, hat_y = event.value
@@ -1068,9 +1069,16 @@ while True:
 
     screen.fill((223, 218, 196))
     main_game.draw_elements()
+    # Draw pause overlay if paused
+    if main_game.paused:
+        pause_text = highlight_font.render("PAUSED", True, (100, 0, 0))
+        text_rect = pause_text.get_rect(center=(screen_width // 2, screen_height // 2))
+        screen.blit(pause_text, text_rect)
+        
     game_area = pygame.Rect(
         0, header_height, screen_width, screen_height - header_height
     )
+    
     pygame.draw.rect(screen, (0, 0, 0), game_area, 2)
     pygame.display.update()
     clock.tick(60)
