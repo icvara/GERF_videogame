@@ -942,7 +942,7 @@ protein_correct = pygame.image.load(f"{current_dir}/Graphics/protein_correct.png
 protein_misfolded = pygame.image.load(f"{current_dir}/Graphics/protein_misfolded.png")
 protein_inactive = pygame.image.load(f"{current_dir}/Graphics/protein_inactive.png")
 
-header_icon_size = 40
+header_icon_size = 35
 
 CODON_ICONS = {
     codon: pygame.image.load(f"{current_dir}/Graphics/{shape}.png").convert_alpha()
