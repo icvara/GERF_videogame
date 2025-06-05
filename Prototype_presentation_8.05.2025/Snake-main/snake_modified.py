@@ -423,14 +423,14 @@ class MAIN:
             ),
             ("Avoid crashing into walls or running into yourself.", emoji_stop),
             ("", None),
-            ("Good luck building a functional food protein!", emoji_dna),
+            ("Press A to START, use X to PAUSE the game", None),
             ("", None),
-            ("Press A to START, use X to PAUSE the game", None)
+            ("Good luck building a functional food protein!", emoji_dna)
         ]
 
         # Popup dimensions
         popup_width = 1030
-        popup_height = 700
+        popup_height = 650
         popup_x = (screen_width - popup_width) // 2
         popup_y = (screen_height - popup_height) // 2
 
@@ -466,11 +466,12 @@ class MAIN:
 
                 # Check if it's the last line
                 is_final = i == len(tutorial_lines) - 1
+                is_lasttofinal = i == len(tutorial_lines) - 3
 
                 font_to_use = highlight_font if is_final else game_font
                 text_color = (0, 0, 0) if is_final else (50, 50, 50)
 
-                if is_final:
+                if is_final or is_lasttofinal:
                     text_surface = font_to_use.render(line, True, text_color)
                     total_width = text_surface.get_width()
                     if emoji_img:
