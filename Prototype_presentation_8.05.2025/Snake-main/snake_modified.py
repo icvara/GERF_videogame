@@ -1089,3 +1089,4 @@ while True:
 
 
 # colorblind palette
+# improve protein descriptions
