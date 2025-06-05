@@ -171,8 +171,8 @@ class MAIN:
         self.active = False  # Game starts paused
         self.paused = False
         self.game_over_reason = None
-        self.snake_speed = 150  # Initial speed in ms
-        self.level_up_every = 5  # Increase speed every 5 codons
+        self.snake_speed = 180  # Initial speed in ms
+        self.level_up_every = 2  # Increase speed every 2 codons
         self.speed_floor = 50  # Fastest allowed speed
         self.codons_eaten = 0
         self.tutorial_shown = False
@@ -273,7 +273,7 @@ class MAIN:
         self.select_new_protein()
         self.snake.reset()
         self.codons_eaten = 0
-        self.snake_speed = 150  # Reset speed to starting value
+        self.snake_speed = 180  # Reset speed to starting value
         pygame.time.set_timer(SCREEN_UPDATE, self.snake_speed)
         self.codons = [CODON() for _ in range(5)]
         self.last_codon_time = pygame.time.get_ticks()
@@ -890,12 +890,12 @@ monitors = get_monitors()
 # Use the second monitor if available
 if len(monitors) > 1:
     screen_width = monitors[1].width
-    screen_height = monitors[1].height - 10
+    screen_height = monitors[1].height - 50
     screen_x = monitors[1].x
     screen_y = monitors[1].y
 else:
     screen_width = monitors[0].width
-    screen_height = monitors[0].height - 10
+    screen_height = monitors[0].height - 50
     screen_x = monitors[0].x
     screen_y = monitors[0].y
     
@@ -940,7 +940,7 @@ protein_correct = pygame.image.load(f"{current_dir}/Graphics/protein_correct.png
 protein_misfolded = pygame.image.load(f"{current_dir}/Graphics/protein_misfolded.png")
 protein_inactive = pygame.image.load(f"{current_dir}/Graphics/protein_inactive.png")
 
-header_icon_size = 30
+header_icon_size = 40
 
 CODON_ICONS = {
     codon: pygame.image.load(f"{current_dir}/Graphics/{shape}.png").convert_alpha()
