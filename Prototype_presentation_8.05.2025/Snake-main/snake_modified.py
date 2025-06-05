@@ -940,7 +940,7 @@ protein_correct = pygame.image.load(f"{current_dir}/Graphics/protein_correct.png
 protein_misfolded = pygame.image.load(f"{current_dir}/Graphics/protein_misfolded.png")
 protein_inactive = pygame.image.load(f"{current_dir}/Graphics/protein_inactive.png")
 
-header_icon_size = 40
+header_icon_size = 30
 
 CODON_ICONS = {
     codon: pygame.image.load(f"{current_dir}/Graphics/{shape}.png").convert_alpha()
@@ -1025,6 +1025,10 @@ while True:
             # Toggle pause with 'X' key
             if event.key == pygame.K_x:
                 main_game.paused = not main_game.paused
+                
+            if event.type == pygame.JOYBUTTONDOWN:
+                if event.button == 2:  # Replace with the correct number for your controller
+                    main_game.paused = not main_game.paused
 
             elif not main_game.active and main_game.game_over_reason:
                 main_game.reset_game()
