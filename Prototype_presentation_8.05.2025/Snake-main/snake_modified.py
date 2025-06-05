@@ -850,11 +850,7 @@ if pygame.joystick.get_count() > 0:
 else:
     joystick = None
     
-# infoObject = pygame.display.Info()
-# screen_width = infoObject.current_w - 5
-# header_height = 130  # Space for protein info
-# screen_height = infoObject.current_h - 115  # Leave space for taskbars etc.
-
+    
 monitors = get_monitors()
 for i, m in enumerate(monitors):
     print(f"Monitor {i}: {m.width}x{m.height} at ({m.x}, {m.y})")
@@ -1052,4 +1048,3 @@ while True:
 # add pause (and add tutorial line about it)
 # add start and play again/tutorial with buttons from joystick
 # colorblind palette
-# bigger recipe or more spaced (or both)
