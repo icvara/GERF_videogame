@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://crxl4vdyq24cl" path="res://Prototype_presentation_8.05.2025/overlab/player_select.gd" id="1_w66ea"]
 [ext_resource type="PackedScene" uid="uid://tj2g8hwy2d8e" path="res://GERF_version/Scenes/charselect.tscn" id="2_w66ea"]
-[ext_resource type="PackedScene" uid="uid://ccwr8m4wr2mn" path="res://Prototype_presentation_8.05.2025/pause_menu.tscn" id="3_b14up"]
+[ext_resource type="PackedScene" uid="uid://ew4cs3o4boh4" path="res://GERF_version/Scenes/pause_menu.tscn" id="3_jeg6x"]
 [ext_resource type="AudioStream" uid="uid://cfluq1b2y86vu" path="res://GERF_version/Asset/sound/mountain top.mp3" id="4_jeg6x"]
 
 [node name="PlayerSelect" type="Control"]
@@ -96,7 +96,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -482.0
 offset_top = -20.0
-offset_right = 516.0
+offset_right = 538.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -118,9 +118,16 @@ visible = false
 layout_mode = 2
 player_number = 4
 
-[node name="Pause_menu" parent="." instance=ExtResource("3_b14up")]
+[node name="Pause_menu" parent="." instance=ExtResource("3_jeg6x")]
 visible = false
 layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_bottom = 20.0
 
 [node name="MountainTop" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_jeg6x")

@@ -13,8 +13,10 @@ func _ready() -> void:
 		$Label2.text = "Press (A) to join"
 	if player_number == 2:
 		$Label2.text = "Press SPACE to join"
+
 	if player_number == 3:
 		$Label2.text = "Press SHIFT to join"
+
 
 
 func add_player_choice():
@@ -24,6 +26,7 @@ func add_player_choice():
 		$L.show()
 		$R.show()
 		$AnimatedSprite2D.show()
+		get_node("Circle"+ str(player_number)).show()
 		$Label.show()
 		GlobalVariableOverlab.nplayer = clamp(GlobalVariableOverlab.nplayer+1,0,4)	
 		print(GlobalVariableOverlab.nplayer)

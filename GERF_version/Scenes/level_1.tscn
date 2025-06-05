@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://c30pbx2xgd84h"]
+[gd_scene load_steps=35 format=4 uid="uid://c30pbx2xgd84h"]
 
 [ext_resource type="Script" uid="uid://udpwraov6f2i" path="res://GERF_version/Scripts/main_overlab.gd" id="1_l73bu"]
 [ext_resource type="PackedScene" uid="uid://cf6mcq38lapcb" path="res://Prototype_presentation_8.05.2025/overlab/item.tscn" id="2_u4kd4"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://mxoes4ppbaoc" path="res://GERF_version/workstation/scene/Transformation_station.tscn" id="14_dhn57"]
 [ext_resource type="PackedScene" uid="uid://bptn6adjpekm0" path="res://GERF_version/workstation/scene/glycerol_stock.tscn" id="14_tjhfs"]
 [ext_resource type="PackedScene" uid="uid://ew4cs3o4boh4" path="res://GERF_version/Scenes/pause_menu.tscn" id="15_p2k58"]
+[ext_resource type="PackedScene" uid="uid://boqe85m3sf8co" path="res://GERF_version/Scenes/tuto_control.tscn" id="20_dhn57"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o0fyi"]
 texture = ExtResource("4_w0wfq")
@@ -2377,6 +2378,7 @@ position = Vector2(448, 77.5)
 position = Vector2(447.5, 15.5)
 
 [node name="player_startpos" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="0" type="Node2D" parent="player_startpos"]
 position = Vector2(434, 405)
@@ -2403,6 +2405,9 @@ offset_bottom = -650.0
 visible = false
 
 [node name="Pause_menu" parent="CanvasLayer" instance=ExtResource("15_p2k58")]
+visible = false
+
+[node name="Tuto_control" parent="CanvasLayer" instance=ExtResource("20_dhn57")]
 visible = false
 
 [node name="Timer" type="Timer" parent="."]

@@ -7,6 +7,7 @@ extends Control
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_pressed("pause"):
+		print("here")
 		show()
 		get_tree().paused = true
 		$Panel/VBoxContainer/Button.grab_focus()
@@ -33,3 +34,17 @@ func _on_button_4_pressed():
 	
 
 	
+
+
+func _on_button_3_pressed() -> void:
+	$Panel.hide()
+	
+	$Control.show()
+	$Control/Button_crtl.grab_focus()
+
+
+func _on_button_crtl_pressed() -> void:
+	$Control.hide()
+	hide()
+
+	get_tree().paused = false

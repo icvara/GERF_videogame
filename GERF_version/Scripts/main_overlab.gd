@@ -7,14 +7,16 @@ var init_posvector = [Vector2(0,0), Vector2(1,0),Vector2(0,1),Vector2(1,1)]
 
 
 func _ready() -> void:	
+	$CanvasLayer/Tuto_control.call_window()
+
 	#instance the player
 	#GlobalVariableOverlab.nplayer = 3
 	print("ss")
 	print(GlobalVariableOverlab.nplayer)
 	for i in GlobalVariableOverlab.nplayer:
 		var newplay = player.instantiate()
-		newplay.setskin(GlobalVariableOverlab.playerskin[i])
 		newplay.playerID = i
+		newplay.setskin(GlobalVariableOverlab.playerskin[i])
 		#newplay.position = 
 		$player_startpos.get_node(str(i)).add_child(newplay)
 		

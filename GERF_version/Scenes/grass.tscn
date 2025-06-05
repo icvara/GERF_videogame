@@ -1766,4 +1766,4 @@ visible = false
 position = Vector2(31, 107)
 sprite_frames = SubResource("SpriteFrames_lo3ss")
 autoplay = "default"
-frame_progress = 0.55287
+frame_progress = 0.375439

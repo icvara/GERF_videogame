@@ -4,7 +4,8 @@ var SPEED = 500
 var interacting_with
 var interacting_with_workstation
 var inventory
-var push_force =  80
+var push_force =  500
+var push_velocity = Vector2(0,0)
 @export var playerID = 1
 
 var animatedstuff
@@ -12,6 +13,9 @@ var animatedstuff
 func setskin(skinid):
 	animatedstuff = get_node("AnimatedSprite2D_"+str(skinid))
 	animatedstuff.show()
+	print(playerID)
+	get_node("Circle"+ str(playerID+1)).show()
+
 
 func _physics_process(delta):
 	#if GlobalVariableOverlab.nplayer >= 1:
@@ -40,9 +44,9 @@ func _physics_process(delta):
 		direction = direction.normalized()
 		
 	if direction:
-		velocity = direction * SPEED
+		velocity = direction * SPEED 
 	else:
-		velocity = Vector2(0,0)
+		velocity = Vector2(0,0) 
 	
 	if direction.x < 0:		
 		animatedstuff.play("left")
@@ -54,13 +58,19 @@ func _physics_process(delta):
 		animatedstuff.play("back")
 	else:
 		animatedstuff.stop()
-		
-	move_and_slide()
+	
+	
+	
 	
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
-		if c.get_collider() is RigidBody2D:
-			c.get_collider().apply_central_impulse(-c.get_normal()*push_force)
+		if c.get_collider() is CharacterBody2D:
+			var push_direction = velocity.normalized()
+			velocity += c.get_collider().velocity.normalized() * push_force
+			c.get_collider().velocity += push_direction * push_force
+	
+	move_and_slide()
+
 	
 	if inventory != null:
 		#inventory.apply_central_force(velocity)

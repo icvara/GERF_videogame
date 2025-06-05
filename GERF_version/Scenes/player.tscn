@@ -1,7 +1,14 @@
-[gd_scene load_steps=44 format=3 uid="uid://b8edkh57hgfcf"]
+[gd_scene load_steps=48 format=3 uid="uid://b8edkh57hgfcf"]
 
 [ext_resource type="Script" uid="uid://6l1o6agfj1nb" path="res://GERF_version/Scripts/player.gd" id="1_do4mp"]
+[ext_resource type="Texture2D" uid="uid://ctvh1y6gh4jvn" path="res://GERF_version/Asset/graphic/circle_1.png" id="2_5cclq"]
 [ext_resource type="Texture2D" uid="uid://dxyjteves365y" path="res://Prototype_presentation_8.05.2025/overlab/asset/LabNPCs.png" id="2_th17n"]
+[ext_resource type="Texture2D" uid="uid://cdtwwkjd0j3hw" path="res://GERF_version/Asset/graphic/circle_2.png" id="3_uqssn"]
+[ext_resource type="Texture2D" uid="uid://tle7o6kpdoi" path="res://GERF_version/Asset/graphic/circle_3.png" id="4_81byt"]
+[ext_resource type="Texture2D" uid="uid://b2xt6ydq27tve" path="res://GERF_version/Asset/graphic/circle_4.png" id="5_cxbiu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_do4mp"]
+radius = 8.02773
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j74bp"]
 radius = 19.0
@@ -327,19 +334,45 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_do4mp"]
-
 [node name="player" type="CharacterBody2D"]
 scale = Vector2(3, 3)
 motion_mode = 1
 script = ExtResource("1_do4mp")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 7.66667)
+shape = SubResource("CircleShape2D_do4mp")
+
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(1, -12)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-1, 12)
+position = Vector2(-1, 19.6667)
 shape = SubResource("CircleShape2D_j74bp")
+
+[node name="Circle1" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0.333333, 8.33333)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_5cclq")
+
+[node name="Circle2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0.333333, 8.33333)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_uqssn")
+
+[node name="Circle3" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0.333333, 8.33333)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_81byt")
+
+[node name="Circle4" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0.333333, 8.33333)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_cxbiu")
 
 [node name="AnimatedSprite2D_1" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -358,10 +391,6 @@ visible = false
 position = Vector2(1, -12)
 sprite_frames = SubResource("SpriteFrames_r7bmt")
 animation = &"back"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.333333, 4)
-shape = SubResource("CircleShape2D_do4mp")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -16.0
