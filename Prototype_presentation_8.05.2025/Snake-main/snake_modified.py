@@ -978,7 +978,9 @@ while True:
     clock.tick(60)
 
 
-# modify protein drawing
+# shorter protein chains
+# rectangle instead of exclamation point for active site in tutorial
+# buttons color? and text
 # better name
 
 # add proteins to db??
