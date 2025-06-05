@@ -857,13 +857,13 @@ for i, m in enumerate(monitors):
 
 # Use the second monitor if available
 if len(monitors) > 1:
-    screen_width = monitors[1].width - 5
-    screen_height = monitors[1].height - 115
+    screen_width = monitors[1].width
+    screen_height = monitors[1].height - 10
     screen_x = monitors[1].x
     screen_y = monitors[1].y
 else:
-    screen_width = monitors[0].width - 5
-    screen_height = monitors[0].height - 115
+    screen_width = monitors[0].width
+    screen_height = monitors[0].height - 10
     screen_x = monitors[0].x
     screen_y = monitors[0].y
     
