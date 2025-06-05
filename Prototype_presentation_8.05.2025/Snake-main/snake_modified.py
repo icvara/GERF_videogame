@@ -505,6 +505,12 @@ class MAIN:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if button_rect.collidepoint(event.pos):
                         return
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_a:  # Pressing 'A' on the keyboard
+                        return
+                if event.type == pygame.JOYBUTTONDOWN:
+                    if event.button == 0:  # Usually A button on gamepads
+                        return
 
     def draw_header(self):
         global active_sites
@@ -842,7 +848,7 @@ if pygame.joystick.get_count() > 0:
     joystick.init()
 else:
     joystick = None
-    
+
 infoObject = pygame.display.Info()
 screen_width = infoObject.current_w - 5
 header_height = 130  # Space for protein info
@@ -884,7 +890,7 @@ protein_correct = pygame.image.load(f"{current_dir}/Graphics/protein_correct.png
 protein_misfolded = pygame.image.load(f"{current_dir}/Graphics/protein_misfolded.png")
 protein_inactive = pygame.image.load(f"{current_dir}/Graphics/protein_inactive.png")
 
-header_icon_size = 35
+header_icon_size = 40
 
 CODON_ICONS = {
     codon: pygame.image.load(f"{current_dir}/Graphics/{shape}.png").convert_alpha()
@@ -977,12 +983,14 @@ while True:
                     ):  # Prevent reversal
                         main_game.snake.direction = new_dir
                         main_game.active = True
-                        
+
         # Joystick hat/dpad
         if event.type == pygame.JOYHATMOTION:
             hat_x, hat_y = event.value
             new_dir = Vector2(hat_x, -hat_y)  # Note: y is inverted
-            if new_dir.length() > 0 and new_dir + main_game.snake.direction != Vector2(0, 0):
+            if new_dir.length() > 0 and new_dir + main_game.snake.direction != Vector2(
+                0, 0
+            ):
                 main_game.snake.direction = new_dir
                 main_game.active = True
 
@@ -1005,7 +1013,9 @@ while True:
                     new_dir = Vector2(0, -1)
                 else:
                     new_dir = Vector2(0, 0)
-            if new_dir.length() > 0 and new_dir + main_game.snake.direction != Vector2(0, 0):
+            if new_dir.length() > 0 and new_dir + main_game.snake.direction != Vector2(
+                0, 0
+            ):
                 main_game.snake.direction = new_dir
                 main_game.active = True
 
@@ -1017,7 +1027,6 @@ while True:
     pygame.draw.rect(screen, (0, 0, 0), game_area, 2)
     pygame.display.update()
     clock.tick(60)
-
 
 
 # buttons color? and text
