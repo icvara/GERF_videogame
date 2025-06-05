@@ -725,15 +725,31 @@ class MAIN:
 
             pygame.display.update()
 
-            # Event handling
+            # ----- Event handling -----
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+
+                # Mouse click
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if play_button_rect.collidepoint(event.pos):
                         return "play"
                     elif tutorial_button_rect.collidepoint(event.pos):
+                        return "tutorial"
+
+                # Keyboard input
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_b:  # 'B' key for Play
+                        return "play"
+                    elif event.key == pygame.K_a:  # 'A' key for Tutorial
+                        return "tutorial"
+
+                # Gamepad input
+                if event.type == pygame.JOYBUTTONDOWN:
+                    if event.button == 1:  # Usually 'B' on Xbox-style controllers
+                        return "play"
+                    elif event.button == 0:  # Usually 'A' on Xbox-style controllers
                         return "tutorial"
 
     def show_gameover_popup(self, message, submessage, emoji_img=None):
@@ -824,11 +840,28 @@ class MAIN:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+
+                # Mouse click
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if play_button_rect.collidepoint(event.pos):
                         return "play"
                     elif tutorial_button_rect.collidepoint(event.pos):
                         return "tutorial"
+
+                # Keyboard input
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_b:  # 'B' key for Play
+                        return "play"
+                    elif event.key == pygame.K_a:  # 'A' key for Tutorial
+                        return "tutorial"
+
+                # Gamepad input
+                if event.type == pygame.JOYBUTTONDOWN:
+                    if event.button == 1:  # Usually 'B' on Xbox-style controllers
+                        return "play"
+                    elif event.button == 0:  # Usually 'A' on Xbox-style controllers
+                        return "tutorial"
+
 
 
 with open(f"{current_dir}/proteins_db.json") as f:
