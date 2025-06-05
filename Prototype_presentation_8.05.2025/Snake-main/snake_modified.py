@@ -984,4 +984,3 @@ while True:
 # better name
 
 # add proteins to db??
-# add shapes added into snake body???
