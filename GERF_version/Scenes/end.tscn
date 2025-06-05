@@ -105,6 +105,7 @@ offset_top = -823.0
 offset_right = 22.0
 offset_bottom = -823.0
 scale = Vector2(2, 2)
+mouse_filter = 2
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="text_changed" from="LineEdit" to="." method="_on_line_edit_text_changed"]
