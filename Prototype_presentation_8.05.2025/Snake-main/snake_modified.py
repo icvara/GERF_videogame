@@ -423,7 +423,7 @@ class MAIN:
             ),
             ("Avoid crashing into walls or running into yourself.", emoji_stop),
             ("", None),
-            ("Press A to START, use X to PAUSE the game", None),
+            ("Press A to START!", None),
             ("", None),
             ("Good luck building a functional food protein!", emoji_dna)
         ]
@@ -1025,9 +1025,6 @@ while True:
         if event.type == SCREEN_UPDATE and not main_game.paused:
             main_game.update()
         if event.type == pygame.KEYDOWN:
-            # Toggle pause with 'X' key
-            if event.key == pygame.K_x:
-                main_game.paused = not main_game.paused
                 
             if event.type == pygame.JOYBUTTONDOWN:
                 if event.button == 2:  # Replace with the correct number for your controller
