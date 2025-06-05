@@ -848,7 +848,7 @@ if pygame.joystick.get_count() > 0:
     joystick.init()
 else:
     joystick = None
-
+    
 infoObject = pygame.display.Info()
 screen_width = infoObject.current_w - 5
 header_height = 130  # Space for protein info
@@ -983,14 +983,12 @@ while True:
                     ):  # Prevent reversal
                         main_game.snake.direction = new_dir
                         main_game.active = True
-
+                        
         # Joystick hat/dpad
         if event.type == pygame.JOYHATMOTION:
             hat_x, hat_y = event.value
             new_dir = Vector2(hat_x, -hat_y)  # Note: y is inverted
-            if new_dir.length() > 0 and new_dir + main_game.snake.direction != Vector2(
-                0, 0
-            ):
+            if new_dir.length() > 0 and new_dir + main_game.snake.direction != Vector2(0, 0):
                 main_game.snake.direction = new_dir
                 main_game.active = True
 
@@ -1013,9 +1011,7 @@ while True:
                     new_dir = Vector2(0, -1)
                 else:
                     new_dir = Vector2(0, 0)
-            if new_dir.length() > 0 and new_dir + main_game.snake.direction != Vector2(
-                0, 0
-            ):
+            if new_dir.length() > 0 and new_dir + main_game.snake.direction != Vector2(0, 0):
                 main_game.snake.direction = new_dir
                 main_game.active = True
 
@@ -1027,6 +1023,7 @@ while True:
     pygame.draw.rect(screen, (0, 0, 0), game_area, 2)
     pygame.display.update()
     clock.tick(60)
+
 
 
 # buttons color? and text
