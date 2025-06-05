@@ -327,11 +327,11 @@ class MAIN:
             time.sleep(1)
             failure.play()
             self.last_description = (
-                f"{errors} wrong codons in the sequence ({error_rate:.0%} error rate)."
+                "Your protein cannot hold its shape and is misfolded!",
             )
             choice = self.show_final_popup(
                 message="Oh no!",
-                submessage="Your protein cannot hold its shape and is misfolded!",
+                submessage=f"{errors} wrong codons in the sequence ({error_rate:.0%} error rate).",
                 emoji_img=emoji_sadface,
                 figure_img=self.protein_misfolded,
             )
@@ -413,7 +413,7 @@ class MAIN:
             ),
             (
                 "Codons in the active site (highlighted by a red rectangle) are the most important!",
-                emoji_exclamation,
+                emoji_hollowsquare,
             ),
             (
                 "Each codon collected makes the snake grow longer and move faster.",
@@ -668,12 +668,15 @@ class MAIN:
             screen.blit(sub_surf, sub_rect)
 
             # Image and description area
-            text_top = sub_rect.bottom + 30
+            text_top = sub_rect.bottom + 20
             padding = 30
 
             if figure_img:
                 original_width, original_height = figure_img.get_size()
-                scale_factor = 0.20  # 20% of original size
+                if figure_img == self.protein_misfolded:
+                    scale_factor = 0.25  # 25% of original size
+                else:
+                    scale_factor = 0.20  # 20% of original size
                 new_size = (
                     int(original_width * scale_factor),
                     int(original_height * scale_factor),
@@ -871,7 +874,7 @@ emoji_sadface = load_scaled(f"{current_dir}/Graphics/sadface.png")
 emoji_snake = load_scaled(f"{current_dir}/Graphics/snake.png")
 emoji_memo = load_scaled(f"{current_dir}/Graphics/memo.png")
 emoji_warning = load_scaled(f"{current_dir}/Graphics/warning.png")
-emoji_exclamation = load_scaled(f"{current_dir}/Graphics/exclamation.png")
+emoji_hollowsquare = load_scaled(f"{current_dir}/Graphics/hollow_square.png")
 emoji_dna = load_scaled(f"{current_dir}/Graphics/dna.png")
 emoji_stop = load_scaled(f"{current_dir}/Graphics/prohibited.png")
 emoji_rocket = load_scaled(f"{current_dir}/Graphics/rocket.png")
@@ -1016,11 +1019,7 @@ while True:
     clock.tick(60)
 
 
-# shorter protein chains
-# rectangle instead of exclamation point for active site in tutorial
-# buttons color? and text
-# better name??
-# add pause
-# joystick??
 
-# add proteins to db??
+# buttons color? and text
+# add pause (and add tutorial line about it)
+# add start and play again/tutorial with buttons from joystick
