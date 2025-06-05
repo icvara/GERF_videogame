@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7fpmxph7j58m"]
+
+[ext_resource type="Script" uid="uid://j0qvchgk1k3i" path="res://Prototype_presentation_8.05.2025/overlab/workstation/empty_table.gd" id="1_5vi41"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_afujj"]
+size = Vector2(29.5, 29.75)
+
+[node name="empty table" type="StaticBody2D" groups=["workstation"]]
+script = ExtResource("1_5vi41")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_right = 30.0
+offset_bottom = 30.0
+color = Color(1, 1, 1, 0.42)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="Label" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -41.0
+offset_right = 20.0
+offset_bottom = -28.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(15.25, 15.125)
+shape = SubResource("RectangleShape2D_afujj")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

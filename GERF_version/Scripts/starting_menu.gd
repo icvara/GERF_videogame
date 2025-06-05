@@ -1,19 +1,15 @@
 extends Control
 
-var activated = false
 #This script is for the landing menu of the game
 
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("space"):
-		activated = true
-	if Input.is_action_just_pressed("up") or Input.is_action_just_pressed("down") or Input.is_action_just_pressed("right") or Input.is_action_just_pressed("left"):
-		$"ColorRect/VBoxContainer/1".grab_focus()
+
+
 
 
 
 func _ready() -> void:
-	activated = false
-
+	$"ColorRect/VBoxContainer/1".grab_focus()
+	
 func _on_1_pressed() -> void:
 	GlobalVariableOverlab.init_var()
 

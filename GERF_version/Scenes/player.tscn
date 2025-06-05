@@ -335,6 +335,7 @@ animations = [{
 }]
 
 [node name="player" type="CharacterBody2D"]
+position = Vector2(0, -23)
 scale = Vector2(3, 3)
 motion_mode = 1
 script = ExtResource("1_do4mp")

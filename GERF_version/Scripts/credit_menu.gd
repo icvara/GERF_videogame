@@ -2,6 +2,9 @@ extends Control
 
 #This script is for the credits of the game
 
+func _ready() -> void:
+	$"ColorRect/VBoxContainer/1".grab_focus()
+
 
 
 func _on_1_pressed() -> void:

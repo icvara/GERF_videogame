@@ -1,8 +1,10 @@
 extends CharacterBody2D
 
 var SPEED = 500
+var last_dir = Vector2(0,0)
 var interacting_with
 var interacting_with_workstation
+var interacting_array = []
 var inventory
 var push_force =  500
 var push_velocity = Vector2(0,0)
@@ -13,11 +15,27 @@ var animatedstuff
 func setskin(skinid):
 	animatedstuff = get_node("AnimatedSprite2D_"+str(skinid))
 	animatedstuff.show()
-	print(playerID)
 	get_node("Circle"+ str(playerID+1)).show()
+
+func get_closest_element(list: Array, target: Vector2) :
+
+	var closest = list[0]
+	var centre_pos =  closest.global_position + Vector2(16,16)
+	var min_diff = centre_pos.distance_to(target)
+	for element in list:
+		centre_pos =  element.global_position + Vector2(16,16)
+		var diff = centre_pos.distance_to(target)
+		if diff < min_diff:
+			min_diff = diff
+			closest = element
+	return closest
+
 
 
 func _physics_process(delta):
+	
+
+	
 	#if GlobalVariableOverlab.nplayer >= 1:
 	if Input.is_action_just_pressed("change_player"):
 			if playerID == 1:
@@ -50,12 +68,16 @@ func _physics_process(delta):
 	
 	if direction.x < 0:		
 		animatedstuff.play("left")
+		last_dir = direction
 	elif direction.x > 0:
 		animatedstuff.play("right")
+		last_dir = direction
 	elif direction.y > 0:
 		animatedstuff.play("front")
+		last_dir = direction
 	elif direction.y < 0:
 		animatedstuff.play("back")
+		last_dir = direction
 	else:
 		animatedstuff.stop()
 	
@@ -76,6 +98,22 @@ func _physics_process(delta):
 		#inventory.apply_central_force(velocity)
 		#inventory.global_position = global_position
 		inventory.position = global_position + Vector2(-8,0)
+
+	if interacting_array.size() > 0:
+		var closest_station = get_closest_element(interacting_array,global_position + last_dir*32)
+		if interacting_with_workstation:
+			if interacting_with_workstation != closest_station:
+				if interacting_with_workstation.get_node("ColorRect"):
+					interacting_with_workstation.get_node("ColorRect").hide()
+				interacting_with_workstation = closest_station
+				if closest_station.get_node("ColorRect"):
+					closest_station.get_node("ColorRect").show()
+		else:
+			interacting_with_workstation = closest_station
+			if closest_station.get_node("ColorRect"):
+					closest_station.get_node("ColorRect").show()
+
+
 
 	if GlobalVariableOverlab.nplayer >= 2:
 		if playerID == 0:
@@ -132,12 +170,13 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Item"):
 		interacting_with = body
 	if body.is_in_group("workstation"):
-		if interacting_with_workstation:
+		interacting_array.append(body)
+		'if interacting_with_workstation:
 			if interacting_with_workstation.get_node("ColorRect"):
 				interacting_with_workstation.get_node("ColorRect").hide()
 		interacting_with_workstation = body 
 		if body.get_node("ColorRect"):
-			body.get_node("ColorRect").show()
+			body.get_node("ColorRect").show()'
 	
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
@@ -145,6 +184,10 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 		if interacting_with == body:
 			interacting_with = null
 	if body.is_in_group("workstation"):
+		if 	interacting_array.has(body):
+				interacting_array.erase(body)
+
+
 		if interacting_with_workstation == body:
 			interacting_with_workstation = null 
 			if body.get_node("ColorRect"):

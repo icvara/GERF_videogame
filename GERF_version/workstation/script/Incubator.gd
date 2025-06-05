@@ -6,16 +6,17 @@ var styleBox
 var dead = false
 
 func Use(player):
-	if player.inventory and added_item == null:
-		if player.inventory.item_ID == "mCell":
-				$Timer.start()
-				x=1
-				$ProgressBar.show()
-				added_item = player.inventory.item_ID
-				player.inventory.Transfer(player)
-				#added_item.position = position + Vector2(0,0)
-				$mCell.show()
-				$mCell.play("default")
+	if task_finshed == false:
+		if player.inventory and added_item == null:
+			if player.inventory.item_ID == "mCell":
+					$Timer.start()
+					x=1
+					$ProgressBar.show()
+					added_item = player.inventory.item_ID
+					player.inventory.Transfer(player)
+					#added_item.position = position + Vector2(0,0)
+					$mCell.show()
+					$mCell.play("default")
 
 			
 	elif task_finshed:

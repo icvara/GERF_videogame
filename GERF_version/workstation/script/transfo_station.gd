@@ -4,33 +4,33 @@ var item_list = []
 var number_item = 0
 
 func Use(player):
-	print(item_list)
-	if player.inventory and number_item < 2:
-		if player.inventory.item_ID == "DNA" and item_list.has("DNA") == false:
-				#$Timer.start()
-				#$ProgressBar.show()
-				added_item = player.inventory
-				item_list.append(player.inventory.item_ID )
-				add_in_queue(player.inventory.item_ID )
-				player.inventory.Transfer(player)
-	
-				number_item += 1
-		elif player.inventory.item_ID == "Cell" and item_list.has("Cell") == false:
-				#$Timer.start()
-				#$ProgressBar.show()
-				added_item = player.inventory
-				item_list.append(player.inventory.item_ID )
-				add_in_queue(player.inventory.item_ID )
-				player.inventory.Transfer(player)
+	if task_finshed == false:
+		if player.inventory and number_item < 2:
+			if player.inventory.item_ID == "DNA" and item_list.has("DNA") == false:
+					#$Timer.start()
+					#$ProgressBar.show()
+					added_item = player.inventory
+					item_list.append(player.inventory.item_ID )
+					add_in_queue(player.inventory.item_ID )
+					player.inventory.Transfer(player)
 		
-				number_item += 1
-		else:
-			player.displaymsg("Wrong Item!")
+					number_item += 1
+			elif player.inventory.item_ID == "Cell" and item_list.has("Cell") == false:
+					#$Timer.start()
+					#$ProgressBar.show()
+					added_item = player.inventory
+					item_list.append(player.inventory.item_ID )
+					add_in_queue(player.inventory.item_ID )
+					player.inventory.Transfer(player)
 			
-	elif player.inventory == null and number_item == 2:
-		$Timer.start()
-		$ProgressBar.show()
-	
+					number_item += 1
+			else:
+				player.displaymsg("Wrong Item!")
+				
+		elif player.inventory == null and number_item == 2:
+			$Timer.start()
+			$ProgressBar.show()
+		
 	
 	elif task_finshed:
 		if player.inventory == null:
