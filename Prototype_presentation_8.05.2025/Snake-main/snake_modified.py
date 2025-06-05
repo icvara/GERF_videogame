@@ -833,6 +833,13 @@ recipe_index = 0
 
 pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init()
+pygame.joystick.init()
+if pygame.joystick.get_count() > 0:
+    joystick = pygame.joystick.Joystick(0)
+    joystick.init()
+else:
+    joystick = None
+    
 infoObject = pygame.display.Info()
 screen_width = infoObject.current_w - 5
 header_height = 130  # Space for protein info
@@ -967,6 +974,37 @@ while True:
                     ):  # Prevent reversal
                         main_game.snake.direction = new_dir
                         main_game.active = True
+                        
+        # Joystick hat/dpad
+        if event.type == pygame.JOYHATMOTION:
+            hat_x, hat_y = event.value
+            new_dir = Vector2(hat_x, -hat_y)  # Note: y is inverted
+            if new_dir.length() > 0 and new_dir + main_game.snake.direction != Vector2(0, 0):
+                main_game.snake.direction = new_dir
+                main_game.active = True
+
+        # Optional: Joystick analog stick
+        if event.type == pygame.JOYAXISMOTION:
+            axis_x = joystick.get_axis(0)
+            axis_y = joystick.get_axis(1)
+            threshold = 0.5  # Deadzone threshold
+            if abs(axis_x) > abs(axis_y):
+                if axis_x > threshold:
+                    new_dir = Vector2(1, 0)
+                elif axis_x < -threshold:
+                    new_dir = Vector2(-1, 0)
+                else:
+                    new_dir = Vector2(0, 0)
+            else:
+                if axis_y > threshold:
+                    new_dir = Vector2(0, 1)
+                elif axis_y < -threshold:
+                    new_dir = Vector2(0, -1)
+                else:
+                    new_dir = Vector2(0, 0)
+            if new_dir.length() > 0 and new_dir + main_game.snake.direction != Vector2(0, 0):
+                main_game.snake.direction = new_dir
+                main_game.active = True
 
     screen.fill((223, 218, 196))
     main_game.draw_elements()
@@ -981,6 +1019,8 @@ while True:
 # shorter protein chains
 # rectangle instead of exclamation point for active site in tutorial
 # buttons color? and text
-# better name
+# better name??
+# add pause
+# joystick??
 
 # add proteins to db??
