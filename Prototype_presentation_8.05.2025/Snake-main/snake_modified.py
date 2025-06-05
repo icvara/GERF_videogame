@@ -430,7 +430,7 @@ class MAIN:
 
         # Popup dimensions
         popup_width = 1030
-        popup_height = 550
+        popup_height = 700
         popup_x = (screen_width - popup_width) // 2
         popup_y = (screen_height - popup_height) // 2
 
