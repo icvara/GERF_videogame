@@ -424,8 +424,8 @@ class MAIN:
             ("Avoid crashing into walls or running into yourself.", emoji_stop),
             ("", None),
             ("Good luck building a functional food protein!", emoji_dna),
-            (""),
-            ("Press A to START, use X to PAUSE the game")
+            ("", None),
+            ("Press A to START, use X to PAUSE the game", None)
         ]
 
         # Popup dimensions
