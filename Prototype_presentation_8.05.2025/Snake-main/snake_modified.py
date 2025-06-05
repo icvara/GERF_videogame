@@ -496,7 +496,7 @@ class MAIN:
             # Button
             pygame.draw.rect(screen, (100, 200, 100), button_rect)
             pygame.draw.rect(screen, (0, 0, 0), button_rect, 2)
-            button_text = game_font.render("Play", True, (0, 0, 0))
+            button_text = game_font.render("PLAY", True, (0, 0, 0))
             text_rect = button_text.get_rect(center=button_rect.center)
             screen.blit(button_text, text_rect)
 
