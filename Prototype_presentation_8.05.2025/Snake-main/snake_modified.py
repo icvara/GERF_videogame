@@ -424,6 +424,8 @@ class MAIN:
             ("Avoid crashing into walls or running into yourself.", emoji_stop),
             ("", None),
             ("Good luck building a functional food protein!", emoji_dna),
+            ("")
+            ("Press A to START, use X to PAUSE the game")
         ]
 
         # Popup dimensions
@@ -493,7 +495,7 @@ class MAIN:
             # Button
             pygame.draw.rect(screen, (100, 200, 100), button_rect)
             pygame.draw.rect(screen, (0, 0, 0), button_rect, 2)
-            button_text = game_font.render("start game", True, (0, 0, 0))
+            button_text = game_font.render("START (A)", True, (0, 0, 0))
             text_rect = button_text.get_rect(center=button_rect.center)
             screen.blit(button_text, text_rect)
 
@@ -712,13 +714,13 @@ class MAIN:
             # Play Again button
             pygame.draw.rect(screen, (100, 200, 100), play_button_rect)
             pygame.draw.rect(screen, (0, 0, 0), play_button_rect, 2)
-            play_text = game_font.render("play again", True, (0, 0, 0))
+            play_text = game_font.render("Play again (A)", True, (0, 0, 0))
             screen.blit(play_text, play_text.get_rect(center=play_button_rect.center))
 
             # Tutorial button
             pygame.draw.rect(screen, (180, 180, 255), tutorial_button_rect)
             pygame.draw.rect(screen, (0, 0, 0), tutorial_button_rect, 2)
-            tutorial_text = game_font.render("view tutorial", True, (0, 0, 0))
+            tutorial_text = game_font.render("View tutorial (B)", True, (0, 0, 0))
             screen.blit(
                 tutorial_text,
                 tutorial_text.get_rect(center=tutorial_button_rect.center),
@@ -741,16 +743,16 @@ class MAIN:
 
                 # Keyboard input
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_b:  # 'B' key for Play
+                    if event.key == pygame.K_a:  # 'B' key for Play
                         return "play"
-                    elif event.key == pygame.K_a:  # 'A' key for Tutorial
+                    elif event.key == pygame.K_b:  # 'A' key for Tutorial
                         return "tutorial"
 
                 # Gamepad input
                 if event.type == pygame.JOYBUTTONDOWN:
-                    if event.button == 1:  # Usually 'B' on Xbox-style controllers
+                    if event.button == 0:  # Usually 'B' on Xbox-style controllers
                         return "play"
-                    elif event.button == 0:  # Usually 'A' on Xbox-style controllers
+                    elif event.button == 1:  # Usually 'A' on Xbox-style controllers
                         return "tutorial"
 
     def show_gameover_popup(self, message, submessage, emoji_img=None):
@@ -823,12 +825,12 @@ class MAIN:
             # ----- Buttons -----
             pygame.draw.rect(screen, (100, 200, 100), play_button_rect)
             pygame.draw.rect(screen, (0, 0, 0), play_button_rect, 2)
-            play_text = game_font.render("play again", True, (0, 0, 0))
+            play_text = game_font.render("Play again (A)", True, (0, 0, 0))
             screen.blit(play_text, play_text.get_rect(center=play_button_rect.center))
 
             pygame.draw.rect(screen, (180, 180, 255), tutorial_button_rect)
             pygame.draw.rect(screen, (0, 0, 0), tutorial_button_rect, 2)
-            tutorial_text = game_font.render("view tutorial", True, (0, 0, 0))
+            tutorial_text = game_font.render("View tutorial (B)", True, (0, 0, 0))
             screen.blit(
                 tutorial_text,
                 tutorial_text.get_rect(center=tutorial_button_rect.center),
@@ -851,16 +853,16 @@ class MAIN:
 
                 # Keyboard input
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_b:  # 'B' key for Play
+                    if event.key == pygame.K_a:  # 'B' key for Play
                         return "play"
-                    elif event.key == pygame.K_a:  # 'A' key for Tutorial
+                    elif event.key == pygame.K_b:  # 'A' key for Tutorial
                         return "tutorial"
 
                 # Gamepad input
                 if event.type == pygame.JOYBUTTONDOWN:
-                    if event.button == 1:  # Usually 'B' on Xbox-style controllers
+                    if event.button == 0:  # Usually 'B' on Xbox-style controllers
                         return "play"
-                    elif event.button == 0:  # Usually 'A' on Xbox-style controllers
+                    elif event.button == 1:  # Usually 'A' on Xbox-style controllers
                         return "tutorial"
 
 
