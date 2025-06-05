@@ -1090,8 +1090,4 @@ while True:
     clock.tick(60)
 
 
-
-# buttons color? and text
-# add pause (and add tutorial line about it)
-# add start and play again/tutorial with buttons from joystick
 # colorblind palette
