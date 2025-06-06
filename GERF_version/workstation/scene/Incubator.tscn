@@ -560,22 +560,20 @@ item = ExtResource("2_tihix")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
-offset_left = 8.0
-offset_top = 15.0
-offset_right = 40.0
-offset_bottom = 47.0
+offset_right = 32.0
+offset_bottom = 32.0
 color = Color(1, 1, 1, 0.42)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(24, 31)
+position = Vector2(17, 16)
 shape = SubResource("RectangleShape2D_afujj")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 visible = false
-offset_left = 48.0
-offset_top = -7.0
-offset_right = 89.0
-offset_bottom = 2.0
+offset_left = 45.0
+offset_top = -6.0
+offset_right = 86.0
+offset_bottom = 3.0
 rotation = 1.5708
 max_value = 20.0
 show_percentage = false
@@ -584,22 +582,24 @@ show_percentage = false
 wait_time = 0.1
 
 [node name="TileMap" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAAAP//AAAeAAcAAAAAAAAAAAAeAAgAAAAAAAEAAAAeAAkAAAAAAAIAAAAeAAoAAAABAP//AAAfAAcAAAABAAAAAAAfAAgAAAABAAEAAAAfAAkAAAABAAIAAAAfAAoAAAACAP//AAAgAAcAAAACAAAAAAAgAAgAAAACAAEAAAAgAAkAAAACAAIAAAAgAAoAAAA=")
+position = Vector2(-7, 0)
+tile_map_data = PackedByteArray("AAAAAP7/AAAeAAcAAAAAAP//AAAeAAgAAAAAAAAAAAAeAAkAAAAAAAEAAAAeAAoAAAABAP7/AAAfAAcAAAABAP//AAAfAAgAAAABAAAAAAAfAAkAAAABAAEAAAAfAAoAAAACAP7/AAAgAAcAAAACAP//AAAgAAgAAAACAAAAAAAgAAkAAAACAAEAAAAgAAoAAAA=")
 tile_set = SubResource("TileSet_sucgt")
 
 [node name="mCell" type="AnimatedSprite2D" parent="."]
 visible = false
 modulate = Color(1, 1, 1, 0.525)
-position = Vector2(24, 21)
+position = Vector2(15, 6)
 scale = Vector2(0.9, 0.9)
 sprite_frames = SubResource("SpriteFrames_tihix")
 animation = &"fail"
 autoplay = "default"
 
 [node name="Label" type="Label" parent="."]
-offset_left = 4.0
+visible = false
+offset_left = -4.0
 offset_top = -40.0
-offset_right = 44.0
+offset_right = 36.0
 offset_bottom = -19.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

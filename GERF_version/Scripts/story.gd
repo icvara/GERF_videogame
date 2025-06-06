@@ -12,4 +12,4 @@ func _on_next_1_pressed() -> void:
 func _on_button_pressed() -> void:
 	#print("stprxz: " + str(GlobalVariableOverlab.nplayer))
 	$Forest.stop()
-	get_tree().change_scene_to_file("res://GERF_version/Scenes/level_1.tscn")
+	get_tree().change_scene_to_file("res://GERF_version/Scenes/player_select.tscn")

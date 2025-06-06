@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://tj2g8hwy2d8e"]
+[gd_scene load_steps=20 format=3 uid="uid://tj2g8hwy2d8e"]
 
 [ext_resource type="Script" uid="uid://bn1sm4tmhencm" path="res://Prototype_presentation_8.05.2025/overlab/charselect.gd" id="1_g1rkv"]
 [ext_resource type="Texture2D" uid="uid://dxyjteves365y" path="res://Prototype_presentation_8.05.2025/overlab/asset/LabNPCs.png" id="2_c6fg3"]
@@ -6,6 +6,15 @@
 [ext_resource type="Texture2D" uid="uid://cdtwwkjd0j3hw" path="res://GERF_version/Asset/graphic/circle_2.png" id="4_ok78m"]
 [ext_resource type="Texture2D" uid="uid://tle7o6kpdoi" path="res://GERF_version/Asset/graphic/circle_3.png" id="5_enxwq"]
 [ext_resource type="Texture2D" uid="uid://b2xt6ydq27tve" path="res://GERF_version/Asset/graphic/circle_4.png" id="6_xuboy"]
+[ext_resource type="Texture2D" uid="uid://b507bunentl55" path="res://GERF_version/Asset/graphic/button/gdb-xbox-2.png" id="7_ok78m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_enxwq"]
+atlas = ExtResource("7_ok78m")
+region = Rect2(448.779, 49.1009, 14.0469, 13.8491)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ok78m"]
+atlas = ExtResource("7_ok78m")
+region = Rect2(449.305, 65.2955, 13.6693, 13.3096)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xy27h"]
 atlas = ExtResource("2_c6fg3")
@@ -107,31 +116,31 @@ offset_right = 84.0
 offset_bottom = 9.0
 text = "Press A to join!"
 
-[node name="L" type="Button" parent="."]
-visible = false
-layout_mode = 0
-offset_left = -61.0
-offset_top = -17.0
-offset_right = -44.0
-offset_bottom = 12.0
-text = "<"
+[node name="Sprite2D" type="Sprite2D" parent="Label2"]
+position = Vector2(71.6627, 10.3373)
+scale = Vector2(1.55621, 1.55621)
+texture = SubResource("AtlasTexture_enxwq")
 
-[node name="R" type="Button" parent="."]
+[node name="Label3" type="Label" parent="."]
 visible = false
 layout_mode = 0
-offset_left = 56.0
-offset_top = -17.0
-offset_right = 73.0
-offset_bottom = 12.0
-text = ">"
+offset_left = -116.0
+offset_top = 75.0
+offset_right = 115.0
+offset_bottom = 96.0
+text = "Y to change character"
+
+[node name="Sprite2D" type="Sprite2D" parent="Label3"]
+position = Vector2(5, 10)
+scale = Vector2(1.55621, 1.55621)
+texture = SubResource("AtlasTexture_ok78m")
 
 [node name="Label" type="Label" parent="."]
-visible = false
 layout_mode = 0
-offset_left = -41.0
-offset_top = 72.0
-offset_right = 44.0
-offset_bottom = 93.0
+offset_left = -38.0
+offset_top = -67.0
+offset_right = 47.0
+offset_bottom = -46.0
 text = "Player X"
 
 [node name="Circle1" type="Sprite2D" parent="."]
@@ -164,6 +173,3 @@ position = Vector2(1, -17)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_u1hik")
 animation = &"2"
-
-[connection signal="pressed" from="L" to="." method="_on_l_pressed"]
-[connection signal="pressed" from="R" to="." method="_on_r_pressed"]

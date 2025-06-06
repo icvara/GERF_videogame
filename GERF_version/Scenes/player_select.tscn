@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://dxtllxnmdl2di"]
+[gd_scene load_steps=6 format=3 uid="uid://dxtllxnmdl2di"]
 
 [ext_resource type="Script" uid="uid://crxl4vdyq24cl" path="res://Prototype_presentation_8.05.2025/overlab/player_select.gd" id="1_w66ea"]
 [ext_resource type="PackedScene" uid="uid://tj2g8hwy2d8e" path="res://GERF_version/Scenes/charselect.tscn" id="2_w66ea"]
-[ext_resource type="PackedScene" uid="uid://ew4cs3o4boh4" path="res://GERF_version/Scenes/pause_menu.tscn" id="3_jeg6x"]
+[ext_resource type="Texture2D" uid="uid://b507bunentl55" path="res://GERF_version/Asset/graphic/button/gdb-xbox-2.png" id="4_b14up"]
 [ext_resource type="AudioStream" uid="uid://cfluq1b2y86vu" path="res://GERF_version/Asset/sound/mountain top.mp3" id="4_jeg6x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_04prf"]
+atlas = ExtResource("4_b14up")
+region = Rect2(449.748, 34.3604, 12.2673, 12.2673)
 
 [node name="PlayerSelect" type="Control"]
 layout_mode = 3
@@ -23,33 +27,6 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0978013, 0.404612, 0.498487, 1)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -25.0
-offset_top = -155.0
-offset_right = 25.0
-offset_bottom = -126.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="l" type="Button" parent="HBoxContainer"]
-layout_mode = 2
-text = "<"
-
-[node name="Label" type="Label" parent="HBoxContainer"]
-layout_mode = 2
-text = "1"
-
-[node name="r" type="Button" parent="HBoxContainer"]
-layout_mode = 2
-text = ">"
-
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 5
@@ -61,7 +38,9 @@ offset_right = 332.0
 offset_bottom = 79.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 34
-text = "Play with friends to build GMOs!"
+text = "Collaborate with your friends and family
+to help the Earth!"
+horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="."]
 visible = false
@@ -94,13 +73,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -482.0
-offset_top = -20.0
-offset_right = 538.0
-offset_bottom = 20.0
+offset_left = -417.0
+offset_top = -15.0
+offset_right = 603.0
+offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 300
+theme_override_constants/separation = 400
 
 [node name="charselect" parent="HBoxContainer2" instance=ExtResource("2_w66ea")]
 layout_mode = 2
@@ -113,26 +92,31 @@ player_number = 2
 layout_mode = 2
 player_number = 3
 
-[node name="charselect4" parent="HBoxContainer2" instance=ExtResource("2_w66ea")]
-visible = false
-layout_mode = 2
-player_number = 4
-
-[node name="Pause_menu" parent="." instance=ExtResource("3_jeg6x")]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_top = -20.0
-offset_bottom = 20.0
-
 [node name="MountainTop" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_jeg6x")
 autoplay = true
 
-[connection signal="pressed" from="HBoxContainer/l" to="." method="_on_l_pressed"]
-[connection signal="pressed" from="HBoxContainer/r" to="." method="_on_r_pressed"]
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 543.0
+offset_top = 515.0
+offset_right = 613.0
+offset_bottom = 546.0
+max_value = 60.0
+value = 60.0
+show_percentage = false
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 463.0
+offset_top = 555.0
+offset_right = 697.0
+offset_bottom = 576.0
+text = "Keep X presed to start"
+
+[node name="Sprite2D" type="Sprite2D" parent="Label3"]
+position = Vector2(61, 12)
+scale = Vector2(1.55621, 1.55621)
+texture = SubResource("AtlasTexture_04prf")
+
 [connection signal="pressed" from="Buttonstart" to="." method="_on_buttonstart_pressed"]

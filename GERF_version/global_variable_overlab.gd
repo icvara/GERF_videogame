@@ -4,7 +4,8 @@ extends Node
 var score = 0
 var time = 80
 
-var nplayer = 3
+var nplayer = 0
+var player_ID = []
 var playerskin = [0,0,0,0]
 
 

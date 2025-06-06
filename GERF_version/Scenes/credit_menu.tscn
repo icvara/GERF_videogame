@@ -30,7 +30,7 @@ offset_right = 92.0
 offset_bottom = 32.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 36
-text = "Credits [TODO]"
+text = "Credits"
 horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
@@ -39,9 +39,9 @@ anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 539.0
-offset_top = 166.0
+offset_top = 222.0
 offset_right = 632.0
-offset_bottom = 262.0
+offset_bottom = 318.0
 grow_vertical = 2
 
 [node name="1" type="Button" parent="ColorRect/VBoxContainer"]
@@ -52,27 +52,44 @@ text = "Return"
 layout_mode = 2
 text = "Quit"
 
-[node name="Label2" type="Label" parent="ColorRect"]
+[node name="main" type="Label" parent="ColorRect"]
 layout_mode = 0
-offset_left = 428.0
-offset_top = 68.0
-offset_right = 746.0
-offset_bottom = 425.0
-text = "----Core Devloppers----
-Giorgia & Icvara
-----Graphics & Sound----
-Icvara
-Earth: 
-https://gold356.itch.io
-Sprites and tileset:
- https://marceles.itch.io
-https://lin-ain.itch.io/
-https://aamatniekss.itch.io
-----Inspiration----
-Overcook
-----Thanks to----
-RLA LAB + Funding agent
+offset_left = 83.0
+offset_top = 64.0
+offset_right = 1073.0
+offset_bottom = 157.0
+text = "This game was developped by giorgia & Icvara as part of the Great Exhibition Road Festival 2025.
+
+the game is strongly inspired by the game Overcook
 "
+horizontal_alignment = 1
+
+[node name="asset" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 316.0
+offset_top = 182.0
+offset_right = 863.0
+offset_bottom = 563.0
+text = "----Graphics & Sound----
+All assets were taken from itch.io 
+and modified by Icvara if needed
+
+Earth: https://gold356.itch.io
+Lab Sprites and tileset: https://marceles.itch.io
+Slime: https://lin-ain.itch.io/
+Forest: https://aamatniekss.itch.io
+Xbox Button: https://greatdocbrown.itch.io
+
+MUUUUSSIC"
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 407.0
+offset_top = 509.0
+offset_right = 793.0
+offset_bottom = 530.0
+text = "Developped with Godot 4.4"
 horizontal_alignment = 1
 
 [connection signal="pressed" from="ColorRect/VBoxContainer/1" to="." method="_on_1_pressed"]

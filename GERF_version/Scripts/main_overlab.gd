@@ -16,7 +16,8 @@ func _ready() -> void:
 	for i in GlobalVariableOverlab.nplayer:
 		var newplay = player.instantiate()
 		newplay.playerID = i
-		newplay.setskin(GlobalVariableOverlab.playerskin[i])
+		newplay.playerID = GlobalVariableOverlab.player_ID[i]
+		newplay.setskin(GlobalVariableOverlab.playerskin[newplay.playerID])
 		#newplay.position = 
 		$player_startpos.get_node(str(i)).add_child(newplay)
 		

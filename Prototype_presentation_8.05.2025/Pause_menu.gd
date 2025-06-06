@@ -23,6 +23,7 @@ func _on_button_2_pressed():
 	pass # Replace with function body.
 	#get_tree().change_scene_to_file("res://start_menu.tscn") 
 	get_tree().paused = false
+	GlobalVariableOverlab.score = 0
 	get_tree().reload_current_scene()
 	
 

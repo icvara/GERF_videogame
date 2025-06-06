@@ -2364,10 +2364,10 @@ position = Vector2(191.5, 240)
 position = Vector2(287.5, 238)
 
 [node name="Incubator" parent="Workstation" instance=ExtResource("13_wdi0a")]
-position = Vector2(216, 95.5)
+position = Vector2(222.5, 110.5)
 
 [node name="Incubator2" parent="Workstation" instance=ExtResource("13_wdi0a")]
-position = Vector2(120, 97)
+position = Vector2(127, 111.5)
 
 [node name="freezer" parent="Workstation" instance=ExtResource("14_tjhfs")]
 position = Vector2(384, 238)

@@ -1,10 +1,54 @@
-[gd_scene load_steps=41 format=3 uid="uid://bbisetm4o3e3q"]
+[gd_scene load_steps=43 format=3 uid="uid://bbisetm4o3e3q"]
 
 [ext_resource type="Script" uid="uid://bc3v5a7rqrg51" path="res://GERF_version/Scripts/story.gd" id="1_u0jl3"]
 [ext_resource type="Texture2D" uid="uid://bbhvvbeectp53" path="res://GERF_version/Asset/graphic/WKRrf_.png" id="1_wugj3"]
 [ext_resource type="AudioStream" uid="uid://dncwo1yv8ohj8" path="res://GERF_version/Asset/sound/hey_listen.mp3" id="2_4mcic"]
 [ext_resource type="Texture2D" uid="uid://cfuxtf3iujdc3" path="res://GERF_version/Asset/graphic/LabNPCs.png" id="2_b68ub"]
-[ext_resource type="AudioStream" uid="uid://bkhyg558xebmw" path="res://GERF_version/Asset/sound/FOREST.mp3" id="5_cxwkt"]
+[ext_resource type="Texture2D" uid="uid://b507bunentl55" path="res://GERF_version/Asset/graphic/button/gdb-xbox-2.png" id="5_7d6uv"]
+[ext_resource type="AudioStream" uid="uid://bkhyg558xebmw" path="res://GERF_version/Asset/sound/forest.mp3" id="5_cxwkt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o6sax"]
+atlas = ExtResource("5_7d6uv")
+region = Rect2(448.779, 49.1009, 14.0469, 13.8491)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mokuj"]
+atlas = ExtResource("2_b68ub")
+region = Rect2(39, 144, 33, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r7g3h"]
+atlas = ExtResource("2_b68ub")
+region = Rect2(138, 144, 33, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h31ic"]
+atlas = ExtResource("2_b68ub")
+region = Rect2(237, 144, 33, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r7g3h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mokuj")
+}],
+"loop": true,
+"name": &"0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r7g3h")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h31ic")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b68ub"]
 atlas = ExtResource("1_wugj3")
@@ -224,45 +268,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mokuj"]
-atlas = ExtResource("2_b68ub")
-region = Rect2(39, 144, 33, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_r7g3h"]
-atlas = ExtResource("2_b68ub")
-region = Rect2(138, 144, 33, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h31ic"]
-atlas = ExtResource("2_b68ub")
-region = Rect2(237, 144, 33, 48)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_r7g3h"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mokuj")
-}],
-"loop": true,
-"name": &"0",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_r7g3h")
-}],
-"loop": true,
-"name": &"1",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_h31ic")
-}],
-"loop": true,
-"name": &"2",
-"speed": 5.0
-}]
-
 [node name="Story" type="Node2D"]
 script = ExtResource("1_u0jl3")
 
@@ -280,11 +285,55 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.321905, 0.398754, 0.58863, 1)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(156, 264)
-sprite_frames = SubResource("SpriteFrames_mokuj")
-autoplay = "default"
-frame_progress = 0.421051
+[node name="Panel2" type="Panel" parent="."]
+visible = false
+offset_left = 391.0
+offset_top = 291.0
+offset_right = 1152.0
+offset_bottom = 465.0
+
+[node name="Label" type="Label" parent="Panel2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -365.5
+offset_top = -72.0
+offset_right = 580.5
+offset_bottom = 95.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Scientists: .... There is quite a huge mess here!
+We can built microorganisms to clean it...
+and also be less messy!
+Would it work for you?
+"
+
+[node name="Button" type="Button" parent="Panel2"]
+layout_mode = 0
+offset_left = -114.0
+offset_top = 232.0
+offset_right = 188.0
+offset_bottom = 298.0
+theme_override_font_sizes/font_size = 24
+text = "Let's go! - press A"
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel2/Button"]
+position = Vector2(280, 33)
+scale = Vector2(3.02595, 3.02595)
+texture = SubResource("AtlasTexture_o6sax")
+
+[node name="next2" type="Button" parent="Panel2"]
+visible = false
+layout_mode = 0
+offset_left = 253.0
+offset_top = 123.0
+offset_right = 454.0
+offset_bottom = 152.0
+text = "Continue - Press A"
 
 [node name="PlayerSprite" type="Control" parent="."]
 layout_mode = 3
@@ -317,10 +366,10 @@ sprite_frames = SubResource("SpriteFrames_r7g3h")
 animation = &"1"
 
 [node name="Panel" type="Panel" parent="."]
-offset_left = 387.0
-offset_top = 38.0
-offset_right = 1086.0
-offset_bottom = 196.0
+offset_left = 98.0
+offset_top = 11.0
+offset_right = 1153.0
+offset_bottom = 220.0
 
 [node name="Label" type="Label" parent="Panel"]
 layout_mode = 1
@@ -329,64 +378,41 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -31.5
-offset_top = -10.5
-offset_right = 31.5
-offset_bottom = 10.5
+offset_left = -426.5
+offset_top = -97.5
+offset_right = 522.5
+offset_bottom = 35.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "TEXT 1"
+theme_override_font_sizes/font_size = 24
+text = "EARTH: Hello dear scientists,
+I need your help.
+Humans did a lot of mess and now all my tenants are suffering. 
+Could you find a way to clean it please?"
 
 [node name="next1" type="Button" parent="Panel"]
 layout_mode = 0
-offset_left = 253.0
-offset_top = 123.0
-offset_right = 454.0
-offset_bottom = 152.0
+offset_left = 453.0
+offset_top = 161.0
+offset_right = 741.0
+offset_bottom = 200.0
+theme_override_font_sizes/font_size = 24
 text = "Continue - Press A"
 
-[node name="Panel2" type="Panel" parent="."]
-visible = false
-offset_left = 390.0
-offset_top = 209.0
-offset_right = 1089.0
-offset_bottom = 367.0
+[node name="Sprite2D" type="Sprite2D" parent="Panel/next1"]
+position = Vector2(273, 18)
+scale = Vector2(2.33364, 2.33364)
+texture = SubResource("AtlasTexture_o6sax")
 
-[node name="Label" type="Label" parent="Panel2"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -31.5
-offset_top = -10.5
-offset_right = 31.5
-offset_bottom = 10.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "TEXT 2"
-
-[node name="Button" type="Button" parent="Panel2"]
-layout_mode = 0
-offset_left = -195.0
-offset_top = 335.0
-offset_right = 107.0
-offset_bottom = 401.0
-text = "Let's go! - press Start"
-
-[node name="next2" type="Button" parent="Panel2"]
-visible = false
-layout_mode = 0
-offset_left = 253.0
-offset_top = 123.0
-offset_right = 454.0
-offset_bottom = 152.0
-text = "Continue - Press A"
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(173, 275)
+sprite_frames = SubResource("SpriteFrames_mokuj")
+autoplay = "default"
+frame_progress = 0.421051
 
 [node name="Forest" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_cxwkt")
 autoplay = true
 
-[connection signal="pressed" from="Panel/next1" to="." method="_on_next_1_pressed"]
 [connection signal="pressed" from="Panel2/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Panel/next1" to="." method="_on_next_1_pressed"]

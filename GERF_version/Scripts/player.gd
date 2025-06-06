@@ -50,12 +50,12 @@ func _physics_process(delta):
 
 	var direction = null
 	direction = Vector2(Input.get_joy_axis(playerID, JOY_AXIS_LEFT_X),Input.get_joy_axis(playerID, JOY_AXIS_LEFT_Y))
-	if direction.x <0.8 and direction.x > -0.8:
+	if direction.x <0.6 and direction.x > -0.6:
 		direction.x = 0
-	if direction.y <0.8 and direction.y > -0.8:
+	if direction.y <0.6 and direction.y > -0.6:
 		direction.y = 0
 	#direction = direction.normalized()
-	print(playerID,direction)
+	
 	'if GlobalVariableOverlab.nplayer >= 2:
 		if playerID == 0:
 			direction = Vector2(Input.get_axis("left", "right"),Input.get_axis("up", "down"))
