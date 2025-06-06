@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://dncwo1yv8ohj8" path="res://GERF_version/Asset/sound/hey_listen.mp3" id="2_4mcic"]
 [ext_resource type="Texture2D" uid="uid://cfuxtf3iujdc3" path="res://GERF_version/Asset/graphic/LabNPCs.png" id="2_b68ub"]
 [ext_resource type="Texture2D" uid="uid://b507bunentl55" path="res://GERF_version/Asset/graphic/button/gdb-xbox-2.png" id="5_7d6uv"]
-[ext_resource type="AudioStream" uid="uid://bkhyg558xebmw" path="res://GERF_version/Asset/sound/forest.mp3" id="5_cxwkt"]
+[ext_resource type="AudioStream" uid="uid://bkhyg558xebmw" path="res://GERF_version/Asset/sound/FOREST.mp3" id="5_cxwkt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o6sax"]
 atlas = ExtResource("5_7d6uv")
@@ -286,6 +286,7 @@ grow_vertical = 2
 color = Color(0.321905, 0.398754, 0.58863, 1)
 
 [node name="Panel2" type="Panel" parent="."]
+visible = false
 offset_left = 391.0
 offset_top = 291.0
 offset_right = 1152.0
