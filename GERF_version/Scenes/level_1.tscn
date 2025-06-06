@@ -2465,10 +2465,10 @@ offset_bottom = -650.0
 [node name="End" parent="CanvasLayer" instance=ExtResource("14_8nwj5")]
 visible = false
 
-[node name="Pause_menu" parent="CanvasLayer" instance=ExtResource("15_p2k58")]
+[node name="Tuto_control" parent="CanvasLayer" instance=ExtResource("20_dhn57")]
 visible = false
 
-[node name="Tuto_control" parent="CanvasLayer" instance=ExtResource("20_dhn57")]
+[node name="Pause_menu" parent="CanvasLayer" instance=ExtResource("15_p2k58")]
 visible = false
 
 [node name="Timer" type="Timer" parent="."]
