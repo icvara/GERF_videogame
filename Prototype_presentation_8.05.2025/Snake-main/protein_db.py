@@ -64,7 +64,7 @@ proteins = [
   },
   {
     "name": "Pea globulin",
-    "description": "Pea globulin can act like egg whites in baking, helping make vegan meringues and fluffy cakes without any eggs!",
+    "description": "Pea globulin can act like egg whites in baking, helping to make vegan meringues and fluffy cakes without any eggs!",
     "sequence": random.choices(letters, k=length),
     "active_sites": []
   },
