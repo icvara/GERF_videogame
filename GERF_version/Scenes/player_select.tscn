@@ -112,7 +112,7 @@ offset_left = 463.0
 offset_top = 555.0
 offset_right = 697.0
 offset_bottom = 576.0
-text = "Keep X presed to start"
+text = "Keep X pressed to start"
 
 [node name="Sprite2D" type="Sprite2D" parent="Label3"]
 position = Vector2(61, 12)

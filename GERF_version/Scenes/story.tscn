@@ -286,7 +286,6 @@ grow_vertical = 2
 color = Color(0.321905, 0.398754, 0.58863, 1)
 
 [node name="Panel2" type="Panel" parent="."]
-visible = false
 offset_left = 391.0
 offset_top = 291.0
 offset_right = 1152.0
@@ -308,8 +307,8 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 24
 text = "Scientists: .... There is quite a huge mess here!
 We can built microorganisms to clean it...
-and also be less messy!
-Would it work for you?
+and make it less messy!
+Would that work for you?
 "
 
 [node name="Button" type="Button" parent="Panel2"]
