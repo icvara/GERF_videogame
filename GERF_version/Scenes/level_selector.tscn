@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bbhvvbeectp53" path="res://GERF_version/Asset/graphic/WKRrf_.png" id="5_67mh6"]
 [ext_resource type="PackedScene" uid="uid://yal365f56m32" path="res://GERF_version/Scenes/level_object.tscn" id="5_bhse7"]
 [ext_resource type="PackedScene" uid="uid://b15cg372t2tac" path="res://GERF_version/Scenes/tuto_A.tscn" id="5_d247x"]
-[ext_resource type="AudioStream" uid="uid://bw51x3pues55w" path="res://GERF_version/Asset/sound/FOREST.mp3" id="8_6nkq7"]
+[ext_resource type="AudioStream" uid="uid://bkhyg558xebmw" path="res://GERF_version/Asset/sound/forest.mp3" id="8_6nkq7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b68ub"]
 atlas = ExtResource("5_67mh6")

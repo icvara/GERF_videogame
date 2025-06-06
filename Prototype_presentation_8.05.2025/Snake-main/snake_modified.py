@@ -1,8 +1,9 @@
-import pygame, sys, random
+import pygame, sys, random, os
 import json
 import time
 from pygame.math import Vector2
 from pathlib import Path
+from screeninfo import get_monitors
 
 # Path to the current file
 current_file = Path(__file__)
@@ -168,9 +169,10 @@ class MAIN:
         self.codons = [CODON() for _ in range(1)]  # 0 codons on screen
         self.last_codon_time = pygame.time.get_ticks()
         self.active = False  # Game starts paused
+        self.paused = False
         self.game_over_reason = None
-        self.snake_speed = 150  # Initial speed in ms
-        self.level_up_every = 5  # Increase speed every 5 codons
+        self.snake_speed = 180  # Initial speed in ms
+        self.level_up_every = 2  # Increase speed every 2 codons
         self.speed_floor = 50  # Fastest allowed speed
         self.codons_eaten = 0
         self.tutorial_shown = False
@@ -271,7 +273,7 @@ class MAIN:
         self.select_new_protein()
         self.snake.reset()
         self.codons_eaten = 0
-        self.snake_speed = 150  # Reset speed to starting value
+        self.snake_speed = 180  # Reset speed to starting value
         pygame.time.set_timer(SCREEN_UPDATE, self.snake_speed)
         self.codons = [CODON() for _ in range(5)]
         self.last_codon_time = pygame.time.get_ticks()
@@ -305,11 +307,11 @@ class MAIN:
                     time.sleep(1)
                     failure.play()
                     self.last_description = (
-                        "One or more wrong codons found in the active site."
+                        "Your protein is inactive!"
                     )
                     choice = self.show_final_popup(
                         message="Oh no!",
-                        submessage="Your protein is inactive!",
+                        submessage="One or more wrong codons found in the active site.",
                         emoji_img=emoji_sadface,
                         figure_img=self.protein_inactive,
                     )
@@ -327,11 +329,12 @@ class MAIN:
             time.sleep(1)
             failure.play()
             self.last_description = (
-                f"{errors} wrong codons in the sequence ({error_rate:.0%} error rate)."
+                "Your protein cannot hold its shape and is misfolded!"
             )
+            submsg = f"{errors} wrong codons in the sequence ({error_rate:.0%} error rate)."
             choice = self.show_final_popup(
                 message="Oh no!",
-                submessage="Your protein cannot hold its shape and is misfolded!",
+                submessage=submsg,
                 emoji_img=emoji_sadface,
                 figure_img=self.protein_misfolded,
             )
@@ -413,7 +416,7 @@ class MAIN:
             ),
             (
                 "Codons in the active site (highlighted by a red rectangle) are the most important!",
-                emoji_exclamation,
+                emoji_hollowsquare,
             ),
             (
                 "Each codon collected makes the snake grow longer and move faster.",
@@ -421,12 +424,14 @@ class MAIN:
             ),
             ("Avoid crashing into walls or running into yourself.", emoji_stop),
             ("", None),
-            ("Good luck building a functional food protein!", emoji_dna),
+            ("Press A to START", None),
+            ("", None),
+            ("Good luck building a functional food protein!", emoji_dna)
         ]
 
         # Popup dimensions
         popup_width = 1030
-        popup_height = 550
+        popup_height = 650
         popup_x = (screen_width - popup_width) // 2
         popup_y = (screen_height - popup_height) // 2
 
@@ -462,11 +467,12 @@ class MAIN:
 
                 # Check if it's the last line
                 is_final = i == len(tutorial_lines) - 1
+                is_lasttofinal = i == len(tutorial_lines) - 3
 
                 font_to_use = highlight_font if is_final else game_font
                 text_color = (0, 0, 0) if is_final else (50, 50, 50)
 
-                if is_final:
+                if is_final or is_lasttofinal:
                     text_surface = font_to_use.render(line, True, text_color)
                     total_width = text_surface.get_width()
                     if emoji_img:
@@ -491,7 +497,7 @@ class MAIN:
             # Button
             pygame.draw.rect(screen, (100, 200, 100), button_rect)
             pygame.draw.rect(screen, (0, 0, 0), button_rect, 2)
-            button_text = game_font.render("start game", True, (0, 0, 0))
+            button_text = game_font.render("PLAY", True, (0, 0, 0))
             text_rect = button_text.get_rect(center=button_rect.center)
             screen.blit(button_text, text_rect)
 
@@ -504,6 +510,12 @@ class MAIN:
                     sys.exit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if button_rect.collidepoint(event.pos):
+                        return
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_a:  # Pressing 'A' on the keyboard
+                        return
+                if event.type == pygame.JOYBUTTONDOWN:
+                    if event.button == 0:  # Usually A button on gamepads
                         return
 
     def draw_header(self):
@@ -611,7 +623,7 @@ class MAIN:
         popup_y = (screen_height - popup_height) // 2
 
         # Button dimensions
-        button_width = 200
+        button_width = 220
         button_height = 50
         button_spacing = 40
         button_y = popup_y + popup_height - 70
@@ -668,12 +680,15 @@ class MAIN:
             screen.blit(sub_surf, sub_rect)
 
             # Image and description area
-            text_top = sub_rect.bottom + 30
+            text_top = sub_rect.bottom + 20
             padding = 30
 
             if figure_img:
                 original_width, original_height = figure_img.get_size()
-                scale_factor = 0.20  # 20% of original size
+                if figure_img == self.protein_misfolded:
+                    scale_factor = 0.25  # 25% of original size
+                else:
+                    scale_factor = 0.20  # 20% of original size
                 new_size = (
                     int(original_width * scale_factor),
                     int(original_height * scale_factor),
@@ -701,13 +716,13 @@ class MAIN:
             # Play Again button
             pygame.draw.rect(screen, (100, 200, 100), play_button_rect)
             pygame.draw.rect(screen, (0, 0, 0), play_button_rect, 2)
-            play_text = game_font.render("play again", True, (0, 0, 0))
+            play_text = game_font.render("Play again (A)", True, (0, 0, 0))
             screen.blit(play_text, play_text.get_rect(center=play_button_rect.center))
 
             # Tutorial button
             pygame.draw.rect(screen, (180, 180, 255), tutorial_button_rect)
             pygame.draw.rect(screen, (0, 0, 0), tutorial_button_rect, 2)
-            tutorial_text = game_font.render("view tutorial", True, (0, 0, 0))
+            tutorial_text = game_font.render("View tutorial (B)", True, (0, 0, 0))
             screen.blit(
                 tutorial_text,
                 tutorial_text.get_rect(center=tutorial_button_rect.center),
@@ -715,25 +730,41 @@ class MAIN:
 
             pygame.display.update()
 
-            # Event handling
+            # ----- Event handling -----
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+
+                # Mouse click
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if play_button_rect.collidepoint(event.pos):
                         return "play"
                     elif tutorial_button_rect.collidepoint(event.pos):
                         return "tutorial"
 
+                # Keyboard input
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_a:  # 'B' key for Play
+                        return "play"
+                    elif event.key == pygame.K_b:  # 'A' key for Tutorial
+                        return "tutorial"
+
+                # Gamepad input
+                if event.type == pygame.JOYBUTTONDOWN:
+                    if event.button == 0:  # Usually 'B' on Xbox-style controllers
+                        return "play"
+                    elif event.button == 1:  # Usually 'A' on Xbox-style controllers
+                        return "tutorial"
+
     def show_gameover_popup(self, message, submessage, emoji_img=None):
-        popup_width = 500
+        popup_width = 600
         popup_height = 250
         popup_x = (screen_width - popup_width) // 2
         popup_y = (screen_height - popup_height) // 2
 
         # Button dimensions
-        button_width = 180
+        button_width = 220
         button_height = 50
         button_y = popup_y + popup_height - 70
 
@@ -796,12 +827,12 @@ class MAIN:
             # ----- Buttons -----
             pygame.draw.rect(screen, (100, 200, 100), play_button_rect)
             pygame.draw.rect(screen, (0, 0, 0), play_button_rect, 2)
-            play_text = game_font.render("play again", True, (0, 0, 0))
+            play_text = game_font.render("Play again (A)", True, (0, 0, 0))
             screen.blit(play_text, play_text.get_rect(center=play_button_rect.center))
 
             pygame.draw.rect(screen, (180, 180, 255), tutorial_button_rect)
             pygame.draw.rect(screen, (0, 0, 0), tutorial_button_rect, 2)
-            tutorial_text = game_font.render("view tutorial", True, (0, 0, 0))
+            tutorial_text = game_font.render("View tutorial (B)", True, (0, 0, 0))
             screen.blit(
                 tutorial_text,
                 tutorial_text.get_rect(center=tutorial_button_rect.center),
@@ -814,11 +845,28 @@ class MAIN:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+
+                # Mouse click
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if play_button_rect.collidepoint(event.pos):
                         return "play"
                     elif tutorial_button_rect.collidepoint(event.pos):
                         return "tutorial"
+
+                # Keyboard input
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_a:  # 'B' key for Play
+                        return "play"
+                    elif event.key == pygame.K_b:  # 'A' key for Tutorial
+                        return "tutorial"
+
+                # Gamepad input
+                if event.type == pygame.JOYBUTTONDOWN:
+                    if event.button == 0:  # Usually 'B' on Xbox-style controllers
+                        return "play"
+                    elif event.button == 1:  # Usually 'A' on Xbox-style controllers
+                        return "tutorial"
+
 
 
 with open(f"{current_dir}/proteins_db.json") as f:
@@ -833,10 +881,32 @@ recipe_index = 0
 
 pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init()
-infoObject = pygame.display.Info()
-screen_width = infoObject.current_w - 5
+pygame.joystick.init()
+if pygame.joystick.get_count() > 0:
+    joystick = pygame.joystick.Joystick(0)
+    joystick.init()
+else:
+    joystick = None
+    
+    
+monitors = get_monitors()
+
+# Use the second monitor if available
+if len(monitors) > 1:
+    screen_width = monitors[1].width
+    screen_height = monitors[1].height - 50
+    screen_x = monitors[1].x
+    screen_y = monitors[1].y
+else:
+    screen_width = monitors[0].width
+    screen_height = monitors[0].height - 50
+    screen_x = monitors[0].x
+    screen_y = monitors[0].y
+    
+os.environ['SDL_VIDEO_WINDOW_POS'] = f"{screen_x},{screen_y}"
+screen = pygame.display.set_mode((screen_width, screen_height))
+
 header_height = 130  # Space for protein info
-screen_height = infoObject.current_h - 115  # Leave space for taskbars etc.
 
 cell_size = 30
 cell_number_x = screen_width // cell_size
@@ -864,7 +934,7 @@ emoji_sadface = load_scaled(f"{current_dir}/Graphics/sadface.png")
 emoji_snake = load_scaled(f"{current_dir}/Graphics/snake.png")
 emoji_memo = load_scaled(f"{current_dir}/Graphics/memo.png")
 emoji_warning = load_scaled(f"{current_dir}/Graphics/warning.png")
-emoji_exclamation = load_scaled(f"{current_dir}/Graphics/exclamation.png")
+emoji_hollowsquare = load_scaled(f"{current_dir}/Graphics/hollow_square.png")
 emoji_dna = load_scaled(f"{current_dir}/Graphics/dna.png")
 emoji_stop = load_scaled(f"{current_dir}/Graphics/prohibited.png")
 emoji_rocket = load_scaled(f"{current_dir}/Graphics/rocket.png")
@@ -953,35 +1023,68 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-        if event.type == SCREEN_UPDATE:
+        if event.type == SCREEN_UPDATE and not main_game.paused:
             main_game.update()
         if event.type == pygame.KEYDOWN:
-            if not main_game.active and main_game.game_over_reason:
+                
+            if event.type == pygame.JOYBUTTONDOWN:
+                if event.button == 2:  # Replace with the correct number for your controller
+                    main_game.paused = not main_game.paused
+
+            elif not main_game.active and main_game.game_over_reason:
                 main_game.reset_game()
                 main_game.active = True
+
+            elif event.key in key_to_direction:
+                new_dir = key_to_direction[event.key]
+                if new_dir + main_game.snake.direction != Vector2(0, 0):
+                    main_game.snake.direction = new_dir
+                    main_game.active = True
+                           
+        # Joystick hat/dpad
+        if event.type == pygame.JOYHATMOTION:
+            hat_x, hat_y = event.value
+            new_dir = Vector2(hat_x, -hat_y)  # Note: y is inverted
+            if new_dir.length() > 0 and new_dir + main_game.snake.direction != Vector2(0, 0):
+                main_game.snake.direction = new_dir
+                main_game.active = True
+
+        # Optional: Joystick analog stick
+        if event.type == pygame.JOYAXISMOTION:
+            axis_x = joystick.get_axis(0)
+            axis_y = joystick.get_axis(1)
+            threshold = 0.5  # Deadzone threshold
+            if abs(axis_x) > abs(axis_y):
+                if axis_x > threshold:
+                    new_dir = Vector2(1, 0)
+                elif axis_x < -threshold:
+                    new_dir = Vector2(-1, 0)
+                else:
+                    new_dir = Vector2(0, 0)
             else:
-                if event.key in key_to_direction:
-                    new_dir = key_to_direction[event.key]
-                    if new_dir + main_game.snake.direction != Vector2(
-                        0, 0
-                    ):  # Prevent reversal
-                        main_game.snake.direction = new_dir
-                        main_game.active = True
+                if axis_y > threshold:
+                    new_dir = Vector2(0, 1)
+                elif axis_y < -threshold:
+                    new_dir = Vector2(0, -1)
+                else:
+                    new_dir = Vector2(0, 0)
+            if new_dir.length() > 0 and new_dir + main_game.snake.direction != Vector2(0, 0):
+                main_game.snake.direction = new_dir
+                main_game.active = True
 
     screen.fill((223, 218, 196))
     main_game.draw_elements()
+    # Draw pause overlay if paused
+    if main_game.paused:
+        pause_text = highlight_font.render("PAUSED", True, (100, 0, 0))
+        text_rect = pause_text.get_rect(center=(screen_width // 2, screen_height // 2))
+        screen.blit(pause_text, text_rect)
+        
     game_area = pygame.Rect(
         0, header_height, screen_width, screen_height - header_height
     )
+    
     pygame.draw.rect(screen, (0, 0, 0), game_area, 2)
     pygame.display.update()
     clock.tick(60)
 
-
-# shorter protein chains
-# rectangle instead of exclamation point for active site in tutorial
-# buttons color? and text
-# better name
-
-# add proteins to db??
-# add shapes added into snake body???

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwf21pw6n2tna"
-path="res://.godot/imported/exclamation.png-47e55ee5619d8edf28c5bc0f13633e18.ctex"
+uid="uid://cupjw1hjjf8uf"
+path="res://.godot/imported/hollow_square.png-2c41c92c80ec7dd76c003eed4df88405.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Prototype_presentation_8.05.2025/Snake-main/Graphics/exclamation.png"
-dest_files=["res://.godot/imported/exclamation.png-47e55ee5619d8edf28c5bc0f13633e18.ctex"]
+source_file="res://Prototype_presentation_8.05.2025/Snake-main/Graphics/hollow_square.png"
+dest_files=["res://.godot/imported/hollow_square.png-2c41c92c80ec7dd76c003eed4df88405.ctex"]
 
 [params]
 

@@ -14,12 +14,7 @@
             "c",
             "d",
             "c",
-            "x",
-            "q",
-            "q",
-            "c",
-            "f",
-            "d"
+            "x"
         ],
         "active_sites": [
             5,
@@ -31,23 +26,18 @@
         "name": "Leghemoglobin",
         "description": "Leghemoglobin comes from soybean roots but it can make plant burgers \u201cbleed\u201d like real meat!",
         "sequence": [
+            "q",
+            "q",
+            "c",
+            "f",
+            "d",
             "x",
             "d",
             "s",
             "f",
             "d",
             "c",
-            "f",
-            "x",
-            "c",
-            "f",
-            "c",
-            "s",
-            "d",
-            "s",
-            "x",
-            "s",
-            "d"
+            "f"
         ],
         "active_sites": [
             1,
@@ -60,23 +50,168 @@
         "description": "Mycoproteins are found in fungi but are used in meat alternatives like Quorn to give it a naturally meaty texture!",
         "sequence": [
             "x",
+            "c",
+            "f",
+            "c",
+            "s",
             "d",
-            "c",
-            "q",
-            "f",
+            "s",
             "x",
             "s",
-            "c",
-            "q",
-            "c",
-            "s",
-            "c",
-            "q",
-            "c",
+            "d",
             "x",
-            "f",
-            "q"
+            "d"
         ],
         "active_sites": []
+    },
+    {
+        "name": "Soy glycinin",
+        "description": "Glycinin is one of soy\u2019s main proteins and helps tofu hold its shape!",
+        "sequence": [
+            "c",
+            "q",
+            "f",
+            "x",
+            "s",
+            "c",
+            "q",
+            "c",
+            "s",
+            "c",
+            "q",
+            "c"
+        ],
+        "active_sites": []
+    },
+    {
+        "name": "Wheat gluten",
+        "description": "Gluten is an elastic protein found in wheat - it makes seitan chewy and bread dough stretchy!",
+        "sequence": [
+            "x",
+            "f",
+            "q",
+            "q",
+            "x",
+            "c",
+            "s",
+            "s",
+            "d",
+            "f",
+            "q",
+            "x"
+        ],
+        "active_sites": [
+            5,
+            6,
+            -3,
+            -2,
+            -1
+        ]
+    },
+    {
+        "name": "Miraculin",
+        "description": "Miraculin is a protein from the miracle fruit that makes sour foods taste sweet!",
+        "sequence": [
+            "f",
+            "q",
+            "x",
+            "q",
+            "c",
+            "d",
+            "d",
+            "x",
+            "s",
+            "f",
+            "x",
+            "q"
+        ],
+        "active_sites": [
+            -2
+        ]
+    },
+    {
+        "name": "Monellin",
+        "description": "Monellin is a sweet protein from the serendipity berry that is about 3000 times sweeter than sugar!",
+        "sequence": [
+            "s",
+            "f",
+            "q",
+            "f",
+            "d",
+            "c",
+            "d",
+            "q",
+            "f",
+            "s",
+            "s",
+            "c"
+        ],
+        "active_sites": [
+            -4,
+            -5,
+            -6
+        ]
+    },
+    {
+        "name": "Phycocyanin",
+        "description": "Phycocyanin is a protein found in spirulina, which can make food bright blue-green without any artificial dye!",
+        "sequence": [
+            "f",
+            "d",
+            "x",
+            "d",
+            "d",
+            "d",
+            "d",
+            "s",
+            "f",
+            "f",
+            "c",
+            "s"
+        ],
+        "active_sites": [
+            -8,
+            -9
+        ]
+    },
+    {
+        "name": "Pea globulin",
+        "description": "Pea globulin can act like egg whites in baking, helping to make vegan meringues and fluffy cakes without any eggs!",
+        "sequence": [
+            "d",
+            "f",
+            "s",
+            "f",
+            "f",
+            "d",
+            "d",
+            "s",
+            "q",
+            "x",
+            "d",
+            "f"
+        ],
+        "active_sites": []
+    },
+    {
+        "name": "Hemp protein",
+        "description": "Made from hemp seeds, it contains all essential amino acids to help muscles repair and grow after exercise!",
+        "sequence": [
+            "d",
+            "c",
+            "s",
+            "d",
+            "q",
+            "s",
+            "f",
+            "d",
+            "s",
+            "d",
+            "q",
+            "d"
+        ],
+        "active_sites": [
+            4
+        ]
     }
 ]

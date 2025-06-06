@@ -11,7 +11,7 @@ current_file = Path(__file__)
 current_dir = current_file.parent
 
 letters = ["c", "s", "q", "x", "f", "d"]
-length = random.randint(10, 20)
+length = random.randint(5, 12)
 
 proteins = [
   {
@@ -42,13 +42,13 @@ proteins = [
     "name": "Wheat gluten",
     "description": "Gluten is an elastic protein found in wheat - it makes seitan chewy and bread dough stretchy!",
     "sequence": random.choices(letters, k=length),
-    "active_sites": [8,9,10,13,14]
+    "active_sites": [5,6,-3,-2,-1]
   },
   {
     "name": "Miraculin",
     "description": "Miraculin is a protein from the miracle fruit that makes sour foods taste sweet!",
     "sequence": random.choices(letters, k=length),
-    "active_sites": [8,9]
+    "active_sites": [-2]
   },
   {
     "name": "Monellin",
@@ -64,7 +64,7 @@ proteins = [
   },
   {
     "name": "Pea globulin",
-    "description": "Pea globulin can act like egg whites in baking, helping make vegan meringues and fluffy cakes without any eggs!",
+    "description": "Pea globulin can act like egg whites in baking, helping to make vegan meringues and fluffy cakes without any eggs!",
     "sequence": random.choices(letters, k=length),
     "active_sites": []
   },
@@ -72,12 +72,12 @@ proteins = [
     "name": "Hemp protein",
     "description": "Made from hemp seeds, it contains all essential amino acids to help muscles repair and grow after exercise!",
     "sequence": random.choices(letters, k=length),
-    "active_sites": []
+    "active_sites": [4]
   }
 ]
 
 with open(f"{current_dir}/proteins_db.json", "w") as f:
     json.dump(proteins, f, indent=4)
 
-with open(f"{current_dir}/proteins_db_short.json", "w") as f:
-    json.dump(proteins[:3], f, indent=4)
+# with open(f"{current_dir}/proteins_db_short.json", "w") as f:
+#     json.dump(proteins[:3], f, indent=4)
