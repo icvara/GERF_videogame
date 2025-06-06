@@ -1,30 +1,30 @@
-[gd_scene load_steps=36 format=4 uid="uid://c30pbx2xgd84h"]
+[gd_scene load_steps=36 format=4 uid="uid://c4hax6x2ngpts"]
 
-[ext_resource type="Script" uid="uid://udpwraov6f2i" path="res://GERF_version/Scripts/main_overlab.gd" id="1_l73bu"]
-[ext_resource type="PackedScene" uid="uid://cf6mcq38lapcb" path="res://Prototype_presentation_8.05.2025/overlab/item.tscn" id="2_u4kd4"]
-[ext_resource type="PackedScene" uid="uid://b8edkh57hgfcf" path="res://GERF_version/Scenes/player.tscn" id="3_htreh"]
-[ext_resource type="Texture2D" uid="uid://d5t833l5vfpy" path="res://Prototype_presentation_8.05.2025/overlab/asset/16px/tilesFloor.png" id="4_w0wfq"]
-[ext_resource type="Texture2D" uid="uid://db1d16uoeyeon" path="res://Prototype_presentation_8.05.2025/overlab/asset/16px/tilesStuff.png" id="5_tjhfs"]
-[ext_resource type="Texture2D" uid="uid://c4epq437ojbmu" path="res://Prototype_presentation_8.05.2025/overlab/asset/16px/tilesWalls.png" id="6_wdi0a"]
-[ext_resource type="PackedScene" uid="uid://b8vgueq3w2gch" path="res://GERF_version/Scenes/grass.tscn" id="7_3mohu"]
-[ext_resource type="Texture2D" uid="uid://nhj7cxexysdf" path="res://GERF_version/Asset/graphic/16px/tilesFloor.png" id="7_nmqik"]
-[ext_resource type="Texture2D" uid="uid://cdagyaexnobuo" path="res://GERF_version/Asset/graphic/16px/tilesStuff.png" id="8_57yap"]
-[ext_resource type="Texture2D" uid="uid://b1ctm2moo4qaj" path="res://GERF_version/Asset/graphic/16px/tilesWalls.png" id="9_l73bu"]
-[ext_resource type="Texture2D" uid="uid://cjrd1bwffn17u" path="res://GERF_version/Asset/graphic/table.png" id="10_57yap"]
-[ext_resource type="PackedScene" uid="uid://625fix8gh62c" path="res://GERF_version/workstation/scene/DNA_delivery.tscn" id="11_w0wfq"]
-[ext_resource type="PackedScene" uid="uid://c1wjuu37hvn4e" path="res://GERF_version/Scenes/score.tscn" id="12_7m1vr"]
-[ext_resource type="PackedScene" uid="uid://bog2su78p01o5" path="res://GERF_version/workstation/scene/final_delivery.tscn" id="12_tjhfs"]
-[ext_resource type="PackedScene" uid="uid://bjxyv0aonstdc" path="res://GERF_version/Scenes/time_hud.tscn" id="13_oajpy"]
-[ext_resource type="PackedScene" uid="uid://bo2gjmkf31bd7" path="res://GERF_version/workstation/scene/Incubator.tscn" id="13_wdi0a"]
-[ext_resource type="PackedScene" uid="uid://fxevips2yu1n" path="res://GERF_version/Scenes/end.tscn" id="14_8nwj5"]
-[ext_resource type="PackedScene" uid="uid://mxoes4ppbaoc" path="res://GERF_version/workstation/scene/Transformation_station.tscn" id="14_dhn57"]
-[ext_resource type="PackedScene" uid="uid://bptn6adjpekm0" path="res://GERF_version/workstation/scene/glycerol_stock.tscn" id="14_tjhfs"]
-[ext_resource type="PackedScene" uid="uid://ew4cs3o4boh4" path="res://GERF_version/Scenes/pause_menu.tscn" id="15_p2k58"]
-[ext_resource type="PackedScene" uid="uid://b7fpmxph7j58m" path="res://GERF_version/workstation/scene/empty_table.tscn" id="17_1fh3b"]
-[ext_resource type="PackedScene" uid="uid://boqe85m3sf8co" path="res://GERF_version/Scenes/tuto_control.tscn" id="20_dhn57"]
+[ext_resource type="Script" uid="uid://udpwraov6f2i" path="res://GERF_version/Scripts/main_overlab.gd" id="1_8dmq6"]
+[ext_resource type="PackedScene" uid="uid://cf6mcq38lapcb" path="res://Prototype_presentation_8.05.2025/overlab/item.tscn" id="2_tbirb"]
+[ext_resource type="PackedScene" uid="uid://b8edkh57hgfcf" path="res://GERF_version/Scenes/player.tscn" id="3_4dbi8"]
+[ext_resource type="PackedScene" uid="uid://b8vgueq3w2gch" path="res://GERF_version/Scenes/grass.tscn" id="4_m21x3"]
+[ext_resource type="Texture2D" uid="uid://d5t833l5vfpy" path="res://Prototype_presentation_8.05.2025/overlab/asset/16px/tilesFloor.png" id="5_jva36"]
+[ext_resource type="Texture2D" uid="uid://db1d16uoeyeon" path="res://Prototype_presentation_8.05.2025/overlab/asset/16px/tilesStuff.png" id="6_73wm2"]
+[ext_resource type="Texture2D" uid="uid://c4epq437ojbmu" path="res://Prototype_presentation_8.05.2025/overlab/asset/16px/tilesWalls.png" id="7_h8vgk"]
+[ext_resource type="Texture2D" uid="uid://nhj7cxexysdf" path="res://GERF_version/Asset/graphic/16px/tilesFloor.png" id="8_w2ikh"]
+[ext_resource type="Texture2D" uid="uid://cdagyaexnobuo" path="res://GERF_version/Asset/graphic/16px/tilesStuff.png" id="9_husya"]
+[ext_resource type="Texture2D" uid="uid://b1ctm2moo4qaj" path="res://GERF_version/Asset/graphic/16px/tilesWalls.png" id="10_lgxj3"]
+[ext_resource type="Texture2D" uid="uid://cjrd1bwffn17u" path="res://GERF_version/Asset/graphic/table.png" id="11_0goef"]
+[ext_resource type="PackedScene" uid="uid://625fix8gh62c" path="res://GERF_version/workstation/scene/DNA_delivery.tscn" id="12_ylgkg"]
+[ext_resource type="PackedScene" uid="uid://bog2su78p01o5" path="res://GERF_version/workstation/scene/final_delivery.tscn" id="13_0qlg7"]
+[ext_resource type="PackedScene" uid="uid://bo2gjmkf31bd7" path="res://GERF_version/workstation/scene/Incubator.tscn" id="14_0eies"]
+[ext_resource type="PackedScene" uid="uid://bptn6adjpekm0" path="res://GERF_version/workstation/scene/glycerol_stock.tscn" id="15_3eeod"]
+[ext_resource type="PackedScene" uid="uid://mxoes4ppbaoc" path="res://GERF_version/workstation/scene/Transformation_station.tscn" id="16_kds61"]
+[ext_resource type="PackedScene" uid="uid://b7fpmxph7j58m" path="res://GERF_version/workstation/scene/empty_table.tscn" id="17_a45bw"]
+[ext_resource type="PackedScene" uid="uid://c1wjuu37hvn4e" path="res://GERF_version/Scenes/score.tscn" id="18_rqxa4"]
+[ext_resource type="PackedScene" uid="uid://bjxyv0aonstdc" path="res://GERF_version/Scenes/time_hud.tscn" id="19_2rsv5"]
+[ext_resource type="PackedScene" uid="uid://fxevips2yu1n" path="res://GERF_version/Scenes/end.tscn" id="20_3herl"]
+[ext_resource type="PackedScene" uid="uid://ew4cs3o4boh4" path="res://GERF_version/Scenes/pause_menu.tscn" id="21_w7cc6"]
+[ext_resource type="PackedScene" uid="uid://boqe85m3sf8co" path="res://GERF_version/Scenes/tuto_control.tscn" id="22_0yyss"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o0fyi"]
-texture = ExtResource("4_w0wfq")
+texture = ExtResource("5_jva36")
 2:0/0 = 0
 3:0/0 = 0
 4:0/0 = 0
@@ -169,7 +169,7 @@ texture = ExtResource("4_w0wfq")
 10:17/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fs4dq"]
-texture = ExtResource("5_tjhfs")
+texture = ExtResource("6_73wm2")
 29:0/0 = 0
 31:0/0 = 0
 32:0/0 = 0
@@ -596,7 +596,7 @@ texture = ExtResource("5_tjhfs")
 36:15/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e1ld3"]
-texture = ExtResource("6_wdi0a")
+texture = ExtResource("7_h8vgk")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -787,7 +787,7 @@ sources/1 = SubResource("TileSetAtlasSource_fs4dq")
 sources/2 = SubResource("TileSetAtlasSource_e1ld3")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u4kd4"]
-texture = ExtResource("7_nmqik")
+texture = ExtResource("8_w2ikh")
 2:0/0 = 0
 3:0/0 = 0
 4:0/0 = 0
@@ -932,7 +932,7 @@ texture = ExtResource("7_nmqik")
 10:17/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_htreh"]
-texture = ExtResource("8_57yap")
+texture = ExtResource("9_husya")
 29:0/0 = 0
 31:0/0 = 0
 32:0/0 = 0
@@ -1359,7 +1359,7 @@ texture = ExtResource("8_57yap")
 36:15/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w0wfq"]
-texture = ExtResource("9_l73bu")
+texture = ExtResource("10_lgxj3")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -1545,7 +1545,7 @@ texture = ExtResource("9_l73bu")
 10:15/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l73bu"]
-texture = ExtResource("10_57yap")
+texture = ExtResource("11_0goef")
 2:2/0 = 0
 2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:2/0 = 0
@@ -1565,7 +1565,7 @@ sources/2 = SubResource("TileSetAtlasSource_w0wfq")
 sources/3 = SubResource("TileSetAtlasSource_l73bu")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l0nf3"]
-texture = ExtResource("4_w0wfq")
+texture = ExtResource("5_jva36")
 2:0/0 = 0
 3:0/0 = 0
 4:0/0 = 0
@@ -1710,7 +1710,7 @@ texture = ExtResource("4_w0wfq")
 10:17/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_og8ts"]
-texture = ExtResource("5_tjhfs")
+texture = ExtResource("6_73wm2")
 29:0/0 = 0
 31:0/0 = 0
 32:0/0 = 0
@@ -2138,7 +2138,7 @@ texture = ExtResource("5_tjhfs")
 20:6/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u5ew8"]
-texture = ExtResource("6_wdi0a")
+texture = ExtResource("7_h8vgk")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -2329,11 +2329,11 @@ sources/1 = SubResource("TileSetAtlasSource_og8ts")
 sources/2 = SubResource("TileSetAtlasSource_u5ew8")
 
 [node name="main_overlab" type="Node2D"]
-script = ExtResource("1_l73bu")
-item = ExtResource("2_u4kd4")
-player = ExtResource("3_htreh")
+script = ExtResource("1_8dmq6")
+item = ExtResource("2_tbirb")
+player = ExtResource("3_4dbi8")
 
-[node name="grass" parent="." instance=ExtResource("7_3mohu")]
+[node name="grass" parent="." instance=ExtResource("4_m21x3")]
 scale = Vector2(2, 2)
 
 [node name="LAB" type="Node2D" parent="."]
@@ -2354,88 +2354,88 @@ tile_set = SubResource("TileSet_qhvny")
 [node name="Workstation" type="Node2D" parent="."]
 scale = Vector2(2, 2)
 
-[node name="dna_delivery3" parent="Workstation" instance=ExtResource("11_w0wfq")]
+[node name="dna_delivery3" parent="Workstation" instance=ExtResource("12_ylgkg")]
 position = Vector2(159, 240)
 
-[node name="dna_delivery" parent="Workstation" instance=ExtResource("11_w0wfq")]
+[node name="dna_delivery" parent="Workstation" instance=ExtResource("12_ylgkg")]
 position = Vector2(191.5, 240)
 
-[node name="Delivery" parent="Workstation" instance=ExtResource("12_tjhfs")]
+[node name="Delivery" parent="Workstation" instance=ExtResource("13_0qlg7")]
 position = Vector2(287.5, 238)
 
-[node name="Incubator" parent="Workstation" instance=ExtResource("13_wdi0a")]
-position = Vector2(216, 95.5)
+[node name="Incubator" parent="Workstation" instance=ExtResource("14_0eies")]
+position = Vector2(89, 64)
 
-[node name="Incubator2" parent="Workstation" instance=ExtResource("13_wdi0a")]
-position = Vector2(120, 97)
+[node name="Incubator2" parent="Workstation" instance=ExtResource("14_0eies")]
+position = Vector2(87.5, 0)
 
-[node name="freezer" parent="Workstation" instance=ExtResource("14_tjhfs")]
+[node name="freezer" parent="Workstation" instance=ExtResource("15_3eeod")]
 position = Vector2(384, 238)
 
-[node name="freezer2" parent="Workstation" instance=ExtResource("14_tjhfs")]
-position = Vector2(416, 237.5)
-
-[node name="Transfo_station" parent="Workstation" instance=ExtResource("14_dhn57")]
+[node name="Transfo_station" parent="Workstation" instance=ExtResource("16_kds61")]
 position = Vector2(448, 77.5)
 
-[node name="Transfo_station2" parent="Workstation" instance=ExtResource("14_dhn57")]
+[node name="Transfo_station2" parent="Workstation" instance=ExtResource("16_kds61")]
 position = Vector2(447.5, 15.5)
 
-[node name="empty table3" parent="Workstation" instance=ExtResource("17_1fh3b")]
+[node name="empty table" parent="Workstation" instance=ExtResource("17_a45bw")]
+position = Vector2(225, 112.5)
+
+[node name="empty table3" parent="Workstation" instance=ExtResource("17_a45bw")]
 position = Vector2(255.5, 112.5)
 
-[node name="empty table5" parent="Workstation" instance=ExtResource("17_1fh3b")]
-position = Vector2(97.5, 80.5)
-
-[node name="empty table19" parent="Workstation" instance=ExtResource("17_1fh3b")]
-position = Vector2(97, 16.5)
-
-[node name="empty table4" parent="Workstation" instance=ExtResource("17_1fh3b")]
+[node name="empty table4" parent="Workstation" instance=ExtResource("17_a45bw")]
 position = Vector2(161, 113)
 
-[node name="empty table6" parent="Workstation" instance=ExtResource("17_1fh3b")]
+[node name="empty table5" parent="Workstation" instance=ExtResource("17_a45bw")]
+position = Vector2(128.5, 112.5)
+
+[node name="empty table6" parent="Workstation" instance=ExtResource("17_a45bw")]
 position = Vector2(97.5, 113)
 
-[node name="empty table7" parent="Workstation" instance=ExtResource("17_1fh3b")]
+[node name="empty table7" parent="Workstation" instance=ExtResource("17_a45bw")]
 position = Vector2(97, 48)
 
-[node name="empty table8" parent="Workstation" instance=ExtResource("17_1fh3b")]
+[node name="empty table8" parent="Workstation" instance=ExtResource("17_a45bw")]
 position = Vector2(448.5, 48.5)
 
-[node name="empty table9" parent="Workstation" instance=ExtResource("17_1fh3b")]
+[node name="empty table9" parent="Workstation" instance=ExtResource("17_a45bw")]
 position = Vector2(449.5, 113)
 
-[node name="empty table10" parent="Workstation" instance=ExtResource("17_1fh3b")]
+[node name="empty table10" parent="Workstation" instance=ExtResource("17_a45bw")]
 position = Vector2(418, 111.5)
 
-[node name="empty table11" parent="Workstation" instance=ExtResource("17_1fh3b")]
+[node name="empty table11" parent="Workstation" instance=ExtResource("17_a45bw")]
 position = Vector2(385.5, 112)
 
-[node name="empty table12" parent="Workstation" instance=ExtResource("17_1fh3b")]
+[node name="empty table12" parent="Workstation" instance=ExtResource("17_a45bw")]
 position = Vector2(353, 112)
 
-[node name="empty table13" parent="Workstation" instance=ExtResource("17_1fh3b")]
+[node name="empty table13" parent="Workstation" instance=ExtResource("17_a45bw")]
 position = Vector2(320.5, 113)
 
-[node name="empty table14" parent="Workstation" instance=ExtResource("17_1fh3b")]
+[node name="empty table14" parent="Workstation" instance=ExtResource("17_a45bw")]
 position = Vector2(96.5, 240.5)
 
-[node name="empty table15" parent="Workstation" instance=ExtResource("17_1fh3b")]
+[node name="empty table15" parent="Workstation" instance=ExtResource("17_a45bw")]
 position = Vector2(128.5, 239.5)
 
-[node name="empty table16" parent="Workstation" instance=ExtResource("17_1fh3b")]
+[node name="empty table16" parent="Workstation" instance=ExtResource("17_a45bw")]
 position = Vector2(225, 240.5)
 
-[node name="empty table17" parent="Workstation" instance=ExtResource("17_1fh3b")]
+[node name="empty table17" parent="Workstation" instance=ExtResource("17_a45bw")]
 position = Vector2(257, 240.5)
 
-[node name="empty table18" parent="Workstation" instance=ExtResource("17_1fh3b")]
+[node name="empty table18" parent="Workstation" instance=ExtResource("17_a45bw")]
 position = Vector2(352.5, 239.5)
 
-[node name="empty table20" parent="Workstation" instance=ExtResource("17_1fh3b")]
+[node name="empty table19" parent="Workstation" instance=ExtResource("17_a45bw")]
+position = Vector2(416.5, 240)
+
+[node name="empty table20" parent="Workstation" instance=ExtResource("17_a45bw")]
 position = Vector2(448.5, 240.5)
 
-[node name="empty table2" parent="Workstation" instance=ExtResource("17_1fh3b")]
+[node name="empty table2" parent="Workstation" instance=ExtResource("17_a45bw")]
 position = Vector2(193, 112)
 
 [node name="player_startpos" type="Node2D" parent="."]
@@ -2455,20 +2455,20 @@ position = Vector2(831, 383)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Score" parent="CanvasLayer" instance=ExtResource("12_7m1vr")]
+[node name="Score" parent="CanvasLayer" instance=ExtResource("18_rqxa4")]
 
-[node name="TimeHUD" parent="CanvasLayer" instance=ExtResource("13_oajpy")]
+[node name="TimeHUD" parent="CanvasLayer" instance=ExtResource("19_2rsv5")]
 offset_top = -2.0
 offset_right = -1152.0
 offset_bottom = -650.0
 
-[node name="End" parent="CanvasLayer" instance=ExtResource("14_8nwj5")]
+[node name="End" parent="CanvasLayer" instance=ExtResource("20_3herl")]
 visible = false
 
-[node name="Pause_menu" parent="CanvasLayer" instance=ExtResource("15_p2k58")]
+[node name="Pause_menu" parent="CanvasLayer" instance=ExtResource("21_w7cc6")]
 visible = false
 
-[node name="Tuto_control" parent="CanvasLayer" instance=ExtResource("20_dhn57")]
+[node name="Tuto_control" parent="CanvasLayer" instance=ExtResource("22_0yyss")]
 visible = false
 
 [node name="Timer" type="Timer" parent="."]

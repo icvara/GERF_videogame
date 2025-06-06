@@ -10,6 +10,8 @@ var push_force =  500
 var push_velocity = Vector2(0,0)
 @export var playerID = 1
 
+var joy_button_pressed = false
+
 var animatedstuff
 
 func setskin(skinid):
@@ -47,7 +49,14 @@ func _physics_process(delta):
 		animatedstuff.show()
 
 	var direction = null
-	if GlobalVariableOverlab.nplayer >= 2:
+	direction = Vector2(Input.get_joy_axis(playerID, JOY_AXIS_LEFT_X),Input.get_joy_axis(playerID, JOY_AXIS_LEFT_Y))
+	if direction.x <0.8 and direction.x > -0.8:
+		direction.x = 0
+	if direction.y <0.8 and direction.y > -0.8:
+		direction.y = 0
+	#direction = direction.normalized()
+	print(playerID,direction)
+	'if GlobalVariableOverlab.nplayer >= 2:
 		if playerID == 0:
 			direction = Vector2(Input.get_axis("left", "right"),Input.get_axis("up", "down"))
 		elif playerID == 1: 
@@ -59,7 +68,7 @@ func _physics_process(delta):
 		direction += Vector2(Input.get_axis("left", "right"),Input.get_axis("up", "down"))
 		direction += Vector2(Input.get_axis("left2", "right2"),Input.get_axis("up2", "down2"))
 		direction += Vector2(Input.get_axis("left3", "right3"),Input.get_axis("up3", "down3"))
-		direction = direction.normalized()
+		direction = direction.normalized()'
 		
 	if direction:
 		velocity = direction * SPEED 
@@ -81,7 +90,7 @@ func _physics_process(delta):
 	else:
 		animatedstuff.stop()
 	
-	
+	#print(playerID, last_dir)
 	
 	
 	for i in get_slide_collision_count():
@@ -115,7 +124,23 @@ func _physics_process(delta):
 
 
 
-	if GlobalVariableOverlab.nplayer >= 2:
+	if Input.is_joy_button_pressed(playerID, 0):
+		if !joy_button_pressed:
+			joy_button_pressed = true 
+			if interacting_with_workstation:
+				interacting_with_workstation.Use(self)
+			else:
+						if interacting_with != null:
+							if inventory == null:
+								interacting_with.PickUP(self)
+							else: 
+								inventory.Drop(self)
+						elif inventory != null:
+							inventory.Drop(self)
+	else:
+			joy_button_pressed = false
+
+	'if GlobalVariableOverlab.nplayer >= 2:
 		if playerID == 0:
 			if Input.is_action_just_pressed("space"):
 				if interacting_with_workstation:
@@ -164,7 +189,7 @@ func _physics_process(delta):
 						else: 
 							inventory.Drop(self)
 					elif inventory != null:
-						inventory.Drop(self)
+						inventory.Drop(self)'
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Item"):
