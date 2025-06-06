@@ -306,12 +306,10 @@ class MAIN:
                 if i in active_sites:
                     time.sleep(1)
                     failure.play()
-                    self.last_description = (
-                        "One or more wrong codons found in the active site."
-                    )
+                    self.last_description = "Your protein is inactive!"
                     choice = self.show_final_popup(
                         message="Oh no!",
-                        submessage="Your protein is inactive!",
+                        submessage="One or more wrong codons found in the active site.",
                         emoji_img=emoji_sadface,
                         figure_img=self.protein_inactive,
                     )
@@ -329,11 +327,14 @@ class MAIN:
             time.sleep(1)
             failure.play()
             self.last_description = (
-                "Your protein cannot hold its shape and is misfolded!",
+                "Your protein cannot hold its shape and is misfolded!"
+            )
+            submsg = (
+                f"{errors} wrong codons in the sequence ({error_rate:.0%} error rate)."
             )
             choice = self.show_final_popup(
                 message="Oh no!",
-                submessage=f"{errors} wrong codons in the sequence ({error_rate:.0%} error rate).",
+                submessage=submsg,
                 emoji_img=emoji_sadface,
                 figure_img=self.protein_misfolded,
             )
@@ -425,7 +426,7 @@ class MAIN:
             ("", None),
             ("Press A to START", None),
             ("", None),
-            ("Good luck building a functional food protein!", emoji_dna)
+            ("Good luck building a functional food protein!", emoji_dna),
         ]
 
         # Popup dimensions
@@ -867,7 +868,6 @@ class MAIN:
                         return "tutorial"
 
 
-
 with open(f"{current_dir}/proteins_db.json") as f:
     PROTEINS = json.load(f)
 
@@ -886,8 +886,8 @@ if pygame.joystick.get_count() > 0:
     joystick.init()
 else:
     joystick = None
-    
-    
+
+
 monitors = get_monitors()
 
 # Use the second monitor if available
@@ -901,8 +901,8 @@ else:
     screen_height = monitors[0].height - 50
     screen_x = monitors[0].x
     screen_y = monitors[0].y
-    
-os.environ['SDL_VIDEO_WINDOW_POS'] = f"{screen_x},{screen_y}"
+
+os.environ["SDL_VIDEO_WINDOW_POS"] = f"{screen_x},{screen_y}"
 screen = pygame.display.set_mode((screen_width, screen_height))
 
 header_height = 130  # Space for protein info
@@ -1025,9 +1025,11 @@ while True:
         if event.type == SCREEN_UPDATE and not main_game.paused:
             main_game.update()
         if event.type == pygame.KEYDOWN:
-                
+
             if event.type == pygame.JOYBUTTONDOWN:
-                if event.button == 2:  # Replace with the correct number for your controller
+                if (
+                    event.button == 2
+                ):  # Replace with the correct number for your controller
                     main_game.paused = not main_game.paused
 
             elif not main_game.active and main_game.game_over_reason:
@@ -1039,12 +1041,14 @@ while True:
                 if new_dir + main_game.snake.direction != Vector2(0, 0):
                     main_game.snake.direction = new_dir
                     main_game.active = True
-                           
+
         # Joystick hat/dpad
         if event.type == pygame.JOYHATMOTION:
             hat_x, hat_y = event.value
             new_dir = Vector2(hat_x, -hat_y)  # Note: y is inverted
-            if new_dir.length() > 0 and new_dir + main_game.snake.direction != Vector2(0, 0):
+            if new_dir.length() > 0 and new_dir + main_game.snake.direction != Vector2(
+                0, 0
+            ):
                 main_game.snake.direction = new_dir
                 main_game.active = True
 
@@ -1067,7 +1071,9 @@ while True:
                     new_dir = Vector2(0, -1)
                 else:
                     new_dir = Vector2(0, 0)
-            if new_dir.length() > 0 and new_dir + main_game.snake.direction != Vector2(0, 0):
+            if new_dir.length() > 0 and new_dir + main_game.snake.direction != Vector2(
+                0, 0
+            ):
                 main_game.snake.direction = new_dir
                 main_game.active = True
 
@@ -1078,12 +1084,11 @@ while True:
         pause_text = highlight_font.render("PAUSED", True, (100, 0, 0))
         text_rect = pause_text.get_rect(center=(screen_width // 2, screen_height // 2))
         screen.blit(pause_text, text_rect)
-        
+
     game_area = pygame.Rect(
         0, header_height, screen_width, screen_height - header_height
     )
-    
+
     pygame.draw.rect(screen, (0, 0, 0), game_area, 2)
     pygame.display.update()
     clock.tick(60)
-
