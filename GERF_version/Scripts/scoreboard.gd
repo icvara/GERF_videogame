@@ -3,11 +3,13 @@ extends VBoxContainer
 var path = "res://GERF_version/savefile/save_score.s"
 var score_list = {}
 func _ready() -> void:
-	#reset_score()
 	
 
 	write_scoreboard()	
 
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("reset"):
+			reset_score()
 
 
 
