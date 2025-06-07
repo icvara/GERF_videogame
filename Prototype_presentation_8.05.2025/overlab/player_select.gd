@@ -2,6 +2,9 @@ extends Control
 
 var maxplayer = 4
 
+func _ready():
+	GlobalVariableOverlab.player_ID = []
+
 func _process(delta: float) -> void:
 	if GlobalVariableOverlab.nplayer > 0 :
 		$ProgressBar.show()

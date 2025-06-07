@@ -5,7 +5,7 @@ var score = 0
 var time = 80
 
 var nplayer = 1
-var player_ID = [0]
+var player_ID = []
 var playerskin = [0,0,0,0]
 
 var score_content =""
