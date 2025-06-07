@@ -16,7 +16,7 @@ func _process(delta: float) -> void:
 func load_from_file(path):
 	var file = FileAccess.open(path, FileAccess.READ)
 	var content = file.get_as_text()
-	content = 	GlobalVariableOverlab.score_content 
+	#GlobalVariableOverlab.score_content = content
 	return content
 
 
