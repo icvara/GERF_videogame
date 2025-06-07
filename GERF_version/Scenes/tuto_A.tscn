@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b15cg372t2tac"]
+[gd_scene load_steps=17 format=3 uid="uid://b15cg372t2tac"]
 
 [ext_resource type="Script" uid="uid://cirow2kaxmkcq" path="res://GERF_version/Scripts/tuto_a.gd" id="1_oyt1q"]
 [ext_resource type="PackedScene" uid="uid://625fix8gh62c" path="res://GERF_version/workstation/scene/DNA_delivery.tscn" id="3_k372j"]
@@ -12,6 +12,13 @@
 [ext_resource type="PackedScene" uid="uid://dyj70urrvani6" path="res://GERF_version/Items/scene/mcell.tscn" id="10_05eaj"]
 [ext_resource type="PackedScene" uid="uid://bptn6adjpekm0" path="res://GERF_version/workstation/scene/glycerol_stock.tscn" id="11_wma2i"]
 [ext_resource type="AudioStream" uid="uid://bth641rduq30i" path="res://GERF_version/Asset/sound/cave theme.mp3" id="12_wofsu"]
+[ext_resource type="Script" uid="uid://cywdf52304agf" path="res://GERF_version/Scripts/tuto_receipe.gd" id="13_wma2i"]
+[ext_resource type="Texture2D" uid="uid://b507bunentl55" path="res://GERF_version/Asset/graphic/button/gdb-xbox-2.png" id="14_g4vls"]
+[ext_resource type="Texture2D" uid="uid://cjrd1bwffn17u" path="res://GERF_version/Asset/graphic/table.png" id="15_0j02m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmyc1"]
+atlas = ExtResource("14_g4vls")
+region = Rect2(448.779, 49.1009, 14.0469, 13.8491)
 
 [node name="Tuto_A" type="Control"]
 layout_mode = 3
@@ -23,6 +30,7 @@ grow_vertical = 2
 script = ExtResource("1_oyt1q")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -197,5 +205,262 @@ layout_mode = 1
 [node name="CaveTheme" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_wofsu")
 autoplay = true
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -58.0
+offset_top = 211.0
+offset_right = 83.0
+offset_bottom = -98.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.155513, 0.243889, 0.320241, 1)
+script = ExtResource("13_wma2i")
+
+[node name="Label" type="Label" parent="ColorRect2"]
+layout_mode = 0
+offset_left = 459.0
+offset_top = 81.0
+offset_right = 678.0
+offset_bottom = 120.0
+theme_override_font_sizes/font_size = 30
+text = "NEW RECIPE!"
+
+[node name="Label" type="Label" parent="ColorRect2/Label"]
+layout_mode = 0
+offset_left = -26.0
+offset_top = 57.0
+offset_right = 277.0
+offset_bottom = 88.0
+theme_override_font_sizes/font_size = 24
+text = "Press A to discover"
+
+[node name="Sprite2D" type="Sprite2D" parent="ColorRect2/Label/Label"]
+position = Vector2(108, 15)
+scale = Vector2(2.42162, 2.42162)
+texture = SubResource("AtlasTexture_bmyc1")
+
+[node name="1" type="Control" parent="ColorRect2"]
+visible = false
+anchors_preset = 0
+offset_left = 5.0
+offset_top = -268.0
+offset_right = 5.0
+offset_bottom = -268.0
+
+[node name="Table" type="Sprite2D" parent="ColorRect2/1"]
+position = Vector2(65, 342)
+scale = Vector2(2, 2)
+texture = ExtResource("15_0j02m")
+
+[node name="dna_delivery" parent="ColorRect2/1" instance=ExtResource("3_k372j")]
+position = Vector2(31, 311)
+scale = Vector2(2, 2)
+collision_layer = 0
+collision_mask = 0
+
+[node name="cell_item" parent="ColorRect2/1" instance=ExtResource("8_wofsu")]
+position = Vector2(185, 442)
+scale = Vector2(2, 2)
+collision_layer = 0
+collision_mask = 0
+
+[node name="dna_item" parent="ColorRect2/1" instance=ExtResource("9_18o0k")]
+position = Vector2(181, 338)
+scale = Vector2(2, 2)
+collision_layer = 0
+collision_mask = 0
+
+[node name="freezer" parent="ColorRect2/1" instance=ExtResource("11_wma2i")]
+position = Vector2(30, 414)
+scale = Vector2(2, 2)
+collision_layer = 0
+collision_mask = 0
+
+[node name="Label" type="Label" parent="ColorRect2/1"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 287.0
+offset_right = 339.0
+offset_bottom = 362.0
+theme_override_font_sizes/font_size = 18
+text = "1. Collect DNA"
+
+[node name="Label2" type="Label" parent="ColorRect2/1"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 389.0
+offset_right = 338.0
+offset_bottom = 464.0
+theme_override_font_sizes/font_size = 18
+text = "1. Collect Cell"
+
+[node name="arrow3" type="Label" parent="ColorRect2/1"]
+layout_mode = 0
+offset_left = 106.0
+offset_top = 427.0
+offset_right = 139.0
+offset_bottom = 466.0
+theme_override_font_sizes/font_size = 30
+text = "->"
+
+[node name="arrow2" type="Label" parent="ColorRect2/1"]
+layout_mode = 0
+offset_left = 101.0
+offset_top = 323.0
+offset_right = 134.0
+offset_bottom = 362.0
+theme_override_font_sizes/font_size = 30
+text = "->"
+
+[node name="2" type="Control" parent="ColorRect2"]
+visible = false
+anchors_preset = 0
+offset_left = 2.0
+offset_top = -257.0
+offset_right = 2.0
+offset_bottom = -257.0
+
+[node name="Table" type="Sprite2D" parent="ColorRect2/2"]
+position = Vector2(379, 383)
+scale = Vector2(2, 2)
+texture = ExtResource("15_0j02m")
+
+[node name="Label7" type="Label" parent="ColorRect2/2"]
+layout_mode = 0
+offset_left = 329.0
+offset_top = 422.0
+offset_right = 771.0
+offset_bottom = 497.0
+theme_override_font_sizes/font_size = 18
+text = "Sucess rate: 3/4"
+
+[node name="Label6" type="Label" parent="ColorRect2/2"]
+layout_mode = 0
+offset_left = 263.0
+offset_top = 283.0
+offset_right = 705.0
+offset_bottom = 358.0
+theme_override_font_sizes/font_size = 18
+text = "2. Combine them in the bench.
+Then, activate to built a new Cell"
+
+[node name="cell_item3" parent="ColorRect2/2" instance=ExtResource("8_wofsu")]
+position = Vector2(320, 355)
+collision_layer = 0
+collision_mask = 0
+
+[node name="dna_item2" parent="ColorRect2/2" instance=ExtResource("9_18o0k")]
+position = Vector2(322, 393)
+collision_layer = 0
+collision_mask = 0
+
+[node name="cell_item2" parent="ColorRect2/2" instance=ExtResource("10_05eaj")]
+position = Vector2(492, 372)
+scale = Vector2(2, 2)
+collision_layer = 0
+collision_mask = 0
+
+[node name="arrow" type="Label" parent="ColorRect2/2"]
+layout_mode = 0
+offset_left = 418.0
+offset_top = 359.0
+offset_right = 451.0
+offset_bottom = 398.0
+theme_override_font_sizes/font_size = 30
+text = "->"
+
+[node name="Transfo_station" parent="ColorRect2/2" instance=ExtResource("7_e2o6h")]
+position = Vector2(343, 345)
+scale = Vector2(2, 2)
+collision_layer = 0
+collision_mask = 0
+
+[node name="3" type="Control" parent="ColorRect2"]
+visible = false
+anchors_preset = 0
+offset_left = -7.0
+offset_top = -253.0
+offset_right = -7.0
+offset_bottom = -253.0
+
+[node name="arrow5" type="Label" parent="ColorRect2/3"]
+layout_mode = 0
+offset_left = 774.0
+offset_top = 361.0
+offset_right = 807.0
+offset_bottom = 400.0
+theme_override_font_sizes/font_size = 30
+text = "->"
+
+[node name="Incubator" parent="ColorRect2/3" instance=ExtResource("6_qac76")]
+position = Vector2(694, 354)
+scale = Vector2(2, 2)
+collision_layer = 0
+collision_mask = 0
+
+[node name="Label5" type="Label" parent="ColorRect2/3"]
+layout_mode = 0
+offset_left = 661.0
+offset_top = 424.0
+offset_right = 925.0
+offset_bottom = 473.0
+theme_override_font_sizes/font_size = 18
+text = "Careful of overgrowth
+"
+
+[node name="cell_item4" parent="ColorRect2/3" instance=ExtResource("10_05eaj")]
+position = Vector2(729, 363)
+collision_layer = 0
+collision_mask = 0
+
+[node name="Label3" type="Label" parent="ColorRect2/3"]
+layout_mode = 0
+offset_left = 661.0
+offset_top = 284.0
+offset_right = 925.0
+offset_bottom = 333.0
+theme_override_font_sizes/font_size = 18
+text = "3. Incubate the cells.
+"
+
+[node name="bioproduct_item" parent="ColorRect2/3" instance=ExtResource("7_12shw")]
+position = Vector2(833, 377)
+scale = Vector2(2, 2)
+collision_layer = 0
+collision_mask = 0
+
+[node name="4" type="Control" parent="ColorRect2"]
+visible = false
+anchors_preset = 0
+offset_left = -4.0
+offset_top = -238.0
+offset_right = -4.0
+offset_bottom = -238.0
+
+[node name="bioproduct_item2" parent="ColorRect2/4" instance=ExtResource("7_12shw")]
+position = Vector2(965, 336)
+
+[node name="bioproduct_item3" parent="ColorRect2/4" instance=ExtResource("7_12shw")]
+position = Vector2(965, 370)
+
+[node name="bioproduct_item4" parent="ColorRect2/4" instance=ExtResource("7_12shw")]
+position = Vector2(966, 404)
+
+[node name="Label4" type="Label" parent="ColorRect2/4"]
+layout_mode = 0
+offset_left = 982.0
+offset_top = 284.0
+offset_right = 1148.0
+offset_bottom = 359.0
+theme_override_font_sizes/font_size = 18
+text = "4. Delivery"
+
+[node name="Delivery" parent="ColorRect2/4" instance=ExtResource("5_bjf18")]
+position = Vector2(994, 320)
+scale = Vector2(2, 2)
 
 [connection signal="pressed" from="ColorRect/Button" to="." method="_on_button_pressed"]

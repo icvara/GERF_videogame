@@ -17,6 +17,8 @@ func Use(player):
 					#added_item.position = position + Vector2(0,0)
 					$mCell.show()
 					$mCell.play("default")
+					GlobalVariableOverlab.tuto_item_player_hand[player.playerID]="mCellplaced"
+
 
 			
 	elif task_finshed:
@@ -51,7 +53,7 @@ func _on_timer_timeout() -> void:
 		$ProgressBar.modulate = Color(1,x,x)
 		
 		if x <= 0:
-			displaytext("Overgrown!")
+			displaytext("Overgrowth!")
 			dead = true
 			task_finshed = false
 			$mCell.play("fail")

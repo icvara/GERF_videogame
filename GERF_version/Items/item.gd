@@ -13,10 +13,11 @@ func PickUP(player):
 		linear_velocity = Vector2(0,0)
 
 		player.inventory = self
+		GlobalVariableOverlab.tuto_item_player_hand[player.playerID]= item_ID
 		player_holding = player
 		#linear_damp = 0
 		set_collision_layer_value(1,false)
-		print("pick up")
+		set_collision_mask_value(1,false)
 		z_index = 1
 
 		#set_physics_process(false)
@@ -32,6 +33,7 @@ func Drop(player):
 	
 		#linear_damp = 10
 		set_collision_layer_value(1,true)
+		set_collision_mask_value(1,true)
 		z_index = 0
 		#set_physics_process(true)
 	#get_parent().get_parent().add_child(self)

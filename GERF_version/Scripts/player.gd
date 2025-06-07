@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+
+var tuto_on = false
 var SPEED = 500
 var last_dir = Vector2(0,0)
 var interacting_with

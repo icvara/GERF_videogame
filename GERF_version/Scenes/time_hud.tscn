@@ -15,20 +15,20 @@ script = ExtResource("1_vypku")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
-offset_left = 982.0
-offset_top = 574.0
-offset_right = 1117.0
-offset_bottom = 605.0
+offset_left = 516.0
+offset_top = 2.0
+offset_right = 651.0
+offset_bottom = 33.0
 theme_override_font_sizes/font_size = 24
 text = "Time Left"
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 modulate = Color(0, 1, 0, 1)
 layout_mode = 2
-offset_left = 971.0
-offset_top = 607.0
-offset_right = 1133.0
-offset_bottom = 626.0
+offset_left = 505.0
+offset_top = 35.0
+offset_right = 667.0
+offset_bottom = 54.0
 max_value = 80.0
 step = 1.0
 value = 80.0
@@ -36,18 +36,18 @@ show_percentage = false
 
 [node name="timevalue" type="Label" parent="."]
 layout_mode = 2
-offset_left = 972.0
-offset_top = 607.0
-offset_right = 1134.0
-offset_bottom = 637.0
+offset_left = 506.0
+offset_top = 35.0
+offset_right = 668.0
+offset_bottom = 65.0
 text = "120 s"
 horizontal_alignment = 1
 
 [node name="Timer" type="Timer" parent="."]
-autostart = true
 
 [node name="CaveTheme" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_ile8r")
+pitch_scale = 0.7
 autoplay = true
 
 [node name="Dark_soundwave" type="AudioStreamPlayer" parent="."]

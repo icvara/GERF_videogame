@@ -110,66 +110,71 @@ script = ExtResource("1_g1rkv")
 
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0
-offset_left = -72.0
-offset_top = -12.0
-offset_right = 84.0
-offset_bottom = 9.0
+offset_left = -115.0
+offset_top = -15.0
+offset_right = 119.0
+offset_bottom = 16.0
+theme_override_font_sizes/font_size = 24
 text = "Press A to join!"
 
 [node name="Sprite2D" type="Sprite2D" parent="Label2"]
-position = Vector2(71.6627, 10.3373)
-scale = Vector2(1.55621, 1.55621)
+position = Vector2(111, 16)
+scale = Vector2(2.41056, 2.41056)
 texture = SubResource("AtlasTexture_enxwq")
 
 [node name="Label3" type="Label" parent="."]
 visible = false
 layout_mode = 0
-offset_left = -116.0
-offset_top = 75.0
-offset_right = 115.0
-offset_bottom = 96.0
-text = "Y to change character"
+offset_left = -218.0
+offset_top = 136.0
+offset_right = 228.0
+offset_bottom = 201.0
+theme_override_font_sizes/font_size = 24
+text = "Press Y to change
+ character"
+horizontal_alignment = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="Label3"]
-position = Vector2(5, 10)
-scale = Vector2(1.55621, 1.55621)
+position = Vector2(191, 15)
+scale = Vector2(2.64133, 2.64133)
 texture = SubResource("AtlasTexture_ok78m")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = -38.0
-offset_top = -67.0
-offset_right = 47.0
-offset_bottom = -46.0
+offset_left = -61.0
+offset_top = -79.0
+offset_right = 66.0
+offset_bottom = -48.0
+theme_override_font_sizes/font_size = 24
 text = "Player X"
 
 [node name="Circle1" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(-2, 41)
-scale = Vector2(2, 2)
+position = Vector2(0, 71)
+scale = Vector2(3, 3)
 texture = ExtResource("3_lkuq0")
 
 [node name="Circle2" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(-2, 41)
-scale = Vector2(2, 2)
+scale = Vector2(3, 3)
 texture = ExtResource("4_ok78m")
 
 [node name="Circle3" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(-2, 41)
-scale = Vector2(2, 2)
+scale = Vector2(3, 3)
 texture = ExtResource("5_enxwq")
 
 [node name="Circle4" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(-2, 41)
-scale = Vector2(2, 2)
+scale = Vector2(3, 3)
 texture = ExtResource("6_xuboy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visible = false
-position = Vector2(1, -17)
-scale = Vector2(3, 3)
+position = Vector2(0, -9)
+scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_u1hik")
 animation = &"2"

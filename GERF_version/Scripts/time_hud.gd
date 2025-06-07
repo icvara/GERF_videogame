@@ -6,7 +6,7 @@ var changemusic = false
 
 func _ready() -> void:
 	GlobalVariableOverlab.time = time_total
-	$Timer.start(1.0)
+	
 
 
 

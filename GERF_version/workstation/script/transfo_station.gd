@@ -13,6 +13,7 @@ func Use(player):
 					item_list.append(player.inventory.item_ID )
 					add_in_queue(player.inventory.item_ID )
 					player.inventory.Transfer(player)
+					GlobalVariableOverlab.tuto_item_player_hand[player.playerID]="DNAplaced"
 		
 					number_item += 1
 			elif player.inventory.item_ID == "Cell" and item_list.has("Cell") == false:
@@ -22,6 +23,8 @@ func Use(player):
 					item_list.append(player.inventory.item_ID )
 					add_in_queue(player.inventory.item_ID )
 					player.inventory.Transfer(player)
+					GlobalVariableOverlab.tuto_item_player_hand[player.playerID]="Cellplaced"
+
 			
 					number_item += 1
 			else:
@@ -68,6 +71,8 @@ func _on_timer_timeout() -> void:
 			#added_item.item_ID = "Cell"
 			queue_finish()
 			displaytext("Success!")
+			GlobalVariableOverlab.tuto_item_player_hand[0]="CellReady"
+
 			task_finshed = true
 			number_item = 0
 

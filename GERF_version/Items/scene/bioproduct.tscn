@@ -1,7 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://yn40icnwyppt"]
+[gd_scene load_steps=9 format=3 uid="uid://yn40icnwyppt"]
 
 [ext_resource type="Script" uid="uid://dh70fjboa8tuy" path="res://GERF_version/Items/script/bioproduct.gd" id="1_ekmxe"]
 [ext_resource type="Texture2D" uid="uid://dlvs6u6flgvrk" path="res://GERF_version/Asset/graphic/Slime.png" id="2_inw7v"]
+[ext_resource type="Texture2D" uid="uid://cdagyaexnobuo" path="res://GERF_version/Asset/graphic/16px/tilesStuff.png" id="2_wqhlf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vjc1d"]
+atlas = ExtResource("2_wqhlf")
+region = Rect2(515.718, 17.0459, 11.6145, 12.3963)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_axg4c"]
 size = Vector2(15, 11)
@@ -41,12 +46,18 @@ linear_damp = 50.0
 script = ExtResource("1_ekmxe")
 item_ID = "Bioproduct"
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2, 1)
+scale = Vector2(4, 4)
+texture = SubResource("AtlasTexture_vjc1d")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 3)
 scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_axg4c")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.553)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_us4ch")
 autoplay = "default"

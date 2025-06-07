@@ -13,7 +13,7 @@ func Use(player):
 		new_item.PickUP(player)
 
 	else:
-		player.displaymsg("hands full")
+		player.displaymsg("Hands full")
 		
 		
 

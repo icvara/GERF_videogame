@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bjntagmk4gbcs" path="res://GERF_version/Asset/graphic/DNA.png" id="2_emms6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_axg4c"]
-size = Vector2(17, 32)
+size = Vector2(24, 24)
 
 [node name="dna_item" type="RigidBody2D" groups=["Item"]]
 mass = 0.05
@@ -14,8 +14,8 @@ linear_damp = 50.0
 script = ExtResource("1_emms6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_axg4c")
 
 [node name="AnimatedSprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_emms6")

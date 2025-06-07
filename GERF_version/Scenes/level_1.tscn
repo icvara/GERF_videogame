@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://c30pbx2xgd84h"]
+[gd_scene load_steps=38 format=4 uid="uid://c30pbx2xgd84h"]
 
 [ext_resource type="Script" uid="uid://udpwraov6f2i" path="res://GERF_version/Scripts/main_overlab.gd" id="1_l73bu"]
 [ext_resource type="PackedScene" uid="uid://cf6mcq38lapcb" path="res://Prototype_presentation_8.05.2025/overlab/item.tscn" id="2_u4kd4"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://ew4cs3o4boh4" path="res://GERF_version/Scenes/pause_menu.tscn" id="15_p2k58"]
 [ext_resource type="PackedScene" uid="uid://b7fpmxph7j58m" path="res://GERF_version/workstation/scene/empty_table.tscn" id="17_1fh3b"]
 [ext_resource type="PackedScene" uid="uid://boqe85m3sf8co" path="res://GERF_version/Scenes/tuto_control.tscn" id="20_dhn57"]
+[ext_resource type="Texture2D" uid="uid://b507bunentl55" path="res://GERF_version/Asset/graphic/button/gdb-xbox-2.png" id="23_3mohu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o0fyi"]
 texture = ExtResource("4_w0wfq")
@@ -2328,7 +2329,12 @@ sources/0 = SubResource("TileSetAtlasSource_l0nf3")
 sources/1 = SubResource("TileSetAtlasSource_og8ts")
 sources/2 = SubResource("TileSetAtlasSource_u5ew8")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_wb57g"]
+atlas = ExtResource("23_3mohu")
+region = Rect2(448.779, 49.1009, 14.0469, 13.8491)
+
 [node name="main_overlab" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_l73bu")
 item = ExtResource("2_u4kd4")
 player = ExtResource("3_htreh")
@@ -2348,7 +2354,7 @@ tile_map_data = PackedByteArray("AAAIAAcAAwACAAIAAAAIAAgAAwACAAMAAAAIAAkAAwACAAQ
 tile_set = SubResource("TileSet_tjhfs")
 
 [node name="TileMapLayer3" type="TileMapLayer" parent="LAB"]
-tile_map_data = PackedByteArray("AAAJAA8AAQAbAAMAAAAIAAUAAQAcAAIAAAAdAAMAAQAbAAQAAAAUAA8AAQAcAAMAAAARAA8AAQAcAAMAAAAaABAAAQAbAAMAAAA=")
+tile_map_data = PackedByteArray("AAAIAAUAAQAcAAIAAAAUAA8AAQAcAAMAAAAaABAAAQAbAAMAAAAcAA8AAQAbAAMAAAAYAA4AAQAbAAMAAAAKAA4AAQAbAAMAAAASAA4AAQAcAAMAAAAbAAUAAQAbAAQAAAAbAAEAAQAbAAQAAAANAAUAAQAcAAIAAAA=")
 tile_set = SubResource("TileSet_qhvny")
 
 [node name="Workstation" type="Node2D" parent="."]
@@ -2458,6 +2464,7 @@ position = Vector2(831, 383)
 [node name="Score" parent="CanvasLayer" instance=ExtResource("12_7m1vr")]
 
 [node name="TimeHUD" parent="CanvasLayer" instance=ExtResource("13_oajpy")]
+visible = false
 offset_top = -2.0
 offset_right = -1152.0
 offset_bottom = -650.0
@@ -2475,4 +2482,208 @@ visible = false
 wait_time = 5.0
 autostart = true
 
+[node name="tuto_0" type="Panel" parent="."]
+offset_left = 292.0
+offset_top = 495.0
+offset_right = 488.0
+offset_bottom = 520.0
+
+[node name="Label" type="Label" parent="tuto_0"]
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 21.0
+theme_override_font_sizes/font_size = 20
+text = "Take DNA Here!"
+
+[node name="tuto_2" type="Panel" parent="."]
+visible = false
+offset_left = 753.0
+offset_top = 496.0
+offset_right = 949.0
+offset_bottom = 521.0
+
+[node name="Label" type="Label" parent="tuto_2"]
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 21.0
+theme_override_font_sizes/font_size = 20
+text = "Take Cell Here!"
+
+[node name="tuto_1" type="Panel" parent="."]
+visible = false
+offset_left = 915.0
+offset_top = 165.0
+offset_right = 1106.0
+offset_bottom = 221.0
+
+[node name="Label" type="Label" parent="tuto_1"]
+layout_mode = 0
+offset_left = -26.0
+offset_top = -2.0
+offset_right = 215.0
+offset_bottom = 53.0
+theme_override_font_sizes/font_size = 20
+text = "Place the DNA
+ here"
+horizontal_alignment = 1
+
+[node name="tuto_1" type="Panel" parent="tuto_1"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -126.0
+offset_right = 188.0
+offset_bottom = -70.0
+
+[node name="Label" type="Label" parent="tuto_1/tuto_1"]
+layout_mode = 0
+offset_left = -26.0
+offset_top = -2.0
+offset_right = 215.0
+offset_bottom = 53.0
+theme_override_font_sizes/font_size = 20
+text = "Place the DNA
+ here"
+horizontal_alignment = 1
+
+[node name="tuto_3" type="Panel" parent="."]
+visible = false
+offset_left = 915.0
+offset_top = 165.0
+offset_right = 1106.0
+offset_bottom = 221.0
+
+[node name="Label" type="Label" parent="tuto_3"]
+layout_mode = 0
+offset_left = -26.0
+offset_top = -2.0
+offset_right = 215.0
+offset_bottom = 53.0
+theme_override_font_sizes/font_size = 20
+text = "Place the Cell
+ here"
+horizontal_alignment = 1
+
+[node name="tuto_1" type="Panel" parent="tuto_3"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -126.0
+offset_right = 188.0
+offset_bottom = -70.0
+
+[node name="Label" type="Label" parent="tuto_3/tuto_1"]
+layout_mode = 0
+offset_left = -26.0
+offset_top = -2.0
+offset_right = 215.0
+offset_bottom = 53.0
+theme_override_font_sizes/font_size = 20
+text = "Place the Cell
+ here"
+horizontal_alignment = 1
+
+[node name="tuto_4" type="Panel" parent="."]
+visible = false
+offset_left = 867.0
+offset_top = 98.0
+offset_right = 1142.0
+offset_bottom = 138.0
+
+[node name="Label" type="Label" parent="tuto_4"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 5.0
+offset_right = 273.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 20
+text = "Activate to tansform"
+horizontal_alignment = 1
+
+[node name="tuto_5" type="Panel" parent="."]
+visible = false
+offset_left = 253.0
+offset_top = 241.0
+offset_right = 541.0
+offset_bottom = 316.0
+
+[node name="Label" type="Label" parent="tuto_5"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 276.0
+offset_bottom = 65.0
+theme_override_font_sizes/font_size = 20
+text = "Place the new cell
+in a incubator"
+horizontal_alignment = 1
+
+[node name="tuto_6" type="Panel" parent="."]
+visible = false
+offset_left = 199.0
+offset_top = 71.0
+offset_right = 629.0
+offset_bottom = 146.0
+
+[node name="Label" type="Label" parent="tuto_6"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 11.0
+offset_right = 414.0
+offset_bottom = 66.0
+theme_override_font_sizes/font_size = 20
+text = "Pick up the Product when ready
+Careful of overgrowth"
+horizontal_alignment = 1
+
+[node name="tuto_7" type="Panel" parent="."]
+visible = false
+offset_left = 496.0
+offset_top = 519.0
+offset_right = 784.0
+offset_bottom = 594.0
+
+[node name="Label" type="Label" parent="tuto_7"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 6.0
+offset_right = 275.0
+offset_bottom = 61.0
+theme_override_font_sizes/font_size = 20
+text = "Deliver the product!"
+horizontal_alignment = 1
+
+[node name="tuto_8" type="Panel" parent="."]
+process_mode = 3
+visible = false
+offset_left = 317.0
+offset_top = 173.0
+offset_right = 871.0
+offset_bottom = 361.0
+
+[node name="next1" type="Button" parent="tuto_8"]
+layout_mode = 0
+offset_left = 197.0
+offset_top = 136.0
+offset_right = 353.0
+offset_bottom = 175.0
+theme_override_font_sizes/font_size = 24
+text = "Press A"
+
+[node name="Sprite2D" type="Sprite2D" parent="tuto_8/next1"]
+position = Vector2(130, 19)
+scale = Vector2(2.33364, 2.33364)
+texture = SubResource("AtlasTexture_wb57g")
+
+[node name="Label" type="Label" parent="tuto_8"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 6.0
+offset_right = 275.0
+offset_bottom = 61.0
+theme_override_font_sizes/font_size = 30
+text = "Good job!
+Try to reach a score of 500
+Ready to go?"
+horizontal_alignment = 1
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="tuto_8/next1" to="." method="_on_next_1_pressed"]

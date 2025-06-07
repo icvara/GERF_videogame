@@ -73,13 +73,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -417.0
-offset_top = -15.0
-offset_right = 603.0
-offset_bottom = 25.0
+offset_left = -376.0
+offset_top = -49.0
+offset_right = 644.0
+offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 400
+theme_override_constants/separation = 350
 
 [node name="charselect" parent="HBoxContainer2" instance=ExtResource("2_w66ea")]
 layout_mode = 2
@@ -102,21 +102,23 @@ offset_left = 543.0
 offset_top = 515.0
 offset_right = 613.0
 offset_bottom = 546.0
+theme_override_font_sizes/font_size = 24
 max_value = 60.0
 value = 60.0
 show_percentage = false
 
 [node name="Label3" type="Label" parent="."]
 layout_mode = 0
-offset_left = 463.0
-offset_top = 555.0
-offset_right = 697.0
-offset_bottom = 576.0
+offset_left = 402.0
+offset_top = 554.0
+offset_right = 771.0
+offset_bottom = 585.0
+theme_override_font_sizes/font_size = 24
 text = "Keep X pressed to start"
 
 [node name="Sprite2D" type="Sprite2D" parent="Label3"]
-position = Vector2(61, 12)
-scale = Vector2(1.55621, 1.55621)
+position = Vector2(93, 15)
+scale = Vector2(2.30572, 2.30572)
 texture = SubResource("AtlasTexture_04prf")
 
 [connection signal="pressed" from="Buttonstart" to="." method="_on_buttonstart_pressed"]
