@@ -21,6 +21,7 @@ GlobalVariableOverlab="*res://GERF_version/global_variable_overlab.gd"
 
 [display]
 
+window/size/mode=3
 window/stretch/mode="canvas_items"
 
 [gui]

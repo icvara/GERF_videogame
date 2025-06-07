@@ -8,6 +8,7 @@ var nplayer = 1
 var player_ID = [0]
 var playerskin = [0,0,0,0]
 
+var score_content =""
 
 var tuto_item_player_hand = [0,0,0,0]
 var tuto_step = 0

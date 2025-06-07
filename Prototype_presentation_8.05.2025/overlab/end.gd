@@ -39,6 +39,7 @@ func save_score(name,finalscore):
 	var score_file = load_from_file(path)
 	var content = score_file  + name + ":" + str(finalscore) + ";"
 	save_to_file(content,path)
+	GlobalVariableOverlab.score_content = content
 
 
 func _on_button_pressed() -> void:
