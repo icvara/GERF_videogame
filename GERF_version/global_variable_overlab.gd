@@ -10,6 +10,9 @@ var playerskin = [0,0,0,0]
 
 var score_content =""
 
+
+var tuto_on = true
+
 var tuto_item_player_hand = [0,0,0,0]
 var tuto_step = 0
 

@@ -9,8 +9,15 @@ var init_posvector = [Vector2(0,0), Vector2(1,0),Vector2(0,1),Vector2(1,1)]
 
 
 func _ready() -> void:	
-	$CanvasLayer/Tuto_control.call_window()
 	GlobalVariableOverlab.tuto_item_player_hand = [0,0,0,0]
+	
+	if GlobalVariableOverlab.tuto_on == false:
+		$CanvasLayer/TimeHUD.get_node("Timer").start(1.0)
+		$CanvasLayer/TimeHUD.show()
+		$tuto_0.hide()
+	else:
+		$CanvasLayer/Tuto_control.call_window()
+
 
 	for i in GlobalVariableOverlab.nplayer:
 		var newplay = player.instantiate()
@@ -29,7 +36,7 @@ func _process(delta: float) -> void:
 		
 		
 		
-	if tuto_on:
+	if GlobalVariableOverlab.tuto_on:
 		if GlobalVariableOverlab.tuto_item_player_hand.has("DNA") and tuto_step==0:
 			$tuto_0.hide()
 			$tuto_1.show()
@@ -69,6 +76,12 @@ func _process(delta: float) -> void:
 
 func _on_next_1_pressed() -> void:
 	$tuto_8.hide()	
+	GlobalVariableOverlab.tuto_on = false
 	get_tree().paused = false
-	$CanvasLayer/TimeHUD.get_node("Timer").start(1.0)
-	$CanvasLayer/TimeHUD.show()
+
+	get_tree().reload_current_scene()
+
+	'for item in get_tree().get_nodes_in_group("Item"):
+		item.queue_free()'
+	#$CanvasLayer/TimeHUD.get_node("Timer").start(1.0)
+	#$CanvasLayer/TimeHUD.show()

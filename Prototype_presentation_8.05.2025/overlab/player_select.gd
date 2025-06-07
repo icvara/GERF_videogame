@@ -24,4 +24,5 @@ func _process(delta: float) -> void:
 		get_tree().change_scene_to_file("res://GERF_version/Scenes/level_1.tscn")
 
 func _on_buttonstart_pressed() -> void:
+	GlobalVariableOverlab.tuto_on = true
 	get_tree().change_scene_to_file("res://GERF_version/Scenes/level_1.tscn")
