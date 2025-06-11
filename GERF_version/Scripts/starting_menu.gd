@@ -12,6 +12,8 @@ func _ready() -> void:
 	
 func _on_1_pressed() -> void:
 	GlobalVariableOverlab.init_var()
+	GlobalVariableOverlab.tuto_on = true
+
 
 	#when start is pressed launch the game
 	#Currently still calling the old version used for the last presentation. it will be change soon.

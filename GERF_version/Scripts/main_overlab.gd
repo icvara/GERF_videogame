@@ -10,7 +10,7 @@ var init_posvector = [Vector2(0,0), Vector2(1,0),Vector2(0,1),Vector2(1,1)]
 
 func _ready() -> void:	
 	GlobalVariableOverlab.tuto_item_player_hand = [0,0,0,0]
-	
+	print(GlobalVariableOverlab.tuto_on)
 	if GlobalVariableOverlab.tuto_on == false:
 		$CanvasLayer/TimeHUD.get_node("Timer").start(1.0)
 		$CanvasLayer/TimeHUD.show()
@@ -23,7 +23,6 @@ func _ready() -> void:
 		var newplay = player.instantiate()
 		newplay.playerID = i
 		newplay.playerID = GlobalVariableOverlab.player_ID[i]
-		print(GlobalVariableOverlab.player_ID)
 		newplay.setskin(GlobalVariableOverlab.playerskin[newplay.playerID])
 		#newplay.position = 
 		$player_startpos.get_node(str(i)).add_child(newplay)
