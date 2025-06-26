@@ -58,19 +58,19 @@ func _physics_process(delta):
 		direction.y = 0
 	#direction = direction.normalized()
 	
-	'if GlobalVariableOverlab.nplayer >= 2:
-		if playerID == 0:
+	'if GlobalVariableOverlab.nplayer >= 2:'
+	if playerID == 0:
 			direction = Vector2(Input.get_axis("left", "right"),Input.get_axis("up", "down"))
-		elif playerID == 1: 
+	if playerID == 1 or playerID == 0: 
 			direction = Vector2(Input.get_axis("left2", "right2"),Input.get_axis("up2", "down2"))
-		else: 
+	else: 
 			direction = Vector2(Input.get_axis("left3", "right3"),Input.get_axis("up3", "down3"))
-	else:
+	'else:
 		direction = Vector2()
 		direction += Vector2(Input.get_axis("left", "right"),Input.get_axis("up", "down"))
 		direction += Vector2(Input.get_axis("left2", "right2"),Input.get_axis("up2", "down2"))
-		direction += Vector2(Input.get_axis("left3", "right3"),Input.get_axis("up3", "down3"))
-		direction = direction.normalized()'
+		direction += Vector2(Input.get_axis("left3", "right3"),Input.get_axis("up3", "down3"))'
+		#direction = direction.normalized()'
 		
 	if direction:
 		velocity = direction * SPEED 
@@ -142,8 +142,8 @@ func _physics_process(delta):
 	else:
 			joy_button_pressed = false
 
-	'if GlobalVariableOverlab.nplayer >= 2:
-		if playerID == 0:
+	'if GlobalVariableOverlab.nplayer >= 2:'
+	if playerID == 0:
 			if Input.is_action_just_pressed("space"):
 				if interacting_with_workstation:
 					interacting_with_workstation.Use(self)
@@ -155,7 +155,7 @@ func _physics_process(delta):
 							inventory.Drop(self)
 					elif inventory != null:
 						inventory.Drop(self)
-		elif playerID == 1:	
+	elif playerID == 1:	
 			if Input.is_action_just_pressed("space2"):
 				if interacting_with_workstation:
 					interacting_with_workstation.Use(self)
@@ -168,7 +168,7 @@ func _physics_process(delta):
 					elif inventory != null:
 						inventory.Drop(self)
 
-		elif playerID == 2:	
+	elif playerID == 2:	
 			if Input.is_action_just_pressed("space3"):
 				if interacting_with_workstation:
 					interacting_with_workstation.Use(self)
@@ -180,7 +180,7 @@ func _physics_process(delta):
 							inventory.Drop(self)
 					elif inventory != null:
 						inventory.Drop(self)
-	else:
+	'else:
 		if Input.is_action_just_pressed("space") or Input.is_action_just_pressed("space2") or Input.is_action_just_pressed("space3") :
 				if interacting_with_workstation:
 					interacting_with_workstation.Use(self)
