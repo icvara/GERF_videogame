@@ -122,6 +122,16 @@ position = Vector2(111, 16)
 scale = Vector2(2.41056, 2.41056)
 texture = SubResource("AtlasTexture_enxwq")
 
+[node name="Label4" type="Label" parent="Label2"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 45.0
+offset_right = 231.0
+offset_bottom = 76.0
+theme_override_font_sizes/font_size = 24
+text = "or SHIFT"
+horizontal_alignment = 1
+
 [node name="Label3" type="Label" parent="."]
 visible = false
 layout_mode = 0
@@ -138,6 +148,16 @@ horizontal_alignment = 1
 position = Vector2(191, 15)
 scale = Vector2(2.64133, 2.64133)
 texture = SubResource("AtlasTexture_ok78m")
+
+[node name="Label4" type="Label" parent="Label3"]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 74.0
+offset_right = 326.0
+offset_bottom = 105.0
+theme_override_font_sizes/font_size = 24
+text = "or SHIFT"
+horizontal_alignment = 1
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0

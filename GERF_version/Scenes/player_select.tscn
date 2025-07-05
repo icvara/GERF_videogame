@@ -58,10 +58,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -33.0
-offset_top = -133.0
-offset_right = 37.0
-offset_bottom = -102.0
+offset_left = -38.0
+offset_top = -93.0
+offset_right = 32.0
+offset_bottom = -62.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "START"
@@ -98,10 +98,10 @@ autoplay = true
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 layout_mode = 0
-offset_left = 543.0
-offset_top = 515.0
-offset_right = 613.0
-offset_bottom = 546.0
+offset_left = 538.0
+offset_top = 555.0
+offset_right = 608.0
+offset_bottom = 586.0
 theme_override_font_sizes/font_size = 24
 max_value = 60.0
 value = 60.0
@@ -109,10 +109,10 @@ show_percentage = false
 
 [node name="Label3" type="Label" parent="."]
 layout_mode = 0
-offset_left = 402.0
-offset_top = 554.0
-offset_right = 771.0
-offset_bottom = 585.0
+offset_left = 397.0
+offset_top = 594.0
+offset_right = 766.0
+offset_bottom = 625.0
 theme_override_font_sizes/font_size = 24
 text = "Keep X pressed to start"
 

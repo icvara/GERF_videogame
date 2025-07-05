@@ -2367,13 +2367,13 @@ position = Vector2(159, 240)
 position = Vector2(191.5, 240)
 
 [node name="Delivery" parent="Workstation" instance=ExtResource("12_tjhfs")]
-position = Vector2(287.5, 238)
+position = Vector2(288, 239)
 
 [node name="Incubator" parent="Workstation" instance=ExtResource("13_wdi0a")]
 position = Vector2(222.5, 110.5)
 
 [node name="Incubator2" parent="Workstation" instance=ExtResource("13_wdi0a")]
-position = Vector2(127, 111.5)
+position = Vector2(127, 112)
 
 [node name="freezer" parent="Workstation" instance=ExtResource("14_tjhfs")]
 position = Vector2(384, 238)
@@ -2436,7 +2436,7 @@ position = Vector2(225, 240.5)
 position = Vector2(257, 240.5)
 
 [node name="empty table18" parent="Workstation" instance=ExtResource("17_1fh3b")]
-position = Vector2(352.5, 239.5)
+position = Vector2(353, 241)
 
 [node name="empty table20" parent="Workstation" instance=ExtResource("17_1fh3b")]
 position = Vector2(448.5, 240.5)

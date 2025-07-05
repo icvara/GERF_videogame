@@ -9,13 +9,15 @@ var joy_button_pressed = false
 func _ready() -> void:
 	$AnimatedSprite2D.play(str(0))
 	$Label.text = "Player " + str(player_number)
-	'if player_number == 1:
-		$Label2.text = "Press (A) to join"
+	if player_number == 1:
+		$Label2/Label4.text = "or SPACE"
+		$Label3/Label4.text = "or SPACE"
 	if player_number == 2:
-		$Label2.text = "Press SPACE to join"
-
+		$Label2/Label4.text = "or #"
+		$Label3/Label4.text = "or #"
 	if player_number == 3:
-		$Label2.text = "Press SHIFT to join"'
+		$Label2/Label4.text = "or SHIFT"
+		$Label3/Label4.text = "or SHIFT"
 
 
 
@@ -45,17 +47,17 @@ func remove_player_choice():
 		
 func _process(delta: float) -> void:
 	if player_number == 1:
-		if Input.is_action_just_pressed("space"):
+		if Input.is_action_just_pressed("space0"):
 			add_player_choice()
 		#if Input.is_action_just_pressed("up") or Input.is_action_just_pressed("down") or Input.is_action_just_pressed("right") or Input.is_action_just_pressed("left"):
 			
 	elif player_number == 2:
-		if Input.is_action_just_pressed("space2"):
+		if Input.is_action_just_pressed("space1"):
 			add_player_choice()
 		'if Input.is_action_just_pressed("up2") or Input.is_action_just_pressed("down2"):
 			$L.grab_focus()'
 	elif player_number == 3:
-		if Input.is_action_just_pressed("space3"):
+		if Input.is_action_just_pressed("space2"):
 			add_player_choice()
 		'if Input.is_action_just_pressed("up3") or Input.is_action_just_pressed("down3"):
 			$L.grab_focus()'
@@ -77,7 +79,14 @@ func _process(delta: float) -> void:
 
 	else:
 			joy_button_pressed = false
-
+			
+	if Input.is_action_just_pressed("changechar"+str(player_number-1)):
+			player_skinid += 1
+			if player_skinid > skin_number:
+				player_skinid = 0
+			$AnimatedSprite2D.play(str(player_skinid))
+			GlobalVariableOverlab.playerskin[player_number-1]=player_skinid
+		
 
 func _on_r_pressed() -> void:
 	#player_skinid = clamp (player_skinid+1,0,1)

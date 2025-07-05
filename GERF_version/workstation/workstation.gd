@@ -5,7 +5,7 @@ class_name Workstation
 
 var added_item
 var task_finshed = false
-
+var size = Vector2(1,1)
 
 
 func Use(player):

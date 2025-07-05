@@ -1,5 +1,7 @@
 extends Workstation
 
+func _ready():
+	size = Vector2(2,1)
 
 func Use(player):
 	if player.inventory:

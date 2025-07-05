@@ -24,14 +24,15 @@ func setskin(skinid):
 func get_closest_element(list: Array, target: Vector2) :
 
 	var closest = list[0]
-	var centre_pos =  closest.global_position + Vector2(16,16)
+	var centre_pos =  closest.global_position + Vector2(32,32)
 	var min_diff = centre_pos.distance_to(target)
 	for element in list:
-		centre_pos =  element.global_position + Vector2(16,16)
-		var diff = centre_pos.distance_to(target)
-		if diff < min_diff:
-			min_diff = diff
-			closest = element
+		for i in range(0,element.size.x):
+			centre_pos =  element.global_position + Vector2(32,32) + Vector2(64,0)*i
+			var diff = centre_pos.distance_to(target)
+			if diff < min_diff:
+				min_diff = diff
+				closest = element
 	return closest
 
 
@@ -59,12 +60,14 @@ func _physics_process(delta):
 	#direction = direction.normalized()
 	
 	'if GlobalVariableOverlab.nplayer >= 2:'
-	if playerID == 0:
+	if direction == Vector2(0,0):
+		direction = Vector2(Input.get_axis("left"+str(playerID), "right"+str(playerID)),Input.get_axis("up"+str(playerID), "down"+str(playerID)))
+	'if playerID == 0:
 			direction = Vector2(Input.get_axis("left", "right"),Input.get_axis("up", "down"))
 	if playerID == 1 or playerID == 0: 
 			direction = Vector2(Input.get_axis("left2", "right2"),Input.get_axis("up2", "down2"))
 	else: 
-			direction = Vector2(Input.get_axis("left3", "right3"),Input.get_axis("up3", "down3"))
+			direction = Vector2(Input.get_axis("left3", "right3"),Input.get_axis("up3", "down3"))'
 	'else:
 		direction = Vector2()
 		direction += Vector2(Input.get_axis("left", "right"),Input.get_axis("up", "down"))
@@ -143,8 +146,8 @@ func _physics_process(delta):
 			joy_button_pressed = false
 
 	'if GlobalVariableOverlab.nplayer >= 2:'
-	if playerID == 0:
-			if Input.is_action_just_pressed("space"):
+	#if playerID == 0:
+	if Input.is_action_just_pressed("space"+str(playerID)):
 				if interacting_with_workstation:
 					interacting_with_workstation.Use(self)
 				else:
@@ -155,7 +158,7 @@ func _physics_process(delta):
 							inventory.Drop(self)
 					elif inventory != null:
 						inventory.Drop(self)
-	elif playerID == 1:	
+	'elif playerID == 1:	
 			if Input.is_action_just_pressed("space2"):
 				if interacting_with_workstation:
 					interacting_with_workstation.Use(self)
@@ -179,7 +182,7 @@ func _physics_process(delta):
 						else: 
 							inventory.Drop(self)
 					elif inventory != null:
-						inventory.Drop(self)
+						inventory.Drop(self)'
 	'else:
 		if Input.is_action_just_pressed("space") or Input.is_action_just_pressed("space2") or Input.is_action_just_pressed("space3") :
 				if interacting_with_workstation:
