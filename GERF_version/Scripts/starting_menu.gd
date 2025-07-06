@@ -6,7 +6,6 @@ extends Control
 
 
 
-
 func _ready() -> void:
 	$"ColorRect/VBoxContainer/1".grab_focus()
 	
@@ -23,7 +22,12 @@ func _on_1_pressed() -> void:
 	#get_tree().change_scene_to_file("res://Prototype_presentation_8.05.2025/overlab/player_select.tscn")
 
 func _on_2_pressed() -> void:
-	#extra button if needed. no function yet
+	if GlobalVariableOverlab.isfullscreen == false:
+		GlobalVariableOverlab.isfullscreen = true
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		GlobalVariableOverlab.isfullscreen = false
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	pass
 
 

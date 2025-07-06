@@ -2,7 +2,8 @@ extends Control
 
 var team_name = ""
 var score_list = {}
-var path = "res://GERF_version/savefile/save_score.s"
+#var path = "res://GERF_version/savefile/save_score.s"
+var path = "user://save_score.s"
 
 
 func start():

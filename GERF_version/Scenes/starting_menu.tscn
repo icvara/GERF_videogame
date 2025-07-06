@@ -330,10 +330,9 @@ theme_override_font_sizes/font_size = 24
 text = "Start"
 
 [node name="2" type="Button" parent="ColorRect/VBoxContainer"]
-visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Controls/tuto/Science?"
+text = "Fullscreen"
 
 [node name="3" type="Button" parent="ColorRect/VBoxContainer"]
 layout_mode = 2
@@ -417,5 +416,5 @@ autoplay = true
 [connection signal="pressed" from="ColorRect/VBoxContainer/1" to="." method="_on_1_pressed"]
 [connection signal="pressed" from="ColorRect/VBoxContainer/2" to="." method="_on_2_pressed"]
 [connection signal="pressed" from="ColorRect/VBoxContainer/3" to="." method="_on_3_pressed"]
-[connection signal="pressed" from="ColorRect/VBoxContainer/4" to="." method="_on_4_pressed"]
 [connection signal="pressed" from="ColorRect/VBoxContainer/4" to="." method="_on__pressed"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/4" to="." method="_on_4_pressed"]

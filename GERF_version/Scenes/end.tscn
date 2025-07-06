@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://fxevips2yu1n"]
 
-[ext_resource type="Script" uid="uid://iehcqn1lsqx2" path="res://Prototype_presentation_8.05.2025/overlab/end.gd" id="1_3ga50"]
+[ext_resource type="Script" uid="uid://881k0u8518ki" path="res://GERF_version/Scripts/end.gd" id="1_hrffo"]
 [ext_resource type="PackedScene" uid="uid://c1wjuu37hvn4e" path="res://GERF_version/Scenes/score.tscn" id="2_hrffo"]
 
 [node name="End" type="Control"]
@@ -10,7 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_3ga50")
+script = ExtResource("1_hrffo")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1

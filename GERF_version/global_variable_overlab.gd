@@ -9,6 +9,7 @@ var player_ID = []
 var playerskin = [0,0,0,0]
 
 var score_content =""
+var isfullscreen = false
 
 
 var tuto_on = true

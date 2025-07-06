@@ -1,9 +1,19 @@
 extends VBoxContainer
 
-var path = "res://GERF_version/savefile/save_score.s"
+#var path = "res://GERF_version/savefile/save_score.s"
+var ori_path = "res://GERF_version/savefile/save_score.s"
+
+var path = "user://save_score.save"
+#var path = "res://GERF_version/savefile/save_score.text"
+
 var score_list = {}
+
+
+
 func _ready() -> void:
-	
+	#var file5 = FileAccess.open(path, FileAccess.WRITE)
+	print(OS.get_user_data_dir())
+
 
 	write_scoreboard()	
 
@@ -14,7 +24,13 @@ func _process(delta: float) -> void:
 
 
 func load_from_file(path):
+	
 	var file = FileAccess.open(path, FileAccess.READ)
+	print(file)
+	if file == null:
+		var file2 = FileAccess.open(path, FileAccess.WRITE)
+		file = FileAccess.open(ori_path, FileAccess.READ)
+		file2.store_string(file.get_as_text())
 	var content = file.get_as_text()
 	#GlobalVariableOverlab.score_content = content
 	return content
