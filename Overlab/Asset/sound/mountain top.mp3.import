@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cfluq1b2y86vu"
+path="res://.godot/imported/mountain top.mp3-61c792f2198f1b1c677fd36b469f6939.mp3str"
+
+[deps]
+
+source_file="res://Asset/sound/mountain top.mp3"
+dest_files=["res://.godot/imported/mountain top.mp3-61c792f2198f1b1c677fd36b469f6939.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,200 @@
+[gd_scene load_steps=20 format=3 uid="uid://tj2g8hwy2d8e"]
+
+[ext_resource type="Script" uid="uid://dk7ueuc8a5lb1" path="res://Scripts/charselect.gd" id="1_ae1m5"]
+[ext_resource type="Texture2D" uid="uid://ctvh1y6gh4jvn" path="res://Asset/graphic/circle_1.png" id="3_lkuq0"]
+[ext_resource type="Texture2D" uid="uid://cdtwwkjd0j3hw" path="res://Asset/graphic/circle_2.png" id="4_ok78m"]
+[ext_resource type="Texture2D" uid="uid://tle7o6kpdoi" path="res://Asset/graphic/circle_3.png" id="5_enxwq"]
+[ext_resource type="Texture2D" uid="uid://b2xt6ydq27tve" path="res://Asset/graphic/circle_4.png" id="6_xuboy"]
+[ext_resource type="Texture2D" uid="uid://b507bunentl55" path="res://Asset/graphic/button/gdb-xbox-2.png" id="7_ok78m"]
+[ext_resource type="Texture2D" uid="uid://cfuxtf3iujdc3" path="res://Asset/graphic/LabNPCs.png" id="7_t37l2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_enxwq"]
+atlas = ExtResource("7_ok78m")
+region = Rect2(448.779, 49.1009, 14.0469, 13.8491)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ok78m"]
+atlas = ExtResource("7_ok78m")
+region = Rect2(449.305, 65.2955, 13.6693, 13.3096)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cry45"]
+atlas = ExtResource("7_t37l2")
+region = Rect2(13, 0, 20, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5dpjf"]
+atlas = ExtResource("7_t37l2")
+region = Rect2(45, 0, 20, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eb873"]
+atlas = ExtResource("7_t37l2")
+region = Rect2(77, 0, 20, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kavyy"]
+atlas = ExtResource("7_t37l2")
+region = Rect2(109, 0, 20, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v765m"]
+atlas = ExtResource("7_t37l2")
+region = Rect2(141, 0, 20, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0dgrp"]
+atlas = ExtResource("7_t37l2")
+region = Rect2(173, 0, 20, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_686u7"]
+atlas = ExtResource("7_t37l2")
+region = Rect2(205, 0, 20, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qxoe5"]
+atlas = ExtResource("7_t37l2")
+region = Rect2(237, 0, 20, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dwn4n"]
+atlas = ExtResource("7_t37l2")
+region = Rect2(269, 0, 20, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u1hik"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cry45")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5dpjf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eb873")
+}],
+"loop": true,
+"name": &"0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kavyy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v765m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0dgrp")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_686u7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qxoe5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dwn4n")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}]
+
+[node name="charselect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -270.0
+offset_bottom = -135.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ae1m5")
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = -115.0
+offset_top = -15.0
+offset_right = 119.0
+offset_bottom = 16.0
+theme_override_font_sizes/font_size = 24
+text = "Press A to join!"
+
+[node name="Sprite2D" type="Sprite2D" parent="Label2"]
+position = Vector2(111, 16)
+scale = Vector2(2.41056, 2.41056)
+texture = SubResource("AtlasTexture_enxwq")
+
+[node name="Label4" type="Label" parent="Label2"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 45.0
+offset_right = 231.0
+offset_bottom = 76.0
+theme_override_font_sizes/font_size = 24
+text = "or SHIFT"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -218.0
+offset_top = 136.0
+offset_right = 228.0
+offset_bottom = 201.0
+theme_override_font_sizes/font_size = 24
+text = "Press Y to change
+ character"
+horizontal_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Label3"]
+position = Vector2(191, 15)
+scale = Vector2(2.64133, 2.64133)
+texture = SubResource("AtlasTexture_ok78m")
+
+[node name="Label4" type="Label" parent="Label3"]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 74.0
+offset_right = 326.0
+offset_bottom = 105.0
+theme_override_font_sizes/font_size = 24
+text = "or SHIFT"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = -61.0
+offset_top = -79.0
+offset_right = 66.0
+offset_bottom = -48.0
+theme_override_font_sizes/font_size = 24
+text = "Player X"
+
+[node name="Circle1" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, 71)
+scale = Vector2(3, 3)
+texture = ExtResource("3_lkuq0")
+
+[node name="Circle2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-2, 41)
+scale = Vector2(3, 3)
+texture = ExtResource("4_ok78m")
+
+[node name="Circle3" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-2, 41)
+scale = Vector2(3, 3)
+texture = ExtResource("5_enxwq")
+
+[node name="Circle4" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-2, 41)
+scale = Vector2(3, 3)
+texture = ExtResource("6_xuboy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0, -9)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_u1hik")
+animation = &"2"
